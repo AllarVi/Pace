@@ -1,0 +1,41 @@
+{
+  "name": "Pace",
+  "description": "Pace App",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aglo35/Pace.git"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-beta.6",
+    "es6-promise": "3.0.2",
+    "es6-shim": "0.33.13",
+    "ionic-angular": "2.0.0-beta.3",
+    "ionic-native": "^1.1.0",
+    "ionicons": "3.0.0-alpha.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.0",
+    "zone.js": "0.5.14"
+  },
+  "devDependencies": {
+    "del": "1.1.1",
+    "gulp": "3.9.1",
+    "gulp-watch": "4.3.5",
+    "ionic-gulp-browserify-es2015": "^1.0.0",
+    "ionic-gulp-fonts-copy": "^1.0.0",
+    "ionic-gulp-html-copy": "^1.0.0",
+    "ionic-gulp-sass-build": "^1.0.0",
+    "ionic-gulp-scripts-copy": "^1.0.0"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-whitelist",
+    {
+      "locator": "https://github.com/VersoSolutions/CordovaClipboard",
+      "id": "com.verso.cordova.clipboard"
+    }
+  ],
+  "cordovaPlatforms": [
+    "ios",
+    "android"
+  ]
+}

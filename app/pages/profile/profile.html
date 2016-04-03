@@ -1,0 +1,27 @@
+<ion-navbar *navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Profile</ion-title>
+</ion-navbar>
+
+<ion-content padding class="speaker-detail">
+
+    <div text-center>
+        <!--<img [src]="speaker" [alt]="speaker.name"><br>-->
+
+        <button clear small twitter>
+            <ion-icon name="logo-twitter"></ion-icon>
+        </button>
+        <button clear small instagram>
+            <ion-icon name="logo-instagram"></ion-icon>
+        </button>
+    </div>
+
+    <p>{{speaker}}</p>
+
+</ion-content>
+
+<button fab primary fab-bottom fab-center style="z-index: 999">
+    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
+</button>
