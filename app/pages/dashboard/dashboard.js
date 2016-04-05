@@ -1,6 +1,5 @@
 import {NavController, Page, ActionSheet} from 'ionic-angular';
 import {ConferenceData} from '../../providers/conference-data';
-import {SpeakerDetailPage} from '../speaker-detail/speaker-detail';
 import {SessionDetailPage} from '../session-detail/session-detail';
 
 
@@ -27,7 +26,7 @@ export class DashboardPage {
   }
 
   goToSpeakerDetail(speakerName) {
-    this.nav.push(SpeakerDetailPage, speakerName);
+    // this.nav.push(SpeakerDetailPage, speakerName);
   }
 
   goToSpeakerTwitter(speaker) {

@@ -5,6 +5,7 @@ import {ConferenceData} from './providers/conference-data';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
+import {DashboardPage} from './pages/dashboard/dashboard';
 import {SignupPage} from './pages/signup/signup';
 // import {TutorialPage} from './pages/tutorial/tutorial';
 
@@ -43,7 +44,7 @@ class ConferenceApp {
 
     // We plan to add auth to only show the login page if not logged in
     // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
-    this.root = LoginPage;
+    this.root = DashboardPage;
 
     // create an list of pages that can be navigated to from the left menu
     // the left menu only works after login
