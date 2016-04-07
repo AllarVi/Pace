@@ -1,7 +1,13 @@
 ion-label {
-  margin: 0px 8px 0px 0;
+  margin: 0 8px 0 0;
 }
 
 .leaderboard-header {
-  font-size: 1.0rem;
+  font-size: 1.2rem;
+  min-height: 2.2rem; /* Default 4.4rem; */
+}
+
+.leaderboard-header ion-row {
+  padding-top: 0; /* Default 5px; */
+  padding-bottom: 0; /* Default 5px; */
 }
