@@ -10072,3 +10072,8 @@ ion-label {
   /* Default 5px; */
   padding-bottom: 0;
   /* Default 5px; */ }
+
+.profile-image {
+  max-height: none;
+  max-width: none;
+  border-radius: 50%; }

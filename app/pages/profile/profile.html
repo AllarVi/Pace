@@ -5,20 +5,114 @@
     <ion-title>My Profile</ion-title>
 </ion-navbar>
 
-<ion-content padding class="speaker-detail">
+<ion-content padding>
 
-    <div text-center>
-        <!--<img [src]="speaker" [alt]="speaker.name"><br>-->
+    <ion-item>
+        <ion-thumbnail item-left>
+            <img class="profile-image" src="img/michael-phelps.png">
+        </ion-thumbnail>
+        <h2>Michael Phelps</h2>
+        <h3>1564 p</h3>
+        <p>Swimmer</p>
+    </ion-item>
 
-        <button clear small twitter>
-            <ion-icon name="logo-twitter"></ion-icon>
-        </button>
-        <button clear small instagram>
-            <ion-icon name="logo-instagram"></ion-icon>
-        </button>
+    <ion-segment padding [(ngModel)]="pet">
+        <ion-segment-button value="puppies">
+            Goals
+        </ion-segment-button>
+        <ion-segment-button value="kittens">
+            Progress
+        </ion-segment-button>
+        <ion-segment-button value="ducklings">
+            Achievements
+        </ion-segment-button>
+    </ion-segment>
+
+    <!--   <div padding>
+      </div>  -->
+
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchWhen="'puppies'">
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-puppy-1.jpg">
+                </ion-thumbnail>
+                <h2>Ruby</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-puppy-2.jpg">
+                </ion-thumbnail>
+                <h2>Oscar</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-puppy-4.jpg">
+                </ion-thumbnail>
+                <h2>Zoey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-puppy-3.jpg">
+                </ion-thumbnail>
+                <h2>Otto</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchWhen="'kittens'">
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-kitten-1.jpg">
+                </ion-thumbnail>
+                <h2>Luna</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-kitten-3.jpg">
+                </ion-thumbnail>
+                <h2>Milo</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-kitten-4.jpg">
+                </ion-thumbnail>
+                <h2>Bandit</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-kitten-2.jpg">
+                </ion-thumbnail>
+                <h2>Nala</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchWhen="'ducklings'">
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-duckling-1.jpg">
+                </ion-thumbnail>
+                <h2>Daffy</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-duckling-2.jpg">
+                </ion-thumbnail>
+                <h2>Huey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-duckling-3.jpg">
+                </ion-thumbnail>
+                <h2>Dewey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="img/thumbnail-duckling-4.jpg">
+                </ion-thumbnail>
+                <h2>Louie</h2>
+            </ion-item>
+        </ion-list>
     </div>
-
-    <p>{{speaker}}</p>
 
 </ion-content>
 

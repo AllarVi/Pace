@@ -32,10 +32,14 @@ var copyHTML = require('ionic-gulp-html-copy');
 var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 
-gulp.task('watch', ['sass', 'html', 'fonts', 'scripts'], function(){
-  gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
-  gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
-  return buildBrowserify({ watch: true });
+gulp.task('watch', ['sass', 'html', 'fonts', 'scripts'], function () {
+    gulpWatch('app/**/*.scss', function () {
+        gulp.start('sass');
+    });
+    gulpWatch('app/**/*.html', function () {
+        gulp.start('html');
+    });
+    return buildBrowserify({watch: true});
 });
 
 gulp.task('build', ['sass', 'html', 'fonts', 'scripts'], buildBrowserify);
@@ -43,6 +47,6 @@ gulp.task('sass', buildSass);
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
-gulp.task('clean', function(done){
-  del('www/build', done);
+gulp.task('clean', function (done) {
+    del('www/build', done);
 });
