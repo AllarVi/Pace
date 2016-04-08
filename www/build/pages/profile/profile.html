@@ -2,7 +2,7 @@
     <button menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My Profile</ion-title>
+    <ion-title></ion-title>
 </ion-navbar>
 
 <ion-content padding>
@@ -17,7 +17,7 @@
     </ion-item>
 
     <ion-segment padding [(ngModel)]="pet">
-        <ion-segment-button value="puppies">
+        <ion-segment-button value="goals">
             Goals
         </ion-segment-button>
         <ion-segment-button value="progress">
@@ -32,18 +32,31 @@
       </div>  -->
 
     <div [ngSwitch]="pet">
-        <ion-list *ngSwitchWhen="'puppies'">
+        <ion-list *ngSwitchWhen="'goals'">
             <ion-list-header>
-                Hobbits
+                Gymnastics
             </ion-list-header>
             <a ion-item (click)="openModal({charNum: 0})">
-                Gollum
+                Aerial
             </a>
             <a ion-item (click)="openModal({charNum: 1})">
-                Frodo Baggins
+                Round Off
             </a>
             <a ion-item (click)="openModal({charNum: 2})">
-                Sam
+                Back Handspring
+            </a>
+            <br>
+            <ion-list-header>
+                Gym/Weights
+            </ion-list-header>
+            <a ion-item (click)="openModal({charNum: 0})">
+                Back Squat
+            </a>
+            <a ion-item (click)="openModal({charNum: 1})">
+                Military Press
+            </a>
+            <a ion-item (click)="openModal({charNum: 2})">
+                Bench Press
             </a>
         </ion-list>
 
