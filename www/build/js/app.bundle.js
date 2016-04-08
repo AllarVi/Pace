@@ -311,7 +311,7 @@ exports.ProfilePage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _dec, _class;
+var _dec, _class, _dec2, _class2;
 
 var _ionicAngular = require('ionic-angular');
 
@@ -335,8 +335,58 @@ var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
         // this.speaker = this.navParams.data;
     }
 
+    _createClass(ProfilePage, [{
+        key: 'openModal',
+        value: function openModal(characterNum) {
+            var modal = _ionicAngular.Modal.create(ModalsContentPage, characterNum);
+            this.nav.present(modal);
+        }
+    }]);
+
     return ProfilePage;
 }()) || _class);
+var ModalsContentPage = (_dec2 = (0, _ionicAngular.Page)({
+    templateUrl: './build/pages/profile-goals-modal/profile-goals-modal.html'
+}), _dec2(_class2 = function () {
+    _createClass(ModalsContentPage, null, [{
+        key: 'parameters',
+        get: function get() {
+            return [[_ionicAngular.Platform], [_ionicAngular.NavParams], [_ionicAngular.ViewController]];
+        }
+    }]);
+
+    function ModalsContentPage(platform, params, viewCtrl) {
+        _classCallCheck(this, ModalsContentPage);
+
+        this.platform = platform;
+        this.params = params;
+        this.viewCtrl = viewCtrl;
+
+        var characters = [{
+            name: 'Gollum',
+            quote: 'Sneaky little hobbitses!',
+            items: [{ title: 'Race', note: 'Hobbit' }, { title: 'Culture', note: 'River Folk' }, { title: 'Alter Ego', note: 'Smeagol' }]
+        }, {
+            name: 'Frodo',
+            quote: 'Go back, Sam! I\'m going to Mordor alone!',
+            items: [{ title: 'Race', note: 'Hobbit' }, { title: 'Culture', note: 'Shire Folk' }, { title: 'Weapon', note: 'Sting' }]
+        }, {
+            name: 'Samwise Gamgee',
+            quote: 'What we need is a few good taters.',
+            items: [{ title: 'Race', note: 'Hobbit' }, { title: 'Culture', note: 'Shire Folk' }, { title: 'Nickname', note: 'Sam' }]
+        }];
+        this.character = characters[this.params.get('charNum')];
+    }
+
+    _createClass(ModalsContentPage, [{
+        key: 'dismiss',
+        value: function dismiss() {
+            this.viewCtrl.dismiss();
+        }
+    }]);
+
+    return ModalsContentPage;
+}()) || _class2);
 
 },{"ionic-angular":330}],7:[function(require,module,exports){
 'use strict';
