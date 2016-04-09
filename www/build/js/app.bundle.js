@@ -163,8 +163,6 @@ var _dec, _class;
 
 var _ionicAngular = require('ionic-angular');
 
-var _conferenceData = require('../../providers/conference-data');
-
 var _groupDetail = require('../group-detail/group-detail');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -175,22 +173,14 @@ var DashboardPage = exports.DashboardPage = (_dec = (0, _ionicAngular.Page)({
     _createClass(DashboardPage, null, [{
         key: 'parameters',
         get: function get() {
-            return [[_ionicAngular.NavController], [_conferenceData.ConferenceData]];
+            return [[_ionicAngular.NavController]];
         }
     }]);
 
-    function DashboardPage(nav, confData) {
-        var _this = this;
-
+    function DashboardPage(nav) {
         _classCallCheck(this, DashboardPage);
 
         this.nav = nav;
-        this.confData = confData;
-        this.speakers = [];
-
-        confData.getSpeakers().then(function (speakers) {
-            _this.speakers = speakers;
-        });
     }
 
     _createClass(DashboardPage, [{
@@ -203,7 +193,7 @@ var DashboardPage = exports.DashboardPage = (_dec = (0, _ionicAngular.Page)({
     return DashboardPage;
 }()) || _class);
 
-},{"../../providers/conference-data":9,"../group-detail/group-detail":4,"ionic-angular":330}],4:[function(require,module,exports){
+},{"../group-detail/group-detail":4,"ionic-angular":330}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -243,7 +233,7 @@ var GroupDetailPage = exports.GroupDetailPage = (_dec = (0, _ionicAngular.Page)(
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.LoginPage = undefined;
 
@@ -262,43 +252,43 @@ var _userData = require('../../providers/user-data');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/login/login.html'
+    templateUrl: 'build/pages/login/login.html'
 }), _dec(_class = function () {
-  _createClass(LoginPage, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_ionicAngular.NavController], [_userData.UserData]];
+    _createClass(LoginPage, null, [{
+        key: 'parameters',
+        get: function get() {
+            return [[_ionicAngular.NavController], [_userData.UserData]];
+        }
+    }]);
+
+    function LoginPage(nav, userData) {
+        _classCallCheck(this, LoginPage);
+
+        this.nav = nav;
+        this.userData = userData;
+
+        this.login = {};
+        this.submitted = false;
     }
-  }]);
 
-  function LoginPage(nav, userData) {
-    _classCallCheck(this, LoginPage);
+    _createClass(LoginPage, [{
+        key: 'onLogin',
+        value: function onLogin(form) {
+            this.submitted = true;
 
-    this.nav = nav;
-    this.userData = userData;
+            if (form.valid) {
+                this.userData.login();
+                this.nav.push(_tabs.TabsPage);
+            }
+        }
+    }, {
+        key: 'onSignup',
+        value: function onSignup() {
+            this.nav.push(_signup.SignupPage);
+        }
+    }]);
 
-    this.login = {};
-    this.submitted = false;
-  }
-
-  _createClass(LoginPage, [{
-    key: 'onLogin',
-    value: function onLogin(form) {
-      this.submitted = true;
-
-      if (form.valid) {
-        this.userData.login();
-        this.nav.push(_tabs.TabsPage);
-      }
-    }
-  }, {
-    key: 'onSignup',
-    value: function onSignup() {
-      this.nav.push(_signup.SignupPage);
-    }
-  }]);
-
-  return LoginPage;
+    return LoginPage;
 }()) || _class);
 
 },{"../../providers/user-data":10,"../signup/signup":7,"../tabs/tabs":8,"ionic-angular":330}],6:[function(require,module,exports){
@@ -332,7 +322,6 @@ var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
 
         this.nav = nav;
         this.navParams = navParams;
-        // this.speaker = this.navParams.data;
     }
 
     _createClass(ProfilePage, [{

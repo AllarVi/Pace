@@ -12,7 +12,6 @@ export class ProfilePage {
     constructor(nav, navParams) {
         this.nav = nav;
         this.navParams = navParams;
-        // this.speaker = this.navParams.data;
     }
 
     openModal(characterNum) {

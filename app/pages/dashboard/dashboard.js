@@ -1,5 +1,4 @@
 import {NavController, Page, ActionSheet} from 'ionic-angular';
-import {ConferenceData} from '../../providers/conference-data';
 import {GroupDetailPage} from '../group-detail/group-detail';
 
 
@@ -8,17 +7,11 @@ import {GroupDetailPage} from '../group-detail/group-detail';
 })
 export class DashboardPage {
     static get parameters() {
-        return [[NavController], [ConferenceData]];
+        return [[NavController]];
     }
 
-    constructor(nav, confData) {
+    constructor(nav) {
         this.nav = nav;
-        this.confData = confData;
-        this.speakers = [];
-
-        confData.getSpeakers().then(speakers => {
-            this.speakers = speakers;
-        });
     }
 
     goToGroupDetail(group) {
