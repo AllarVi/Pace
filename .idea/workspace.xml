@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
+    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="Some code cleanup">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/profile/profile.html" afterPath="$PROJECT_DIR$/www/build/pages/profile/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.html" afterPath="$PROJECT_DIR$/app/pages/profile/profile.html" />
     </list>
     <ignored path="pacewayer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +28,8 @@
       <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-501">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="286">
+              <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -75,7 +75,6 @@
         <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/app/pages/profile/profile.scss" />
         <option value="$PROJECT_DIR$/www/build/css/app.ios.css" />
-        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
         <option value="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.html" />
         <option value="$PROJECT_DIR$/app/pages/profile/profile.ts" />
         <option value="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.ts" />
@@ -88,6 +87,7 @@
         <option value="$PROJECT_DIR$/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
         <option value="$PROJECT_DIR$/app/pages/profile/profile.js" />
         <option value="$PROJECT_DIR$/app/pages/login/login.js" />
+        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
       </list>
     </option>
   </component>
@@ -695,7 +695,7 @@
       <updated>1459688597790</updated>
       <workItem from="1459688599113" duration="5831000" />
       <workItem from="1459720108525" duration="386000" />
-      <workItem from="1459778090587" duration="34615000" />
+      <workItem from="1459778090587" duration="34732000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -746,11 +746,18 @@
       <option name="project" value="LOCAL" />
       <updated>1460238724687</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Some code cleanup">
+      <created>1460238835248</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1460238835248</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40832000" />
+    <option name="totallyTimeSpent" value="40949000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -1223,8 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-501">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="286">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
           <folding />
         </state>
       </provider>
