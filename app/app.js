@@ -7,12 +7,13 @@ import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
 import {DashboardPage} from './pages/dashboard/dashboard';
 import {SignupPage} from './pages/signup/signup';
+import {FbProvider} from './providers/fb-provider';
 // import {TutorialPage} from './pages/tutorial/tutorial';
 
 
 @App({
   templateUrl: 'build/app.html',
-  providers: [ConferenceData, UserData],
+  providers: [ConferenceData, UserData, FbProvider],
   config: {
     platforms: {
       android: {
@@ -24,7 +25,7 @@ import {SignupPage} from './pages/signup/signup';
 class ConferenceApp {
   static get parameters() {
     return [
-      [IonicApp], [Events], [ConferenceData], [UserData], [Platform]
+      [IonicApp], [Events], [ConferenceData], [UserData], [Platform], [FbProvider]
     ]
   }
 

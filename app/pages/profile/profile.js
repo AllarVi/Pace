@@ -1,6 +1,5 @@
 import {IonicApp, Modal, Platform, NavController, NavParams, Page, ViewController} from 'ionic-angular';
 
-
 @Page({
     templateUrl: 'build/pages/profile/profile.html'
 })
