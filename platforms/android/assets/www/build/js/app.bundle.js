@@ -25,13 +25,15 @@ var _signup = require('./pages/signup/signup');
 
 var _fbProvider = require('./providers/fb-provider');
 
+var _user = require('./providers/user');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // import {TutorialPage} from './pages/tutorial/tutorial';
 
 var ConferenceApp = (_dec = (0, _ionicAngular.App)({
   templateUrl: 'build/app.html',
-  providers: [_conferenceData.ConferenceData, _userData.UserData, _fbProvider.FbProvider],
+  providers: [_conferenceData.ConferenceData, _userData.UserData, _fbProvider.FbProvider, _user.User],
   config: {
     platforms: {
       android: {
@@ -43,7 +45,7 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
   _createClass(ConferenceApp, null, [{
     key: 'parameters',
     get: function get() {
-      return [[_ionicAngular.IonicApp], [_ionicAngular.Events], [_conferenceData.ConferenceData], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
+      return [[_ionicAngular.IonicApp], [_ionicAngular.Events], [_conferenceData.ConferenceData], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider], [_user.User]];
     }
   }]);
 
@@ -131,7 +133,7 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
   return ConferenceApp;
 }()) || _class);
 
-},{"./pages/dashboard/dashboard":3,"./pages/login/login":5,"./pages/signup/signup":7,"./pages/tabs/tabs":8,"./providers/conference-data":9,"./providers/fb-provider":10,"./providers/user-data":11,"es6-shim":255,"ionic-angular":331,"ionic-native":352}],2:[function(require,module,exports){
+},{"./pages/dashboard/dashboard":3,"./pages/login/login":5,"./pages/signup/signup":7,"./pages/tabs/tabs":8,"./providers/conference-data":9,"./providers/fb-provider":10,"./providers/user":12,"./providers/user-data":11,"es6-shim":256,"ionic-angular":332,"ionic-native":353}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -151,7 +153,7 @@ var AboutPage = exports.AboutPage = (_dec = (0, _ionicAngular.Page)({
   _classCallCheck(this, AboutPage);
 }) || _class);
 
-},{"ionic-angular":331}],3:[function(require,module,exports){
+},{"ionic-angular":332}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -195,7 +197,7 @@ var DashboardPage = exports.DashboardPage = (_dec = (0, _ionicAngular.Page)({
     return DashboardPage;
 }()) || _class);
 
-},{"../group-detail/group-detail":4,"ionic-angular":331}],4:[function(require,module,exports){
+},{"../group-detail/group-detail":4,"ionic-angular":332}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -231,7 +233,7 @@ var GroupDetailPage = exports.GroupDetailPage = (_dec = (0, _ionicAngular.Page)(
     return GroupDetailPage;
 }()) || _class);
 
-},{"ionic-angular":331}],5:[function(require,module,exports){
+},{"ionic-angular":332}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -251,6 +253,8 @@ var _signup = require('../signup/signup');
 
 var _userData = require('../../providers/user-data');
 
+var _user = require('../../providers/user');
+
 var _fbProvider = require('../../providers/fb-provider');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -261,11 +265,11 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     _createClass(LoginPage, null, [{
         key: 'parameters',
         get: function get() {
-            return [[_ionicAngular.NavController], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
+            return [[_ionicAngular.NavController], [_userData.UserData], [_ionicAngular.Platform], [_user.User], [_fbProvider.FbProvider]];
         }
     }]);
 
-    function LoginPage(nav, userData, platform, fbProvider) {
+    function LoginPage(nav, userData, platform, fbProvider, user) {
         _classCallCheck(this, LoginPage);
 
         this.platform = platform;
@@ -279,13 +283,17 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
 
         this.login = {};
         this.submitted = false;
+
+        this.loggedIn = false;
+        this.user = user;
     }
 
     _createClass(LoginPage, [{
-        key: 'login',
-        value: function login() {
+        key: 'fbLogin',
+        value: function fbLogin() {
             var _this = this;
 
+            console.log("Login.js reached");
             this.fb.login().then(function () {
                 _this.fb.getCurrentUserProfile().then(function (profileData) {
                     _this.email = profileData.email;
@@ -317,7 +325,7 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     return LoginPage;
 }()) || _class);
 
-},{"../../providers/fb-provider":10,"../../providers/user-data":11,"../signup/signup":7,"../tabs/tabs":8,"ionic-angular":331}],6:[function(require,module,exports){
+},{"../../providers/fb-provider":10,"../../providers/user":12,"../../providers/user-data":11,"../signup/signup":7,"../tabs/tabs":8,"ionic-angular":332}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -403,7 +411,7 @@ var ModalsContentPage = (_dec2 = (0, _ionicAngular.Page)({
     return ModalsContentPage;
 }()) || _class2);
 
-},{"ionic-angular":331}],7:[function(require,module,exports){
+},{"ionic-angular":332}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -460,7 +468,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
   return SignupPage;
 }()) || _class);
 
-},{"../../providers/user-data":11,"../tabs/tabs":8,"ionic-angular":331}],8:[function(require,module,exports){
+},{"../../providers/user-data":11,"../tabs/tabs":8,"ionic-angular":332}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -506,7 +514,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
   return TabsPage;
 }()) || _class);
 
-},{"../about/about":2,"../dashboard/dashboard":3,"../profile/profile":6,"ionic-angular":331}],9:[function(require,module,exports){
+},{"../about/about":2,"../dashboard/dashboard":3,"../profile/profile":6,"ionic-angular":332}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -722,7 +730,7 @@ var ConferenceData = exports.ConferenceData = (_dec = (0, _core.Injectable)(), _
   return ConferenceData;
 }()) || _class);
 
-},{"./user-data":11,"angular2/core":14,"angular2/http":15}],10:[function(require,module,exports){
+},{"./user-data":11,"angular2/core":15,"angular2/http":16}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -795,11 +803,11 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
     return FbProvider;
 }()) || _class);
 
-},{"angular2/core":14,"ionic-angular":331}],11:[function(require,module,exports){
+},{"angular2/core":15,"ionic-angular":332}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.UserData = undefined;
 
@@ -814,74 +822,159 @@ var _ionicAngular = require('ionic-angular');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
-  _createClass(UserData, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_ionicAngular.Events]];
-    }
-  }]);
+    _createClass(UserData, null, [{
+        key: 'parameters',
+        get: function get() {
+            return [[_ionicAngular.Events]];
+        }
+    }]);
 
-  function UserData(events) {
-    _classCallCheck(this, UserData);
+    function UserData(events) {
+        _classCallCheck(this, UserData);
 
-    this._favorites = [];
-    this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
-    this.events = events;
-    this.HAS_LOGGED_IN = 'hasLoggedIn';
-  }
-
-  _createClass(UserData, [{
-    key: 'hasFavorite',
-    value: function hasFavorite(sessionName) {
-      return this._favorites.indexOf(sessionName) > -1;
-    }
-  }, {
-    key: 'addFavorite',
-    value: function addFavorite(sessionName) {
-      this._favorites.push(sessionName);
-    }
-  }, {
-    key: 'removeFavorite',
-    value: function removeFavorite(sessionName) {
-      var index = this._favorites.indexOf(sessionName);
-      if (index > -1) {
-        this._favorites.splice(index, 1);
-      }
-    }
-  }, {
-    key: 'login',
-    value: function login(username, password) {
-      this.storage.set(this.HAS_LOGGED_IN, true);
-      this.events.publish('user:login');
-    }
-  }, {
-    key: 'signup',
-    value: function signup(username, password) {
-      this.storage.set(this.HAS_LOGGED_IN, true);
-      this.events.publish('user:signup');
-    }
-  }, {
-    key: 'logout',
-    value: function logout() {
-      this.storage.remove(this.HAS_LOGGED_IN);
-      this.events.publish('user:logout');
+        this._favorites = [];
+        this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
+        this.events = events;
+        this.HAS_LOGGED_IN = 'hasLoggedIn';
     }
 
-    // return a promise
+    _createClass(UserData, [{
+        key: 'hasFavorite',
+        value: function hasFavorite(sessionName) {
+            return this._favorites.indexOf(sessionName) > -1;
+        }
+    }, {
+        key: 'addFavorite',
+        value: function addFavorite(sessionName) {
+            this._favorites.push(sessionName);
+        }
+    }, {
+        key: 'removeFavorite',
+        value: function removeFavorite(sessionName) {
+            var index = this._favorites.indexOf(sessionName);
+            if (index > -1) {
+                this._favorites.splice(index, 1);
+            }
+        }
+    }, {
+        key: 'login',
+        value: function login(username, password) {
+            this.storage.set(this.HAS_LOGGED_IN, true);
+            this.events.publish('user:login');
+        }
+    }, {
+        key: 'signup',
+        value: function signup(username, password) {
+            this.storage.set(this.HAS_LOGGED_IN, true);
+            this.events.publish('user:signup');
+        }
+    }, {
+        key: 'logout',
+        value: function logout() {
+            this.storage.remove(this.HAS_LOGGED_IN);
+            this.events.publish('user:logout');
+        }
 
-  }, {
-    key: 'hasLoggedIn',
-    value: function hasLoggedIn() {
-      return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
-        return value;
-      });
-    }
-  }]);
+        // return a promise
 
-  return UserData;
+    }, {
+        key: 'hasLoggedIn',
+        value: function hasLoggedIn() {
+            return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
+                return value;
+            });
+        }
+    }]);
+
+    return UserData;
 }()) || _class);
 
-},{"angular2/core":14,"ionic-angular":331}],12:[function(require,module,exports){
+},{"angular2/core":15,"ionic-angular":332}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.User = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _core = require('angular2/core');
+
+var _http = require('angular2/http');
+
+var _ionicAngular = require('ionic-angular');
+
+require('rxjs/add/operator/map');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var User = exports.User = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
+    _createClass(User, null, [{
+        key: 'parameters',
+        get: function get() {
+            return [[_ionicAngular.Events], [_http.Http]];
+        }
+    }]);
+
+    function User(events, http) {
+        var _this = this;
+
+        _classCallCheck(this, User);
+
+        this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
+        this.events = events;
+
+        // inject the Http provider and set to this instance
+        this.http = http;
+        this.userData = null;
+
+        this.name = 'username';
+
+        // this.userData = this.loadUserData();
+        this.http.get('http://localhost:8080/user').map(function (res) {
+            return res;
+        }).subscribe(function (data) {
+            _this.userData = data;
+            console.log(_this.userData);
+        });
+    }
+
+    _createClass(User, [{
+        key: 'loadUserData',
+        value: function loadUserData() {
+            var _this2 = this;
+
+            if (this.data) {
+                // already loaded data
+                return Promise.resolve(this.data);
+            }
+
+            console.log("User.loadUserData() reached: ");
+            // don't have the data yet
+            return new Promise(function (resolve) {
+                // We're using Angular Http provider to request the data,
+                // then on the response it'll map the JSON data to a parsed JS object.
+                // Next we process the data and resolve the promise with the new data.
+                _this2.http.get('http://localhost:8080/user').subscribe(function (res) {
+                    // we've got back the raw data, now generate the core schedule data
+                    // and save the data for later reference
+                    console.log("About to parse user data: ");
+                    // this.data = res.json();
+                    _this2.data = res;
+                    console.log("Data: " + _this2.data);
+                    resolve(_this2.data);
+                });
+            });
+        }
+    }]);
+
+    return User;
+}()) || _class);
+
+},{"angular2/core":15,"angular2/http":16,"ionic-angular":332,"rxjs/add/operator/map":397}],13:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -889,7 +982,7 @@ __export(require('./src/common/pipes'));
 __export(require('./src/common/directives'));
 __export(require('./src/common/forms'));
 __export(require('./src/common/common_directives'));
-},{"./src/common/common_directives":25,"./src/common/directives":26,"./src/common/forms":34,"./src/common/pipes":58}],13:[function(require,module,exports){
+},{"./src/common/common_directives":26,"./src/common/directives":27,"./src/common/forms":35,"./src/common/pipes":59}],14:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -901,7 +994,7 @@ __export(require('./src/common/common_directives'));
 __export(require('./src/compiler/url_resolver'));
 __export(require('./src/compiler/xhr'));
 __export(require('./src/compiler/compiler'));
-},{"./src/compiler/compiler":69,"./src/compiler/url_resolver":91,"./src/compiler/xhr":94}],14:[function(require,module,exports){
+},{"./src/compiler/compiler":70,"./src/compiler/url_resolver":92,"./src/compiler/xhr":95}],15:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -941,7 +1034,7 @@ __export(require('./src/core/platform_directives_and_pipes'));
 __export(require('./src/core/platform_common_providers'));
 __export(require('./src/core/application_common_providers'));
 __export(require('./src/core/reflection/reflection'));
-},{"./src/core/application_common_providers":96,"./src/core/application_ref":97,"./src/core/application_tokens":98,"./src/core/change_detection":99,"./src/core/debug/debug_node":131,"./src/core/di":133,"./src/core/linker":143,"./src/core/metadata":161,"./src/core/platform_common_providers":167,"./src/core/platform_directives_and_pipes":168,"./src/core/prod_mode":169,"./src/core/reflection/reflection":173,"./src/core/render":176,"./src/core/testability/testability":179,"./src/core/util":180,"./src/core/zone":182,"./src/facade/facade":189,"angular2/src/facade/lang":191}],15:[function(require,module,exports){
+},{"./src/core/application_common_providers":97,"./src/core/application_ref":98,"./src/core/application_tokens":99,"./src/core/change_detection":100,"./src/core/debug/debug_node":132,"./src/core/di":134,"./src/core/linker":144,"./src/core/metadata":162,"./src/core/platform_common_providers":168,"./src/core/platform_directives_and_pipes":169,"./src/core/prod_mode":170,"./src/core/reflection/reflection":174,"./src/core/render":177,"./src/core/testability/testability":180,"./src/core/util":181,"./src/core/zone":183,"./src/facade/facade":190,"angular2/src/facade/lang":192}],16:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -1252,13 +1345,13 @@ exports.JSONP_PROVIDERS = [
  * @deprecated
  */
 exports.JSON_BINDINGS = exports.JSONP_PROVIDERS;
-},{"./src/http/backends/browser_jsonp":194,"./src/http/backends/browser_xhr":195,"./src/http/backends/jsonp_backend":196,"./src/http/backends/xhr_backend":197,"./src/http/base_request_options":198,"./src/http/base_response_options":199,"./src/http/enums":200,"./src/http/headers":201,"./src/http/http":202,"./src/http/interfaces":204,"./src/http/static_request":205,"./src/http/static_response":206,"./src/http/url_search_params":207,"angular2/core":14}],16:[function(require,module,exports){
+},{"./src/http/backends/browser_jsonp":195,"./src/http/backends/browser_xhr":196,"./src/http/backends/jsonp_backend":197,"./src/http/backends/xhr_backend":198,"./src/http/base_request_options":199,"./src/http/base_response_options":200,"./src/http/enums":201,"./src/http/headers":202,"./src/http/http":203,"./src/http/interfaces":205,"./src/http/static_request":206,"./src/http/static_response":207,"./src/http/url_search_params":208,"angular2/core":15}],17:[function(require,module,exports){
 'use strict';var profile_1 = require('./src/core/profile/profile');
 exports.wtfCreateScope = profile_1.wtfCreateScope;
 exports.wtfLeave = profile_1.wtfLeave;
 exports.wtfStartTimeRange = profile_1.wtfStartTimeRange;
 exports.wtfEndTimeRange = profile_1.wtfEndTimeRange;
-},{"./src/core/profile/profile":170}],17:[function(require,module,exports){
+},{"./src/core/profile/profile":171}],18:[function(require,module,exports){
 'use strict';var angular_entrypoint_1 = require('angular2/src/core/angular_entrypoint');
 exports.AngularEntrypoint = angular_entrypoint_1.AngularEntrypoint;
 var browser_common_1 = require('angular2/src/platform/browser_common');
@@ -1362,7 +1455,7 @@ function bootstrap(appComponentType, customProviders) {
     return core_1.platform(browser_common_2.BROWSER_PROVIDERS).application(appProviders).bootstrap(appComponentType);
 }
 exports.bootstrap = bootstrap;
-},{"angular2/compiler":13,"angular2/core":14,"angular2/src/core/angular_entrypoint":95,"angular2/src/core/di":133,"angular2/src/core/reflection/reflection_capabilities":174,"angular2/src/facade/lang":191,"angular2/src/platform/browser/xhr_impl":214,"angular2/src/platform/browser_common":215}],18:[function(require,module,exports){
+},{"angular2/compiler":14,"angular2/core":15,"angular2/src/core/angular_entrypoint":96,"angular2/src/core/di":134,"angular2/src/core/reflection/reflection_capabilities":175,"angular2/src/facade/lang":192,"angular2/src/platform/browser/xhr_impl":215,"angular2/src/platform/browser_common":216}],19:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -1388,7 +1481,7 @@ exports.EventManager = event_manager_1.EventManager;
 exports.EventManagerPlugin = event_manager_1.EventManagerPlugin;
 __export(require('angular2/src/platform/dom/debug/by'));
 __export(require('angular2/src/platform/dom/debug/ng_probe'));
-},{"angular2/src/platform/dom/debug/by":216,"angular2/src/platform/dom/debug/ng_probe":217,"angular2/src/platform/dom/dom_adapter":218,"angular2/src/platform/dom/dom_renderer":219,"angular2/src/platform/dom/dom_tokens":220,"angular2/src/platform/dom/events/dom_events":221,"angular2/src/platform/dom/events/event_manager":222,"angular2/src/platform/dom/shared_styles_host":226}],19:[function(require,module,exports){
+},{"angular2/src/platform/dom/debug/by":217,"angular2/src/platform/dom/debug/ng_probe":218,"angular2/src/platform/dom/dom_adapter":219,"angular2/src/platform/dom/dom_renderer":220,"angular2/src/platform/dom/dom_tokens":221,"angular2/src/platform/dom/events/dom_events":222,"angular2/src/platform/dom/events/event_manager":223,"angular2/src/platform/dom/shared_styles_host":227}],20:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -1460,7 +1553,7 @@ var lang_1 = require('./src/facade/lang');
  * ```
  */
 exports.ROUTER_DIRECTIVES = lang_1.CONST_EXPR([router_outlet_2.RouterOutlet, router_link_2.RouterLink]);
-},{"./src/facade/lang":191,"./src/router/hash_location_strategy":231,"./src/router/instruction":232,"./src/router/lifecycle_annotations":233,"./src/router/location":235,"./src/router/location_strategy":236,"./src/router/path_location_strategy":237,"./src/router/platform_location":239,"./src/router/route_config_decorator":240,"./src/router/route_definition":243,"./src/router/route_registry":246,"./src/router/router":247,"./src/router/router_link":248,"./src/router/router_outlet":249,"angular2/core":14,"angular2/src/router/router_providers":250,"angular2/src/router/router_providers_common":251}],20:[function(require,module,exports){
+},{"./src/facade/lang":192,"./src/router/hash_location_strategy":232,"./src/router/instruction":233,"./src/router/lifecycle_annotations":234,"./src/router/location":236,"./src/router/location_strategy":237,"./src/router/path_location_strategy":238,"./src/router/platform_location":240,"./src/router/route_config_decorator":241,"./src/router/route_definition":244,"./src/router/route_registry":247,"./src/router/router":248,"./src/router/router_link":249,"./src/router/router_outlet":250,"angular2/core":15,"angular2/src/router/router_providers":251,"angular2/src/router/router_providers_common":252}],21:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var math_1 = require('angular2/src/facade/math');
 var util_1 = require('angular2/src/platform/dom/util');
@@ -1642,7 +1735,7 @@ var Animation = (function () {
     return Animation;
 })();
 exports.Animation = Animation;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/facade/math":192,"angular2/src/platform/dom/dom_adapter":218,"angular2/src/platform/dom/util":227}],21:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/facade/math":193,"angular2/src/platform/dom/dom_adapter":219,"angular2/src/platform/dom/util":228}],22:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1675,7 +1768,7 @@ var AnimationBuilder = (function () {
     return AnimationBuilder;
 })();
 exports.AnimationBuilder = AnimationBuilder;
-},{"./browser_details":22,"./css_animation_builder":23,"angular2/src/core/di":133}],22:[function(require,module,exports){
+},{"./browser_details":23,"./css_animation_builder":24,"angular2/src/core/di":134}],23:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1748,7 +1841,7 @@ var RafQueue = (function () {
     };
     return RafQueue;
 })();
-},{"angular2/src/core/di":133,"angular2/src/facade/math":192,"angular2/src/platform/dom/dom_adapter":218}],23:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/math":193,"angular2/src/platform/dom/dom_adapter":219}],24:[function(require,module,exports){
 'use strict';var css_animation_options_1 = require('./css_animation_options');
 var animation_1 = require('./animation');
 var CssAnimationBuilder = (function () {
@@ -1834,7 +1927,7 @@ var CssAnimationBuilder = (function () {
     return CssAnimationBuilder;
 })();
 exports.CssAnimationBuilder = CssAnimationBuilder;
-},{"./animation":20,"./css_animation_options":24}],24:[function(require,module,exports){
+},{"./animation":21,"./css_animation_options":25}],25:[function(require,module,exports){
 'use strict';var CssAnimationOptions = (function () {
     function CssAnimationOptions() {
         /** classes to be added to the element */
@@ -1847,7 +1940,7 @@ exports.CssAnimationBuilder = CssAnimationBuilder;
     return CssAnimationOptions;
 })();
 exports.CssAnimationOptions = CssAnimationOptions;
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var forms_1 = require('./forms');
 var directives_1 = require('./directives');
@@ -1895,7 +1988,7 @@ var directives_1 = require('./directives');
  * ```
  */
 exports.COMMON_DIRECTIVES = lang_1.CONST_EXPR([directives_1.CORE_DIRECTIVES, forms_1.FORM_DIRECTIVES]);
-},{"./directives":26,"./forms":34,"angular2/src/facade/lang":191}],26:[function(require,module,exports){
+},{"./directives":27,"./forms":35,"angular2/src/facade/lang":192}],27:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -1919,7 +2012,7 @@ exports.NgSwitchDefault = ng_switch_1.NgSwitchDefault;
 __export(require('./directives/observable_list_diff'));
 var core_directives_1 = require('./directives/core_directives');
 exports.CORE_DIRECTIVES = core_directives_1.CORE_DIRECTIVES;
-},{"./directives/core_directives":27,"./directives/ng_class":28,"./directives/ng_for":29,"./directives/ng_if":30,"./directives/ng_style":31,"./directives/ng_switch":32,"./directives/observable_list_diff":33}],27:[function(require,module,exports){
+},{"./directives/core_directives":28,"./directives/ng_class":29,"./directives/ng_for":30,"./directives/ng_if":31,"./directives/ng_style":32,"./directives/ng_switch":33,"./directives/observable_list_diff":34}],28:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var ng_class_1 = require('./ng_class');
 var ng_for_1 = require('./ng_for');
@@ -1967,7 +2060,7 @@ var ng_switch_1 = require('./ng_switch');
  * ```
  */
 exports.CORE_DIRECTIVES = lang_1.CONST_EXPR([ng_class_1.NgClass, ng_for_1.NgFor, ng_if_1.NgIf, ng_style_1.NgStyle, ng_switch_1.NgSwitch, ng_switch_1.NgSwitchWhen, ng_switch_1.NgSwitchDefault]);
-},{"./ng_class":28,"./ng_for":29,"./ng_if":30,"./ng_style":31,"./ng_switch":32,"angular2/src/facade/lang":191}],28:[function(require,module,exports){
+},{"./ng_class":29,"./ng_for":30,"./ng_if":31,"./ng_style":32,"./ng_switch":33,"angular2/src/facade/lang":192}],29:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2156,7 +2249,7 @@ var NgClass = (function () {
     return NgClass;
 })();
 exports.NgClass = NgClass;
-},{"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],29:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],30:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2333,7 +2426,7 @@ var RecordViewTuple = (function () {
     }
     return RecordViewTuple;
 })();
-},{"angular2/core":14,"angular2/src/facade/lang":191}],30:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],31:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2394,7 +2487,7 @@ var NgIf = (function () {
     return NgIf;
 })();
 exports.NgIf = NgIf;
-},{"angular2/core":14,"angular2/src/facade/lang":191}],31:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],32:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2497,7 +2590,7 @@ var NgStyle = (function () {
     return NgStyle;
 })();
 exports.NgStyle = NgStyle;
-},{"angular2/core":14,"angular2/src/facade/lang":191}],32:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],33:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2723,9 +2816,9 @@ var NgSwitchDefault = (function () {
     return NgSwitchDefault;
 })();
 exports.NgSwitchDefault = NgSwitchDefault;
-},{"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],33:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],34:[function(require,module,exports){
 'use strict';// TS does not have Observables
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -2805,7 +2898,7 @@ exports.FORM_PROVIDERS = lang_1.CONST_EXPR([form_builder_2.FormBuilder, radio_co
  * @deprecated
  */
 exports.FORM_BINDINGS = exports.FORM_PROVIDERS;
-},{"./forms/directives":35,"./forms/directives/abstract_control_directive":36,"./forms/directives/checkbox_value_accessor":37,"./forms/directives/control_container":38,"./forms/directives/control_value_accessor":39,"./forms/directives/default_value_accessor":40,"./forms/directives/ng_control":41,"./forms/directives/ng_control_group":42,"./forms/directives/ng_control_name":43,"./forms/directives/ng_control_status":44,"./forms/directives/ng_form":45,"./forms/directives/ng_form_control":46,"./forms/directives/ng_form_model":47,"./forms/directives/ng_model":48,"./forms/directives/radio_control_value_accessor":51,"./forms/directives/select_control_value_accessor":52,"./forms/directives/validators":54,"./forms/form_builder":55,"./forms/model":56,"./forms/validators":57,"angular2/src/facade/lang":191}],35:[function(require,module,exports){
+},{"./forms/directives":36,"./forms/directives/abstract_control_directive":37,"./forms/directives/checkbox_value_accessor":38,"./forms/directives/control_container":39,"./forms/directives/control_value_accessor":40,"./forms/directives/default_value_accessor":41,"./forms/directives/ng_control":42,"./forms/directives/ng_control_group":43,"./forms/directives/ng_control_name":44,"./forms/directives/ng_control_status":45,"./forms/directives/ng_form":46,"./forms/directives/ng_form_control":47,"./forms/directives/ng_form_model":48,"./forms/directives/ng_model":49,"./forms/directives/radio_control_value_accessor":52,"./forms/directives/select_control_value_accessor":53,"./forms/directives/validators":55,"./forms/form_builder":56,"./forms/model":57,"./forms/validators":58,"angular2/src/facade/lang":192}],36:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var ng_control_name_1 = require('./directives/ng_control_name');
 var ng_form_control_1 = require('./directives/ng_form_control');
@@ -2886,7 +2979,7 @@ exports.FORM_DIRECTIVES = lang_1.CONST_EXPR([
     validators_1.MinLengthValidator,
     validators_1.MaxLengthValidator
 ]);
-},{"./directives/checkbox_value_accessor":37,"./directives/default_value_accessor":40,"./directives/ng_control":41,"./directives/ng_control_group":42,"./directives/ng_control_name":43,"./directives/ng_control_status":44,"./directives/ng_form":45,"./directives/ng_form_control":46,"./directives/ng_form_model":47,"./directives/ng_model":48,"./directives/number_value_accessor":50,"./directives/radio_control_value_accessor":51,"./directives/select_control_value_accessor":52,"./directives/validators":54,"angular2/src/facade/lang":191}],36:[function(require,module,exports){
+},{"./directives/checkbox_value_accessor":38,"./directives/default_value_accessor":41,"./directives/ng_control":42,"./directives/ng_control_group":43,"./directives/ng_control_name":44,"./directives/ng_control_status":45,"./directives/ng_form":46,"./directives/ng_form_control":47,"./directives/ng_form_model":48,"./directives/ng_model":49,"./directives/number_value_accessor":51,"./directives/radio_control_value_accessor":52,"./directives/select_control_value_accessor":53,"./directives/validators":55,"angular2/src/facade/lang":192}],37:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 /**
@@ -2947,7 +3040,7 @@ var AbstractControlDirective = (function () {
     return AbstractControlDirective;
 })();
 exports.AbstractControlDirective = AbstractControlDirective;
-},{"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],37:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],38:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2992,7 +3085,7 @@ var CheckboxControlValueAccessor = (function () {
     return CheckboxControlValueAccessor;
 })();
 exports.CheckboxControlValueAccessor = CheckboxControlValueAccessor;
-},{"./control_value_accessor":39,"angular2/core":14,"angular2/src/facade/lang":191}],38:[function(require,module,exports){
+},{"./control_value_accessor":40,"angular2/core":15,"angular2/src/facade/lang":192}],39:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3028,7 +3121,7 @@ var ControlContainer = (function (_super) {
     return ControlContainer;
 })(abstract_control_directive_1.AbstractControlDirective);
 exports.ControlContainer = ControlContainer;
-},{"./abstract_control_directive":36}],39:[function(require,module,exports){
+},{"./abstract_control_directive":37}],40:[function(require,module,exports){
 'use strict';var core_1 = require('angular2/core');
 var lang_1 = require('angular2/src/facade/lang');
 /**
@@ -3037,7 +3130,7 @@ var lang_1 = require('angular2/src/facade/lang');
  * See {@link DefaultValueAccessor} for how to implement one.
  */
 exports.NG_VALUE_ACCESSOR = lang_1.CONST_EXPR(new core_1.OpaqueToken("NgValueAccessor"));
-},{"angular2/core":14,"angular2/src/facade/lang":191}],40:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],41:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3087,7 +3180,7 @@ var DefaultValueAccessor = (function () {
     return DefaultValueAccessor;
 })();
 exports.DefaultValueAccessor = DefaultValueAccessor;
-},{"./control_value_accessor":39,"angular2/core":14,"angular2/src/facade/lang":191}],41:[function(require,module,exports){
+},{"./control_value_accessor":40,"angular2/core":15,"angular2/src/facade/lang":192}],42:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3121,7 +3214,7 @@ var NgControl = (function (_super) {
     return NgControl;
 })(abstract_control_directive_1.AbstractControlDirective);
 exports.NgControl = NgControl;
-},{"./abstract_control_directive":36,"angular2/src/facade/exceptions":188}],42:[function(require,module,exports){
+},{"./abstract_control_directive":37,"angular2/src/facade/exceptions":189}],43:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3257,7 +3350,7 @@ var NgControlGroup = (function (_super) {
     return NgControlGroup;
 })(control_container_1.ControlContainer);
 exports.NgControlGroup = NgControlGroup;
-},{"../validators":57,"./control_container":38,"./shared":53,"angular2/core":14,"angular2/src/facade/lang":191}],43:[function(require,module,exports){
+},{"../validators":58,"./control_container":39,"./shared":54,"angular2/core":15,"angular2/src/facade/lang":192}],44:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3415,7 +3508,7 @@ var NgControlName = (function (_super) {
     return NgControlName;
 })(ng_control_1.NgControl);
 exports.NgControlName = NgControlName;
-},{"../validators":57,"./control_container":38,"./control_value_accessor":39,"./ng_control":41,"./shared":53,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],44:[function(require,module,exports){
+},{"../validators":58,"./control_container":39,"./control_value_accessor":40,"./ng_control":42,"./shared":54,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],45:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3499,7 +3592,7 @@ var NgControlStatus = (function () {
     return NgControlStatus;
 })();
 exports.NgControlStatus = NgControlStatus;
-},{"./ng_control":41,"angular2/core":14,"angular2/src/facade/lang":191}],45:[function(require,module,exports){
+},{"./ng_control":42,"angular2/core":15,"angular2/src/facade/lang":192}],46:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3693,7 +3786,7 @@ var NgForm = (function (_super) {
     return NgForm;
 })(control_container_1.ControlContainer);
 exports.NgForm = NgForm;
-},{"../model":56,"../validators":57,"./control_container":38,"./shared":53,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],46:[function(require,module,exports){
+},{"../model":57,"../validators":58,"./control_container":39,"./shared":54,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],47:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3835,7 +3928,7 @@ var NgFormControl = (function (_super) {
     return NgFormControl;
 })(ng_control_1.NgControl);
 exports.NgFormControl = NgFormControl;
-},{"../validators":57,"./control_value_accessor":39,"./ng_control":41,"./shared":53,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],47:[function(require,module,exports){
+},{"../validators":58,"./control_value_accessor":40,"./ng_control":42,"./shared":54,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],48:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -4021,7 +4114,7 @@ var NgFormModel = (function (_super) {
     return NgFormModel;
 })(control_container_1.ControlContainer);
 exports.NgFormModel = NgFormModel;
-},{"../validators":57,"./control_container":38,"./shared":53,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],48:[function(require,module,exports){
+},{"../validators":58,"./control_container":39,"./shared":54,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],49:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -4139,7 +4232,7 @@ var NgModel = (function (_super) {
     return NgModel;
 })(ng_control_1.NgControl);
 exports.NgModel = NgModel;
-},{"../model":56,"../validators":57,"./control_value_accessor":39,"./ng_control":41,"./shared":53,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],49:[function(require,module,exports){
+},{"../model":57,"../validators":58,"./control_value_accessor":40,"./ng_control":42,"./shared":54,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],50:[function(require,module,exports){
 'use strict';function normalizeValidator(validator) {
     if (validator.validate !== undefined) {
         return function (c) { return validator.validate(c); };
@@ -4149,7 +4242,7 @@ exports.NgModel = NgModel;
     }
 }
 exports.normalizeValidator = normalizeValidator;
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4201,7 +4294,7 @@ var NumberValueAccessor = (function () {
     return NumberValueAccessor;
 })();
 exports.NumberValueAccessor = NumberValueAccessor;
-},{"./control_value_accessor":39,"angular2/core":14,"angular2/src/facade/lang":191}],51:[function(require,module,exports){
+},{"./control_value_accessor":40,"angular2/core":15,"angular2/src/facade/lang":192}],52:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4324,7 +4417,7 @@ var RadioControlValueAccessor = (function () {
     return RadioControlValueAccessor;
 })();
 exports.RadioControlValueAccessor = RadioControlValueAccessor;
-},{"angular2/core":14,"angular2/src/common/forms/directives/control_value_accessor":39,"angular2/src/common/forms/directives/ng_control":41,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],52:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/common/forms/directives/control_value_accessor":40,"angular2/src/common/forms/directives/ng_control":42,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],53:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4396,7 +4489,7 @@ var SelectControlValueAccessor = (function () {
     return SelectControlValueAccessor;
 })();
 exports.SelectControlValueAccessor = SelectControlValueAccessor;
-},{"./control_value_accessor":39,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],53:[function(require,module,exports){
+},{"./control_value_accessor":40,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],54:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
@@ -4496,7 +4589,7 @@ function selectValueAccessor(dir, valueAccessors) {
     return null;
 }
 exports.selectValueAccessor = selectValueAccessor;
-},{"../validators":57,"./checkbox_value_accessor":37,"./default_value_accessor":40,"./normalize_validator":49,"./number_value_accessor":50,"./radio_control_value_accessor":51,"./select_control_value_accessor":52,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],54:[function(require,module,exports){
+},{"../validators":58,"./checkbox_value_accessor":38,"./default_value_accessor":41,"./normalize_validator":50,"./number_value_accessor":51,"./radio_control_value_accessor":52,"./select_control_value_accessor":53,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],55:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4593,7 +4686,7 @@ var MaxLengthValidator = (function () {
     return MaxLengthValidator;
 })();
 exports.MaxLengthValidator = MaxLengthValidator;
-},{"../validators":57,"angular2/core":14,"angular2/src/facade/lang":191}],55:[function(require,module,exports){
+},{"../validators":58,"angular2/core":15,"angular2/src/facade/lang":192}],56:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4717,7 +4810,7 @@ var FormBuilder = (function () {
     return FormBuilder;
 })();
 exports.FormBuilder = FormBuilder;
-},{"./model":56,"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],56:[function(require,module,exports){
+},{"./model":57,"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],57:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -5217,7 +5310,7 @@ var ControlArray = (function (_super) {
     return ControlArray;
 })(AbstractControl);
 exports.ControlArray = ControlArray;
-},{"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/facade/promise":193}],57:[function(require,module,exports){
+},{"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/facade/promise":194}],58:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var promise_1 = require('angular2/src/facade/promise');
 var async_1 = require('angular2/src/facade/async');
@@ -5335,7 +5428,7 @@ function _mergeErrors(arrayOfErrors) {
     }, {});
     return collection_1.StringMapWrapper.isEmpty(res) ? null : res;
 }
-},{"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/facade/promise":193}],58:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/facade/promise":194}],59:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -5384,7 +5477,7 @@ exports.COMMON_PIPES = lang_1.CONST_EXPR([
     number_pipe_1.CurrencyPipe,
     date_pipe_1.DatePipe
 ]);
-},{"./pipes/async_pipe":59,"./pipes/date_pipe":60,"./pipes/json_pipe":62,"./pipes/lowercase_pipe":63,"./pipes/number_pipe":64,"./pipes/slice_pipe":65,"./pipes/uppercase_pipe":66,"angular2/src/facade/lang":191}],59:[function(require,module,exports){
+},{"./pipes/async_pipe":60,"./pipes/date_pipe":61,"./pipes/json_pipe":63,"./pipes/lowercase_pipe":64,"./pipes/number_pipe":65,"./pipes/slice_pipe":66,"./pipes/uppercase_pipe":67,"angular2/src/facade/lang":192}],60:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5519,7 +5612,7 @@ var AsyncPipe = (function () {
     return AsyncPipe;
 })();
 exports.AsyncPipe = AsyncPipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],60:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],61:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5641,7 +5734,7 @@ var DatePipe = (function () {
     return DatePipe;
 })();
 exports.DatePipe = DatePipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/intl":190,"angular2/src/facade/lang":191}],61:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/intl":191,"angular2/src/facade/lang":192}],62:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -5657,7 +5750,7 @@ var InvalidPipeArgumentException = (function (_super) {
     return InvalidPipeArgumentException;
 })(exceptions_1.BaseException);
 exports.InvalidPipeArgumentException = InvalidPipeArgumentException;
-},{"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],62:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],63:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5691,7 +5784,7 @@ var JsonPipe = (function () {
     return JsonPipe;
 })();
 exports.JsonPipe = JsonPipe;
-},{"angular2/core":14,"angular2/src/facade/lang":191}],63:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],64:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5732,7 +5825,7 @@ var LowerCasePipe = (function () {
     return LowerCasePipe;
 })();
 exports.LowerCasePipe = LowerCasePipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/lang":191}],64:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/lang":192}],65:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -5920,7 +6013,7 @@ var CurrencyPipe = (function (_super) {
     return CurrencyPipe;
 })(NumberPipe);
 exports.CurrencyPipe = CurrencyPipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/intl":190,"angular2/src/facade/lang":191}],65:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/intl":191,"angular2/src/facade/lang":192}],66:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6015,7 +6108,7 @@ var SlicePipe = (function () {
     return SlicePipe;
 })();
 exports.SlicePipe = SlicePipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],66:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],67:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6056,7 +6149,7 @@ var UpperCasePipe = (function () {
     return UpperCasePipe;
 })();
 exports.UpperCasePipe = UpperCasePipe;
-},{"./invalid_pipe_argument_exception":61,"angular2/core":14,"angular2/src/facade/lang":191}],67:[function(require,module,exports){
+},{"./invalid_pipe_argument_exception":62,"angular2/core":15,"angular2/src/facade/lang":192}],68:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var reflection_1 = require('angular2/src/core/reflection/reflection');
@@ -6224,7 +6317,7 @@ function _collectNestedProtoViewsVariableNames(pvVisitors) {
     });
     return nestedPvVariableNames;
 }
-},{"./template_ast":86,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/linker/interfaces":150,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],68:[function(require,module,exports){
+},{"./template_ast":87,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/linker/interfaces":151,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],69:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6309,7 +6402,7 @@ var ChangeDetectionCompiler = (function () {
     return ChangeDetectionCompiler;
 })();
 exports.ChangeDetectionCompiler = ChangeDetectionCompiler;
-},{"./change_definition_factory":67,"./source_module":83,"./util":92,"angular2/src/core/change_detection/abstract_change_detector":100,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/change_detection/change_detection_jit_generator":103,"angular2/src/core/change_detection/change_detection_util":104,"angular2/src/core/change_detection/constants":110,"angular2/src/core/di":133,"angular2/src/facade/lang":191,"angular2/src/transform/template_compiler/change_detector_codegen":254}],69:[function(require,module,exports){
+},{"./change_definition_factory":68,"./source_module":84,"./util":93,"angular2/src/core/change_detection/abstract_change_detector":101,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/change_detection/change_detection_jit_generator":104,"angular2/src/core/change_detection/change_detection_util":105,"angular2/src/core/change_detection/constants":111,"angular2/src/core/di":134,"angular2/src/facade/lang":192,"angular2/src/transform/template_compiler/change_detector_codegen":255}],70:[function(require,module,exports){
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6374,7 +6467,7 @@ exports.COMPILER_PROVIDERS = lang_1.CONST_EXPR([
     new di_1.Provider(element_schema_registry_1.ElementSchemaRegistry, { useExisting: dom_element_schema_registry_1.DomElementSchemaRegistry }),
     url_resolver_1.UrlResolver
 ]);
-},{"./directive_metadata":70,"./runtime_compiler":77,"./source_module":83,"./template_compiler":87,"angular2/src/compiler/change_detector_compiler":68,"angular2/src/compiler/html_parser":73,"angular2/src/compiler/proto_view_compiler":76,"angular2/src/compiler/runtime_compiler":77,"angular2/src/compiler/runtime_metadata":78,"angular2/src/compiler/schema/dom_element_schema_registry":79,"angular2/src/compiler/schema/element_schema_registry":80,"angular2/src/compiler/style_compiler":84,"angular2/src/compiler/template_ast":86,"angular2/src/compiler/template_compiler":87,"angular2/src/compiler/template_normalizer":88,"angular2/src/compiler/template_parser":89,"angular2/src/compiler/url_resolver":91,"angular2/src/compiler/view_compiler":93,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/di":133,"angular2/src/core/linker/compiler":144,"angular2/src/core/platform_directives_and_pipes":168,"angular2/src/facade/lang":191}],70:[function(require,module,exports){
+},{"./directive_metadata":71,"./runtime_compiler":78,"./source_module":84,"./template_compiler":88,"angular2/src/compiler/change_detector_compiler":69,"angular2/src/compiler/html_parser":74,"angular2/src/compiler/proto_view_compiler":77,"angular2/src/compiler/runtime_compiler":78,"angular2/src/compiler/runtime_metadata":79,"angular2/src/compiler/schema/dom_element_schema_registry":80,"angular2/src/compiler/schema/element_schema_registry":81,"angular2/src/compiler/style_compiler":85,"angular2/src/compiler/template_ast":87,"angular2/src/compiler/template_compiler":88,"angular2/src/compiler/template_normalizer":89,"angular2/src/compiler/template_parser":90,"angular2/src/compiler/url_resolver":92,"angular2/src/compiler/view_compiler":94,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/di":134,"angular2/src/core/linker/compiler":145,"angular2/src/core/platform_directives_and_pipes":169,"angular2/src/facade/lang":192}],71:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -6631,7 +6724,7 @@ var _COMPILE_METADATA_FROM_JSON = {
     'Directive': CompileDirectiveMetadata.fromJson,
     'Pipe': CompilePipeMetadata.fromJson
 };
-},{"./util":92,"angular2/src/compiler/selector":81,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/linker/interfaces":150,"angular2/src/core/metadata/view":164,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],71:[function(require,module,exports){
+},{"./util":93,"angular2/src/compiler/selector":82,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/linker/interfaces":151,"angular2/src/core/metadata/view":165,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],72:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var HtmlTextAst = (function () {
     function HtmlTextAst(value, sourceSpan) {
@@ -6675,7 +6768,7 @@ function htmlVisitAll(visitor, asts, context) {
     return result;
 }
 exports.htmlVisitAll = htmlVisitAll;
-},{"angular2/src/facade/lang":191}],72:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],73:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -7230,7 +7323,7 @@ function mergeTextTokens(srcTokens) {
     }
     return dstTokens;
 }
-},{"./html_tags":74,"./parse_util":75,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],73:[function(require,module,exports){
+},{"./html_tags":75,"./parse_util":76,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],74:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -7478,7 +7571,7 @@ function getElementFullName(prefix, localName, parentElement) {
     }
     return mergeNsAndName(prefix, localName);
 }
-},{"./html_ast":71,"./html_lexer":72,"./html_tags":74,"./parse_util":75,"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],74:[function(require,module,exports){
+},{"./html_ast":72,"./html_lexer":73,"./html_tags":75,"./parse_util":76,"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],75:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 // see http://www.w3.org/TR/html51/syntax.html#named-character-references
 // see https://html.spec.whatwg.org/multipage/entities.json
@@ -7873,7 +7966,7 @@ function getNsPrefix(elementName) {
     return splitNsName(elementName)[0];
 }
 exports.getNsPrefix = getNsPrefix;
-},{"angular2/src/facade/lang":191}],75:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],76:[function(require,module,exports){
 'use strict';var ParseLocation = (function () {
     function ParseLocation(file, offset, line, col) {
         this.file = file;
@@ -7945,7 +8038,7 @@ var ParseSourceSpan = (function () {
     return ParseSourceSpan;
 })();
 exports.ParseSourceSpan = ParseSourceSpan;
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8256,7 +8349,7 @@ function getViewType(component, embeddedTemplateIndex) {
         return view_type_1.ViewType.COMPONENT;
     }
 }
-},{"./source_module":83,"./template_ast":86,"./util":92,"angular2/src/core/di":133,"angular2/src/core/linker/element":148,"angular2/src/core/linker/view":155,"angular2/src/core/linker/view_type":160,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],77:[function(require,module,exports){
+},{"./source_module":84,"./template_ast":87,"./util":93,"angular2/src/core/di":134,"angular2/src/core/linker/element":149,"angular2/src/core/linker/view":156,"angular2/src/core/linker/view_type":161,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],78:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8304,7 +8397,7 @@ var RuntimeCompiler_ = (function (_super) {
     return RuntimeCompiler_;
 })(compiler_1.Compiler_);
 exports.RuntimeCompiler_ = RuntimeCompiler_;
-},{"./template_compiler":87,"angular2/src/core/di":133,"angular2/src/core/linker/compiler":144,"angular2/src/core/linker/view_ref":158}],78:[function(require,module,exports){
+},{"./template_compiler":88,"angular2/src/core/di":134,"angular2/src/core/linker/compiler":145,"angular2/src/core/linker/view_ref":159}],79:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8471,7 +8564,7 @@ function calcModuleUrl(type, cmpMetadata) {
         return reflection_1.reflector.importUri(type);
     }
 }
-},{"./directive_metadata":70,"./util":92,"angular2/src/compiler/url_resolver":91,"angular2/src/core/di":133,"angular2/src/core/linker/directive_lifecycle_reflector":145,"angular2/src/core/linker/directive_resolver":146,"angular2/src/core/linker/interfaces":150,"angular2/src/core/linker/pipe_resolver":151,"angular2/src/core/linker/view_resolver":159,"angular2/src/core/metadata/directives":163,"angular2/src/core/platform_directives_and_pipes":168,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],79:[function(require,module,exports){
+},{"./directive_metadata":71,"./util":93,"angular2/src/compiler/url_resolver":92,"angular2/src/core/di":134,"angular2/src/core/linker/directive_lifecycle_reflector":146,"angular2/src/core/linker/directive_resolver":147,"angular2/src/core/linker/interfaces":151,"angular2/src/core/linker/pipe_resolver":152,"angular2/src/core/linker/view_resolver":160,"angular2/src/core/metadata/directives":164,"angular2/src/core/platform_directives_and_pipes":169,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],80:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8532,7 +8625,7 @@ var DomElementSchemaRegistry = (function (_super) {
     return DomElementSchemaRegistry;
 })(element_schema_registry_1.ElementSchemaRegistry);
 exports.DomElementSchemaRegistry = DomElementSchemaRegistry;
-},{"./element_schema_registry":80,"angular2/src/compiler/html_tags":74,"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],80:[function(require,module,exports){
+},{"./element_schema_registry":81,"angular2/src/compiler/html_tags":75,"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],81:[function(require,module,exports){
 'use strict';var ElementSchemaRegistry = (function () {
     function ElementSchemaRegistry() {
     }
@@ -8541,7 +8634,7 @@ exports.DomElementSchemaRegistry = DomElementSchemaRegistry;
     return ElementSchemaRegistry;
 })();
 exports.ElementSchemaRegistry = ElementSchemaRegistry;
-},{}],81:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
@@ -8898,7 +8991,7 @@ var SelectorContext = (function () {
     return SelectorContext;
 })();
 exports.SelectorContext = SelectorContext;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],82:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],83:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 /**
@@ -9395,7 +9488,7 @@ function escapeBlocks(input) {
     }
     return new StringWithEscapedBlocks(resultParts.join(''), escapedBlocks);
 }
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],83:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],84:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var MODULE_REGEXP = /#MODULE\[([^\]]*)\]/g;
 function moduleRef(moduleUrl) {
@@ -9464,7 +9557,7 @@ var SourceWithImports = (function () {
     return SourceWithImports;
 })();
 exports.SourceWithImports = SourceWithImports;
-},{"angular2/src/facade/lang":191}],84:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],85:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9559,7 +9652,7 @@ var StyleCompiler = (function () {
     return StyleCompiler;
 })();
 exports.StyleCompiler = StyleCompiler;
-},{"./source_module":83,"./style_url_resolver":85,"./util":92,"angular2/src/compiler/shadow_css":82,"angular2/src/compiler/url_resolver":91,"angular2/src/compiler/xhr":94,"angular2/src/core/di":133,"angular2/src/core/metadata/view":164,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],85:[function(require,module,exports){
+},{"./source_module":84,"./style_url_resolver":86,"./util":93,"angular2/src/compiler/shadow_css":83,"angular2/src/compiler/url_resolver":92,"angular2/src/compiler/xhr":95,"angular2/src/core/di":134,"angular2/src/core/metadata/view":165,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],86:[function(require,module,exports){
 'use strict';// Some of the code comes from WebComponents.JS
 // https://github.com/webcomponents/webcomponentsjs/blob/master/src/HTMLImports/path.js
 var lang_1 = require('angular2/src/facade/lang');
@@ -9600,7 +9693,7 @@ var _cssImportRe = /@import\s+(?:url\()?\s*(?:(?:['"]([^'"]*))|([^;\)\s]*))[^;]*
 // TODO: can't use /^[^:/?#.]+:/g due to clang-format bug:
 //       https://github.com/angular/angular/issues/4596
 var _urlWithSchemaRe = /^([a-zA-Z\-\+\.]+):/g;
-},{"angular2/src/facade/lang":191}],86:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],87:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 /**
  * A segment of text within the template.
@@ -9844,7 +9937,7 @@ function templateVisitAll(visitor, asts, context) {
     return result;
 }
 exports.templateVisitAll = templateVisitAll;
-},{"angular2/src/facade/lang":191}],87:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],88:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10190,7 +10283,7 @@ var PipeVisitor = (function () {
     };
     return PipeVisitor;
 })();
-},{"./change_detector_compiler":68,"./directive_metadata":70,"./proto_view_compiler":76,"./runtime_metadata":78,"./source_module":83,"./style_compiler":84,"./template_ast":86,"./template_normalizer":88,"./template_parser":89,"./util":92,"./view_compiler":93,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/di":133,"angular2/src/core/linker/resolved_metadata_cache":153,"angular2/src/core/linker/view":155,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],88:[function(require,module,exports){
+},{"./change_detector_compiler":69,"./directive_metadata":71,"./proto_view_compiler":77,"./runtime_metadata":79,"./source_module":84,"./style_compiler":85,"./template_ast":87,"./template_normalizer":89,"./template_parser":90,"./util":93,"./view_compiler":94,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/di":134,"angular2/src/core/linker/resolved_metadata_cache":154,"angular2/src/core/linker/view":156,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],89:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10317,7 +10410,7 @@ var TemplatePreparseVisitor = (function () {
     TemplatePreparseVisitor.prototype.visitText = function (ast, context) { return null; };
     return TemplatePreparseVisitor;
 })();
-},{"./directive_metadata":70,"./html_ast":71,"./html_parser":73,"./style_url_resolver":85,"./template_preparser":90,"angular2/src/compiler/url_resolver":91,"angular2/src/compiler/xhr":94,"angular2/src/core/di":133,"angular2/src/core/metadata/view":164,"angular2/src/facade/async":184,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],89:[function(require,module,exports){
+},{"./directive_metadata":71,"./html_ast":72,"./html_parser":74,"./style_url_resolver":86,"./template_preparser":91,"angular2/src/compiler/url_resolver":92,"angular2/src/compiler/xhr":95,"angular2/src/core/di":134,"angular2/src/core/metadata/view":165,"angular2/src/facade/async":185,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],90:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -10979,7 +11072,7 @@ var PipeCollector = (function (_super) {
     return PipeCollector;
 })(ast_1.RecursiveAstVisitor);
 exports.PipeCollector = PipeCollector;
-},{"./html_ast":71,"./html_parser":73,"./html_tags":74,"./parse_util":75,"./style_url_resolver":85,"./template_ast":86,"./template_preparser":90,"./util":92,"angular2/core":14,"angular2/src/compiler/schema/element_schema_registry":80,"angular2/src/compiler/selector":81,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/change_detection/parser/ast":122,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],90:[function(require,module,exports){
+},{"./html_ast":72,"./html_parser":74,"./html_tags":75,"./parse_util":76,"./style_url_resolver":86,"./template_ast":87,"./template_preparser":91,"./util":93,"angular2/core":15,"angular2/src/compiler/schema/element_schema_registry":81,"angular2/src/compiler/selector":82,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/change_detection/parser/ast":123,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],91:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var html_tags_1 = require('./html_tags');
 var NG_CONTENT_SELECT_ATTR = 'select';
@@ -11053,7 +11146,7 @@ function normalizeNgContentSelect(selectAttr) {
     }
     return selectAttr;
 }
-},{"./html_tags":74,"angular2/src/facade/lang":191}],91:[function(require,module,exports){
+},{"./html_tags":75,"angular2/src/facade/lang":192}],92:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11378,7 +11471,7 @@ function _resolveUrl(base, url) {
     parts[_ComponentIndex.Path] = path;
     return _joinAndCanonicalizePath(parts);
 }
-},{"angular2/src/core/application_tokens":98,"angular2/src/core/di":133,"angular2/src/facade/lang":191}],92:[function(require,module,exports){
+},{"angular2/src/core/application_tokens":99,"angular2/src/core/di":134,"angular2/src/facade/lang":192}],93:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var CAMEL_CASE_REGEXP = /([A-Z])/g;
 var DASH_CASE_REGEXP = /-([a-z])/g;
@@ -11567,7 +11660,7 @@ function flattenArray(source, target) {
     return target;
 }
 exports.flattenArray = flattenArray;
-},{"angular2/src/facade/lang":191}],93:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],94:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11966,7 +12059,7 @@ function codeGenViewEncapsulation(value) {
         return "" + value;
     }
 }
-},{"./proto_view_compiler":76,"./source_module":83,"./template_ast":86,"./util":92,"angular2/src/core/di":133,"angular2/src/core/linker/element":148,"angular2/src/core/linker/view":155,"angular2/src/core/linker/view_type":160,"angular2/src/core/metadata/view":164,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],94:[function(require,module,exports){
+},{"./proto_view_compiler":77,"./source_module":84,"./template_ast":87,"./util":93,"angular2/src/core/di":134,"angular2/src/core/linker/element":149,"angular2/src/core/linker/view":156,"angular2/src/core/linker/view_type":161,"angular2/src/core/metadata/view":165,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],95:[function(require,module,exports){
 'use strict';// TODO: vsavkin rename it into TemplateLoader
 /**
  * An interface for retrieving documents by URL that the compiler uses
@@ -11979,7 +12072,7 @@ var XHR = (function () {
     return XHR;
 })();
 exports.XHR = XHR;
-},{}],95:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12018,7 +12111,7 @@ var AngularEntrypoint = (function () {
     return AngularEntrypoint;
 })();
 exports.AngularEntrypoint = AngularEntrypoint;
-},{"angular2/src/facade/lang":191}],96:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],97:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var di_1 = require('angular2/src/core/di');
 var application_tokens_1 = require('./application_tokens');
@@ -12049,7 +12142,7 @@ exports.APPLICATION_COMMON_PROVIDERS = lang_1.CONST_EXPR([
     pipe_resolver_1.PipeResolver,
     new di_1.Provider(dynamic_component_loader_1.DynamicComponentLoader, { useClass: dynamic_component_loader_2.DynamicComponentLoader_ })
 ]);
-},{"./application_tokens":98,"./change_detection/change_detection":102,"./linker/compiler":144,"./linker/directive_resolver":146,"./linker/dynamic_component_loader":147,"./linker/pipe_resolver":151,"./linker/view_manager":157,"./linker/view_resolver":159,"angular2/src/core/di":133,"angular2/src/core/linker/resolved_metadata_cache":153,"angular2/src/facade/lang":191}],97:[function(require,module,exports){
+},{"./application_tokens":99,"./change_detection/change_detection":103,"./linker/compiler":145,"./linker/directive_resolver":147,"./linker/dynamic_component_loader":148,"./linker/pipe_resolver":152,"./linker/view_manager":158,"./linker/view_resolver":160,"angular2/src/core/di":134,"angular2/src/core/linker/resolved_metadata_cache":154,"angular2/src/facade/lang":192}],98:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -12464,7 +12557,7 @@ var ApplicationRef_ = (function (_super) {
     return ApplicationRef_;
 })(ApplicationRef);
 exports.ApplicationRef_ = ApplicationRef_;
-},{"./application_tokens":98,"./profile/profile":170,"angular2/src/core/console":130,"angular2/src/core/di":133,"angular2/src/core/linker/dynamic_component_loader":147,"angular2/src/core/testability/testability":179,"angular2/src/core/zone/ng_zone":183,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],98:[function(require,module,exports){
+},{"./application_tokens":99,"./profile/profile":171,"angular2/src/core/console":131,"angular2/src/core/di":134,"angular2/src/core/linker/dynamic_component_loader":148,"angular2/src/core/testability/testability":180,"angular2/src/core/zone/ng_zone":184,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],99:[function(require,module,exports){
 'use strict';var di_1 = require('angular2/src/core/di');
 var lang_1 = require('angular2/src/facade/lang');
 /**
@@ -12520,7 +12613,7 @@ exports.APP_INITIALIZER = lang_1.CONST_EXPR(new di_1.OpaqueToken("Application In
  * A token which indicates the root directory of the application
  */
 exports.PACKAGE_ROOT_URL = lang_1.CONST_EXPR(new di_1.OpaqueToken("Application Packages Root URL"));
-},{"angular2/src/core/di":133,"angular2/src/facade/lang":191}],99:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/lang":192}],100:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -12535,7 +12628,7 @@ exports.WrappedValue = change_detection_1.WrappedValue;
 exports.SimpleChange = change_detection_1.SimpleChange;
 exports.IterableDiffers = change_detection_1.IterableDiffers;
 exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
-},{"./change_detection/change_detection":102}],100:[function(require,module,exports){
+},{"./change_detection/change_detection":103}],101:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var collection_1 = require('angular2/src/facade/collection');
 var change_detection_util_1 = require('./change_detection_util');
@@ -12847,7 +12940,7 @@ var AbstractChangeDetector = (function () {
     return AbstractChangeDetector;
 })();
 exports.AbstractChangeDetector = AbstractChangeDetector;
-},{"../profile/profile":170,"./change_detection_util":104,"./change_detector_ref":105,"./constants":110,"./exceptions":118,"./observable_facade":121,"./parser/locals":124,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],101:[function(require,module,exports){
+},{"../profile/profile":171,"./change_detection_util":105,"./change_detector_ref":106,"./constants":111,"./exceptions":119,"./observable_facade":122,"./parser/locals":125,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],102:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var DIRECTIVE_LIFECYCLE = "directiveLifecycle";
 var BINDING = "native";
@@ -12955,7 +13048,7 @@ var BindingRecord = (function () {
     return BindingRecord;
 })();
 exports.BindingRecord = BindingRecord;
-},{"angular2/src/facade/lang":191}],102:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],103:[function(require,module,exports){
 'use strict';var iterable_differs_1 = require('./differs/iterable_differs');
 var default_iterable_differ_1 = require('./differs/default_iterable_differ');
 var keyvalue_differs_1 = require('./differs/keyvalue_differs');
@@ -13016,7 +13109,7 @@ exports.keyValDiff = lang_1.CONST_EXPR([lang_1.CONST_EXPR(new default_keyvalue_d
 exports.iterableDiff = lang_1.CONST_EXPR([lang_1.CONST_EXPR(new default_iterable_differ_1.DefaultIterableDifferFactory())]);
 exports.defaultIterableDiffers = lang_1.CONST_EXPR(new iterable_differs_1.IterableDiffers(exports.iterableDiff));
 exports.defaultKeyValueDiffers = lang_1.CONST_EXPR(new keyvalue_differs_1.KeyValueDiffers(exports.keyValDiff));
-},{"./binding_record":101,"./change_detection_util":104,"./change_detector_ref":105,"./constants":110,"./differs/default_iterable_differ":111,"./differs/default_keyvalue_differ":112,"./differs/iterable_differs":113,"./differs/keyvalue_differs":114,"./directive_record":115,"./dynamic_change_detector":116,"./exceptions":118,"./interfaces":119,"./jit_proto_change_detector":120,"./parser/ast":122,"./parser/lexer":123,"./parser/locals":124,"./parser/parser":125,"./proto_change_detector":128,"angular2/src/facade/lang":191}],103:[function(require,module,exports){
+},{"./binding_record":102,"./change_detection_util":105,"./change_detector_ref":106,"./constants":111,"./differs/default_iterable_differ":112,"./differs/default_keyvalue_differ":113,"./differs/iterable_differs":114,"./differs/keyvalue_differs":115,"./directive_record":116,"./dynamic_change_detector":117,"./exceptions":119,"./interfaces":120,"./jit_proto_change_detector":121,"./parser/ast":123,"./parser/lexer":124,"./parser/locals":125,"./parser/parser":126,"./proto_change_detector":129,"angular2/src/facade/lang":192}],104:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -13359,7 +13452,7 @@ var ChangeDetectorJITGenerator = (function () {
     return ChangeDetectorJITGenerator;
 })();
 exports.ChangeDetectorJITGenerator = ChangeDetectorJITGenerator;
-},{"./abstract_change_detector":100,"./change_detection_util":104,"./codegen_facade":107,"./codegen_logic_util":108,"./codegen_name_util":109,"./constants":110,"./proto_change_detector":128,"./proto_record":129,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],104:[function(require,module,exports){
+},{"./abstract_change_detector":101,"./change_detection_util":105,"./codegen_facade":108,"./codegen_logic_util":109,"./codegen_name_util":110,"./constants":111,"./proto_change_detector":129,"./proto_record":130,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],105:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -13569,7 +13662,7 @@ var ChangeDetectionUtil = (function () {
     return ChangeDetectionUtil;
 })();
 exports.ChangeDetectionUtil = ChangeDetectionUtil;
-},{"./binding_record":101,"./constants":110,"./directive_record":115,"./pipe_lifecycle_reflector":126,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],105:[function(require,module,exports){
+},{"./binding_record":102,"./constants":111,"./directive_record":116,"./pipe_lifecycle_reflector":127,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],106:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -13599,7 +13692,7 @@ var ChangeDetectorRef_ = (function (_super) {
     return ChangeDetectorRef_;
 })(ChangeDetectorRef);
 exports.ChangeDetectorRef_ = ChangeDetectorRef_;
-},{"./constants":110}],106:[function(require,module,exports){
+},{"./constants":111}],107:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var collection_1 = require('angular2/src/facade/collection');
 var proto_record_1 = require('./proto_record');
@@ -13744,7 +13837,7 @@ function _haveSameDirIndex(a, b) {
     var ei2 = lang_1.isBlank(b.directiveIndex) ? null : b.directiveIndex.elementIndex;
     return di1 === di2 && ei1 === ei2;
 }
-},{"./proto_record":129,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],107:[function(require,module,exports){
+},{"./proto_record":130,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],108:[function(require,module,exports){
 'use strict';/**
  * Converts `funcOrValue` to a string which can be used in generated code.
  */
@@ -13765,7 +13858,7 @@ function combineGeneratedStrings(vals) {
     return vals.join(' + ');
 }
 exports.combineGeneratedStrings = combineGeneratedStrings;
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var codegen_facade_1 = require('./codegen_facade');
 var proto_record_1 = require('./proto_record');
@@ -13999,7 +14092,7 @@ var CodegenLogicUtil = (function () {
     return CodegenLogicUtil;
 })();
 exports.CodegenLogicUtil = CodegenLogicUtil;
-},{"./codegen_facade":107,"./constants":110,"./proto_record":129,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],109:[function(require,module,exports){
+},{"./codegen_facade":108,"./constants":111,"./proto_record":130,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],110:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var collection_1 = require('angular2/src/facade/collection');
 // The names of these fields must be kept in sync with abstract_change_detector.ts or change
@@ -14163,7 +14256,7 @@ var CodegenNameUtil = (function () {
     return CodegenNameUtil;
 })();
 exports.CodegenNameUtil = CodegenNameUtil;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],110:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],111:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 /**
  * Describes the current state of the change detector.
@@ -14251,7 +14344,7 @@ function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
         changeDetectionStrategy === ChangeDetectionStrategy.Default;
 }
 exports.isDefaultChangeDetectionStrategy = isDefaultChangeDetectionStrategy;
-},{"angular2/src/facade/lang":191}],111:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],112:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14913,7 +15006,7 @@ var _DuplicateMap = (function () {
     _DuplicateMap.prototype.toString = function () { return '_DuplicateMap(' + lang_2.stringify(this.map) + ')'; };
     return _DuplicateMap;
 })();
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],112:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],113:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15279,7 +15372,7 @@ var KVChangeRecord = (function () {
     return KVChangeRecord;
 })();
 exports.KVChangeRecord = KVChangeRecord;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],113:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],114:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15361,7 +15454,7 @@ var IterableDiffers = (function () {
     return IterableDiffers;
 })();
 exports.IterableDiffers = IterableDiffers;
-},{"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],114:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],115:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15443,7 +15536,7 @@ var KeyValueDiffers = (function () {
     return KeyValueDiffers;
 })();
 exports.KeyValueDiffers = KeyValueDiffers;
-},{"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],115:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],116:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var constants_1 = require('./constants');
 var DirectiveIndex = (function () {
@@ -15480,7 +15573,7 @@ var DirectiveRecord = (function () {
     return DirectiveRecord;
 })();
 exports.DirectiveRecord = DirectiveRecord;
-},{"./constants":110,"angular2/src/facade/lang":191}],116:[function(require,module,exports){
+},{"./constants":111,"angular2/src/facade/lang":192}],117:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -15916,7 +16009,7 @@ var DynamicChangeDetector = (function (_super) {
     return DynamicChangeDetector;
 })(abstract_change_detector_1.AbstractChangeDetector);
 exports.DynamicChangeDetector = DynamicChangeDetector;
-},{"./abstract_change_detector":100,"./change_detection_util":104,"./constants":110,"./proto_record":129,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],117:[function(require,module,exports){
+},{"./abstract_change_detector":101,"./change_detection_util":105,"./constants":111,"./proto_record":130,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],118:[function(require,module,exports){
 'use strict';var EventBinding = (function () {
     function EventBinding(eventName, elIndex, dirIndex, records) {
         this.eventName = eventName;
@@ -15927,7 +16020,7 @@ exports.DynamicChangeDetector = DynamicChangeDetector;
     return EventBinding;
 })();
 exports.EventBinding = EventBinding;
-},{}],118:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -16056,7 +16149,7 @@ var EventEvaluationErrorContext = (function () {
     return EventEvaluationErrorContext;
 })();
 exports.EventEvaluationErrorContext = EventEvaluationErrorContext;
-},{"angular2/src/facade/exceptions":188}],119:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189}],120:[function(require,module,exports){
 'use strict';var DebugContext = (function () {
     function DebugContext(element, componentElement, directive, context, locals, injector) {
         this.element = element;
@@ -16091,7 +16184,7 @@ var ChangeDetectorDefinition = (function () {
     return ChangeDetectorDefinition;
 })();
 exports.ChangeDetectorDefinition = ChangeDetectorDefinition;
-},{}],120:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 'use strict';var change_detection_jit_generator_1 = require('./change_detection_jit_generator');
 var JitProtoChangeDetector = (function () {
     function JitProtoChangeDetector(definition) {
@@ -16108,12 +16201,12 @@ var JitProtoChangeDetector = (function () {
     return JitProtoChangeDetector;
 })();
 exports.JitProtoChangeDetector = JitProtoChangeDetector;
-},{"./change_detection_jit_generator":103}],121:[function(require,module,exports){
+},{"./change_detection_jit_generator":104}],122:[function(require,module,exports){
 'use strict';function isObservable(value) {
     return false;
 }
 exports.isObservable = isObservable;
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -16532,7 +16625,7 @@ var AstTransformer = (function () {
     return AstTransformer;
 })();
 exports.AstTransformer = AstTransformer;
-},{"angular2/src/facade/collection":186}],123:[function(require,module,exports){
+},{"angular2/src/facade/collection":187}],124:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -16980,7 +17073,7 @@ var OPERATORS = collection_1.SetWrapper.createFromList([
     '?.'
 ]);
 var KEYWORDS = collection_1.SetWrapper.createFromList(['var', 'null', 'undefined', 'true', 'false', 'if', 'else']);
-},{"angular2/src/core/di/decorators":134,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],124:[function(require,module,exports){
+},{"angular2/src/core/di/decorators":135,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],125:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -17022,7 +17115,7 @@ var Locals = (function () {
     return Locals;
 })();
 exports.Locals = Locals;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],125:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],126:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -17658,12 +17751,12 @@ var SimpleExpressionChecker = (function () {
     SimpleExpressionChecker.prototype.visitQuote = function (ast) { this.simple = false; };
     return SimpleExpressionChecker;
 })();
-},{"./ast":122,"./lexer":123,"angular2/src/core/di/decorators":134,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],126:[function(require,module,exports){
+},{"./ast":123,"./lexer":124,"angular2/src/core/di/decorators":135,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],127:[function(require,module,exports){
 'use strict';function implementsOnDestroy(pipe) {
     return pipe.constructor.prototype.ngOnDestroy;
 }
 exports.implementsOnDestroy = implementsOnDestroy;
-},{}],127:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 'use strict';var SelectedPipe = (function () {
     function SelectedPipe(pipe, pure) {
         this.pipe = pipe;
@@ -17672,7 +17765,7 @@ exports.implementsOnDestroy = implementsOnDestroy;
     return SelectedPipe;
 })();
 exports.SelectedPipe = SelectedPipe;
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -18061,7 +18154,7 @@ function _interpolationFn(strings) {
             throw new exceptions_1.BaseException("Does not support more than 9 expressions");
     }
 }
-},{"./change_detection_util":104,"./coalesce":106,"./directive_record":115,"./dynamic_change_detector":116,"./event_binding":117,"./parser/ast":122,"./proto_record":129,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],129:[function(require,module,exports){
+},{"./change_detection_util":105,"./coalesce":107,"./directive_record":116,"./dynamic_change_detector":117,"./event_binding":118,"./parser/ast":123,"./proto_record":130,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],130:[function(require,module,exports){
 'use strict';(function (RecordType) {
     RecordType[RecordType["Self"] = 0] = "Self";
     RecordType[RecordType["Const"] = 1] = "Const";
@@ -18122,7 +18215,7 @@ var ProtoRecord = (function () {
     return ProtoRecord;
 })();
 exports.ProtoRecord = ProtoRecord;
-},{}],130:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18145,7 +18238,7 @@ var Console = (function () {
     return Console;
 })();
 exports.Console = Console;
-},{"angular2/src/core/di":133,"angular2/src/facade/lang":191}],131:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/lang":192}],132:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -18304,7 +18397,7 @@ function removeDebugNodeFromIndex(node) {
     _nativeNodeToDebugNode.delete(node.nativeNode);
 }
 exports.removeDebugNodeFromIndex = removeDebugNodeFromIndex;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],132:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],133:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var debug_node_1 = require('angular2/src/core/debug/debug_node');
 var DebugDomRootRenderer = (function () {
@@ -18435,7 +18528,7 @@ var DebugDomRenderer = (function () {
     return DebugDomRenderer;
 })();
 exports.DebugDomRenderer = DebugDomRenderer;
-},{"angular2/src/core/debug/debug_node":131,"angular2/src/facade/lang":191}],133:[function(require,module,exports){
+},{"angular2/src/core/debug/debug_node":132,"angular2/src/facade/lang":192}],134:[function(require,module,exports){
 'use strict';/**
  * @module
  * @description
@@ -18480,7 +18573,7 @@ exports.NoAnnotationError = exceptions_1.NoAnnotationError;
 exports.OutOfBoundsError = exceptions_1.OutOfBoundsError;
 var opaque_token_1 = require('./di/opaque_token');
 exports.OpaqueToken = opaque_token_1.OpaqueToken;
-},{"./di/decorators":134,"./di/exceptions":135,"./di/forward_ref":136,"./di/injector":137,"./di/key":138,"./di/metadata":139,"./di/opaque_token":140,"./di/provider":141}],134:[function(require,module,exports){
+},{"./di/decorators":135,"./di/exceptions":136,"./di/forward_ref":137,"./di/injector":138,"./di/key":139,"./di/metadata":140,"./di/opaque_token":141,"./di/provider":142}],135:[function(require,module,exports){
 'use strict';var metadata_1 = require('./metadata');
 var decorators_1 = require('../util/decorators');
 /**
@@ -18507,7 +18600,7 @@ exports.Host = decorators_1.makeParamDecorator(metadata_1.HostMetadata);
  * Factory for creating {@link SkipSelfMetadata}.
  */
 exports.SkipSelf = decorators_1.makeParamDecorator(metadata_1.SkipSelfMetadata);
-},{"../util/decorators":181,"./metadata":139}],135:[function(require,module,exports){
+},{"../util/decorators":182,"./metadata":140}],136:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -18787,7 +18880,7 @@ var MixingMultiProvidersWithRegularProvidersError = (function (_super) {
     return MixingMultiProvidersWithRegularProvidersError;
 })(exceptions_1.BaseException);
 exports.MixingMultiProvidersWithRegularProvidersError = MixingMultiProvidersWithRegularProvidersError;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],136:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],137:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 /**
  * Allows to refer to references which are not yet defined.
@@ -18831,7 +18924,7 @@ function resolveForwardRef(type) {
     }
 }
 exports.resolveForwardRef = resolveForwardRef;
-},{"angular2/src/facade/lang":191}],137:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],138:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var provider_1 = require('./provider');
 var exceptions_1 = require('./exceptions');
@@ -19760,7 +19853,7 @@ function _mapProviders(injector, fn) {
     }
     return res;
 }
-},{"./exceptions":135,"./key":138,"./metadata":139,"./provider":141,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],138:[function(require,module,exports){
+},{"./exceptions":136,"./key":139,"./metadata":140,"./provider":142,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],139:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var type_literal_1 = require('./type_literal');
@@ -19846,7 +19939,7 @@ var KeyRegistry = (function () {
 })();
 exports.KeyRegistry = KeyRegistry;
 var _globalKeyRegistry = new KeyRegistry();
-},{"./forward_ref":136,"./type_literal":142,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],139:[function(require,module,exports){
+},{"./forward_ref":137,"./type_literal":143,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],140:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20140,7 +20233,7 @@ var HostMetadata = (function () {
     return HostMetadata;
 })();
 exports.HostMetadata = HostMetadata;
-},{"angular2/src/facade/lang":191}],140:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],141:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20184,7 +20277,7 @@ var OpaqueToken = (function () {
     return OpaqueToken;
 })();
 exports.OpaqueToken = OpaqueToken;
-},{"angular2/src/facade/lang":191}],141:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],142:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -20706,7 +20799,7 @@ function _extractToken(typeOrFunc, metadata /*any[] | any*/, params) {
 function _createDependency(token, optional, lowerBoundVisibility, upperBoundVisibility, depProps) {
     return new Dependency(key_1.Key.get(token), optional, lowerBoundVisibility, upperBoundVisibility, depProps);
 }
-},{"./exceptions":135,"./forward_ref":136,"./key":138,"./metadata":139,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],142:[function(require,module,exports){
+},{"./exceptions":136,"./forward_ref":137,"./key":139,"./metadata":140,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],143:[function(require,module,exports){
 'use strict';/**
  * Type literals is a Dart-only feature. This is here only so we can x-compile
  * to multiple languages.
@@ -20722,7 +20815,7 @@ var TypeLiteral = (function () {
     return TypeLiteral;
 })();
 exports.TypeLiteral = TypeLiteral;
-},{}],143:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 'use strict';// Public API for compiler
 var directive_resolver_1 = require('./linker/directive_resolver');
 exports.DirectiveResolver = directive_resolver_1.DirectiveResolver;
@@ -20749,7 +20842,7 @@ var view_container_ref_1 = require('./linker/view_container_ref');
 exports.ViewContainerRef = view_container_ref_1.ViewContainerRef;
 var dynamic_component_loader_2 = require('./linker/dynamic_component_loader');
 exports.ComponentRef = dynamic_component_loader_2.ComponentRef;
-},{"./linker/compiler":144,"./linker/directive_resolver":146,"./linker/dynamic_component_loader":147,"./linker/element_ref":149,"./linker/query_list":152,"./linker/template_ref":154,"./linker/view_container_ref":156,"./linker/view_manager":157,"./linker/view_ref":158,"./linker/view_resolver":159}],144:[function(require,module,exports){
+},{"./linker/compiler":145,"./linker/directive_resolver":147,"./linker/dynamic_component_loader":148,"./linker/element_ref":150,"./linker/query_list":153,"./linker/template_ref":155,"./linker/view_container_ref":157,"./linker/view_manager":158,"./linker/view_ref":159,"./linker/view_resolver":160}],145:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -20808,7 +20901,7 @@ var Compiler_ = (function (_super) {
     return Compiler_;
 })(Compiler);
 exports.Compiler_ = Compiler_;
-},{"angular2/src/core/di":133,"angular2/src/core/linker/view":155,"angular2/src/core/linker/view_ref":158,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/async":184,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],145:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/linker/view":156,"angular2/src/core/linker/view_ref":159,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/async":185,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],146:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var interfaces_1 = require('./interfaces');
 function hasLifecycleHook(lcInterface, token) {
@@ -20837,7 +20930,7 @@ function hasLifecycleHook(lcInterface, token) {
     }
 }
 exports.hasLifecycleHook = hasLifecycleHook;
-},{"./interfaces":150,"angular2/src/facade/lang":191}],146:[function(require,module,exports){
+},{"./interfaces":151,"angular2/src/facade/lang":192}],147:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20981,7 +21074,7 @@ var DirectiveResolver = (function () {
 })();
 exports.DirectiveResolver = DirectiveResolver;
 exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver();
-},{"angular2/src/core/di":133,"angular2/src/core/metadata":161,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],147:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/metadata":162,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],148:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -21125,7 +21218,7 @@ var DynamicComponentLoader_ = (function (_super) {
     return DynamicComponentLoader_;
 })(DynamicComponentLoader);
 exports.DynamicComponentLoader_ = DynamicComponentLoader_;
-},{"./compiler":144,"angular2/src/core/di":133,"angular2/src/core/linker/view_manager":157,"angular2/src/facade/lang":191}],148:[function(require,module,exports){
+},{"./compiler":145,"angular2/src/core/di":134,"angular2/src/core/linker/view_manager":158,"angular2/src/facade/lang":192}],149:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -21930,7 +22023,7 @@ var _ComponentViewChangeDetectorRef = (function (_super) {
     _ComponentViewChangeDetectorRef.prototype.reattach = function () { this._appElement.componentView.changeDetector.ref.reattach(); };
     return _ComponentViewChangeDetectorRef;
 })(change_detection_1.ChangeDetectorRef);
-},{"../metadata/di":162,"../metadata/directives":163,"./element_ref":149,"./query_list":152,"./template_ref":154,"./view_container_ref":156,"./view_type":160,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/di":133,"angular2/src/core/di/injector":137,"angular2/src/core/di/provider":141,"angular2/src/core/pipes/pipe_provider":165,"angular2/src/core/reflection/reflection":173,"angular2/src/core/render/api":177,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],149:[function(require,module,exports){
+},{"../metadata/di":163,"../metadata/directives":164,"./element_ref":150,"./query_list":153,"./template_ref":155,"./view_container_ref":157,"./view_type":161,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/di":134,"angular2/src/core/di/injector":138,"angular2/src/core/di/provider":142,"angular2/src/core/pipes/pipe_provider":166,"angular2/src/core/reflection/reflection":174,"angular2/src/core/render/api":178,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],150:[function(require,module,exports){
 'use strict';var exceptions_1 = require('angular2/src/facade/exceptions');
 /**
  * Represents a location in a View that has an injection, change-detection and render context
@@ -21989,7 +22082,7 @@ var ElementRef_ = (function () {
     return ElementRef_;
 })();
 exports.ElementRef_ = ElementRef_;
-},{"angular2/src/facade/exceptions":188}],150:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189}],151:[function(require,module,exports){
 'use strict';(function (LifecycleHooks) {
     LifecycleHooks[LifecycleHooks["OnInit"] = 0] = "OnInit";
     LifecycleHooks[LifecycleHooks["OnDestroy"] = 1] = "OnDestroy";
@@ -22014,7 +22107,7 @@ exports.LIFECYCLE_HOOKS_VALUES = [
     LifecycleHooks.AfterViewInit,
     LifecycleHooks.AfterViewChecked
 ];
-},{}],151:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22063,7 +22156,7 @@ var PipeResolver = (function () {
 })();
 exports.PipeResolver = PipeResolver;
 exports.CODEGEN_PIPE_RESOLVER = new PipeResolver();
-},{"angular2/src/core/di":133,"angular2/src/core/metadata":161,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],152:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/metadata":162,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],153:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var async_1 = require('angular2/src/facade/async');
@@ -22143,7 +22236,7 @@ var QueryList = (function () {
     return QueryList;
 })();
 exports.QueryList = QueryList;
-},{"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],153:[function(require,module,exports){
+},{"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],154:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22190,7 +22283,7 @@ var ResolvedMetadataCache = (function () {
 })();
 exports.ResolvedMetadataCache = ResolvedMetadataCache;
 exports.CODEGEN_RESOLVED_METADATA_CACHE = new ResolvedMetadataCache(directive_resolver_1.CODEGEN_DIRECTIVE_RESOLVER, pipe_resolver_1.CODEGEN_PIPE_RESOLVER);
-},{"../di":133,"../pipes/pipe_provider":165,"./directive_resolver":146,"./element":148,"./pipe_resolver":151,"angular2/src/facade/lang":191}],154:[function(require,module,exports){
+},{"../di":134,"../pipes/pipe_provider":166,"./directive_resolver":147,"./element":149,"./pipe_resolver":152,"angular2/src/facade/lang":192}],155:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -22245,7 +22338,7 @@ var TemplateRef_ = (function (_super) {
     return TemplateRef_;
 })(TemplateRef);
 exports.TemplateRef_ = TemplateRef_;
-},{}],155:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22545,7 +22638,7 @@ function checkSlotCount(componentName, expectedSlotCount, projectableNodes) {
     }
 }
 exports.checkSlotCount = checkSlotCount;
-},{"./element":148,"./view_ref":158,"./view_type":160,"angular2/src/core/change_detection/change_detection":102,"angular2/src/core/change_detection/interfaces":119,"angular2/src/core/pipes/pipes":166,"angular2/src/core/render/api":177,"angular2/src/core/render/util":178,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],156:[function(require,module,exports){
+},{"./element":149,"./view_ref":159,"./view_type":161,"angular2/src/core/change_detection/change_detection":103,"angular2/src/core/change_detection/interfaces":120,"angular2/src/core/pipes/pipes":167,"angular2/src/core/render/api":178,"angular2/src/core/render/util":179,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],157:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -22675,7 +22768,7 @@ var ViewContainerRef_ = (function (_super) {
     return ViewContainerRef_;
 })(ViewContainerRef);
 exports.ViewContainerRef_ = ViewContainerRef_;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],157:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],158:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -22878,7 +22971,7 @@ var AppViewManager_ = (function (_super) {
     return AppViewManager_;
 })(AppViewManager);
 exports.AppViewManager_ = AppViewManager_;
-},{"../profile/profile":170,"./element":148,"./view":155,"./view_type":160,"angular2/src/core/application_tokens":98,"angular2/src/core/di":133,"angular2/src/core/render/api":177,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],158:[function(require,module,exports){
+},{"../profile/profile":171,"./element":149,"./view":156,"./view_type":161,"angular2/src/core/application_tokens":99,"angular2/src/core/di":134,"angular2/src/core/render/api":178,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],159:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -23046,7 +23139,7 @@ var HostViewFactoryRef_ = (function () {
     return HostViewFactoryRef_;
 })();
 exports.HostViewFactoryRef_ = HostViewFactoryRef_;
-},{"angular2/src/facade/exceptions":188}],159:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189}],160:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23152,7 +23245,7 @@ var ViewResolver = (function () {
     return ViewResolver;
 })();
 exports.ViewResolver = ViewResolver;
-},{"../metadata/directives":163,"../metadata/view":164,"angular2/src/core/di":133,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],160:[function(require,module,exports){
+},{"../metadata/directives":164,"../metadata/view":165,"angular2/src/core/di":134,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],161:[function(require,module,exports){
 'use strict';(function (ViewType) {
     // A view that contains the host element with bound component directive.
     // Contains a COMPONENT view
@@ -23165,7 +23258,7 @@ exports.ViewResolver = ViewResolver;
     ViewType[ViewType["EMBEDDED"] = 2] = "EMBEDDED";
 })(exports.ViewType || (exports.ViewType = {}));
 var ViewType = exports.ViewType;
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 'use strict';/**
  * This indirection is needed to free up Component, etc symbols in the public API
  * to be used by the decorator versions of these annotations.
@@ -24056,7 +24149,7 @@ exports.HostBinding = decorators_1.makePropDecorator(directives_2.HostBindingMet
  * ```
  */
 exports.HostListener = decorators_1.makePropDecorator(directives_2.HostListenerMetadata);
-},{"./metadata/di":162,"./metadata/directives":163,"./metadata/view":164,"./util/decorators":181}],162:[function(require,module,exports){
+},{"./metadata/di":163,"./metadata/directives":164,"./metadata/view":165,"./util/decorators":182}],163:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -24466,7 +24559,7 @@ var ViewChildMetadata = (function (_super) {
     return ViewChildMetadata;
 })(ViewQueryMetadata);
 exports.ViewChildMetadata = ViewChildMetadata;
-},{"angular2/src/core/di":133,"angular2/src/core/di/metadata":139,"angular2/src/facade/lang":191}],163:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/di/metadata":140,"angular2/src/facade/lang":192}],164:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -25389,7 +25482,7 @@ var HostListenerMetadata = (function () {
     return HostListenerMetadata;
 })();
 exports.HostListenerMetadata = HostListenerMetadata;
-},{"angular2/src/core/change_detection":99,"angular2/src/core/di/metadata":139,"angular2/src/facade/lang":191}],164:[function(require,module,exports){
+},{"angular2/src/core/change_detection":100,"angular2/src/core/di/metadata":140,"angular2/src/facade/lang":192}],165:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -25476,7 +25569,7 @@ var ViewMetadata = (function () {
     return ViewMetadata;
 })();
 exports.ViewMetadata = ViewMetadata;
-},{"angular2/src/facade/lang":191}],165:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],166:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -25499,7 +25592,7 @@ var PipeProvider = (function (_super) {
     return PipeProvider;
 })(provider_1.ResolvedProvider_);
 exports.PipeProvider = PipeProvider;
-},{"angular2/src/core/di":133,"angular2/src/core/di/provider":141}],166:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/di/provider":142}],167:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -25549,7 +25642,7 @@ var Pipes = (function () {
     return Pipes;
 })();
 exports.Pipes = Pipes;
-},{"angular2/src/core/change_detection/pipes":127,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],167:[function(require,module,exports){
+},{"angular2/src/core/change_detection/pipes":128,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],168:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var di_1 = require('angular2/src/core/di');
 var console_1 = require('angular2/src/core/console');
@@ -25562,7 +25655,7 @@ function _reflector() {
  * A default set of providers which should be included in any Angular platform.
  */
 exports.PLATFORM_COMMON_PROVIDERS = lang_1.CONST_EXPR([new di_1.Provider(reflection_1.Reflector, { useFactory: _reflector, deps: [] }), testability_1.TestabilityRegistry, console_1.Console]);
-},{"./reflection/reflection":173,"angular2/src/core/console":130,"angular2/src/core/di":133,"angular2/src/core/testability/testability":179,"angular2/src/facade/lang":191}],168:[function(require,module,exports){
+},{"./reflection/reflection":174,"angular2/src/core/console":131,"angular2/src/core/di":134,"angular2/src/core/testability/testability":180,"angular2/src/facade/lang":192}],169:[function(require,module,exports){
 'use strict';var di_1 = require("angular2/src/core/di");
 var lang_1 = require("angular2/src/facade/lang");
 /**
@@ -25614,10 +25707,10 @@ exports.PLATFORM_DIRECTIVES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform D
  * ```
  */
 exports.PLATFORM_PIPES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform Pipes"));
-},{"angular2/src/core/di":133,"angular2/src/facade/lang":191}],169:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/lang":192}],170:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 exports.enableProdMode = lang_1.enableProdMode;
-},{"angular2/src/facade/lang":191}],170:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],171:[function(require,module,exports){
 'use strict';var impl = require("./wtf_impl");
 // Change exports to const once https://github.com/angular/ts2dart/issues/150
 /**
@@ -25687,7 +25780,7 @@ exports.wtfStartTimeRange = exports.wtfEnabled ? impl.startTimeRange : function 
 exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function (r) {
     return null;
 };
-},{"./wtf_impl":171}],171:[function(require,module,exports){
+},{"./wtf_impl":172}],172:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var trace;
 var events;
@@ -25721,13 +25814,13 @@ function endTimeRange(range) {
     trace.endTimeRange(range);
 }
 exports.endTimeRange = endTimeRange;
-},{"angular2/src/facade/lang":191}],172:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],173:[function(require,module,exports){
 'use strict';/**
  * This is here because DART requires it. It is noop in JS.
  */
 function wtfInit() { }
 exports.wtfInit = wtfInit;
-},{}],173:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 'use strict';var reflector_1 = require('./reflector');
 var reflector_2 = require('./reflector');
 exports.Reflector = reflector_2.Reflector;
@@ -25738,7 +25831,7 @@ var reflection_capabilities_1 = require('./reflection_capabilities');
  * about symbols.
  */
 exports.reflector = new reflector_1.Reflector(new reflection_capabilities_1.ReflectionCapabilities());
-},{"./reflection_capabilities":174,"./reflector":175}],174:[function(require,module,exports){
+},{"./reflection_capabilities":175,"./reflector":176}],175:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var ReflectionCapabilities = (function () {
@@ -25909,7 +26002,7 @@ var ReflectionCapabilities = (function () {
     return ReflectionCapabilities;
 })();
 exports.ReflectionCapabilities = ReflectionCapabilities;
-},{"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],175:[function(require,module,exports){
+},{"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],176:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -26057,13 +26150,13 @@ exports.Reflector = Reflector;
 function _mergeMaps(target, config) {
     collection_1.StringMapWrapper.forEach(config, function (v, k) { return target.set(k, v); });
 }
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],176:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],177:[function(require,module,exports){
 'use strict';// Public API for render
 var api_1 = require('./render/api');
 exports.RootRenderer = api_1.RootRenderer;
 exports.Renderer = api_1.Renderer;
 exports.RenderComponentType = api_1.RenderComponentType;
-},{"./render/api":177}],177:[function(require,module,exports){
+},{"./render/api":178}],178:[function(require,module,exports){
 'use strict';var RenderComponentType = (function () {
     function RenderComponentType(id, encapsulation, styles) {
         this.id = id;
@@ -26107,7 +26200,7 @@ var RootRenderer = (function () {
     return RootRenderer;
 })();
 exports.RootRenderer = RootRenderer;
-},{}],178:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var CAMEL_CASE_REGEXP = /([A-Z])/g;
 var DASH_CASE_REGEXP = /-([a-z])/g;
@@ -26119,7 +26212,7 @@ function dashCaseToCamelCase(input) {
     return lang_1.StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function (m) { return m[1].toUpperCase(); });
 }
 exports.dashCaseToCamelCase = dashCaseToCamelCase;
-},{"angular2/src/facade/lang":191}],179:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],180:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -26271,11 +26364,11 @@ function setTestabilityGetter(getter) {
 }
 exports.setTestabilityGetter = setTestabilityGetter;
 var _testabilityGetter = lang_1.CONST_EXPR(new _NoopGetTestability());
-},{"../zone/ng_zone":183,"angular2/src/core/di":133,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],180:[function(require,module,exports){
+},{"../zone/ng_zone":184,"angular2/src/core/di":134,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],181:[function(require,module,exports){
 'use strict';// Public API for util
 var decorators_1 = require('./util/decorators');
 exports.Class = decorators_1.Class;
-},{"./util/decorators":181}],181:[function(require,module,exports){
+},{"./util/decorators":182}],182:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var _nextClassId = 0;
 function extractAnnotation(annotation) {
@@ -26525,12 +26618,12 @@ function makePropDecorator(decoratorCls) {
     return PropDecoratorFactory;
 }
 exports.makePropDecorator = makePropDecorator;
-},{"angular2/src/facade/lang":191}],182:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],183:[function(require,module,exports){
 'use strict';// Public API for Zone
 var ng_zone_1 = require('./zone/ng_zone');
 exports.NgZone = ng_zone_1.NgZone;
 exports.NgZoneError = ng_zone_1.NgZoneError;
-},{"./zone/ng_zone":183}],183:[function(require,module,exports){
+},{"./zone/ng_zone":184}],184:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var async_1 = require('angular2/src/facade/async');
@@ -26973,7 +27066,7 @@ var NgZone = (function () {
     return NgZone;
 })();
 exports.NgZone = NgZone;
-},{"../profile/profile":170,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],184:[function(require,module,exports){
+},{"../profile/profile":171,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],185:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -27122,7 +27215,7 @@ var EventEmitter = (function (_super) {
     return EventEmitter;
 })(Subject_1.Subject);
 exports.EventEmitter = EventEmitter;
-},{"angular2/src/facade/lang":191,"angular2/src/facade/promise":193,"rxjs/Observable":392,"rxjs/Subject":393,"rxjs/observable/fromPromise":396,"rxjs/operator/toPromise":397}],185:[function(require,module,exports){
+},{"angular2/src/facade/lang":192,"angular2/src/facade/promise":194,"rxjs/Observable":393,"rxjs/Subject":394,"rxjs/observable/fromPromise":398,"rxjs/operator/toPromise":400}],186:[function(require,module,exports){
 'use strict';/**
  * JS version of browser APIs. This library can only run in the browser.
  */
@@ -27139,7 +27232,7 @@ exports.EventTarget = window['EventTarget'];
 exports.History = window['History'];
 exports.Location = window['Location'];
 exports.EventListener = window['EventListener'];
-},{}],186:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 exports.Map = lang_1.global.Map;
 exports.Set = lang_1.global.Set;
@@ -27476,7 +27569,7 @@ var SetWrapper = (function () {
     return SetWrapper;
 })();
 exports.SetWrapper = SetWrapper;
-},{"angular2/src/facade/lang":191}],187:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],188:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -27606,7 +27699,7 @@ var ExceptionHandler = (function () {
     return ExceptionHandler;
 })();
 exports.ExceptionHandler = ExceptionHandler;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],188:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],189:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -27682,7 +27775,7 @@ function unimplemented() {
     throw new BaseException('unimplemented');
 }
 exports.unimplemented = unimplemented;
-},{"./exception_handler":187}],189:[function(require,module,exports){
+},{"./exception_handler":188}],190:[function(require,module,exports){
 'use strict';// Public API for Facade
 var lang_1 = require('./lang');
 exports.Type = lang_1.Type;
@@ -27692,7 +27785,7 @@ var exceptions_1 = require('./exceptions');
 exports.WrappedException = exceptions_1.WrappedException;
 var exception_handler_1 = require('./exception_handler');
 exports.ExceptionHandler = exception_handler_1.ExceptionHandler;
-},{"./async":184,"./exception_handler":187,"./exceptions":188,"./lang":191}],190:[function(require,module,exports){
+},{"./async":185,"./exception_handler":188,"./exceptions":189,"./lang":192}],191:[function(require,module,exports){
 'use strict';(function (NumberFormatStyle) {
     NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
     NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
@@ -27796,7 +27889,7 @@ var DateFormatter = (function () {
     return DateFormatter;
 })();
 exports.DateFormatter = DateFormatter;
-},{}],191:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 (function (global){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -28236,11 +28329,11 @@ function hasConstructor(value, type) {
 exports.hasConstructor = hasConstructor;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],192:[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 exports.Math = lang_1.global.Math;
 exports.NaN = typeof exports.NaN;
-},{"angular2/src/facade/lang":191}],193:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],194:[function(require,module,exports){
 'use strict';// Promises are put into their own facade file so that they can be used without
 // introducing a dependency on rxjs. They are re-exported through facade/async.
 var PromiseWrapper = (function () {
@@ -28287,7 +28380,7 @@ var PromiseWrapper = (function () {
     return PromiseWrapper;
 })();
 exports.PromiseWrapper = PromiseWrapper;
-},{}],194:[function(require,module,exports){
+},{}],195:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28343,7 +28436,7 @@ var BrowserJsonp = (function () {
     return BrowserJsonp;
 })();
 exports.BrowserJsonp = BrowserJsonp;
-},{"angular2/core":14,"angular2/src/facade/lang":191}],195:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],196:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28370,7 +28463,7 @@ var BrowserXhr = (function () {
     return BrowserXhr;
 })();
 exports.BrowserXhr = BrowserXhr;
-},{"angular2/core":14}],196:[function(require,module,exports){
+},{"angular2/core":15}],197:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -28515,7 +28608,7 @@ var JSONPBackend_ = (function (_super) {
     return JSONPBackend_;
 })(JSONPBackend);
 exports.JSONPBackend_ = JSONPBackend_;
-},{"../base_response_options":199,"../enums":200,"../interfaces":204,"../static_response":206,"./browser_jsonp":194,"angular2/core":14,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191,"rxjs/Observable":392}],197:[function(require,module,exports){
+},{"../base_response_options":200,"../enums":201,"../interfaces":205,"../static_response":207,"./browser_jsonp":195,"angular2/core":15,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192,"rxjs/Observable":393}],198:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28643,7 +28736,7 @@ var XHRBackend = (function () {
     return XHRBackend;
 })();
 exports.XHRBackend = XHRBackend;
-},{"../base_response_options":199,"../enums":200,"../headers":201,"../http_utils":203,"../static_response":206,"./browser_xhr":195,"angular2/core":14,"angular2/src/facade/lang":191,"rxjs/Observable":392}],198:[function(require,module,exports){
+},{"../base_response_options":200,"../enums":201,"../headers":202,"../http_utils":204,"../static_response":207,"./browser_xhr":196,"angular2/core":15,"angular2/src/facade/lang":192,"rxjs/Observable":393}],199:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -28795,7 +28888,7 @@ var BaseRequestOptions = (function (_super) {
     return BaseRequestOptions;
 })(RequestOptions);
 exports.BaseRequestOptions = BaseRequestOptions;
-},{"./enums":200,"./headers":201,"./http_utils":203,"./url_search_params":207,"angular2/core":14,"angular2/src/facade/lang":191}],199:[function(require,module,exports){
+},{"./enums":201,"./headers":202,"./http_utils":204,"./url_search_params":208,"angular2/core":15,"angular2/src/facade/lang":192}],200:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -28945,7 +29038,7 @@ var BaseResponseOptions = (function (_super) {
     return BaseResponseOptions;
 })(ResponseOptions);
 exports.BaseResponseOptions = BaseResponseOptions;
-},{"./enums":200,"./headers":201,"angular2/core":14,"angular2/src/facade/lang":191}],200:[function(require,module,exports){
+},{"./enums":201,"./headers":202,"angular2/core":15,"angular2/src/facade/lang":192}],201:[function(require,module,exports){
 'use strict';/**
  * Supported http methods.
  */
@@ -28985,7 +29078,7 @@ var ReadyState = exports.ReadyState;
     ResponseType[ResponseType["Opaque"] = 4] = "Opaque";
 })(exports.ResponseType || (exports.ResponseType = {}));
 var ResponseType = exports.ResponseType;
-},{}],201:[function(require,module,exports){
+},{}],202:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -29119,7 +29212,7 @@ var Headers = (function () {
     return Headers;
 })();
 exports.Headers = Headers;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],202:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],203:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -29323,7 +29416,7 @@ var Jsonp = (function (_super) {
     return Jsonp;
 })(Http);
 exports.Jsonp = Jsonp;
-},{"./base_request_options":198,"./enums":200,"./interfaces":204,"./static_request":205,"angular2/core":14,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],203:[function(require,module,exports){
+},{"./base_request_options":199,"./enums":201,"./interfaces":205,"./static_request":206,"angular2/core":15,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],204:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var enums_1 = require('./enums');
 var exceptions_1 = require('angular2/src/facade/exceptions');
@@ -29354,7 +29447,7 @@ function getResponseURL(xhr) {
 exports.getResponseURL = getResponseURL;
 var lang_2 = require('angular2/src/facade/lang');
 exports.isJsObject = lang_2.isJsObject;
-},{"./enums":200,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],204:[function(require,module,exports){
+},{"./enums":201,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],205:[function(require,module,exports){
 'use strict';/**
  * Abstract class from which real backends are derived.
  *
@@ -29376,7 +29469,7 @@ var Connection = (function () {
     return Connection;
 })();
 exports.Connection = Connection;
-},{}],205:[function(require,module,exports){
+},{}],206:[function(require,module,exports){
 'use strict';var headers_1 = require('./headers');
 var http_utils_1 = require('./http_utils');
 var lang_1 = require('angular2/src/facade/lang');
@@ -29450,7 +29543,7 @@ var Request = (function () {
     return Request;
 })();
 exports.Request = Request;
-},{"./headers":201,"./http_utils":203,"angular2/src/facade/lang":191}],206:[function(require,module,exports){
+},{"./headers":202,"./http_utils":204,"angular2/src/facade/lang":192}],207:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var http_utils_1 = require('./http_utils');
@@ -29513,7 +29606,7 @@ var Response = (function () {
     return Response;
 })();
 exports.Response = Response;
-},{"./http_utils":203,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],207:[function(require,module,exports){
+},{"./http_utils":204,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],208:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var collection_1 = require('angular2/src/facade/collection');
 function paramParser(rawParams) {
@@ -29640,7 +29733,7 @@ var URLSearchParams = (function () {
     return URLSearchParams;
 })();
 exports.URLSearchParams = URLSearchParams;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],208:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],209:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -30028,7 +30121,7 @@ function relativePath(url) {
     return (urlParsingNode.pathname.charAt(0) === '/') ? urlParsingNode.pathname :
         '/' + urlParsingNode.pathname;
 }
-},{"./generic_browser_adapter":209,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],209:[function(require,module,exports){
+},{"./generic_browser_adapter":210,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],210:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -30098,7 +30191,7 @@ var GenericBrowserDomAdapter = (function (_super) {
     return GenericBrowserDomAdapter;
 })(dom_adapter_1.DomAdapter);
 exports.GenericBrowserDomAdapter = GenericBrowserDomAdapter;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/platform/browser/xhr_impl":214,"angular2/src/platform/dom/dom_adapter":218}],210:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/platform/browser/xhr_impl":215,"angular2/src/platform/dom/dom_adapter":219}],211:[function(require,module,exports){
 'use strict';var collection_1 = require('angular2/src/facade/collection');
 var lang_1 = require('angular2/src/facade/lang');
 var dom_adapter_1 = require('angular2/src/platform/dom/dom_adapter');
@@ -30171,7 +30264,7 @@ var BrowserGetTestability = (function () {
     return BrowserGetTestability;
 })();
 exports.BrowserGetTestability = BrowserGetTestability;
-},{"angular2/core":14,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],211:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],212:[function(require,module,exports){
 'use strict';var dom_adapter_1 = require('angular2/src/platform/dom/dom_adapter');
 /**
  * A service that can be used to get and set the title of a current HTML document.
@@ -30197,7 +30290,7 @@ var Title = (function () {
     return Title;
 })();
 exports.Title = Title;
-},{"angular2/src/platform/dom/dom_adapter":218}],212:[function(require,module,exports){
+},{"angular2/src/platform/dom/dom_adapter":219}],213:[function(require,module,exports){
 'use strict';var application_ref_1 = require('angular2/src/core/application_ref');
 var lang_1 = require('angular2/src/facade/lang');
 var browser_1 = require('angular2/src/facade/browser');
@@ -30266,7 +30359,7 @@ var AngularProfiler = (function () {
     return AngularProfiler;
 })();
 exports.AngularProfiler = AngularProfiler;
-},{"angular2/src/core/application_ref":97,"angular2/src/facade/browser":185,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],213:[function(require,module,exports){
+},{"angular2/src/core/application_ref":98,"angular2/src/facade/browser":186,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],214:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var common_tools_1 = require('./common_tools');
 var context = lang_1.global;
@@ -30292,7 +30385,7 @@ function disableDebugTools() {
     delete context.ng;
 }
 exports.disableDebugTools = disableDebugTools;
-},{"./common_tools":212,"angular2/src/facade/lang":191}],214:[function(require,module,exports){
+},{"./common_tools":213,"angular2/src/facade/lang":192}],215:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -30337,7 +30430,7 @@ var XHRImpl = (function (_super) {
     return XHRImpl;
 })(xhr_1.XHR);
 exports.XHRImpl = XHRImpl;
-},{"angular2/src/compiler/xhr":94,"angular2/src/facade/lang":191,"angular2/src/facade/promise":193}],215:[function(require,module,exports){
+},{"angular2/src/compiler/xhr":95,"angular2/src/facade/lang":192,"angular2/src/facade/promise":194}],216:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var di_1 = require('angular2/src/core/di');
 var core_1 = require("angular2/core");
@@ -30420,7 +30513,7 @@ function initDomAdapter() {
     testability_2.BrowserGetTestability.init();
 }
 exports.initDomAdapter = initDomAdapter;
-},{"./browser/browser_adapter":208,"angular2/common":12,"angular2/core":14,"angular2/platform/common_dom":18,"angular2/src/animate/animation_builder":21,"angular2/src/animate/browser_details":22,"angular2/src/core/di":133,"angular2/src/core/profile/wtf_init":172,"angular2/src/core/testability/testability":179,"angular2/src/facade/lang":191,"angular2/src/platform/browser/testability":210,"angular2/src/platform/browser/title":211,"angular2/src/platform/browser/tools/tools":213,"angular2/src/platform/dom/dom_adapter":218,"angular2/src/platform/dom/dom_renderer":219,"angular2/src/platform/dom/dom_tokens":220,"angular2/src/platform/dom/events/dom_events":221,"angular2/src/platform/dom/events/event_manager":222,"angular2/src/platform/dom/events/hammer_gestures":224,"angular2/src/platform/dom/events/key_events":225,"angular2/src/platform/dom/shared_styles_host":226}],216:[function(require,module,exports){
+},{"./browser/browser_adapter":209,"angular2/common":13,"angular2/core":15,"angular2/platform/common_dom":19,"angular2/src/animate/animation_builder":22,"angular2/src/animate/browser_details":23,"angular2/src/core/di":134,"angular2/src/core/profile/wtf_init":173,"angular2/src/core/testability/testability":180,"angular2/src/facade/lang":192,"angular2/src/platform/browser/testability":211,"angular2/src/platform/browser/title":212,"angular2/src/platform/browser/tools/tools":214,"angular2/src/platform/dom/dom_adapter":219,"angular2/src/platform/dom/dom_renderer":220,"angular2/src/platform/dom/dom_tokens":221,"angular2/src/platform/dom/events/dom_events":222,"angular2/src/platform/dom/events/event_manager":223,"angular2/src/platform/dom/events/hammer_gestures":225,"angular2/src/platform/dom/events/key_events":226,"angular2/src/platform/dom/shared_styles_host":227}],217:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var dom_adapter_1 = require('angular2/src/platform/dom/dom_adapter');
 /**
@@ -30464,7 +30557,7 @@ var By = (function () {
     return By;
 })();
 exports.By = By;
-},{"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],217:[function(require,module,exports){
+},{"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],218:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var di_1 = require('angular2/src/core/di');
 var dom_adapter_1 = require('angular2/src/platform/dom/dom_adapter');
@@ -30499,7 +30592,7 @@ exports.ELEMENT_PROBE_PROVIDERS = lang_1.CONST_EXPR([
     new di_1.Provider(core_1.RootRenderer, { useFactory: _createConditionalRootRenderer, deps: [dom_renderer_1.DomRootRenderer] })
 ]);
 exports.ELEMENT_PROBE_PROVIDERS_PROD_MODE = lang_1.CONST_EXPR([new di_1.Provider(core_1.RootRenderer, { useFactory: _createRootRenderer, deps: [dom_renderer_1.DomRootRenderer] })]);
-},{"angular2/core":14,"angular2/src/core/debug/debug_node":131,"angular2/src/core/debug/debug_renderer":132,"angular2/src/core/di":133,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218,"angular2/src/platform/dom/dom_renderer":219}],218:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/core/debug/debug_node":132,"angular2/src/core/debug/debug_renderer":133,"angular2/src/core/di":134,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219,"angular2/src/platform/dom/dom_renderer":220}],219:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 exports.DOM = null;
 function setRootDomAdapter(adapter) {
@@ -30530,7 +30623,7 @@ var DomAdapter = (function () {
     return DomAdapter;
 })();
 exports.DomAdapter = DomAdapter;
-},{"angular2/src/facade/lang":191}],219:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],220:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -30845,7 +30938,7 @@ function splitNamespace(name) {
     var match = lang_1.RegExpWrapper.firstMatch(NS_PREFIX_RE, name);
     return [match[1], match[2]];
 }
-},{"./dom_tokens":220,"./events/event_manager":222,"./shared_styles_host":226,"./util":227,"angular2/src/animate/animation_builder":21,"angular2/src/core/di":133,"angular2/src/core/metadata":161,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],220:[function(require,module,exports){
+},{"./dom_tokens":221,"./events/event_manager":223,"./shared_styles_host":227,"./util":228,"angular2/src/animate/animation_builder":22,"angular2/src/core/di":134,"angular2/src/core/metadata":162,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],221:[function(require,module,exports){
 'use strict';var di_1 = require('angular2/src/core/di');
 var lang_1 = require('angular2/src/facade/lang');
 /**
@@ -30855,7 +30948,7 @@ var lang_1 = require('angular2/src/facade/lang');
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  */
 exports.DOCUMENT = lang_1.CONST_EXPR(new di_1.OpaqueToken('DocumentToken'));
-},{"angular2/src/core/di":133,"angular2/src/facade/lang":191}],221:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/facade/lang":192}],222:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -30899,7 +30992,7 @@ var DomEventsPlugin = (function (_super) {
     return DomEventsPlugin;
 })(event_manager_1.EventManagerPlugin);
 exports.DomEventsPlugin = DomEventsPlugin;
-},{"./event_manager":222,"angular2/core":14,"angular2/src/platform/dom/dom_adapter":218}],222:[function(require,module,exports){
+},{"./event_manager":223,"angular2/core":15,"angular2/src/platform/dom/dom_adapter":219}],223:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -30967,7 +31060,7 @@ var EventManagerPlugin = (function () {
     return EventManagerPlugin;
 })();
 exports.EventManagerPlugin = EventManagerPlugin;
-},{"angular2/src/core/di":133,"angular2/src/core/zone/ng_zone":183,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],223:[function(require,module,exports){
+},{"angular2/src/core/di":134,"angular2/src/core/zone/ng_zone":184,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],224:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31024,7 +31117,7 @@ var HammerGesturesPluginCommon = (function (_super) {
     return HammerGesturesPluginCommon;
 })(event_manager_1.EventManagerPlugin);
 exports.HammerGesturesPluginCommon = HammerGesturesPluginCommon;
-},{"./event_manager":222,"angular2/src/facade/collection":186}],224:[function(require,module,exports){
+},{"./event_manager":223,"angular2/src/facade/collection":187}],225:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31076,7 +31169,7 @@ var HammerGesturesPlugin = (function (_super) {
     return HammerGesturesPlugin;
 })(hammer_common_1.HammerGesturesPluginCommon);
 exports.HammerGesturesPlugin = HammerGesturesPlugin;
-},{"./hammer_common":223,"angular2/src/core/di":133,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],225:[function(require,module,exports){
+},{"./hammer_common":224,"angular2/src/core/di":134,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],226:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31189,7 +31282,7 @@ var KeyEventsPlugin = (function (_super) {
     return KeyEventsPlugin;
 })(event_manager_1.EventManagerPlugin);
 exports.KeyEventsPlugin = KeyEventsPlugin;
-},{"./event_manager":222,"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191,"angular2/src/platform/dom/dom_adapter":218}],226:[function(require,module,exports){
+},{"./event_manager":223,"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192,"angular2/src/platform/dom/dom_adapter":219}],227:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31270,7 +31363,7 @@ var DomSharedStylesHost = (function (_super) {
     return DomSharedStylesHost;
 })(SharedStylesHost);
 exports.DomSharedStylesHost = DomSharedStylesHost;
-},{"./dom_tokens":220,"angular2/src/core/di":133,"angular2/src/facade/collection":186,"angular2/src/platform/dom/dom_adapter":218}],227:[function(require,module,exports){
+},{"./dom_tokens":221,"angular2/src/core/di":134,"angular2/src/facade/collection":187,"angular2/src/platform/dom/dom_adapter":219}],228:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var CAMEL_CASE_REGEXP = /([A-Z])/g;
 var DASH_CASE_REGEXP = /-([a-z])/g;
@@ -31282,7 +31375,7 @@ function dashCaseToCamelCase(input) {
     return lang_1.StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function (m) { return m[1].toUpperCase(); });
 }
 exports.dashCaseToCamelCase = dashCaseToCamelCase;
-},{"angular2/src/facade/lang":191}],228:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],229:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var instruction_1 = require('./instruction');
 var AsyncRouteHandler = (function () {
@@ -31306,7 +31399,7 @@ var AsyncRouteHandler = (function () {
     return AsyncRouteHandler;
 })();
 exports.AsyncRouteHandler = AsyncRouteHandler;
-},{"./instruction":232,"angular2/src/facade/lang":191}],229:[function(require,module,exports){
+},{"./instruction":233,"angular2/src/facade/lang":192}],230:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31385,7 +31478,7 @@ var BrowserPlatformLocation = (function (_super) {
     return BrowserPlatformLocation;
 })(platform_location_1.PlatformLocation);
 exports.BrowserPlatformLocation = BrowserPlatformLocation;
-},{"./platform_location":239,"angular2/core":14,"angular2/src/platform/dom/dom_adapter":218}],230:[function(require,module,exports){
+},{"./platform_location":240,"angular2/core":15,"angular2/src/platform/dom/dom_adapter":219}],231:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -31513,7 +31606,7 @@ var ComponentRecognizer = (function () {
     return ComponentRecognizer;
 })();
 exports.ComponentRecognizer = ComponentRecognizer;
-},{"./async_route_handler":228,"./route_config_impl":241,"./route_recognizer":245,"./sync_route_handler":252,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],231:[function(require,module,exports){
+},{"./async_route_handler":229,"./route_config_impl":242,"./route_recognizer":246,"./sync_route_handler":253,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],232:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31627,7 +31720,7 @@ var HashLocationStrategy = (function (_super) {
     return HashLocationStrategy;
 })(location_strategy_1.LocationStrategy);
 exports.HashLocationStrategy = HashLocationStrategy;
-},{"./location_strategy":236,"./platform_location":239,"angular2/core":14,"angular2/src/facade/lang":191}],232:[function(require,module,exports){
+},{"./location_strategy":237,"./platform_location":240,"angular2/core":15,"angular2/src/facade/lang":192}],233:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31967,7 +32060,7 @@ var ComponentInstruction = (function () {
     return ComponentInstruction;
 })();
 exports.ComponentInstruction = ComponentInstruction;
-},{"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/lang":191}],233:[function(require,module,exports){
+},{"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/lang":192}],234:[function(require,module,exports){
 'use strict';/**
  * This indirection is needed to free up Component, etc symbols in the public API
  * to be used by the decorator versions of these annotations.
@@ -32007,7 +32100,7 @@ exports.routerOnDeactivate = lifecycle_annotations_impl_2.routerOnDeactivate;
  * {@example router/ts/can_activate/can_activate_example.ts region='canActivate' }
  */
 exports.CanActivate = decorators_1.makeDecorator(lifecycle_annotations_impl_1.CanActivate);
-},{"./lifecycle_annotations_impl":234,"angular2/src/core/util/decorators":181}],234:[function(require,module,exports){
+},{"./lifecycle_annotations_impl":235,"angular2/src/core/util/decorators":182}],235:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -32045,7 +32138,7 @@ exports.routerCanDeactivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerCa
 exports.routerOnActivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnActivate"));
 exports.routerOnReuse = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnReuse"));
 exports.routerOnDeactivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnDeactivate"));
-},{"angular2/src/facade/lang":191}],235:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],236:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -32192,7 +32285,7 @@ function stripTrailingSlash(url) {
     }
     return url;
 }
-},{"./location_strategy":236,"angular2/core":14,"angular2/src/facade/async":184}],236:[function(require,module,exports){
+},{"./location_strategy":237,"angular2/core":15,"angular2/src/facade/async":185}],237:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var core_1 = require('angular2/core');
 /**
@@ -32273,7 +32366,7 @@ function joinWithSlash(start, end) {
     return start + '/' + end;
 }
 exports.joinWithSlash = joinWithSlash;
-},{"angular2/core":14,"angular2/src/facade/lang":191}],237:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/lang":192}],238:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -32382,7 +32475,7 @@ var PathLocationStrategy = (function (_super) {
     return PathLocationStrategy;
 })(location_strategy_1.LocationStrategy);
 exports.PathLocationStrategy = PathLocationStrategy;
-},{"./location_strategy":236,"./platform_location":239,"angular2/core":14,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],238:[function(require,module,exports){
+},{"./location_strategy":237,"./platform_location":240,"angular2/core":15,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],239:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
 var collection_1 = require('angular2/src/facade/collection');
@@ -32624,7 +32717,7 @@ var PathRecognizer = (function () {
     return PathRecognizer;
 })();
 exports.PathRecognizer = PathRecognizer;
-},{"./url_parser":253,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],239:[function(require,module,exports){
+},{"./url_parser":254,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],240:[function(require,module,exports){
 'use strict';/**
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
@@ -32655,7 +32748,7 @@ var PlatformLocation = (function () {
     return PlatformLocation;
 })();
 exports.PlatformLocation = PlatformLocation;
-},{}],240:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 'use strict';var route_config_impl_1 = require('./route_config_impl');
 var decorators_1 = require('angular2/src/core/util/decorators');
 var route_config_impl_2 = require('./route_config_impl');
@@ -32670,7 +32763,7 @@ exports.AsyncRoute = route_config_impl_2.AsyncRoute;
  * It takes an array of {@link RouteDefinition}s.
  */
 exports.RouteConfig = decorators_1.makeDecorator(route_config_impl_1.RouteConfig);
-},{"./route_config_impl":241,"angular2/src/core/util/decorators":181}],241:[function(require,module,exports){
+},{"./route_config_impl":242,"angular2/src/core/util/decorators":182}],242:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -32860,7 +32953,7 @@ var Redirect = (function () {
     return Redirect;
 })();
 exports.Redirect = Redirect;
-},{"angular2/src/facade/lang":191}],242:[function(require,module,exports){
+},{"angular2/src/facade/lang":192}],243:[function(require,module,exports){
 'use strict';var route_config_decorator_1 = require('./route_config_decorator');
 var lang_1 = require('angular2/src/facade/lang');
 var exceptions_1 = require('angular2/src/facade/exceptions');
@@ -32954,9 +33047,9 @@ function assertComponentExists(component, path) {
     }
 }
 exports.assertComponentExists = assertComponentExists;
-},{"./route_config_decorator":240,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],243:[function(require,module,exports){
+},{"./route_config_decorator":241,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],244:[function(require,module,exports){
 'use strict';
-},{}],244:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 'use strict';var lang_1 = require('angular2/src/facade/lang');
 var lifecycle_annotations_impl_1 = require('./lifecycle_annotations_impl');
 var reflection_1 = require('angular2/src/core/reflection/reflection');
@@ -32977,7 +33070,7 @@ function getCanActivateHook(type) {
     return null;
 }
 exports.getCanActivateHook = getCanActivateHook;
-},{"./lifecycle_annotations_impl":234,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/lang":191}],245:[function(require,module,exports){
+},{"./lifecycle_annotations_impl":235,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/lang":192}],246:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -33087,7 +33180,7 @@ var RouteRecognizer = (function () {
     return RouteRecognizer;
 })();
 exports.RouteRecognizer = RouteRecognizer;
-},{"./instruction":232,"./path_recognizer":238,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191,"angular2/src/facade/promise":193}],246:[function(require,module,exports){
+},{"./instruction":233,"./path_recognizer":239,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192,"angular2/src/facade/promise":194}],247:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -33541,7 +33634,7 @@ function assertTerminalComponent(component, path) {
         }
     }
 }
-},{"./component_recognizer":230,"./instruction":232,"./route_config_impl":241,"./route_config_nomalizer":242,"./route_recognizer":245,"./url_parser":253,"angular2/core":14,"angular2/src/core/reflection/reflection":173,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],247:[function(require,module,exports){
+},{"./component_recognizer":231,"./instruction":233,"./route_config_impl":242,"./route_config_nomalizer":243,"./route_recognizer":246,"./url_parser":254,"angular2/core":15,"angular2/src/core/reflection/reflection":174,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],248:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -34035,7 +34128,7 @@ function canActivateOne(nextInstruction, prevInstruction) {
         return true;
     });
 }
-},{"./location":235,"./route_lifecycle_reflector":244,"./route_registry":246,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],248:[function(require,module,exports){
+},{"./location":236,"./route_lifecycle_reflector":245,"./route_registry":247,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],249:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34129,7 +34222,7 @@ var RouterLink = (function () {
     return RouterLink;
 })();
 exports.RouterLink = RouterLink;
-},{"./location":235,"./router":247,"angular2/core":14,"angular2/src/facade/lang":191}],249:[function(require,module,exports){
+},{"./location":236,"./router":248,"angular2/core":15,"angular2/src/facade/lang":192}],250:[function(require,module,exports){
 'use strict';var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34289,7 +34382,7 @@ var RouterOutlet = (function () {
     return RouterOutlet;
 })();
 exports.RouterOutlet = RouterOutlet;
-},{"./instruction":232,"./lifecycle_annotations":233,"./route_lifecycle_reflector":244,"./router":247,"angular2/core":14,"angular2/src/facade/async":184,"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],250:[function(require,module,exports){
+},{"./instruction":233,"./lifecycle_annotations":234,"./route_lifecycle_reflector":245,"./router":248,"angular2/core":15,"angular2/src/facade/async":185,"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],251:[function(require,module,exports){
 'use strict';// import {ROUTER_PROVIDERS_COMMON} from './router_providers_common';
 var router_1 = require('angular2/router');
 var core_1 = require('angular2/core');
@@ -34330,7 +34423,7 @@ exports.ROUTER_PROVIDERS = lang_1.CONST_EXPR([
  * @deprecated
  */
 exports.ROUTER_BINDINGS = exports.ROUTER_PROVIDERS;
-},{"./browser_platform_location":229,"./platform_location":239,"angular2/core":14,"angular2/router":19,"angular2/src/facade/lang":191}],251:[function(require,module,exports){
+},{"./browser_platform_location":230,"./platform_location":240,"angular2/core":15,"angular2/router":20,"angular2/src/facade/lang":192}],252:[function(require,module,exports){
 'use strict';var location_strategy_1 = require('angular2/src/router/location_strategy');
 var path_location_strategy_1 = require('angular2/src/router/path_location_strategy');
 var router_1 = require('angular2/src/router/router');
@@ -34363,7 +34456,7 @@ function routerPrimaryComponentFactory(app) {
     }
     return app.componentTypes[0];
 }
-},{"angular2/core":14,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191,"angular2/src/router/location":235,"angular2/src/router/location_strategy":236,"angular2/src/router/path_location_strategy":237,"angular2/src/router/route_registry":246,"angular2/src/router/router":247}],252:[function(require,module,exports){
+},{"angular2/core":15,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192,"angular2/src/router/location":236,"angular2/src/router/location_strategy":237,"angular2/src/router/path_location_strategy":238,"angular2/src/router/route_registry":247,"angular2/src/router/router":248}],253:[function(require,module,exports){
 'use strict';var async_1 = require('angular2/src/facade/async');
 var lang_1 = require('angular2/src/facade/lang');
 var instruction_1 = require('./instruction');
@@ -34379,7 +34472,7 @@ var SyncRouteHandler = (function () {
     return SyncRouteHandler;
 })();
 exports.SyncRouteHandler = SyncRouteHandler;
-},{"./instruction":232,"angular2/src/facade/async":184,"angular2/src/facade/lang":191}],253:[function(require,module,exports){
+},{"./instruction":233,"angular2/src/facade/async":185,"angular2/src/facade/lang":192}],254:[function(require,module,exports){
 'use strict';var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -34590,7 +34683,7 @@ function serializeParams(paramMap) {
     return params;
 }
 exports.serializeParams = serializeParams;
-},{"angular2/src/facade/collection":186,"angular2/src/facade/exceptions":188,"angular2/src/facade/lang":191}],254:[function(require,module,exports){
+},{"angular2/src/facade/collection":187,"angular2/src/facade/exceptions":189,"angular2/src/facade/lang":192}],255:[function(require,module,exports){
 'use strict';// Note: This class is only here so that we can reference it from TypeScript code.
 // The actual implementation lives under modules_dart.
 // TODO(tbosch): Move the corresponding code into angular2/src/compiler once
@@ -34605,7 +34698,7 @@ var Codegen = (function () {
     return Codegen;
 })();
 exports.Codegen = Codegen;
-},{}],255:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 (function (process,global){
  /*!
   * https://github.com/paulmillr/es6-shim
@@ -37970,7 +38063,7 @@ exports.Codegen = Codegen;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":391}],256:[function(require,module,exports){
+},{"_process":392}],257:[function(require,module,exports){
 var dom_1 = require('../util/dom');
 var util_1 = require('../util/util');
 /**
@@ -38629,7 +38722,7 @@ var TRANSFORMS = {
 var CSS_VALUE_REGEX = /(^-?\d*\.?\d*)(.*)/;
 var AnimationRegistry = {};
 
-},{"../util/dom":346,"../util/util":351}],257:[function(require,module,exports){
+},{"../util/dom":347,"../util/util":352}],258:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -38685,7 +38778,7 @@ var FadeOut = (function (_super) {
 })(animation_1.Animation);
 animation_1.Animation.register('fade-out', FadeOut);
 
-},{"./animation":256}],258:[function(require,module,exports){
+},{"./animation":257}],259:[function(require,module,exports){
 var dom_1 = require('../util/dom');
 var ScrollTo = (function () {
     function ScrollTo(ele) {
@@ -38781,7 +38874,7 @@ function easeOutCubic(t) {
     return (--t) * t * t + 1;
 }
 
-},{"../util/dom":346}],259:[function(require,module,exports){
+},{"../util/dom":347}],260:[function(require,module,exports){
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -38832,7 +38925,7 @@ __export(require('./components/tap-click/tap-click'));
 __export(require('./components/toggle/toggle'));
 __export(require('./components/toolbar/toolbar'));
 
-},{"./components/action-sheet/action-sheet":260,"./components/alert/alert":261,"./components/app/app":262,"./components/app/id":263,"./components/blur/blur":265,"./components/button/button":266,"./components/checkbox/checkbox":267,"./components/content/content":268,"./components/icon/icon":269,"./components/infinite-scroll/infinite-scroll":271,"./components/infinite-scroll/infinite-scroll-content":270,"./components/input/input":273,"./components/item/item":278,"./components/item/item-sliding":277,"./components/label/label":279,"./components/list/list":280,"./components/menu/menu":286,"./components/menu/menu-close":281,"./components/menu/menu-controller":282,"./components/menu/menu-toggle":284,"./components/menu/menu-types":285,"./components/modal/modal":287,"./components/nav/nav":293,"./components/nav/nav-controller":288,"./components/nav/nav-params":289,"./components/nav/nav-push":290,"./components/nav/nav-router":292,"./components/nav/view-controller":295,"./components/navbar/navbar":296,"./components/option/option":297,"./components/overlay/overlay":298,"./components/radio/radio-button":299,"./components/radio/radio-group":300,"./components/refresher/refresher":302,"./components/refresher/refresher-content":301,"./components/scroll/scroll":303,"./components/searchbar/searchbar":304,"./components/segment/segment":305,"./components/select/select":306,"./components/show-hide-when/show-hide-when":307,"./components/slides/slides":308,"./components/tabs/tab":313,"./components/tabs/tabs":314,"./components/tap-click/tap-click":317,"./components/toggle/toggle":318,"./components/toolbar/toolbar":319}],260:[function(require,module,exports){
+},{"./components/action-sheet/action-sheet":261,"./components/alert/alert":262,"./components/app/app":263,"./components/app/id":264,"./components/blur/blur":266,"./components/button/button":267,"./components/checkbox/checkbox":268,"./components/content/content":269,"./components/icon/icon":270,"./components/infinite-scroll/infinite-scroll":272,"./components/infinite-scroll/infinite-scroll-content":271,"./components/input/input":274,"./components/item/item":279,"./components/item/item-sliding":278,"./components/label/label":280,"./components/list/list":281,"./components/menu/menu":287,"./components/menu/menu-close":282,"./components/menu/menu-controller":283,"./components/menu/menu-toggle":285,"./components/menu/menu-types":286,"./components/modal/modal":288,"./components/nav/nav":294,"./components/nav/nav-controller":289,"./components/nav/nav-params":290,"./components/nav/nav-push":291,"./components/nav/nav-router":293,"./components/nav/view-controller":296,"./components/navbar/navbar":297,"./components/option/option":298,"./components/overlay/overlay":299,"./components/radio/radio-button":300,"./components/radio/radio-group":301,"./components/refresher/refresher":303,"./components/refresher/refresher-content":302,"./components/scroll/scroll":304,"./components/searchbar/searchbar":305,"./components/segment/segment":306,"./components/select/select":307,"./components/show-hide-when/show-hide-when":308,"./components/slides/slides":309,"./components/tabs/tab":314,"./components/tabs/tabs":315,"./components/tap-click/tap-click":318,"./components/toggle/toggle":319,"./components/toolbar/toolbar":320}],261:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -39217,7 +39310,7 @@ var ActionSheetWpSlideOut = (function (_super) {
 transition_1.Transition.register('action-sheet-wp-slide-out', ActionSheetWpSlideOut);
 var actionSheetIds = -1;
 
-},{"../../animations/animation":256,"../../config/config":321,"../../transitions/transition":341,"../../util/util":351,"../icon/icon":269,"../nav/nav-params":289,"../nav/view-controller":295,"angular2/common":12,"angular2/core":14}],261:[function(require,module,exports){
+},{"../../animations/animation":257,"../../config/config":322,"../../transitions/transition":342,"../../util/util":352,"../icon/icon":270,"../nav/nav-params":290,"../nav/view-controller":296,"angular2/common":13,"angular2/core":15}],262:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -39769,7 +39862,7 @@ var AlertWpPopOut = (function (_super) {
 transition_1.Transition.register('alert-wp-pop-out', AlertWpPopOut);
 var alertIds = -1;
 
-},{"../../animations/animation":256,"../../config/config":321,"../../transitions/transition":341,"../../util/util":351,"../nav/nav-params":289,"../nav/view-controller":295,"angular2/common":12,"angular2/core":14}],262:[function(require,module,exports){
+},{"../../animations/animation":257,"../../config/config":322,"../../transitions/transition":342,"../../util/util":352,"../nav/nav-params":290,"../nav/view-controller":296,"angular2/common":13,"angular2/core":15}],263:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39914,7 +40007,7 @@ var IonicApp = (function () {
 })();
 exports.IonicApp = IonicApp;
 
-},{"../../config/config":321,"../../util/click-block":345,"angular2/core":14,"angular2/platform/browser":17}],263:[function(require,module,exports){
+},{"../../config/config":322,"../../util/click-block":346,"angular2/core":15,"angular2/platform/browser":18}],264:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40019,7 +40112,7 @@ var Attr = (function () {
 })();
 exports.Attr = Attr;
 
-},{"./app":262,"angular2/core":14}],264:[function(require,module,exports){
+},{"./app":263,"angular2/core":15}],265:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40078,7 +40171,7 @@ var Badge = (function () {
 })();
 exports.Badge = Badge;
 
-},{"../../config/config":321,"angular2/core":14}],265:[function(require,module,exports){
+},{"../../config/config":322,"angular2/core":15}],266:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40120,7 +40213,7 @@ var Blur = (function () {
 })();
 exports.Blur = Blur;
 
-},{"angular2/core":14}],266:[function(require,module,exports){
+},{"angular2/core":15}],267:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40499,7 +40592,7 @@ var IGNORE_ATTRS = /_ng|button|left|right/;
 var TEXT = 1;
 var ICON = 2;
 
-},{"../../config/config":321,"../../util/util":351,"angular2/core":14}],267:[function(require,module,exports){
+},{"../../config/config":322,"../../util/util":352,"angular2/core":15}],268:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40705,7 +40798,7 @@ var Checkbox = (function () {
 })();
 exports.Checkbox = Checkbox;
 
-},{"../../util/form":349,"../../util/util":351,"../item/item":278,"angular2/common":12,"angular2/core":14}],268:[function(require,module,exports){
+},{"../../util/form":350,"../../util/util":352,"../item/item":279,"angular2/common":13,"angular2/core":15}],269:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -41044,7 +41137,7 @@ var Content = (function (_super) {
 })(ion_1.Ion);
 exports.Content = Content;
 
-},{"../../animations/scroll-to":258,"../../config/config":321,"../../util/dom":346,"../app/app":262,"../ion":275,"../nav/view-controller":295,"angular2/core":14}],269:[function(require,module,exports){
+},{"../../animations/scroll-to":259,"../../config/config":322,"../../util/dom":347,"../app/app":263,"../ion":276,"../nav/view-controller":296,"angular2/core":15}],270:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41234,7 +41327,7 @@ var Icon = (function () {
 })();
 exports.Icon = Icon;
 
-},{"../../config/config":321,"angular2/core":14}],270:[function(require,module,exports){
+},{"../../config/config":322,"angular2/core":15}],271:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41293,7 +41386,7 @@ var InfiniteScrollContent = (function () {
 })();
 exports.InfiniteScrollContent = InfiniteScrollContent;
 
-},{"../../config/config":321,"../spinner/spinner":310,"./infinite-scroll":271,"angular2/common":12,"angular2/core":14}],271:[function(require,module,exports){
+},{"../../config/config":322,"../spinner/spinner":311,"./infinite-scroll":272,"angular2/common":13,"angular2/core":15}],272:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41560,7 +41653,7 @@ var STATE_ENABLED = 'enabled';
 var STATE_DISABLED = 'disabled';
 var STATE_LOADING = 'loading';
 
-},{"../content/content":268,"angular2/core":14}],272:[function(require,module,exports){
+},{"../content/content":269,"angular2/core":15}],273:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42090,7 +42183,7 @@ function getScrollAssistDuration(distanceToScroll) {
     return Math.min(400, Math.max(150, duration));
 }
 
-},{"../../util/dom":346,"../../util/util":351,"./native-input":274,"angular2/core":14}],273:[function(require,module,exports){
+},{"../../util/dom":347,"../../util/util":352,"./native-input":275,"angular2/core":15}],274:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -42269,7 +42362,7 @@ var TextArea = (function (_super) {
 })(input_base_1.InputBase);
 exports.TextArea = TextArea;
 
-},{"../../config/config":321,"../../platform/platform":332,"../../util/form":349,"../app/app":262,"../button/button":266,"../content/content":268,"../item/item":278,"../nav/nav-controller":288,"./input-base":272,"./native-input":274,"angular2/common":12,"angular2/core":14}],274:[function(require,module,exports){
+},{"../../config/config":322,"../../platform/platform":333,"../../util/form":350,"../app/app":263,"../button/button":267,"../content/content":269,"../item/item":279,"../nav/nav-controller":289,"./input-base":273,"./native-input":275,"angular2/common":13,"angular2/core":15}],275:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42459,7 +42552,7 @@ var NextInput = (function () {
 })();
 exports.NextInput = NextInput;
 
-},{"../../util/dom":346,"angular2/common":12,"angular2/core":14}],275:[function(require,module,exports){
+},{"../../util/dom":347,"angular2/common":13,"angular2/core":15}],276:[function(require,module,exports){
 var dom = require('../util/dom');
 var ids = 0;
 /**
@@ -42494,7 +42587,7 @@ var Ion = (function () {
 })();
 exports.Ion = Ion;
 
-},{"../util/dom":346}],276:[function(require,module,exports){
+},{"../util/dom":347}],277:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -42712,7 +42805,7 @@ function isActive(itemContainerEle) {
 }
 var DRAG_THRESHOLD = 20;
 
-},{"../../gestures/drag-gesture":326,"../../gestures/hammer":328,"../../util/dom":346}],277:[function(require,module,exports){
+},{"../../gestures/drag-gesture":327,"../../gestures/hammer":329,"../../util/dom":347}],278:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42777,7 +42870,7 @@ var ItemSliding = (function () {
 exports.ItemSliding = ItemSliding;
 var slideIds = 0;
 
-},{"../list/list":280,"angular2/core":14}],278:[function(require,module,exports){
+},{"../list/list":281,"angular2/core":15}],279:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42969,7 +43062,7 @@ var Item = (function () {
 })();
 exports.Item = Item;
 
-},{"../../util/form":349,"../button/button":266,"../icon/icon":269,"../label/label":279,"angular2/common":12,"angular2/core":14}],279:[function(require,module,exports){
+},{"../../util/form":350,"../button/button":267,"../icon/icon":270,"../label/label":280,"angular2/common":13,"angular2/core":15}],280:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43089,7 +43182,7 @@ var Label = (function () {
 })();
 exports.Label = Label;
 
-},{"angular2/core":14}],280:[function(require,module,exports){
+},{"angular2/core":15}],281:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -43234,7 +43327,7 @@ var ListHeader = (function () {
 })();
 exports.ListHeader = ListHeader;
 
-},{"../ion":275,"../item/item-sliding-gesture":276,"angular2/core":14}],281:[function(require,module,exports){
+},{"../ion":276,"../item/item-sliding-gesture":277,"angular2/core":15}],282:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43299,7 +43392,7 @@ var MenuClose = (function () {
 })();
 exports.MenuClose = MenuClose;
 
-},{"./menu-controller":282,"angular2/core":14}],282:[function(require,module,exports){
+},{"./menu-controller":283,"angular2/core":15}],283:[function(require,module,exports){
 /**
  * @name Menu
  * @description
@@ -43608,7 +43701,7 @@ var MenuController = (function () {
 exports.MenuController = MenuController;
 var menuTypes = {};
 
-},{}],283:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -43730,7 +43823,7 @@ var MenuTargetGesture = (function (_super) {
 })(MenuContentGesture);
 exports.MenuTargetGesture = MenuTargetGesture;
 
-},{"../../gestures/slide-edge-gesture":329,"../../util/util":351}],284:[function(require,module,exports){
+},{"../../gestures/slide-edge-gesture":330,"../../util/util":352}],285:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43831,7 +43924,7 @@ var MenuToggle = (function () {
 })();
 exports.MenuToggle = MenuToggle;
 
-},{"../nav/view-controller":295,"../navbar/navbar":296,"./menu-controller":282,"angular2/core":14}],285:[function(require,module,exports){
+},{"../nav/view-controller":296,"../navbar/navbar":297,"./menu-controller":283,"angular2/core":15}],286:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -43975,7 +44068,7 @@ var MenuOverlayType = (function (_super) {
 })(MenuType);
 menu_controller_1.MenuController.registerType('overlay', MenuOverlayType);
 
-},{"../../animations/animation":256,"./menu-controller":282}],286:[function(require,module,exports){
+},{"../../animations/animation":257,"./menu-controller":283}],287:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -44424,7 +44517,7 @@ var MenuBackdrop = (function () {
 })();
 exports.MenuBackdrop = MenuBackdrop;
 
-},{"../../config/config":321,"../../platform/platform":332,"../../util/keyboard":350,"../../util/util":351,"../ion":275,"./menu-controller":282,"./menu-gestures":283,"angular2/core":14}],287:[function(require,module,exports){
+},{"../../config/config":322,"../../platform/platform":333,"../../util/keyboard":351,"../../util/util":352,"../ion":276,"./menu-controller":283,"./menu-gestures":284,"angular2/core":15}],288:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -44630,7 +44723,7 @@ var ModalMDSlideOut = (function (_super) {
 })(transition_1.Transition);
 transition_1.Transition.register('modal-md-slide-out', ModalMDSlideOut);
 
-},{"../../animations/animation":256,"../../transitions/transition":341,"../nav/view-controller":295}],288:[function(require,module,exports){
+},{"../../animations/animation":257,"../../transitions/transition":342,"../nav/view-controller":296}],289:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -46103,7 +46196,7 @@ var STATE_FORCE_ACTIVE = 'force_active';
 var INIT_ZINDEX = 100;
 var ctrlIds = -1;
 
-},{"../../transitions/transition":341,"../../util/util":351,"../ion":275,"./nav-params":289,"./swipe-back":294,"./view-controller":295,"angular2/core":14,"angular2/instrumentation":16}],289:[function(require,module,exports){
+},{"../../transitions/transition":342,"../../util/util":352,"../ion":276,"./nav-params":290,"./swipe-back":295,"./view-controller":296,"angular2/core":15,"angular2/instrumentation":17}],290:[function(require,module,exports){
 /**
  * @name NavParams
  * @description
@@ -46159,7 +46252,7 @@ var NavParams = (function () {
 })();
 exports.NavParams = NavParams;
 
-},{}],290:[function(require,module,exports){
+},{}],291:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -46316,7 +46409,7 @@ var NavPop = (function () {
 })();
 exports.NavPop = NavPop;
 
-},{"./nav-controller":288,"./nav-registry":291,"angular2/core":14}],291:[function(require,module,exports){
+},{"./nav-controller":289,"./nav-registry":292,"angular2/core":15}],292:[function(require,module,exports){
 /**
  * @private
  * Map of possible pages that can be navigated to using an Ionic NavController
@@ -46341,7 +46434,7 @@ var NavRegistry = (function () {
 })();
 exports.NavRegistry = NavRegistry;
 
-},{}],292:[function(require,module,exports){
+},{}],293:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -46457,7 +46550,7 @@ var ResolvedInstruction = (function (_super) {
     return ResolvedInstruction;
 })(router_1.Instruction);
 
-},{"./nav":293,"angular2/core":14,"angular2/router":19}],293:[function(require,module,exports){
+},{"./nav":294,"angular2/core":15,"angular2/router":20}],294:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -46633,7 +46726,7 @@ var Nav = (function (_super) {
 })(nav_controller_1.NavController);
 exports.Nav = Nav;
 
-},{"../../config/config":321,"../../util/keyboard":350,"../app/app":262,"./nav-controller":288,"./view-controller":295,"angular2/core":14}],294:[function(require,module,exports){
+},{"../../config/config":322,"../../util/keyboard":351,"../app/app":263,"./nav-controller":289,"./view-controller":296,"angular2/core":15}],295:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -46683,7 +46776,7 @@ var SwipeBackGesture = (function (_super) {
 })(slide_edge_gesture_1.SlideEdgeGesture);
 exports.SwipeBackGesture = SwipeBackGesture;
 
-},{"../../gestures/slide-edge-gesture":329,"../../util/util":351}],295:[function(require,module,exports){
+},{"../../gestures/slide-edge-gesture":330,"../../util/util":352}],296:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47149,7 +47242,7 @@ function ctrlFn(viewCtrl, fnName) {
     }
 }
 
-},{"../../util/util":351,"./nav-params":289,"angular2/core":14}],296:[function(require,module,exports){
+},{"../../util/util":352,"./nav-params":290,"angular2/core":15}],297:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -47400,7 +47493,7 @@ var NavbarTemplate = (function () {
 })();
 exports.NavbarTemplate = NavbarTemplate;
 
-},{"../../config/config":321,"../../util/util":351,"../app/app":262,"../icon/icon":269,"../ion":275,"../nav/nav-controller":288,"../nav/view-controller":295,"../toolbar/toolbar":319,"angular2/core":14}],297:[function(require,module,exports){
+},{"../../config/config":322,"../../util/util":352,"../app/app":263,"../icon/icon":270,"../ion":276,"../nav/nav-controller":289,"../nav/view-controller":296,"../toolbar/toolbar":320,"angular2/core":15}],298:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47489,7 +47582,7 @@ var Option = (function () {
 })();
 exports.Option = Option;
 
-},{"../../util/util":351,"angular2/core":14}],298:[function(require,module,exports){
+},{"../../util/util":352,"angular2/core":15}],299:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47520,7 +47613,7 @@ var OverlayNav = (function () {
 })();
 exports.OverlayNav = OverlayNav;
 
-},{"angular2/core":14}],299:[function(require,module,exports){
+},{"angular2/core":15}],300:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47701,7 +47794,7 @@ var RadioButton = (function () {
 })();
 exports.RadioButton = RadioButton;
 
-},{"../../util/form":349,"../../util/util":351,"../item/item":278,"./radio-group":300,"angular2/core":14}],300:[function(require,module,exports){
+},{"../../util/form":350,"../../util/util":352,"../item/item":279,"./radio-group":301,"angular2/core":15}],301:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47922,7 +48015,7 @@ var RadioGroup = (function () {
 exports.RadioGroup = RadioGroup;
 var radioGroupIds = -1;
 
-},{"../../util/util":351,"../list/list":280,"angular2/common":12,"angular2/core":14}],301:[function(require,module,exports){
+},{"../../util/util":352,"../list/list":281,"angular2/common":13,"angular2/core":15}],302:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47999,7 +48092,7 @@ var RefresherContent = (function () {
 })();
 exports.RefresherContent = RefresherContent;
 
-},{"../../config/config":321,"../icon/icon":269,"../spinner/spinner":310,"./refresher":302,"angular2/common":12,"angular2/core":14}],302:[function(require,module,exports){
+},{"../../config/config":322,"../icon/icon":270,"../spinner/spinner":311,"./refresher":303,"angular2/common":13,"angular2/core":15}],303:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -48512,7 +48605,7 @@ var STATE_REFRESHING = 'refreshing';
 var STATE_CANCELLING = 'cancelling';
 var STATE_COMPLETING = 'completing';
 
-},{"../../util/dom":346,"../../util/util":351,"../content/content":268,"angular2/core":14}],303:[function(require,module,exports){
+},{"../../util/dom":347,"../../util/util":352,"../content/content":269,"angular2/core":15}],304:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -48608,7 +48701,7 @@ var Scroll = (function (_super) {
 })(ion_1.Ion);
 exports.Scroll = Scroll;
 
-},{"../ion":275,"angular2/core":14}],304:[function(require,module,exports){
+},{"../ion":276,"angular2/core":15}],305:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -48961,7 +49054,7 @@ var Searchbar = (function (_super) {
 })(ion_1.Ion);
 exports.Searchbar = Searchbar;
 
-},{"../../config/config":321,"../../util/util":351,"../button/button":266,"../icon/icon":269,"../ion":275,"angular2/common":12,"angular2/core":14}],305:[function(require,module,exports){
+},{"../../config/config":322,"../../util/util":352,"../button/button":267,"../icon/icon":270,"../ion":276,"angular2/common":13,"angular2/core":15}],306:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49204,7 +49297,7 @@ var Segment = (function () {
 })();
 exports.Segment = Segment;
 
-},{"../../util/util":351,"angular2/common":12,"angular2/core":14}],306:[function(require,module,exports){
+},{"../../util/util":352,"angular2/common":13,"angular2/core":15}],307:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49628,7 +49721,7 @@ var Select = (function () {
 })();
 exports.Select = Select;
 
-},{"../../util/form":349,"../../util/util":351,"../alert/alert":261,"../item/item":278,"../nav/nav-controller":288,"../option/option":297,"angular2/common":12,"angular2/core":14}],307:[function(require,module,exports){
+},{"../../util/form":350,"../../util/util":352,"../alert/alert":262,"../item/item":279,"../nav/nav-controller":289,"../option/option":298,"angular2/common":13,"angular2/core":15}],308:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -49813,7 +49906,7 @@ var HideWhen = (function (_super) {
 })(DisplayWhen);
 exports.HideWhen = HideWhen;
 
-},{"../../platform/platform":332,"angular2/core":14}],308:[function(require,module,exports){
+},{"../../platform/platform":333,"angular2/core":15}],309:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -50390,7 +50483,7 @@ var SlideLazy = (function () {
 })();
 exports.SlideLazy = SlideLazy;
 
-},{"../../animations/animation":256,"../../gestures/gesture":327,"../../util":344,"../../util/dom":346,"../../util/util":351,"../ion":275,"./swiper-widget":309,"angular2/common":12,"angular2/core":14}],309:[function(require,module,exports){
+},{"../../animations/animation":257,"../../gestures/gesture":328,"../../util":345,"../../util/dom":347,"../../util/util":352,"../ion":276,"./swiper-widget":310,"angular2/common":13,"angular2/core":15}],310:[function(require,module,exports){
 /**
  * Swiper 3.1.2
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -54346,7 +54439,7 @@ function Swiper(container, params) {
       }
   }
 
-},{}],310:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -54634,7 +54727,7 @@ var SPINNERS = {
     }
 };
 
-},{"../../config/config":321,"angular2/common":12,"angular2/core":14}],311:[function(require,module,exports){
+},{"../../config/config":322,"angular2/common":13,"angular2/core":15}],312:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -54711,7 +54804,7 @@ var TabButton = (function (_super) {
 })(ion_1.Ion);
 exports.TabButton = TabButton;
 
-},{"../../config/config":321,"../ion":275,"./tab":313,"angular2/core":14}],312:[function(require,module,exports){
+},{"../../config/config":322,"../ion":276,"./tab":314,"angular2/core":15}],313:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -54754,7 +54847,7 @@ var TabHighlight = (function () {
 })();
 exports.TabHighlight = TabHighlight;
 
-},{"../../util/dom":346,"angular2/core":14}],313:[function(require,module,exports){
+},{"../../util/dom":347,"angular2/core":15}],314:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -54991,7 +55084,7 @@ var Tab = (function (_super) {
 })(nav_controller_1.NavController);
 exports.Tab = Tab;
 
-},{"../../config/config":321,"../../util/keyboard":350,"../app/app":262,"../nav/nav-controller":288,"./tabs":314,"angular2/core":14}],314:[function(require,module,exports){
+},{"../../config/config":322,"../../util/keyboard":351,"../app/app":263,"../nav/nav-controller":289,"./tabs":315,"angular2/core":15}],315:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -55336,7 +55429,7 @@ var TabNavBarAnchor = (function () {
     return TabNavBarAnchor;
 })();
 
-},{"../../config/config":321,"../../platform/platform":332,"../../util/util":351,"../app/app":262,"../icon/icon":269,"../ion":275,"../nav/nav-controller":288,"../nav/view-controller":295,"./tab-button":311,"./tab-highlight":312,"angular2/common":12,"angular2/core":14}],315:[function(require,module,exports){
+},{"../../config/config":322,"../../platform/platform":333,"../../util/util":352,"../app/app":263,"../icon/icon":270,"../ion":276,"../nav/nav-controller":289,"../nav/view-controller":296,"./tab-button":312,"./tab-highlight":313,"angular2/common":13,"angular2/core":15}],316:[function(require,module,exports){
 var dom_1 = require('../../util/dom');
 var Activator = (function () {
     function Activator(app, config, _zone) {
@@ -55423,7 +55516,7 @@ var Activator = (function () {
 exports.Activator = Activator;
 var CLEAR_STATE_DEFERS = 5;
 
-},{"../../util/dom":346}],316:[function(require,module,exports){
+},{"../../util/dom":347}],317:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -55531,7 +55624,7 @@ var RippleActivator = (function (_super) {
 exports.RippleActivator = RippleActivator;
 var TOUCH_DOWN_ACCEL = 300;
 
-},{"../../util/dom":346,"./activator":315}],317:[function(require,module,exports){
+},{"../../util/dom":347,"./activator":316}],318:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55726,7 +55819,7 @@ var POINTER_TOLERANCE = 4;
 var POINTER_MOVE_UNTIL_CANCEL = 10;
 var DISABLE_NATIVE_CLICK_AMOUNT = 2500;
 
-},{"../../config/config":321,"../../util/dom":346,"../app/app":262,"./activator":315,"./ripple":316,"angular2/core":14}],318:[function(require,module,exports){
+},{"../../config/config":322,"../../util/dom":347,"../app/app":263,"./activator":316,"./ripple":317,"angular2/core":15}],319:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55992,7 +56085,7 @@ var Toggle = (function () {
 })();
 exports.Toggle = Toggle;
 
-},{"../../util/dom":346,"../../util/form":349,"../../util/util":351,"../item/item":278,"angular2/common":12,"angular2/core":14}],319:[function(require,module,exports){
+},{"../../util/dom":347,"../../util/form":350,"../../util/util":352,"../item/item":279,"angular2/common":13,"angular2/core":15}],320:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -56220,7 +56313,7 @@ var ToolbarItem = (function () {
 })();
 exports.ToolbarItem = ToolbarItem;
 
-},{"../button/button":266,"../ion":275,"../navbar/navbar":296,"angular2/core":14}],320:[function(require,module,exports){
+},{"../button/button":267,"../ion":276,"../navbar/navbar":297,"angular2/core":15}],321:[function(require,module,exports){
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
 var http_1 = require('angular2/http');
@@ -56356,7 +56449,7 @@ function bindEvents(window, document, platform, events) {
     }, 2000);
 }
 
-},{"../animations/scroll-to":258,"../components/app/app":262,"../components/menu/menu-controller":282,"../components/nav/nav-registry":291,"../components/tap-click/tap-click":317,"../platform/platform":332,"../translation/translate":342,"../util/click-block":345,"../util/dom":346,"../util/events":347,"../util/feature-detect":348,"../util/form":349,"../util/keyboard":350,"./config":321,"angular2/core":14,"angular2/http":15,"angular2/router":19}],321:[function(require,module,exports){
+},{"../animations/scroll-to":259,"../components/app/app":263,"../components/menu/menu-controller":283,"../components/nav/nav-registry":292,"../components/tap-click/tap-click":318,"../platform/platform":333,"../translation/translate":343,"../util/click-block":346,"../util/dom":347,"../util/events":348,"../util/feature-detect":349,"../util/form":350,"../util/keyboard":351,"./config":322,"angular2/core":15,"angular2/http":16,"angular2/router":20}],322:[function(require,module,exports){
 /**
 * @ngdoc service
 * @name Config
@@ -56653,7 +56746,7 @@ var Config = (function () {
 exports.Config = Config;
 var modeConfigs = {};
 
-},{"../platform/platform":332,"../util/util":351}],322:[function(require,module,exports){
+},{"../platform/platform":333,"../util/util":352}],323:[function(require,module,exports){
 var common_1 = require('angular2/common');
 var overlay_1 = require('../components/overlay/overlay');
 var menu_1 = require('../components/menu/menu');
@@ -56830,7 +56923,7 @@ exports.IONIC_DIRECTIVES = [
     show_hide_when_1.HideWhen
 ];
 
-},{"../components/app/id":263,"../components/badge/badge":264,"../components/blur/blur":265,"../components/button/button":266,"../components/checkbox/checkbox":267,"../components/content/content":268,"../components/icon/icon":269,"../components/infinite-scroll/infinite-scroll":271,"../components/infinite-scroll/infinite-scroll-content":270,"../components/input/input":273,"../components/item/item":278,"../components/item/item-sliding":277,"../components/label/label":279,"../components/list/list":280,"../components/menu/menu":286,"../components/menu/menu-close":281,"../components/menu/menu-toggle":284,"../components/nav/nav":293,"../components/nav/nav-push":290,"../components/nav/nav-router":292,"../components/navbar/navbar":296,"../components/option/option":297,"../components/overlay/overlay":298,"../components/radio/radio-button":299,"../components/radio/radio-group":300,"../components/refresher/refresher":302,"../components/refresher/refresher-content":301,"../components/scroll/scroll":303,"../components/searchbar/searchbar":304,"../components/segment/segment":305,"../components/select/select":306,"../components/show-hide-when/show-hide-when":307,"../components/slides/slides":308,"../components/spinner/spinner":310,"../components/tabs/tab":313,"../components/tabs/tabs":314,"../components/toggle/toggle":318,"../components/toolbar/toolbar":319,"angular2/common":12}],323:[function(require,module,exports){
+},{"../components/app/id":264,"../components/badge/badge":265,"../components/blur/blur":266,"../components/button/button":267,"../components/checkbox/checkbox":268,"../components/content/content":269,"../components/icon/icon":270,"../components/infinite-scroll/infinite-scroll":272,"../components/infinite-scroll/infinite-scroll-content":271,"../components/input/input":274,"../components/item/item":279,"../components/item/item-sliding":278,"../components/label/label":280,"../components/list/list":281,"../components/menu/menu":287,"../components/menu/menu-close":282,"../components/menu/menu-toggle":285,"../components/nav/nav":294,"../components/nav/nav-push":291,"../components/nav/nav-router":293,"../components/navbar/navbar":297,"../components/option/option":298,"../components/overlay/overlay":299,"../components/radio/radio-button":300,"../components/radio/radio-group":301,"../components/refresher/refresher":303,"../components/refresher/refresher-content":302,"../components/scroll/scroll":304,"../components/searchbar/searchbar":305,"../components/segment/segment":306,"../components/select/select":307,"../components/show-hide-when/show-hide-when":308,"../components/slides/slides":309,"../components/spinner/spinner":311,"../components/tabs/tab":314,"../components/tabs/tabs":315,"../components/toggle/toggle":319,"../components/toolbar/toolbar":320,"angular2/common":13}],324:[function(require,module,exports){
 var config_1 = require('./config');
 // iOS Mode Settings
 config_1.Config.setModeConfig('ios', {
@@ -56889,7 +56982,7 @@ config_1.Config.setModeConfig('wp', {
     tabSubPages: true,
 });
 
-},{"./config":321}],324:[function(require,module,exports){
+},{"./config":322}],325:[function(require,module,exports){
 var core_1 = require('angular2/core');
 var browser_1 = require('angular2/platform/browser');
 var app_1 = require('../components/app/app');
@@ -56958,7 +57051,7 @@ function App(args) {
 }
 exports.App = App;
 
-},{"../components/app/app":262,"../components/tap-click/tap-click":317,"../config/bootstrap":320,"../config/directives":322,"angular2/core":14,"angular2/platform/browser":17}],325:[function(require,module,exports){
+},{"../components/app/app":263,"../components/tap-click/tap-click":318,"../config/bootstrap":321,"../config/directives":323,"angular2/core":15,"angular2/platform/browser":18}],326:[function(require,module,exports){
 var core_1 = require('angular2/core');
 var directives_1 = require('../config/directives');
 var _reflect = Reflect;
@@ -57045,7 +57138,7 @@ function Page(config) {
 }
 exports.Page = Page;
 
-},{"../config/directives":322,"angular2/core":14}],326:[function(require,module,exports){
+},{"../config/directives":323,"angular2/core":15}],327:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -57089,7 +57182,7 @@ var DragGesture = (function (_super) {
 })(gesture_1.Gesture);
 exports.DragGesture = DragGesture;
 
-},{"../util":344,"./gesture":327}],327:[function(require,module,exports){
+},{"../util":345,"./gesture":328}],328:[function(require,module,exports){
 var util_1 = require('../util');
 var hammer_1 = require('./hammer');
 /**
@@ -57154,7 +57247,7 @@ var Gesture = (function () {
 })();
 exports.Gesture = Gesture;
 
-},{"../util":344,"./hammer":328}],328:[function(require,module,exports){
+},{"../util":345,"./hammer":329}],329:[function(require,module,exports){
 var util_1 = require('../util/util');
 var win = window;
 var doc = document;
@@ -59306,7 +59399,7 @@ util_1.assign(Hammer, {
 });
 win.Hammer = Hammer;
 
-},{"../util/util":351}],329:[function(require,module,exports){
+},{"../util/util":352}],330:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -59353,7 +59446,7 @@ var SlideEdgeGesture = (function (_super) {
 })(slide_gesture_1.SlideGesture);
 exports.SlideEdgeGesture = SlideEdgeGesture;
 
-},{"../util/dom":346,"../util/util":351,"./slide-gesture":330}],330:[function(require,module,exports){
+},{"../util/dom":347,"../util/util":352,"./slide-gesture":331}],331:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -59429,7 +59522,7 @@ var SlideGesture = (function (_super) {
 })(drag_gesture_1.DragGesture);
 exports.SlideGesture = SlideGesture;
 
-},{"../util":344,"./drag-gesture":326}],331:[function(require,module,exports){
+},{"../util":345,"./drag-gesture":327}],332:[function(require,module,exports){
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -59457,7 +59550,7 @@ require('./transitions/transition-ios');
 require('./transitions/transition-md');
 require('./transitions/transition-wp');
 
-},{"./animations/animation":256,"./animations/builtins":257,"./components":259,"./config/bootstrap":320,"./config/config":321,"./config/directives":322,"./config/modes":323,"./decorators/app":324,"./decorators/page":325,"./platform/platform":332,"./platform/registry":333,"./platform/storage":334,"./transitions/transition":341,"./transitions/transition-ios":338,"./transitions/transition-md":339,"./transitions/transition-wp":340,"./translation/translate":342,"./translation/translate_pipe":343,"./util/click-block":345,"./util/events":347,"./util/form":349,"./util/keyboard":350}],332:[function(require,module,exports){
+},{"./animations/animation":257,"./animations/builtins":258,"./components":260,"./config/bootstrap":321,"./config/config":322,"./config/directives":323,"./config/modes":324,"./decorators/app":325,"./decorators/page":326,"./platform/platform":333,"./platform/registry":334,"./platform/storage":335,"./transitions/transition":342,"./transitions/transition-ios":339,"./transitions/transition-md":340,"./transitions/transition-wp":341,"./translation/translate":343,"./translation/translate_pipe":344,"./util/click-block":346,"./util/events":348,"./util/form":350,"./util/keyboard":351}],333:[function(require,module,exports){
 var util_1 = require('../util/util');
 var dom_1 = require('../util/dom');
 /**
@@ -60093,7 +60186,7 @@ var PlatformNode = (function () {
 var platformRegistry = {};
 var platformDefault = null;
 
-},{"../util/dom":346,"../util/util":351}],333:[function(require,module,exports){
+},{"../util/dom":347,"../util/util":352}],334:[function(require,module,exports){
 var platform_1 = require('./platform');
 var dom_1 = require('../util/dom');
 var win = window;
@@ -60257,7 +60350,7 @@ function isIOSDevice(p) {
     return p.testNavigatorPlatform('iphone|ipad|ipod');
 }
 
-},{"../util/dom":346,"./platform":332}],334:[function(require,module,exports){
+},{"../util/dom":347,"./platform":333}],335:[function(require,module,exports){
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -60265,7 +60358,7 @@ __export(require('./storage/storage'));
 __export(require('./storage/local-storage'));
 __export(require('./storage/sql'));
 
-},{"./storage/local-storage":335,"./storage/sql":336,"./storage/storage":337}],335:[function(require,module,exports){
+},{"./storage/local-storage":336,"./storage/sql":337,"./storage/storage":338}],336:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60356,7 +60449,7 @@ var LocalStorage = (function (_super) {
 })(storage_1.StorageEngine);
 exports.LocalStorage = LocalStorage;
 
-},{"./storage":337}],336:[function(require,module,exports){
+},{"./storage":338}],337:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60569,7 +60662,7 @@ var SqlStorage = (function (_super) {
 })(storage_1.StorageEngine);
 exports.SqlStorage = SqlStorage;
 
-},{"../../util/util":351,"./storage":337}],337:[function(require,module,exports){
+},{"../../util/util":352,"./storage":338}],338:[function(require,module,exports){
 /**
  * Storage is an easy way to store key/value pairs and other complicated
  * data in a way that uses a variety of storage engines underneath.
@@ -60643,7 +60736,7 @@ var StorageEngine = (function () {
 })();
 exports.StorageEngine = StorageEngine;
 
-},{}],338:[function(require,module,exports){
+},{}],339:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60813,7 +60906,7 @@ var IOSTransition = (function (_super) {
 })(transition_1.Transition);
 transition_1.Transition.register('ios-transition', IOSTransition);
 
-},{"../animations/animation":256,"./transition":341}],339:[function(require,module,exports){
+},{"../animations/animation":257,"./transition":342}],340:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60873,7 +60966,7 @@ var MDTransition = (function (_super) {
 })(transition_1.Transition);
 transition_1.Transition.register('md-transition', MDTransition);
 
-},{"../animations/animation":256,"./transition":341}],340:[function(require,module,exports){
+},{"../animations/animation":257,"./transition":342}],341:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60931,7 +61024,7 @@ var WPTransition = (function (_super) {
 })(transition_1.Transition);
 transition_1.Transition.register('wp-transition', WPTransition);
 
-},{"../animations/animation":256,"./transition":341}],341:[function(require,module,exports){
+},{"../animations/animation":257,"./transition":342}],342:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60964,7 +61057,7 @@ var Transition = (function (_super) {
 exports.Transition = Transition;
 var TransitionRegistry = {};
 
-},{"../animations/animation":256}],342:[function(require,module,exports){
+},{"../animations/animation":257}],343:[function(require,module,exports){
 /**
  * @private
  * Provide multi-language and i18n support in your app. Translate works by
@@ -61028,7 +61121,7 @@ var Translate = (function () {
 })();
 exports.Translate = Translate;
 
-},{}],343:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61073,7 +61166,7 @@ var TranslatePipe = (function () {
 })();
 exports.TranslatePipe = TranslatePipe;
 
-},{"./translate":342,"angular2/core":14}],344:[function(require,module,exports){
+},{"./translate":343,"angular2/core":15}],345:[function(require,module,exports){
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -61081,7 +61174,7 @@ var domUtil = require('./util/dom');
 exports.dom = domUtil;
 __export(require('./util/util'));
 
-},{"./util/dom":346,"./util/util":351}],345:[function(require,module,exports){
+},{"./util/dom":347,"./util/util":352}],346:[function(require,module,exports){
 var CSS_CLICK_BLOCK = 'click-block-active';
 var DEFAULT_EXPIRE = 330;
 var cbEle, fallbackTimerId;
@@ -61131,7 +61224,7 @@ function hide() {
     }
 }
 
-},{}],346:[function(require,module,exports){
+},{}],347:[function(require,module,exports){
 // RequestAnimationFrame Polyfill (Android 4.3 and below)
 /*! @author Paul Irish */
 /*! @source https://gist.github.com/paulirish/1579671 */
@@ -61387,7 +61480,7 @@ function flushDimensionCache() {
 exports.flushDimensionCache = flushDimensionCache;
 var dimensionCache = {};
 
-},{}],347:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 /**
  * @name Events
  * @description
@@ -61490,7 +61583,7 @@ var Events = (function () {
 })();
 exports.Events = Events;
 
-},{}],348:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 var FeatureDetect = (function () {
     function FeatureDetect() {
         this._results = {};
@@ -61536,7 +61629,7 @@ FeatureDetect.add('hairlines', function (window, document, body) {
     return canDo;
 });
 
-},{}],349:[function(require,module,exports){
+},{}],350:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61621,7 +61714,7 @@ var Form = (function () {
 })();
 exports.Form = Form;
 
-},{"angular2/core":14}],350:[function(require,module,exports){
+},{"angular2/core":15}],351:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61804,7 +61897,7 @@ var Keyboard = (function () {
 exports.Keyboard = Keyboard;
 var KEYBOARD_CLOSE_POLLING = 150;
 
-},{"../config/config":321,"./dom":346,"./form":349,"angular2/core":14}],351:[function(require,module,exports){
+},{"../config/config":322,"./dom":347,"./form":350,"angular2/core":15}],352:[function(require,module,exports){
 /**
  * Given a min and max, restrict the given number
  * to the range.
@@ -62048,7 +62141,7 @@ function throttle(fn, wait, options) {
 }
 exports.throttle = throttle;
 
-},{}],352:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -62182,7 +62275,7 @@ setTimeout(function () {
     }
 }, DEVICE_READY_TIMEOUT);
 
-},{"./ng1":353,"./plugins/actionsheet":354,"./plugins/appavailability":355,"./plugins/apprate":356,"./plugins/appversion":357,"./plugins/badge":358,"./plugins/barcodescanner":359,"./plugins/base64togallery":360,"./plugins/batterystatus":361,"./plugins/ble":362,"./plugins/calendar":363,"./plugins/camera":364,"./plugins/clipboard":365,"./plugins/contacts":366,"./plugins/datepicker":367,"./plugins/dbmeter":368,"./plugins/device":369,"./plugins/devicemotion":370,"./plugins/deviceorientation":371,"./plugins/dialogs":372,"./plugins/facebook":373,"./plugins/flashlight":374,"./plugins/geolocation":375,"./plugins/globalization":376,"./plugins/hotspot":377,"./plugins/imagepicker":378,"./plugins/keyboard":379,"./plugins/launchnavigator":380,"./plugins/localnotifications":381,"./plugins/plugin":382,"./plugins/push":383,"./plugins/sms":384,"./plugins/splashscreen":385,"./plugins/statusbar":386,"./plugins/toast":387,"./plugins/touchid":388,"./plugins/vibration":389}],353:[function(require,module,exports){
+},{"./ng1":354,"./plugins/actionsheet":355,"./plugins/appavailability":356,"./plugins/apprate":357,"./plugins/appversion":358,"./plugins/badge":359,"./plugins/barcodescanner":360,"./plugins/base64togallery":361,"./plugins/batterystatus":362,"./plugins/ble":363,"./plugins/calendar":364,"./plugins/camera":365,"./plugins/clipboard":366,"./plugins/contacts":367,"./plugins/datepicker":368,"./plugins/dbmeter":369,"./plugins/device":370,"./plugins/devicemotion":371,"./plugins/deviceorientation":372,"./plugins/dialogs":373,"./plugins/facebook":374,"./plugins/flashlight":375,"./plugins/geolocation":376,"./plugins/globalization":377,"./plugins/hotspot":378,"./plugins/imagepicker":379,"./plugins/keyboard":380,"./plugins/launchnavigator":381,"./plugins/localnotifications":382,"./plugins/plugin":383,"./plugins/push":384,"./plugins/sms":385,"./plugins/splashscreen":386,"./plugins/statusbar":387,"./plugins/toast":388,"./plugins/touchid":389,"./plugins/vibration":390}],354:[function(require,module,exports){
 /**
  * Initialize the ngCordova Angular module if we're running in ng1
  */
@@ -62207,7 +62300,7 @@ function publishAngular1Service(config, cls) {
 }
 exports.publishAngular1Service = publishAngular1Service;
 
-},{}],354:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62282,7 +62375,7 @@ var ActionSheet = (function () {
 })();
 exports.ActionSheet = ActionSheet;
 
-},{"./plugin":382}],355:[function(require,module,exports){
+},{"./plugin":383}],356:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62338,7 +62431,7 @@ var AppAvailability = (function () {
 })();
 exports.AppAvailability = AppAvailability;
 
-},{"./plugin":382}],356:[function(require,module,exports){
+},{"./plugin":383}],357:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62413,7 +62506,7 @@ var AppRate = (function () {
 })();
 exports.AppRate = AppRate;
 
-},{"./plugin":382}],357:[function(require,module,exports){
+},{"./plugin":383}],358:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62483,7 +62576,7 @@ var AppVersion = (function () {
 })();
 exports.AppVersion = AppVersion;
 
-},{"./plugin":382}],358:[function(require,module,exports){
+},{"./plugin":383}],359:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62577,7 +62670,7 @@ var Badge = (function () {
 })();
 exports.Badge = Badge;
 
-},{"./plugin":382}],359:[function(require,module,exports){
+},{"./plugin":383}],360:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62624,7 +62717,7 @@ var BarcodeScanner = (function () {
 })();
 exports.BarcodeScanner = BarcodeScanner;
 
-},{"./plugin":382}],360:[function(require,module,exports){
+},{"./plugin":383}],361:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62670,7 +62763,7 @@ var Base64ToGallery = (function () {
 })();
 exports.Base64ToGallery = Base64ToGallery;
 
-},{"./plugin":382}],361:[function(require,module,exports){
+},{"./plugin":383}],362:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62745,7 +62838,7 @@ function getEventObservable(event) {
     });
 }
 
-},{"./plugin":382,"rxjs/Observable":392}],362:[function(require,module,exports){
+},{"./plugin":383,"rxjs/Observable":393}],363:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63168,7 +63261,7 @@ var BLE = (function () {
 })();
 exports.BLE = BLE;
 
-},{"./plugin":382}],363:[function(require,module,exports){
+},{"./plugin":383}],364:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63470,7 +63563,7 @@ var Calendar = (function () {
 })();
 exports.Calendar = Calendar;
 
-},{"./plugin":382}],364:[function(require,module,exports){
+},{"./plugin":383}],365:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63535,7 +63628,7 @@ var Camera = (function () {
 })();
 exports.Camera = Camera;
 
-},{"./plugin":382}],365:[function(require,module,exports){
+},{"./plugin":383}],366:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63598,7 +63691,7 @@ var Clipboard = (function () {
 })();
 exports.Clipboard = Clipboard;
 
-},{"./plugin":382}],366:[function(require,module,exports){
+},{"./plugin":383}],367:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63686,7 +63779,7 @@ var Contacts = (function () {
 })();
 exports.Contacts = Contacts;
 
-},{"./plugin":382}],367:[function(require,module,exports){
+},{"./plugin":383}],368:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63738,7 +63831,7 @@ var DatePicker = (function () {
 })();
 exports.DatePicker = DatePicker;
 
-},{"./plugin":382}],368:[function(require,module,exports){
+},{"./plugin":383}],369:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63821,7 +63914,7 @@ var DBMeter = (function () {
 })();
 exports.DBMeter = DBMeter;
 
-},{"./plugin":382}],369:[function(require,module,exports){
+},{"./plugin":383}],370:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63866,7 +63959,7 @@ var Device = (function () {
 })();
 exports.Device = Device;
 
-},{"./plugin":382}],370:[function(require,module,exports){
+},{"./plugin":383}],371:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63944,7 +64037,7 @@ var DeviceMotion = (function () {
 })();
 exports.DeviceMotion = DeviceMotion;
 
-},{"./plugin":382}],371:[function(require,module,exports){
+},{"./plugin":383}],372:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64011,7 +64104,7 @@ var DeviceOrientation = (function () {
 })();
 exports.DeviceOrientation = DeviceOrientation;
 
-},{"./plugin":382}],372:[function(require,module,exports){
+},{"./plugin":383}],373:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64110,7 +64203,7 @@ var Dialogs = (function () {
 })();
 exports.Dialogs = Dialogs;
 
-},{"./plugin":382}],373:[function(require,module,exports){
+},{"./plugin":383}],374:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64358,7 +64451,7 @@ var Facebook = (function () {
 })();
 exports.Facebook = Facebook;
 
-},{"./plugin":382}],374:[function(require,module,exports){
+},{"./plugin":383}],375:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64432,7 +64525,7 @@ var Flashlight = (function () {
 })();
 exports.Flashlight = Flashlight;
 
-},{"./plugin":382}],375:[function(require,module,exports){
+},{"./plugin":383}],376:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64512,7 +64605,7 @@ var Geolocation = (function () {
 })();
 exports.Geolocation = Geolocation;
 
-},{"./plugin":382}],376:[function(require,module,exports){
+},{"./plugin":383}],377:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64656,7 +64749,7 @@ var Globalization = (function () {
 })();
 exports.Globalization = Globalization;
 
-},{"./plugin":382}],377:[function(require,module,exports){
+},{"./plugin":383}],378:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64796,7 +64889,7 @@ var Hotspot = (function () {
 })();
 exports.Hotspot = Hotspot;
 
-},{"./plugin":382}],378:[function(require,module,exports){
+},{"./plugin":383}],379:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64848,7 +64941,7 @@ var ImagePicker = (function () {
 })();
 exports.ImagePicker = ImagePicker;
 
-},{"./plugin":382}],379:[function(require,module,exports){
+},{"./plugin":383}],380:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64901,7 +64994,7 @@ var Keyboard = (function () {
 })();
 exports.Keyboard = Keyboard;
 
-},{"./plugin":382}],380:[function(require,module,exports){
+},{"./plugin":383}],381:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64951,7 +65044,7 @@ var LaunchNavigator = (function () {
 })();
 exports.LaunchNavigator = LaunchNavigator;
 
-},{"./plugin":382}],381:[function(require,module,exports){
+},{"./plugin":383}],382:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65170,7 +65263,7 @@ var LocalNotifications = (function () {
 })();
 exports.LocalNotifications = LocalNotifications;
 
-},{"./plugin":382}],382:[function(require,module,exports){
+},{"./plugin":383}],383:[function(require,module,exports){
 var util_1 = require('../util');
 var Observable_1 = require('rxjs/Observable');
 /**
@@ -65420,7 +65513,7 @@ function CordovaProperty(target, key, descriptor) {
 }
 exports.CordovaProperty = CordovaProperty;
 
-},{"../util":390,"rxjs/Observable":392}],383:[function(require,module,exports){
+},{"../util":391,"rxjs/Observable":393}],384:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65485,7 +65578,7 @@ var Push = (function () {
 })();
 exports.Push = Push;
 
-},{"./plugin":382}],384:[function(require,module,exports){
+},{"./plugin":383}],385:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65533,7 +65626,7 @@ var SMS = (function () {
 })();
 exports.SMS = SMS;
 
-},{"./plugin":382}],385:[function(require,module,exports){
+},{"./plugin":383}],386:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65583,7 +65676,7 @@ var Splashscreen = (function () {
 })();
 exports.Splashscreen = Splashscreen;
 
-},{"./plugin":382}],386:[function(require,module,exports){
+},{"./plugin":383}],387:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65733,7 +65826,7 @@ var StatusBar = (function () {
 })();
 exports.StatusBar = StatusBar;
 
-},{"./plugin":382}],387:[function(require,module,exports){
+},{"./plugin":383}],388:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65878,7 +65971,7 @@ var Toast = (function () {
 })();
 exports.Toast = Toast;
 
-},{"./plugin":382}],388:[function(require,module,exports){
+},{"./plugin":383}],389:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65961,7 +66054,7 @@ var TouchID = (function () {
 })();
 exports.TouchID = TouchID;
 
-},{"./plugin":382}],389:[function(require,module,exports){
+},{"./plugin":383}],390:[function(require,module,exports){
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66012,7 +66105,7 @@ var Vibration = (function () {
 })();
 exports.Vibration = Vibration;
 
-},{"./plugin":382}],390:[function(require,module,exports){
+},{"./plugin":383}],391:[function(require,module,exports){
 function get(obj, path) {
     for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
         if (!obj) {
@@ -66025,7 +66118,7 @@ function get(obj, path) {
 exports.get = get;
 ;
 
-},{}],391:[function(require,module,exports){
+},{}],392:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -66118,7 +66211,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],392:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 var Subscriber_1 = require('./Subscriber');
 var root_1 = require('./util/root');
 var SymbolShim_1 = require('./util/SymbolShim');
@@ -66254,7 +66347,7 @@ var Observable = (function () {
 })();
 exports.Observable = Observable;
 
-},{"./Subscriber":394,"./symbol/rxSubscriber":403,"./util/SymbolShim":404,"./util/root":406}],393:[function(require,module,exports){
+},{"./Subscriber":395,"./symbol/rxSubscriber":406,"./util/SymbolShim":407,"./util/root":410}],394:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66427,7 +66520,7 @@ var BidirectionalSubject = (function (_super) {
     return BidirectionalSubject;
 })(Subject);
 
-},{"./Observable":392,"./Subscriber":394,"./Subscription":395,"./subject/SubjectSubscription":402,"./symbol/rxSubscriber":403}],394:[function(require,module,exports){
+},{"./Observable":393,"./Subscriber":395,"./Subscription":396,"./subject/SubjectSubscription":405,"./symbol/rxSubscriber":406}],395:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66558,7 +66651,7 @@ var Subscriber = (function (_super) {
 })(Subscription_1.Subscription);
 exports.Subscriber = Subscriber;
 
-},{"./Subscription":395,"./symbol/rxSubscriber":403,"./util/noop":405,"./util/throwError":407,"./util/tryOrOnError":408}],395:[function(require,module,exports){
+},{"./Subscription":396,"./symbol/rxSubscriber":406,"./util/noop":409,"./util/throwError":411,"./util/tryOrOnError":413}],396:[function(require,module,exports){
 var noop_1 = require('./util/noop');
 var Subscription = (function () {
     function Subscription(_unsubscribe) {
@@ -66641,7 +66734,12 @@ var Subscription = (function () {
 })();
 exports.Subscription = Subscription;
 
-},{"./util/noop":405}],396:[function(require,module,exports){
+},{"./util/noop":409}],397:[function(require,module,exports){
+var Observable_1 = require('../../Observable');
+var map_1 = require('../../operator/map');
+Observable_1.Observable.prototype.map = map_1.map;
+
+},{"../../Observable":393,"../../operator/map":399}],398:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66718,7 +66816,61 @@ function dispatchError(_a) {
     subscriber.error(err);
 }
 
-},{"../Observable":392,"../Subscription":395,"../scheduler/queue":401}],397:[function(require,module,exports){
+},{"../Observable":393,"../Subscription":396,"../scheduler/queue":404}],399:[function(require,module,exports){
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = require('../Subscriber');
+var tryCatch_1 = require('../util/tryCatch');
+var errorObject_1 = require('../util/errorObject');
+/**
+ * Similar to the well known `Array.prototype.map` function, this operator
+ * applies a projection to each value and emits that projection in the returned observable
+ *
+ * @param {Function} project the function to create projection
+ * @param {any} [thisArg] an optional argument to define what `this` is in the project function
+ * @returns {Observable} a observable of projected values
+ */
+function map(project, thisArg) {
+    if (typeof project !== 'function') {
+        throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
+    }
+    return this.lift(new MapOperator(project, thisArg));
+}
+exports.map = map;
+var MapOperator = (function () {
+    function MapOperator(project, thisArg) {
+        this.project = project;
+        this.thisArg = thisArg;
+    }
+    MapOperator.prototype.call = function (subscriber) {
+        return new MapSubscriber(subscriber, this.project, this.thisArg);
+    };
+    return MapOperator;
+})();
+var MapSubscriber = (function (_super) {
+    __extends(MapSubscriber, _super);
+    function MapSubscriber(destination, project, thisArg) {
+        _super.call(this, destination);
+        this.project = project;
+        this.thisArg = thisArg;
+        this.count = 0;
+    }
+    MapSubscriber.prototype._next = function (x) {
+        var result = tryCatch_1.tryCatch(this.project).call(this.thisArg || this, x, this.count++);
+        if (result === errorObject_1.errorObject) {
+            this.error(errorObject_1.errorObject.e);
+        }
+        else {
+            this.destination.next(result);
+        }
+    };
+    return MapSubscriber;
+})(Subscriber_1.Subscriber);
+
+},{"../Subscriber":395,"../util/errorObject":408,"../util/tryCatch":412}],400:[function(require,module,exports){
 var root_1 = require('../util/root');
 function toPromise(PromiseCtor) {
     var _this = this;
@@ -66740,7 +66892,7 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":406}],398:[function(require,module,exports){
+},{"../util/root":410}],401:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66787,7 +66939,7 @@ var FutureAction = (function (_super) {
 })(QueueAction_1.QueueAction);
 exports.FutureAction = FutureAction;
 
-},{"./QueueAction":399}],399:[function(require,module,exports){
+},{"./QueueAction":402}],402:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66833,7 +66985,7 @@ var QueueAction = (function (_super) {
 })(Subscription_1.Subscription);
 exports.QueueAction = QueueAction;
 
-},{"../Subscription":395}],400:[function(require,module,exports){
+},{"../Subscription":396}],403:[function(require,module,exports){
 var QueueAction_1 = require('./QueueAction');
 var FutureAction_1 = require('./FutureAction');
 var QueueScheduler = (function () {
@@ -66872,11 +67024,11 @@ var QueueScheduler = (function () {
 })();
 exports.QueueScheduler = QueueScheduler;
 
-},{"./FutureAction":398,"./QueueAction":399}],401:[function(require,module,exports){
+},{"./FutureAction":401,"./QueueAction":402}],404:[function(require,module,exports){
 var QueueScheduler_1 = require('./QueueScheduler');
 exports.queue = new QueueScheduler_1.QueueScheduler();
 
-},{"./QueueScheduler":400}],402:[function(require,module,exports){
+},{"./QueueScheduler":403}],405:[function(require,module,exports){
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66915,7 +67067,7 @@ var SubjectSubscription = (function (_super) {
 })(Subscription_1.Subscription);
 exports.SubjectSubscription = SubjectSubscription;
 
-},{"../Subscriber":394,"../Subscription":395}],403:[function(require,module,exports){
+},{"../Subscriber":395,"../Subscription":396}],406:[function(require,module,exports){
 var SymbolShim_1 = require('../util/SymbolShim');
 /**
  * rxSubscriber symbol is a symbol for retreiving an "Rx safe" Observer from an object
@@ -66925,7 +67077,7 @@ var SymbolShim_1 = require('../util/SymbolShim');
  */
 exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
 
-},{"../util/SymbolShim":404}],404:[function(require,module,exports){
+},{"../util/SymbolShim":407}],407:[function(require,module,exports){
 var root_1 = require('./root');
 function polyfillSymbol(root) {
     var Symbol = ensureSymbol(root);
@@ -66994,12 +67146,15 @@ function ensureObservable(Symbol) {
 exports.ensureObservable = ensureObservable;
 exports.SymbolShim = polyfillSymbol(root_1.root);
 
-},{"./root":406}],405:[function(require,module,exports){
+},{"./root":410}],408:[function(require,module,exports){
+exports.errorObject = { e: {} };
+
+},{}],409:[function(require,module,exports){
 /* tslint:disable:no-empty */
 function noop() { }
 exports.noop = noop;
 
-},{}],406:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 (function (global){
 var objectTypes = {
     'boolean': false,
@@ -67020,11 +67175,30 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],407:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],408:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
+var errorObject_1 = require('./errorObject');
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+
+},{"./errorObject":408}],413:[function(require,module,exports){
 function tryOrOnError(target) {
     function tryCatcher() {
         try {

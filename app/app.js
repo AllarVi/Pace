@@ -22,7 +22,7 @@ import {FbProvider} from './providers/fb-provider';
     }
   }
 })
-class ConferenceApp {
+class PaceApp {
   static get parameters() {
     return [
       [IonicApp], [Events], [ConferenceData], [UserData], [Platform], [FbProvider]

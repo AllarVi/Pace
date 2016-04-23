@@ -41,7 +41,7 @@
     <author email="allar.viinamae@hotmail.com" href="http://ionicframework.com/">
         Allar
     </author>
-    <content original-src="index.html" src="index.html" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

@@ -27,10 +27,11 @@ export class LoginPage {
     }
 
     fbLogin() {
-        console.log("Login.js reached");
+        console.log("Facebook login initialized...");
         this.fb.login().then(() => {
             this.fb.getCurrentUserProfile().then(
                 (profileData) => {
+                    console.log("Parsing out profile data:");
                     this.email = profileData.email;
                     console.log(this.email);
                     this.name = profileData.name;
