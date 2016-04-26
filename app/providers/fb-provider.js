@@ -1,17 +1,19 @@
 import {Page, Platform} from 'ionic-angular';
 import {Injectable} from 'angular2/core';
+import {UserData} from '../providers/user-data';
 
 @Injectable()
 export class FbProvider {
     static get parameters() {
-        return [Platform];
+        return [[Platform], [UserData]];
     }
 
-    constructor(platform) {
+    constructor(platform, userData) {
         this.platform = platform;
+        this.userData = userData;
 
         this.loginStatus = this.getFbLoginStatus().then(() => {
-            console.log("Login status...");
+            console.log("User status initialization finished!");
         });
 
         this.p = null;
@@ -20,51 +22,32 @@ export class FbProvider {
     getFbLoginStatus() {
         console.log("Fb-provider: getFbLoginStatus() reached...");
         this.loginStatus = new Promise((resolve, reject) => {
-            console.log("Making new Promise...");
-            if (this.platform.is('cordova')) {
-                console.log("Running on a device or simulator...");
-                facebookConnectPlugin.getLoginStatus((success) => {
-                    console.log("getLoginStatus connetion...");
-                    console.log(success.status);
-                    if (success.status === 'connected') {
-                        // The user is logged in and has authenticated your app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed request, and the time the access token
-                        // and signed request each expire
-                        console.log('getLoginStatus', success.status);
-                        resolve(success);
+            this.platform.ready().then(() => {
+                if (this.platform.is('cordova')) {
+                    console.log("Running on a device or simulator...");
+                    facebookConnectPlugin.getLoginStatus((success) => {
+                        console.log("getLoginStatus connetion...");
+                        if (success.status === 'connected') {
+                            // The user is logged in and has authenticated your app, and response.authResponse supplies
+                            // the user's ID, a valid access token, a signed request, and the time the access token
+                            // and signed request each expire
+                            console.log('getLoginStatus', success.status);
 
-                        // // Check if we have our user saved
-                        // var user = UserService.getUser('facebook');
-                        //
-                        // if (!user.userID) {
-                        //     getFacebookProfileInfo(success.authResponse)
-                        //         .then(function (profileInfo) {
-                        //             // For the purpose of this example I will store user data on local storage
-                        //             UserService.setUser({
-                        //                 authResponse: success.authResponse,
-                        //                 userID: profileInfo.id,
-                        //                 name: profileInfo.name,
-                        //                 email: profileInfo.email,
-                        //                 picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-                        //             });
-                        //
-                        //             $state.go('app.home');
-                        //         }, function (fail) {
-                        //             // Fail get profile info
-                        //             console.log('profile info fail', fail);
-                        //         });
-                        // } else {
-                        //     $state.go('app.home');
-                        // }
-                    }
-                }, (err) => {
-                    console.log("Unsuccessful login status fetching from Facebook!");
-                    reject(err);
-                });
-            } else {
-                console.log("Please run me on a device!");
-                reject('Please run me on a device!');
-            }
+                            this.userData.getUser(success.authResponse.userID).then((user) => {
+                                console.log("Fb-provider: getUser(): ");
+                                console.log(JSON.stringify(user.json()));
+                                resolve(success);
+                            });
+                        }
+                    }, (err) => {
+                        console.log("Unsuccessful login status fetching from Facebook!");
+                        reject(err);
+                    });
+                } else {
+                    console.log("Please run me on a device!");
+                    reject('Please run me on a device!');
+                }
+            });
         });
         return this.loginStatus;
     }

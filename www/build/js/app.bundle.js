@@ -512,7 +512,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.ConferenceData = undefined;
 
@@ -529,199 +529,199 @@ var _userData = require('./user-data');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ConferenceData = exports.ConferenceData = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
-  _createClass(ConferenceData, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_http.Http], [_userData.UserData]];
+    _createClass(ConferenceData, null, [{
+        key: 'parameters',
+        get: function get() {
+            return [[_http.Http], [_userData.UserData]];
+        }
+    }]);
+
+    function ConferenceData(http, user) {
+        _classCallCheck(this, ConferenceData);
+
+        // inject the Http provider and set to this instance
+        this.http = http;
+        this.user = user;
     }
-  }]);
 
-  function ConferenceData(http, user) {
-    _classCallCheck(this, ConferenceData);
+    _createClass(ConferenceData, [{
+        key: 'load',
+        value: function load() {
+            var _this = this;
 
-    // inject the Http provider and set to this instance
-    this.http = http;
-    this.user = user;
-  }
-
-  _createClass(ConferenceData, [{
-    key: 'load',
-    value: function load() {
-      var _this = this;
-
-      if (this.data) {
-        // already loaded data
-        return Promise.resolve(this.data);
-      }
-
-      // don't have the data yet
-      return new Promise(function (resolve) {
-        // We're using Angular Http provider to request the data,
-        // then on the response it'll map the JSON data to a parsed JS object.
-        // Next we process the data and resolve the promise with the new data.
-        _this.http.get('data/data.json').subscribe(function (res) {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          _this.data = _this.processData(res.json());
-          resolve(_this.data);
-        });
-      });
-    }
-  }, {
-    key: 'processData',
-    value: function processData(data) {
-      var _this2 = this;
-
-      // just some good 'ol JS fun with objects and arrays
-      // build up the data by linking speakers to sessions
-
-      data.tracks = [];
-
-      // loop through each day in the schedule
-      data.schedule.forEach(function (day) {
-        // loop through each timeline group in the day
-        day.groups.forEach(function (group) {
-          // loop through each session in the timeline group
-          group.sessions.forEach(function (session) {
-            _this2.processSession(data, session);
-          });
-        });
-      });
-
-      return data;
-    }
-  }, {
-    key: 'processSession',
-    value: function processSession(data, session) {
-      // loop through each speaker and load the speaker data
-      // using the speaker name as the key
-      session.speakers = [];
-      if (session.speakerNames) {
-        session.speakerNames.forEach(function (speakerName) {
-          var speaker = data.speakers.find(function (s) {
-            return s.name === speakerName;
-          });
-          if (speaker) {
-            session.speakers.push(speaker);
-            speaker.sessions = speaker.sessions || [];
-            speaker.sessions.push(session);
-          }
-        });
-      }
-
-      if (session.tracks) {
-        session.tracks.forEach(function (track) {
-          if (data.tracks.indexOf(track) < 0) {
-            data.tracks.push(track);
-          }
-        });
-      }
-    }
-  }, {
-    key: 'getTimeline',
-    value: function getTimeline(dayIndex) {
-      var queryText = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
-
-      var _this3 = this;
-
-      var excludeTracks = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
-      var segment = arguments.length <= 3 || arguments[3] === undefined ? 'all' : arguments[3];
-
-      return this.load().then(function (data) {
-        var day = data.schedule[dayIndex];
-        day.shownSessions = 0;
-
-        queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
-        var queryWords = queryText.split(' ').filter(function (w) {
-          return w.trim().length;
-        });
-
-        day.groups.forEach(function (group) {
-          group.hide = true;
-
-          group.sessions.forEach(function (session) {
-            // check if this session should show or not
-            _this3.filterSession(session, queryWords, excludeTracks, segment);
-
-            if (!session.hide) {
-              // if this session is not hidden then this group should show
-              group.hide = false;
-              day.shownSessions++;
+            if (this.data) {
+                // already loaded data
+                return Promise.resolve(this.data);
             }
-          });
-        });
 
-        return day;
-      });
-    }
-  }, {
-    key: 'filterSession',
-    value: function filterSession(session, queryWords, excludeTracks, segment) {
-
-      var matchesQueryText = false;
-      if (queryWords.length) {
-        // of any query word is in the session name than it passes the query test
-        queryWords.forEach(function (queryWord) {
-          if (session.name.toLowerCase().indexOf(queryWord) > -1) {
-            matchesQueryText = true;
-          }
-        });
-      } else {
-        // if there are no query words then this session passes the query test
-        matchesQueryText = true;
-      }
-
-      // if any of the sessions tracks are not in the
-      // exclude tracks then this session passes the track test
-      var matchesTracks = false;
-      session.tracks.forEach(function (trackName) {
-        if (excludeTracks.indexOf(trackName) === -1) {
-          matchesTracks = true;
+            // don't have the data yet
+            return new Promise(function (resolve) {
+                // We're using Angular Http provider to request the data,
+                // then on the response it'll map the JSON data to a parsed JS object.
+                // Next we process the data and resolve the promise with the new data.
+                _this.http.get('data/data.json').subscribe(function (res) {
+                    // we've got back the raw data, now generate the core schedule data
+                    // and save the data for later reference
+                    _this.data = _this.processData(res.json());
+                    resolve(_this.data);
+                });
+            });
         }
-      });
+    }, {
+        key: 'processData',
+        value: function processData(data) {
+            var _this2 = this;
 
-      // if the segement is 'favorites', but session is not a user favorite
-      // then this session does not pass the segment test
-      var matchesSegment = false;
-      if (segment === 'favorites') {
-        if (this.user.hasFavorite(session.name)) {
-          matchesSegment = true;
+            // just some good 'ol JS fun with objects and arrays
+            // build up the data by linking speakers to sessions
+
+            data.tracks = [];
+
+            // loop through each day in the schedule
+            data.schedule.forEach(function (day) {
+                // loop through each timeline group in the day
+                day.groups.forEach(function (group) {
+                    // loop through each session in the timeline group
+                    group.sessions.forEach(function (session) {
+                        _this2.processSession(data, session);
+                    });
+                });
+            });
+
+            return data;
         }
-      } else {
-        matchesSegment = true;
-      }
+    }, {
+        key: 'processSession',
+        value: function processSession(data, session) {
+            // loop through each speaker and load the speaker data
+            // using the speaker name as the key
+            session.speakers = [];
+            if (session.speakerNames) {
+                session.speakerNames.forEach(function (speakerName) {
+                    var speaker = data.speakers.find(function (s) {
+                        return s.name === speakerName;
+                    });
+                    if (speaker) {
+                        session.speakers.push(speaker);
+                        speaker.sessions = speaker.sessions || [];
+                        speaker.sessions.push(session);
+                    }
+                });
+            }
 
-      // all tests must be true if it should not be hidden
-      session.hide = !(matchesQueryText && matchesTracks && matchesSegment);
-    }
-  }, {
-    key: 'getSpeakers',
-    value: function getSpeakers() {
-      return this.load().then(function (data) {
-        return data.speakers.sort(function (a, b) {
-          var aName = a.name.split(' ').pop();
-          var bName = b.name.split(' ').pop();
-          return aName.localeCompare(bName);
-        });
-      });
-    }
-  }, {
-    key: 'getTracks',
-    value: function getTracks() {
-      return this.load().then(function (data) {
-        return data.tracks.sort();
-      });
-    }
-  }, {
-    key: 'getMap',
-    value: function getMap() {
-      return this.load().then(function (data) {
-        return data.map;
-      });
-    }
-  }]);
+            if (session.tracks) {
+                session.tracks.forEach(function (track) {
+                    if (data.tracks.indexOf(track) < 0) {
+                        data.tracks.push(track);
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'getTimeline',
+        value: function getTimeline(dayIndex) {
+            var queryText = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
 
-  return ConferenceData;
+            var _this3 = this;
+
+            var excludeTracks = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+            var segment = arguments.length <= 3 || arguments[3] === undefined ? 'all' : arguments[3];
+
+            return this.load().then(function (data) {
+                var day = data.schedule[dayIndex];
+                day.shownSessions = 0;
+
+                queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
+                var queryWords = queryText.split(' ').filter(function (w) {
+                    return w.trim().length;
+                });
+
+                day.groups.forEach(function (group) {
+                    group.hide = true;
+
+                    group.sessions.forEach(function (session) {
+                        // check if this session should show or not
+                        _this3.filterSession(session, queryWords, excludeTracks, segment);
+
+                        if (!session.hide) {
+                            // if this session is not hidden then this group should show
+                            group.hide = false;
+                            day.shownSessions++;
+                        }
+                    });
+                });
+
+                return day;
+            });
+        }
+    }, {
+        key: 'filterSession',
+        value: function filterSession(session, queryWords, excludeTracks, segment) {
+
+            var matchesQueryText = false;
+            if (queryWords.length) {
+                // of any query word is in the session name than it passes the query test
+                queryWords.forEach(function (queryWord) {
+                    if (session.name.toLowerCase().indexOf(queryWord) > -1) {
+                        matchesQueryText = true;
+                    }
+                });
+            } else {
+                // if there are no query words then this session passes the query test
+                matchesQueryText = true;
+            }
+
+            // if any of the sessions tracks are not in the
+            // exclude tracks then this session passes the track test
+            var matchesTracks = false;
+            session.tracks.forEach(function (trackName) {
+                if (excludeTracks.indexOf(trackName) === -1) {
+                    matchesTracks = true;
+                }
+            });
+
+            // if the segement is 'favorites', but session is not a user favorite
+            // then this session does not pass the segment test
+            var matchesSegment = false;
+            if (segment === 'favorites') {
+                if (this.user.hasFavorite(session.name)) {
+                    matchesSegment = true;
+                }
+            } else {
+                matchesSegment = true;
+            }
+
+            // all tests must be true if it should not be hidden
+            session.hide = !(matchesQueryText && matchesTracks && matchesSegment);
+        }
+    }, {
+        key: 'getSpeakers',
+        value: function getSpeakers() {
+            return this.load().then(function (data) {
+                return data.speakers.sort(function (a, b) {
+                    var aName = a.name.split(' ').pop();
+                    var bName = b.name.split(' ').pop();
+                    return aName.localeCompare(bName);
+                });
+            });
+        }
+    }, {
+        key: 'getTracks',
+        value: function getTracks() {
+            return this.load().then(function (data) {
+                return data.tracks.sort();
+            });
+        }
+    }, {
+        key: 'getMap',
+        value: function getMap() {
+            return this.load().then(function (data) {
+                return data.map;
+            });
+        }
+    }]);
+
+    return ConferenceData;
 }()) || _class);
 
 },{"./user-data":11,"angular2/core":14,"angular2/http":15}],10:[function(require,module,exports){
@@ -740,20 +740,23 @@ var _ionicAngular = require('ionic-angular');
 
 var _core = require('angular2/core');
 
+    var _userData = require('../providers/user-data');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(FbProvider, null, [{
         key: 'parameters',
         get: function get() {
-            return [_ionicAngular.Platform];
+            return [[_ionicAngular.Platform], [_userData.UserData]];
         }
     }]);
 
-    function FbProvider(platform) {
+    function FbProvider(platform, userData) {
         _classCallCheck(this, FbProvider);
 
         this.platform = platform;
+        this.userData = userData;
 
         this.loginStatus = this.getFbLoginStatus().then(function () {
             console.log("Login status...");
@@ -769,51 +772,32 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 
             console.log("Fb-provider: getFbLoginStatus() reached...");
             this.loginStatus = new Promise(function (resolve, reject) {
-                console.log("Making new Promise...");
-                if (_this.platform.is('cordova')) {
-                    console.log("Running on a device or simulator...");
-                    facebookConnectPlugin.getLoginStatus(function (success) {
-                        console.log("getLoginStatus connetion...");
-                        console.log(success.status);
-                        if (success.status === 'connected') {
-                            // The user is logged in and has authenticated your app, and response.authResponse supplies
-                            // the user's ID, a valid access token, a signed request, and the time the access token
-                            // and signed request each expire
-                            console.log('getLoginStatus', success.status);
-                            resolve(success);
+                _this.platform.ready().then(function () {
+                    if (_this.platform.is('cordova')) {
+                        console.log("Running on a device or simulator...");
+                        facebookConnectPlugin.getLoginStatus(function (success) {
+                            console.log("getLoginStatus connetion...");
+                            if (success.status === 'connected') {
+                                // The user is logged in and has authenticated your app, and response.authResponse supplies
+                                // the user's ID, a valid access token, a signed request, and the time the access token
+                                // and signed request each expire
+                                console.log('getLoginStatus', success.status);
 
-                            // // Check if we have our user saved
-                            // var user = UserService.getUser('facebook');
-                            //
-                            // if (!user.userID) {
-                            //     getFacebookProfileInfo(success.authResponse)
-                            //         .then(function (profileInfo) {
-                            //             // For the purpose of this example I will store user data on local storage
-                            //             UserService.setUser({
-                            //                 authResponse: success.authResponse,
-                            //                 userID: profileInfo.id,
-                            //                 name: profileInfo.name,
-                            //                 email: profileInfo.email,
-                            //                 picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-                            //             });
-                            //
-                            //             $state.go('app.home');
-                            //         }, function (fail) {
-                            //             // Fail get profile info
-                            //             console.log('profile info fail', fail);
-                            //         });
-                            // } else {
-                            //     $state.go('app.home');
-                            // }
-                        }
-                    }, function (err) {
-                        console.log("Unsuccessful login status fetching from Facebook!");
-                        reject(err);
-                    });
-                } else {
-                    console.log("Please run me on a device!");
-                    reject('Please run me on a device!');
-                }
+                                _this.userData.getUser(success.authResponse.userID).then(function (user) {
+                                    console.log("Fb-provider: getUser(): ");
+                                    console.log(JSON.stringify(user.json()));
+                                    resolve(success);
+                                });
+                            }
+                        }, function (err) {
+                            console.log("Unsuccessful login status fetching from Facebook!");
+                            reject(err);
+                        });
+                    } else {
+                        console.log("Please run me on a device!");
+                        reject('Please run me on a device!');
+                    }
+                });
             });
             return this.loginStatus;
         }
@@ -862,7 +846,8 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
     return FbProvider;
 }()) || _class);
 
-},{"angular2/core":14,"ionic-angular":331}],11:[function(require,module,exports){
+}, {"../providers/user-data": 11, "angular2/core": 14, "ionic-angular": 331}],
+    11: [function (require, module, exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -878,26 +863,76 @@ var _core = require('angular2/core');
 
 var _ionicAngular = require('ionic-angular');
 
+        var _http = require('angular2/http');
+
+        require('rxjs/add/operator/map');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(UserData, null, [{
         key: 'parameters',
         get: function get() {
-            return [[_ionicAngular.Events]];
+            return [[_ionicAngular.Events], [_http.Http]];
         }
     }]);
 
-    function UserData(events) {
+    function UserData(events, http) {
         _classCallCheck(this, UserData);
 
         this._favorites = [];
         this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
         this.events = events;
         this.HAS_LOGGED_IN = 'hasLoggedIn';
+
+        this.http = http;
+
+        this.paceUser = null;
     }
 
     _createClass(UserData, [{
+        key: 'getUser',
+        value: function getUser(userID) {
+            var _this = this;
+
+            console.log("UserData: getUser() reached...", "UserID:", userID);
+
+            return new Promise(function (resolve) {
+                _this.paceUser = _this.getPaceUser(userID).then(function (paceUser) {
+                    resolve(paceUser);
+                });
+            });
+        }
+    }, {
+        key: 'getPaceUser',
+        value: function getPaceUser(userID) {
+            var _this2 = this;
+
+            console.log("UserData: getPaceUser() reached...");
+            if (this.paceUser) {
+                console.log("User already loaded");
+                return Promise.resolve(this.paceUser);
+            }
+
+            // don't have the data yet
+            return new Promise(function (resolve) {
+                _this2.url = 'http://localhost:8080/user?facebookId=' + userID;
+                console.log("Making request to: " + _this2.url);
+                console.log("Fetching user data from BackPace...");
+                _this2.http.get(_this2.url).subscribe(function (paceUser) {
+                    console.log("User data from BackPace...");
+                    console.log(JSON.stringify(paceUser.json()));
+                    _this2.paceUser = paceUser;
+                    resolve(paceUser);
+                }, function (error) {
+                    console.log("Error occurred while fetching user data...");
+                    console.log(JSON.stringify(error.json()));
+                }, function () {
+                    return console.log('User data fetching complete!');
+                });
+            });
+        }
+    }, {
         key: 'hasFavorite',
         value: function hasFavorite(sessionName) {
             return this._favorites.indexOf(sessionName) > -1;
@@ -948,7 +983,8 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     return UserData;
 }()) || _class);
 
-},{"angular2/core":14,"ionic-angular":331}],12:[function(require,module,exports){
+    }, {"angular2/core": 14, "angular2/http": 15, "ionic-angular": 331, "rxjs/add/operator/map": 396}],
+    12: [function (require, module, exports) {
 'use strict';function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -27189,7 +27225,15 @@ var EventEmitter = (function (_super) {
     return EventEmitter;
 })(Subject_1.Subject);
 exports.EventEmitter = EventEmitter;
-},{"angular2/src/facade/lang":191,"angular2/src/facade/promise":193,"rxjs/Observable":392,"rxjs/Subject":393,"rxjs/observable/fromPromise":396,"rxjs/operator/toPromise":397}],185:[function(require,module,exports){
+    }, {
+        "angular2/src/facade/lang": 191,
+        "angular2/src/facade/promise": 193,
+        "rxjs/Observable": 392,
+        "rxjs/Subject": 393,
+        "rxjs/observable/fromPromise": 397,
+        "rxjs/operator/toPromise": 399
+    }],
+    185: [function (require, module, exports) {
 'use strict';/**
  * JS version of browser APIs. This library can only run in the browser.
  */
@@ -27601,22 +27645,22 @@ var ExceptionHandler = (function () {
         var context = this._findContext(exception);
         this._logger.logGroup("EXCEPTION: " + this._extractMessage(exception));
         if (lang_1.isPresent(stackTrace) && lang_1.isBlank(originalStack)) {
-            this._logger.logError("STACKTRACE:");
-            this._logger.logError(this._longStackTrace(stackTrace));
+            UserData.logError("STACKTRACE:");
+            UserData.logError(this._longStackTrace(stackTrace));
         }
         if (lang_1.isPresent(reason)) {
-            this._logger.logError("REASON: " + reason);
+            UserData.logError("REASON: " + reason);
         }
         if (lang_1.isPresent(originalException)) {
-            this._logger.logError("ORIGINAL EXCEPTION: " + this._extractMessage(originalException));
+            UserData.logError("ORIGINAL EXCEPTION: " + this._extractMessage(originalException));
         }
         if (lang_1.isPresent(originalStack)) {
-            this._logger.logError("ORIGINAL STACKTRACE:");
-            this._logger.logError(this._longStackTrace(originalStack));
+            UserData.logError("ORIGINAL STACKTRACE:");
+            UserData.logError(this._longStackTrace(originalStack));
         }
         if (lang_1.isPresent(context)) {
-            this._logger.logError("ERROR CONTEXT:");
-            this._logger.logError(context);
+            UserData.logError("ERROR CONTEXT:");
+            UserData.logError(context);
         }
         this._logger.logGroupEnd();
         // We rethrow exceptions, so operations like 'bootstrap' will result in an error
@@ -66321,7 +66365,8 @@ var Observable = (function () {
 })();
 exports.Observable = Observable;
 
-},{"./Subscriber":394,"./symbol/rxSubscriber":403,"./util/SymbolShim":404,"./util/root":406}],393:[function(require,module,exports){
+    }, {"./Subscriber": 394, "./symbol/rxSubscriber": 405, "./util/SymbolShim": 406, "./util/root": 409}],
+    393: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66494,7 +66539,14 @@ var BidirectionalSubject = (function (_super) {
     return BidirectionalSubject;
 })(Subject);
 
-},{"./Observable":392,"./Subscriber":394,"./Subscription":395,"./subject/SubjectSubscription":402,"./symbol/rxSubscriber":403}],394:[function(require,module,exports){
+    }, {
+        "./Observable": 392,
+        "./Subscriber": 394,
+        "./Subscription": 395,
+        "./subject/SubjectSubscription": 404,
+        "./symbol/rxSubscriber": 405
+    }],
+    394: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66625,7 +66677,14 @@ var Subscriber = (function (_super) {
 })(Subscription_1.Subscription);
 exports.Subscriber = Subscriber;
 
-},{"./Subscription":395,"./symbol/rxSubscriber":403,"./util/noop":405,"./util/throwError":407,"./util/tryOrOnError":408}],395:[function(require,module,exports){
+    }, {
+        "./Subscription": 395,
+        "./symbol/rxSubscriber": 405,
+        "./util/noop": 408,
+        "./util/throwError": 410,
+        "./util/tryOrOnError": 412
+    }],
+    395: [function (require, module, exports) {
 var noop_1 = require('./util/noop');
 var Subscription = (function () {
     function Subscription(_unsubscribe) {
@@ -66708,7 +66767,14 @@ var Subscription = (function () {
 })();
 exports.Subscription = Subscription;
 
-},{"./util/noop":405}],396:[function(require,module,exports){
+    }, {"./util/noop": 408}],
+    396: [function (require, module, exports) {
+        var Observable_1 = require('../../Observable');
+        var map_1 = require('../../operator/map');
+        Observable_1.Observable.prototype.map = map_1.map;
+
+    }, {"../../Observable": 392, "../../operator/map": 398}],
+    397: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66785,7 +66851,70 @@ function dispatchError(_a) {
     subscriber.error(err);
 }
 
-},{"../Observable":392,"../Subscription":395,"../scheduler/queue":401}],397:[function(require,module,exports){
+    }, {"../Observable": 392, "../Subscription": 395, "../scheduler/queue": 403}],
+    398: [function (require, module, exports) {
+        var __extends = (this && this.__extends) || function (d, b) {
+                for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+                function __() {
+                    this.constructor = d;
+                }
+
+                d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+            };
+        var Subscriber_1 = require('../Subscriber');
+        var tryCatch_1 = require('../util/tryCatch');
+        var errorObject_1 = require('../util/errorObject');
+
+        /**
+         * Similar to the well known `Array.prototype.map` function, this operator
+         * applies a projection to each value and emits that projection in the returned observable
+         *
+         * @param {Function} project the function to create projection
+         * @param {any} [thisArg] an optional argument to define what `this` is in the project function
+         * @returns {Observable} a observable of projected values
+         */
+        function map(project, thisArg) {
+            if (typeof project !== 'function') {
+                throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
+            }
+            return this.lift(new MapOperator(project, thisArg));
+        }
+
+        exports.map = map;
+        var MapOperator = (function () {
+            function MapOperator(project, thisArg) {
+                this.project = project;
+                this.thisArg = thisArg;
+            }
+
+            MapOperator.prototype.call = function (subscriber) {
+                return new MapSubscriber(subscriber, this.project, this.thisArg);
+            };
+            return MapOperator;
+        })();
+        var MapSubscriber = (function (_super) {
+            __extends(MapSubscriber, _super);
+            function MapSubscriber(destination, project, thisArg) {
+                _super.call(this, destination);
+                this.project = project;
+                this.thisArg = thisArg;
+                this.count = 0;
+            }
+
+            MapSubscriber.prototype._next = function (x) {
+                var result = tryCatch_1.tryCatch(this.project).call(this.thisArg || this, x, this.count++);
+                if (result === errorObject_1.errorObject) {
+                    this.error(errorObject_1.errorObject.e);
+                }
+                else {
+                    this.destination.next(result);
+                }
+            };
+            return MapSubscriber;
+        })(Subscriber_1.Subscriber);
+
+    }, {"../Subscriber": 394, "../util/errorObject": 407, "../util/tryCatch": 411}],
+    399: [function (require, module, exports) {
 var root_1 = require('../util/root');
 function toPromise(PromiseCtor) {
     var _this = this;
@@ -66807,7 +66936,8 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":406}],398:[function(require,module,exports){
+    }, {"../util/root": 409}],
+    400: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66854,7 +66984,8 @@ var FutureAction = (function (_super) {
 })(QueueAction_1.QueueAction);
 exports.FutureAction = FutureAction;
 
-},{"./QueueAction":399}],399:[function(require,module,exports){
+    }, {"./QueueAction": 401}],
+    401: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66900,7 +67031,8 @@ var QueueAction = (function (_super) {
 })(Subscription_1.Subscription);
 exports.QueueAction = QueueAction;
 
-},{"../Subscription":395}],400:[function(require,module,exports){
+    }, {"../Subscription": 395}],
+    402: [function (require, module, exports) {
 var QueueAction_1 = require('./QueueAction');
 var FutureAction_1 = require('./FutureAction');
 var QueueScheduler = (function () {
@@ -66939,11 +67071,13 @@ var QueueScheduler = (function () {
 })();
 exports.QueueScheduler = QueueScheduler;
 
-},{"./FutureAction":398,"./QueueAction":399}],401:[function(require,module,exports){
+    }, {"./FutureAction": 400, "./QueueAction": 401}],
+    403: [function (require, module, exports) {
 var QueueScheduler_1 = require('./QueueScheduler');
 exports.queue = new QueueScheduler_1.QueueScheduler();
 
-},{"./QueueScheduler":400}],402:[function(require,module,exports){
+    }, {"./QueueScheduler": 402}],
+    404: [function (require, module, exports) {
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -66982,7 +67116,8 @@ var SubjectSubscription = (function (_super) {
 })(Subscription_1.Subscription);
 exports.SubjectSubscription = SubjectSubscription;
 
-},{"../Subscriber":394,"../Subscription":395}],403:[function(require,module,exports){
+    }, {"../Subscriber": 394, "../Subscription": 395}],
+    405: [function (require, module, exports) {
 var SymbolShim_1 = require('../util/SymbolShim');
 /**
  * rxSubscriber symbol is a symbol for retreiving an "Rx safe" Observer from an object
@@ -66992,7 +67127,8 @@ var SymbolShim_1 = require('../util/SymbolShim');
  */
 exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
 
-},{"../util/SymbolShim":404}],404:[function(require,module,exports){
+    }, {"../util/SymbolShim": 406}],
+    406: [function (require, module, exports) {
 var root_1 = require('./root');
 function polyfillSymbol(root) {
     var Symbol = ensureSymbol(root);
@@ -67061,12 +67197,18 @@ function ensureObservable(Symbol) {
 exports.ensureObservable = ensureObservable;
 exports.SymbolShim = polyfillSymbol(root_1.root);
 
-},{"./root":406}],405:[function(require,module,exports){
+    }, {"./root": 409}],
+    407: [function (require, module, exports) {
+        exports.errorObject = {e: {}};
+
+    }, {}],
+    408: [function (require, module, exports) {
 /* tslint:disable:no-empty */
 function noop() { }
 exports.noop = noop;
 
-},{}],406:[function(require,module,exports){
+    }, {}],
+    409: [function (require, module, exports) {
 (function (global){
 var objectTypes = {
     'boolean': false,
@@ -67087,11 +67229,36 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],407:[function(require,module,exports){
+    }, {}],
+    410: [function (require, module, exports) {
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],408:[function(require,module,exports){
+    }, {}],
+    411: [function (require, module, exports) {
+        var errorObject_1 = require('./errorObject');
+        var tryCatchTarget;
+
+        function tryCatcher() {
+            try {
+                return tryCatchTarget.apply(this, arguments);
+            }
+            catch (e) {
+                errorObject_1.errorObject.e = e;
+                return errorObject_1.errorObject;
+            }
+        }
+
+        function tryCatch(fn) {
+            tryCatchTarget = fn;
+            return tryCatcher;
+        }
+
+        exports.tryCatch = tryCatch;
+        ;
+
+    }, {"./errorObject": 407}],
+    412: [function (require, module, exports) {
 function tryOrOnError(target) {
     function tryCatcher() {
         try {

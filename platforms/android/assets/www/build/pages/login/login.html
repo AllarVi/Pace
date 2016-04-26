@@ -39,28 +39,15 @@
                 <ion-col>
                     <button (click)="onSignup()" light block>Signup</button>
                 </ion-col>
-                <ion-col *ngIf="loggedIn">
-                    Logged in as: <span></span>
-                </ion-col>
-                <ion-col *ngIf="!loggedIn">
-                    Login with: <a href="/login">Facebook</a>
-                </ion-col>
             </ion-row>
         </form>
     </ion-list>
 
-    <ion-card>
-        <ion-card-header>
-            Click a button. Any button.
-        </ion-card-header>
-        <ion-card-content>
-            <button (click)="fbLogin()">login with Facebook</button>
-            <ion-card padding [hidden]="id == ''">
-                <p>Name: {{name}}</p>
-                <p>Email: {{email}}</p>
-                <p>id: {{id}}</p>
-            </ion-card>
-        </ion-card-content>
+    <button (click)="fbLogin()" primary block>login with Facebook</button>
+    <ion-card padding [hidden]="id == ''">
+        <p>Name: {{name}}</p>
+        <p>Email: {{email}}</p>
+        <p>id: {{id}}</p>
     </ion-card>
 
 </ion-content>
