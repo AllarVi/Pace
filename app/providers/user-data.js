@@ -16,8 +16,6 @@ export class UserData {
         this.HAS_LOGGED_IN = 'hasLoggedIn';
 
         this.http = http;
-
-        this.paceUser = null;
     }
 
     getUser(userID) {
@@ -32,12 +30,13 @@ export class UserData {
 
     getPaceUser(userID) {
         console.log("UserData: getPaceUser() reached...");
-        if (this.paceUser) {
-            console.log("User already loaded");
-            return Promise.resolve(this.paceUser);
-        }
+        // if (this.paceUser) {
+        //     console.log("User already loaded");
+        //     console.log(JSON.stringify(this.paceUser.json()));
+        //     return Promise.resolve(this.paceUser);
+        // }
 
-        // don't have the data yet
+        // Don't have the data yet
         return new Promise(resolve => {
             this.url = 'http://localhost:8080/user?facebookId=' + userID;
             console.log("Making request to: " + this.url);
@@ -45,7 +44,6 @@ export class UserData {
             this.http.get(this.url).subscribe(paceUser => {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
-                this.paceUser = paceUser;
                 resolve(paceUser)
             }, error => {
                 console.log("Error occurred while fetching user data...");

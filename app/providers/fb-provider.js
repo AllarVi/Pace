@@ -12,13 +12,10 @@ export class FbProvider {
         this.platform = platform;
         this.userData = userData;
 
-        this.loginStatus = this.getFbLoginStatus().then(() => {
-            console.log("User status initialization finished!");
-        });
-
         this.p = null;
     }
 
+    // This method is executed when the user starts the app
     getFbLoginStatus() {
         console.log("Fb-provider: getFbLoginStatus() reached...");
         this.loginStatus = new Promise((resolve, reject) => {
