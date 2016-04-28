@@ -78,7 +78,7 @@ export class UserData {
         this.events.publish('user:signup');
     }
 
-    FbLogout(UserID) {
+    FbLogout() {
         return new Promise((resolve, reject) => {
             this.storage.remove(this.HAS_LOGGED_IN);
             console.log("UserData: logout() reached...");

@@ -97,12 +97,12 @@ class PaceApp {
             // Give the menu time to close before changing to logged out
             setTimeout(() => {
                 console.log("Logging out initialized...");
-                this.initLogout(nav, this.userData, this.fbLoginStatus);
+                this.initLogout(nav, this.userData);
             }, 1000);
         }
     }
 
-    initLogout(nav, userData, fbLoginStatus) {
+    initLogout(nav, userData) {
         let actionSheet = ActionSheet.create({
             title: 'Are you sure?',
             buttons: [
@@ -113,7 +113,7 @@ class PaceApp {
                         let navTransition = actionSheet.dismiss();
 
                         console.log("Starting the async mehtod...");
-                        userData.FbLogout(fbLoginStatus.authResponse.userID)
+                        userData.FbLogout()
                             .then(() => {
                                 console.log("Finished call to Facebook about logging out");
 

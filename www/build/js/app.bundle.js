@@ -113,13 +113,13 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
                 // Give the menu time to close before changing to logged out
                 setTimeout(function () {
                     console.log("Logging out initialized...");
-                    _this2.initLogout(nav, _this2.userData, _this2.fbLoginStatus);
+                    _this2.initLogout(nav, _this2.userData);
                 }, 1000);
             }
         }
     }, {
         key: 'initLogout',
-        value: function initLogout(nav, userData, fbLoginStatus) {
+        value: function initLogout(nav, userData) {
             var actionSheet = _ionicAngular.ActionSheet.create({
                 title: 'Are you sure?',
                 buttons: [{
@@ -129,7 +129,7 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
                         var navTransition = actionSheet.dismiss();
 
                         console.log("Starting the async mehtod...");
-                        userData.FbLogout(fbLoginStatus.authResponse.userID).then(function () {
+                        userData.FbLogout().then(function () {
                             console.log("Finished call to Facebook about logging out");
 
                             navTransition.then(function () {
@@ -794,7 +794,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
         }
     }, {
         key: 'FbLogout',
-        value: function FbLogout(UserID) {
+        value: function FbLogout() {
             var _this3 = this;
 
             return new Promise(function (resolve, reject) {
