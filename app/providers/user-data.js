@@ -84,7 +84,7 @@ export class UserData {
             console.log("UserData: logout() reached...");
 
             facebookConnectPlugin.logout(() => {
-                console.log("Logging out with userID...", UserID);
+                console.log("Logging out...");
 
                 this.events.publish('user:logout');
 
@@ -98,7 +98,7 @@ export class UserData {
         });
     }
 
-    // return a promise
+    // Return a promise
     hasLoggedIn() {
         return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
             return value;

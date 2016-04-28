@@ -816,7 +816,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             });
         }
 
-        // return a promise
+        // Return a promise
 
     }, {
         key: 'hasLoggedIn',
