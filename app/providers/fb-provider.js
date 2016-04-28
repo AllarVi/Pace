@@ -1,16 +1,17 @@
-import {Page, Platform} from 'ionic-angular';
+import {Page, Platform, Events} from 'ionic-angular';
 import {Injectable} from 'angular2/core';
 import {UserData} from '../providers/user-data';
 
 @Injectable()
 export class FbProvider {
     static get parameters() {
-        return [[Platform], [UserData]];
+        return [[Events], [Platform], [UserData]];
     }
 
-    constructor(platform, userData) {
+    constructor(events, platform, userData) {
         this.platform = platform;
         this.userData = userData;
+        this.events = events;
 
         this.p = null;
     }
@@ -25,17 +26,21 @@ export class FbProvider {
                     facebookConnectPlugin.getLoginStatus((success) => {
                         console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
-                            // The user is logged in and has authenticated your app, and response.authResponse supplies
-                            // the user's ID, a valid access token, a signed request, and the time the access token
-                            // and signed request each expire
                             console.log('getLoginStatus', success.status);
+
+                            this.events.publish('user:login');
 
                             this.userData.getUser(success.authResponse.userID).then((user) => {
                                 console.log("Fb-provider: getUser(): ");
                                 console.log(JSON.stringify(user.json()));
                                 resolve(success);
                             });
+                        } else if (success.status === 'not_authorized') {
+                            console.log('getLoginStatus', success.status);
+                        } else if (success.status === 'unknown') {
+                            console.log('getLoginStatus', success.status);
                         }
+                        resolve(success);
                     }, (err) => {
                         console.log("Unsuccessful login status fetching from Facebook!");
                         reject(err);
@@ -55,8 +60,11 @@ export class FbProvider {
             if (this.platform.is('cordova')) {
                 console.log("Connecting to facebookConnectPlugin...");
                 facebookConnectPlugin.login(['email'], (success) => {
-                    console.log("Successful connection to Facebook API!");
-                    console.log(JSON.stringify(success));
+                    if (success.status === 'connected') {
+                        this.events.publish('user:login');
+                        console.log("Successful connection to Facebook API!");
+                        console.log(JSON.stringify(success));
+                    }
                     resolve(success);
                 }, (err) => {
                     console.log("Unsuccessful connection to Facebook API!");
@@ -71,7 +79,7 @@ export class FbProvider {
         });
         return this.p;
     }
-
+    
     getCurrentUserProfile() {
         console.log("Fb-provider: getCurrentUserProfile() reached...");
         this.p = new Promise((resolve, reject) => {

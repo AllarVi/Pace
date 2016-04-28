@@ -56,6 +56,7 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
         this.loggedIn = false;
 
         this.fbProvider = fbProvider;
+        this.fbLoginStatus = null;
 
         // Call any initial plugins when ready
         platform.ready().then(function () {
@@ -64,6 +65,7 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
 
         // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
+            _this.fbLoginStatus = FbLoginStatus;
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 _this.root = _dashboard.DashboardPage;
@@ -100,17 +102,53 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
             var nav = this.app.getComponent('nav');
 
             if (page.index) {
+                console.log("Setting navRoot to index:");
                 nav.setRoot(page.component, { tabIndex: page.index });
             } else {
+                console.log("Setting navRoot to component:");
                 nav.setRoot(page.component);
             }
 
             if (page.title === 'Logout') {
                 // Give the menu time to close before changing to logged out
                 setTimeout(function () {
-                    _this2.userData.logout();
+                    console.log("Logging out initialized...");
+                    _this2.initLogout(nav, _this2.userData, _this2.fbLoginStatus);
                 }, 1000);
             }
+        }
+    }, {
+        key: 'initLogout',
+        value: function initLogout(nav, userData, fbLoginStatus) {
+            var actionSheet = _ionicAngular.ActionSheet.create({
+                title: 'Are you sure?',
+                buttons: [{
+                    text: 'Log out',
+                    role: 'destructive',
+                    handler: function handler() {
+                        var navTransition = actionSheet.dismiss();
+
+                        console.log("Starting the async mehtod...");
+                        userData.FbLogout(fbLoginStatus.authResponse.userID).then(function () {
+                            console.log("Finished call to Facebook about logging out");
+
+                            navTransition.then(function () {
+                                console.log("Navigating to LoginPage...");
+                                nav.setRoot(_login.LoginPage);
+                            });
+                        });
+                        return false;
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function handler() {
+                        console.log('Cancel clicked');
+                    }
+                }]
+            });
+
+            nav.present(actionSheet);
         }
     }, {
         key: 'listenToLoginEvents',
@@ -275,7 +313,6 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         this.fb = fbProvider;
         this.email = '';
         this.name = '';
-        this.id = '';
 
         this.nav = nav;
         this.userData = userData;
@@ -297,8 +334,8 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
                     console.log(_this.email);
                     _this.name = profileData.name;
                     console.log(_this.name);
-                    _this.id = profileData.id;
-                    console.log(_this.id);
+
+                    _this.nav.push(_tabs.TabsPage);
                 });
             });
         }
@@ -535,15 +572,16 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
     _createClass(FbProvider, null, [{
         key: 'parameters',
         get: function get() {
-            return [[_ionicAngular.Platform], [_userData.UserData]];
+            return [[_ionicAngular.Events], [_ionicAngular.Platform], [_userData.UserData]];
         }
     }]);
 
-    function FbProvider(platform, userData) {
+    function FbProvider(events, platform, userData) {
         _classCallCheck(this, FbProvider);
 
         this.platform = platform;
         this.userData = userData;
+        this.events = events;
 
         this.p = null;
     }
@@ -564,17 +602,21 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
                         facebookConnectPlugin.getLoginStatus(function (success) {
                             console.log("getLoginStatus connetion...");
                             if (success.status === 'connected') {
-                                // The user is logged in and has authenticated your app, and response.authResponse supplies
-                                // the user's ID, a valid access token, a signed request, and the time the access token
-                                // and signed request each expire
                                 console.log('getLoginStatus', success.status);
+
+                                _this.events.publish('user:login');
 
                                 _this.userData.getUser(success.authResponse.userID).then(function (user) {
                                     console.log("Fb-provider: getUser(): ");
                                     console.log(JSON.stringify(user.json()));
                                     resolve(success);
                                 });
+                            } else if (success.status === 'not_authorized') {
+                                console.log('getLoginStatus', success.status);
+                            } else if (success.status === 'unknown') {
+                                console.log('getLoginStatus', success.status);
                             }
+                            resolve(success);
                         }, function (err) {
                             console.log("Unsuccessful login status fetching from Facebook!");
                             reject(err);
@@ -597,8 +639,11 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
                 if (_this2.platform.is('cordova')) {
                     console.log("Connecting to facebookConnectPlugin...");
                     facebookConnectPlugin.login(['email'], function (success) {
-                        console.log("Successful connection to Facebook API!");
-                        console.log(JSON.stringify(success));
+                        if (success.status === 'connected') {
+                            _this2.events.publish('user:login');
+                            console.log("Successful connection to Facebook API!");
+                            console.log(JSON.stringify(success));
+                        }
                         resolve(success);
                     }, function (err) {
                         console.log("Unsuccessful connection to Facebook API!");
@@ -643,6 +688,8 @@ exports.UserData = undefined;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class;
+// import {FbProvider} from '../providers/fb-provider';
+
 
 var _core = require('angular2/core');
 
@@ -681,7 +728,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             console.log("UserData: getUser() reached...", "UserID:", userID);
 
             return new Promise(function (resolve) {
-                _this.paceUser = _this.getPaceUser(userID).then(function (paceUser) {
+                _this.getPaceUser(userID).then(function (paceUser) {
                     resolve(paceUser);
                 });
             });
@@ -746,10 +793,27 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             this.events.publish('user:signup');
         }
     }, {
-        key: 'logout',
-        value: function logout() {
-            this.storage.remove(this.HAS_LOGGED_IN);
-            this.events.publish('user:logout');
+        key: 'FbLogout',
+        value: function FbLogout(UserID) {
+            var _this3 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this3.storage.remove(_this3.HAS_LOGGED_IN);
+                console.log("UserData: logout() reached...");
+
+                facebookConnectPlugin.logout(function () {
+                    console.log("Logging out...");
+
+                    _this3.events.publish('user:logout');
+
+                    resolve();
+                }, function (err) {
+                    console.log("Unsuccessful logout from Facebook!");
+                    console.error(JSON.stringify(err.json()));
+
+                    reject();
+                });
+            });
         }
 
         // return a promise

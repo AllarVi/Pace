@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Storage, LocalStorage, Events} from 'ionic-angular';
 import {Http} from 'angular2/http';
+// import {FbProvider} from '../providers/fb-provider';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -22,7 +23,7 @@ export class UserData {
         console.log("UserData: getUser() reached...", "UserID:", userID);
 
         return new Promise(resolve => {
-            this.paceUser = this.getPaceUser(userID).then((paceUser) => {
+            this.getPaceUser(userID).then((paceUser) => {
                 resolve(paceUser);
             });
         });
@@ -77,9 +78,24 @@ export class UserData {
         this.events.publish('user:signup');
     }
 
-    logout() {
-        this.storage.remove(this.HAS_LOGGED_IN);
-        this.events.publish('user:logout');
+    FbLogout(UserID) {
+        return new Promise((resolve, reject) => {
+            this.storage.remove(this.HAS_LOGGED_IN);
+            console.log("UserData: logout() reached...");
+
+            facebookConnectPlugin.logout(() => {
+                console.log("Logging out with userID...", UserID);
+
+                this.events.publish('user:logout');
+
+                resolve();
+            }, (err) => {
+                console.log("Unsuccessful logout from Facebook!");
+                console.error(JSON.stringify(err.json()));
+
+                reject();
+            });
+        });
     }
 
     // return a promise

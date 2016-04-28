@@ -1,5 +1,5 @@
 import 'es6-shim';
-import {App, IonicApp, Events, Platform} from 'ionic-angular';
+import {App, IonicApp, Events, Platform, ActionSheet} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
@@ -35,6 +35,7 @@ class PaceApp {
         this.loggedIn = false;
 
         this.fbProvider = fbProvider;
+        this.fbLoginStatus = null;
 
         // Call any initial plugins when ready
         platform.ready().then(() => {
@@ -43,6 +44,7 @@ class PaceApp {
 
         // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
+            this.fbLoginStatus = FbLoginStatus;
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 this.root = DashboardPage;
@@ -84,17 +86,56 @@ class PaceApp {
         let nav = this.app.getComponent('nav');
 
         if (page.index) {
+            console.log("Setting navRoot to index:");
             nav.setRoot(page.component, {tabIndex: page.index});
         } else {
+            console.log("Setting navRoot to component:");
             nav.setRoot(page.component);
         }
 
         if (page.title === 'Logout') {
             // Give the menu time to close before changing to logged out
             setTimeout(() => {
-                this.userData.logout();
+                console.log("Logging out initialized...");
+                this.initLogout(nav, this.userData, this.fbLoginStatus);
             }, 1000);
         }
+    }
+
+    initLogout(nav, userData, fbLoginStatus) {
+        let actionSheet = ActionSheet.create({
+            title: 'Are you sure?',
+            buttons: [
+                {
+                    text: 'Log out',
+                    role: 'destructive',
+                    handler: () => {
+                        let navTransition = actionSheet.dismiss();
+
+                        console.log("Starting the async mehtod...");
+                        userData.FbLogout(fbLoginStatus.authResponse.userID)
+                            .then(() => {
+                                console.log("Finished call to Facebook about logging out");
+
+                                navTransition.then(() => {
+                                    console.log("Navigating to LoginPage...");
+                                    nav.setRoot(LoginPage);
+                                });
+                            });
+                        return false;
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+
+        nav.present(actionSheet);
     }
 
     listenToLoginEvents() {

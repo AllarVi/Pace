@@ -17,7 +17,6 @@ export class LoginPage {
         this.fb = fbProvider;
         this.email = '';
         this.name = '';
-        this.id = '';
 
         this.nav = nav;
         this.userData = userData;
@@ -36,8 +35,8 @@ export class LoginPage {
                     console.log(this.email);
                     this.name = profileData.name;
                     console.log(this.name);
-                    this.id = profileData.id;
-                    console.log(this.id);
+
+                    this.nav.push(TabsPage);
                 }
             );
         });
