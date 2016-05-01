@@ -35,7 +35,6 @@ class PaceApp {
         this.loggedIn = false;
 
         this.fbProvider = fbProvider;
-        this.fbLoginStatus = null;
 
         // Call any initial plugins when ready
         platform.ready().then(() => {
@@ -44,7 +43,6 @@ class PaceApp {
 
         // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
-            this.fbLoginStatus = FbLoginStatus;
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 this.root = DashboardPage;
@@ -104,7 +102,7 @@ class PaceApp {
 
     initLogout(nav, userData) {
         let actionSheet = ActionSheet.create({
-            title: 'Are you sure?',
+            title: 'Exit now?',
             buttons: [
                 {
                     text: 'Log out',

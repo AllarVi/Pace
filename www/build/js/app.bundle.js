@@ -56,7 +56,6 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
         this.loggedIn = false;
 
         this.fbProvider = fbProvider;
-        this.fbLoginStatus = null;
 
         // Call any initial plugins when ready
         platform.ready().then(function () {
@@ -65,7 +64,6 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
 
         // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
-            _this.fbLoginStatus = FbLoginStatus;
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 _this.root = _dashboard.DashboardPage;
@@ -121,7 +119,7 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
         key: 'initLogout',
         value: function initLogout(nav, userData) {
             var actionSheet = _ionicAngular.ActionSheet.create({
-                title: 'Are you sure?',
+                title: 'Exit now?',
                 buttons: [{
                     text: 'Log out',
                     role: 'destructive',
