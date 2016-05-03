@@ -271,7 +271,7 @@ var GroupDetailPage = exports.GroupDetailPage = (_dec = (0, _ionicAngular.Page)(
 }()) || _class);
 
 },{"ionic-angular":330}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -282,15 +282,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class;
 
-var _ionicAngular = require('ionic-angular');
+var _ionicAngular = require("ionic-angular");
 
-var _tabs = require('../tabs/tabs');
+var _tabs = require("../tabs/tabs");
 
-var _signup = require('../signup/signup');
+var _userData = require("../../providers/user-data");
 
-var _userData = require('../../providers/user-data');
-
-var _fbProvider = require('../../providers/fb-provider');
+var _fbProvider = require("../../providers/fb-provider");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -298,13 +296,13 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     templateUrl: 'build/pages/login/login.html'
 }), _dec(_class = function () {
     _createClass(LoginPage, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
-            return [[_ionicAngular.NavController], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
+            return [[_ionicAngular.NavController], [_ionicAngular.MenuController], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
         }
     }]);
 
-    function LoginPage(nav, userData, platform, fbProvider) {
+    function LoginPage(nav, menu, userData, platform, fbProvider) {
         _classCallCheck(this, LoginPage);
 
         this.platform = platform;
@@ -313,14 +311,29 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         this.name = '';
 
         this.nav = nav;
+        this.menu = menu;
         this.userData = userData;
 
         this.login = {};
         this.submitted = false;
+
+        this.slides = [{
+            title: "Welcome to <b>ICA</b>",
+            description: "The <b>Ionic Conference App</b> is a practical preview of the Ionic Framework in action, and a demonstration of proper code use.",
+            image: "img/ica-slidebox-img-1.png"
+        }, {
+            title: "What is Ionic?",
+            description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
+            image: "img/ica-slidebox-img-2.png"
+        }, {
+            title: " What is Ionic Platform?",
+            description: "The <b>Ionic Platform</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
+            image: "img/ica-slidebox-img-3.png"
+        }];
     }
 
     _createClass(LoginPage, [{
-        key: 'fbLogin',
+        key: "fbLogin",
         value: function fbLogin() {
             var _this = this;
 
@@ -338,7 +351,7 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
             });
         }
     }, {
-        key: 'onLogin',
+        key: "onLogin",
         value: function onLogin(form) {
             this.submitted = true;
 
@@ -348,16 +361,23 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
             }
         }
     }, {
-        key: 'onSignup',
-        value: function onSignup() {
-            this.nav.push(_signup.SignupPage);
+        key: "onPageDidEnter",
+        value: function onPageDidEnter() {
+            // the left menu should be disabled on the tutorial page
+            this.menu.enable(false);
+        }
+    }, {
+        key: "onPageDidLeave",
+        value: function onPageDidLeave() {
+            // enable the left menu when leaving the tutorial page
+            this.menu.enable(true);
         }
     }]);
 
     return LoginPage;
 }()) || _class);
 
-},{"../../providers/fb-provider":9,"../../providers/user-data":10,"../signup/signup":7,"../tabs/tabs":8,"ionic-angular":330}],6:[function(require,module,exports){
+},{"../../providers/fb-provider":9,"../../providers/user-data":10,"../tabs/tabs":8,"ionic-angular":330}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -604,6 +624,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 
                                 _this.events.publish('user:login');
 
+                                // Check if we have our user saved
                                 _this.userData.getUser(success.authResponse.userID).then(function (user) {
                                     console.log("Fb-provider: getUser(): ");
                                     console.log(JSON.stringify(user.json()));
@@ -745,7 +766,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
 
             // Don't have the data yet
             return new Promise(function (resolve) {
-                _this2.url = 'http://localhost:8080/user?facebookId=' + userID;
+                _this2.url = 'http://localhost:8080/api/user?facebookId=' + userID;
                 console.log("Making request to: " + _this2.url);
                 console.log("Fetching user data from BackPace...");
                 _this2.http.get(_this2.url).subscribe(function (paceUser) {

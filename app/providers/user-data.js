@@ -39,7 +39,7 @@ export class UserData {
 
         // Don't have the data yet
         return new Promise(resolve => {
-            this.url = 'http://localhost:8080/user?facebookId=' + userID;
+            this.url = 'http://localhost:8080/api/user?facebookId=' + userID;
             console.log("Making request to: " + this.url);
             console.log("Fetching user data from BackPace...");
             this.http.get(this.url).subscribe(paceUser => {

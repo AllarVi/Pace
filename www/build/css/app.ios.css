@@ -8024,9 +8024,16 @@ body {
   width: auto;
   margin-right: 10px; }
 
-.tutorial-page .toolbar-background {
-  background: #fff;
-  border-color: transparent; }
+.login-page .logo {
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center; }
+
+.login-page .logo img {
+  max-width: 150px; }
+
+.facebook-btn {
+  background-color: #3b5998; }
 
 .tutorial-page .slide-zoom {
   height: 100%; }
@@ -8049,14 +8056,6 @@ body {
   color: #60646B; }
   .tutorial-page p b {
     color: #000000; }
-
-.login-page .logo {
-  padding: 20px 0;
-  min-height: 200px;
-  text-align: center; }
-
-.login-page .logo img {
-  max-width: 150px; }
 
 ion-label {
   margin: 0 8px 0 0; }

@@ -30,6 +30,7 @@ export class FbProvider {
 
                             this.events.publish('user:login');
 
+                            // Check if we have our user saved
                             this.userData.getUser(success.authResponse.userID).then((user) => {
                                 console.log("Fb-provider: getUser(): ");
                                 console.log(JSON.stringify(user.json()));
