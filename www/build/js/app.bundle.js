@@ -25,8 +25,6 @@ var _fbProvider = require('./providers/fb-provider');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import {TutorialPage} from './pages/tutorial/tutorial';
-
 var PaceApp = (_dec = (0, _ionicAngular.App)({
     templateUrl: 'build/app.html',
     providers: [_userData.UserData, _fbProvider.FbProvider],
@@ -62,7 +60,6 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
             _ionicNative.StatusBar.styleDefault();
         });
 
-        // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
@@ -656,25 +653,50 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             console.log("Fb-provider: login() reached...");
             this.p = new Promise(function (resolve, reject) {
                 if (_this2.platform.is('cordova')) {
-                    console.log("Connecting to facebookConnectPlugin...");
-                    facebookConnectPlugin.login(['email'], function (success) {
-                        if (success.status === 'connected') {
-                            _this2.events.publish('user:login');
-                            console.log("Successful connection to Facebook API!");
-                            console.log(JSON.stringify(success));
-                        }
-                        resolve(success);
-                    }, function (err) {
-                        console.log("Unsuccessful connection to Facebook API!");
-                        console.log(JSON.stringify(err));
-                        reject(err);
+                    _this2.getFbLoginStatus().then(function (FbLoginStatus) {
+                        _this2.fbLoginStatusSuccess(FbLoginStatus, resolve, reject);
                     });
                 } else {
-                    console.log("Please run me on a device");
                     reject('Please run me on a device');
                 }
             });
             return this.p;
+        }
+    }, {
+        key: 'fbLoginStatusSuccess',
+        value: function fbLoginStatusSuccess(FbLoginStatus, resolve, reject) {
+            var _this3 = this;
+
+            console.log("PaceApp: User status:", FbLoginStatus.status);
+            if (FbLoginStatus.status === 'connected') {
+                console.log("We shouldn't get here...");
+            } else {
+                console.log("getFbLoginStatus", FbLoginStatus.status);
+
+                facebookConnectPlugin.login(['email', 'public_profile'], function (success) {
+                    _this3.fbLoginSuccess(success);
+                    resolve(success);
+                }, function (err) {
+                    _this3.fbLoginError(err);
+                    reject(err);
+                });
+            }
+        }
+    }, {
+        key: 'fbLoginError',
+        value: function fbLoginError(err) {
+            console.log("Unsuccessful Facebook login!");
+            console.log(JSON.stringify(err));
+        }
+    }, {
+        key: 'fbLoginSuccess',
+        value: function fbLoginSuccess(success) {
+            if (success.status === 'connected') {
+                this.events.publish('user:login');
+
+                console.log("Successful Facebook login!");
+                console.log(JSON.stringify(success));
+            }
         }
     }, {
         key: 'getCurrentUserProfile',
@@ -758,11 +780,6 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             var _this2 = this;
 
             console.log("UserData: getPaceUser() reached...");
-            // if (this.paceUser) {
-            //     console.log("User already loaded");
-            //     console.log(JSON.stringify(this.paceUser.json()));
-            //     return Promise.resolve(this.paceUser);
-            // }
 
             // Don't have the data yet
             return new Promise(function (resolve) {
@@ -774,7 +791,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
                     console.log(JSON.stringify(paceUser.json()));
                     resolve(paceUser);
                 }, function (error) {
-                    console.log("Error occurred while fetching user data...");
+                    console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                     console.log(JSON.stringify(error.json()));
                 }, function () {
                     return console.log('User data fetching complete!');
@@ -804,12 +821,6 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
         value: function login(username, password) {
             this.storage.set(this.HAS_LOGGED_IN, true);
             this.events.publish('user:login');
-        }
-    }, {
-        key: 'signup',
-        value: function signup(username, password) {
-            this.storage.set(this.HAS_LOGGED_IN, true);
-            this.events.publish('user:signup');
         }
     }, {
         key: 'FbLogout',

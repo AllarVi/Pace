@@ -59,28 +59,47 @@ export class FbProvider {
         console.log("Fb-provider: login() reached...");
         this.p = new Promise((resolve, reject) => {
             if (this.platform.is('cordova')) {
-                console.log("Connecting to facebookConnectPlugin...");
-                facebookConnectPlugin.login(['email'], (success) => {
-                    if (success.status === 'connected') {
-                        this.events.publish('user:login');
-                        console.log("Successful connection to Facebook API!");
-                        console.log(JSON.stringify(success));
-                    }
-                    resolve(success);
-                }, (err) => {
-                    console.log("Unsuccessful connection to Facebook API!");
-                    console.log(JSON.stringify(err));
-                    reject(err);
+                this.getFbLoginStatus().then((FbLoginStatus) => {
+                    this.fbLoginStatusSuccess(FbLoginStatus, resolve, reject);
                 });
-
             } else {
-                console.log("Please run me on a device");
                 reject('Please run me on a device');
             }
         });
         return this.p;
     }
-    
+
+    fbLoginStatusSuccess(FbLoginStatus, resolve, reject) {
+        console.log("PaceApp: User status:", FbLoginStatus.status);
+        if (FbLoginStatus.status === 'connected') {
+            console.log("We shouldn't get here...");
+        } else {
+            console.log("getFbLoginStatus", FbLoginStatus.status);
+
+            facebookConnectPlugin.login(['email', 'public_profile'], (success) => {
+                this.fbLoginSuccess(success);
+                resolve(success);
+            }, (err) => {
+                this.fbLoginError(err);
+                reject(err);
+            });
+        }
+    };
+
+    fbLoginError(err) {
+        console.log("Unsuccessful Facebook login!");
+        console.log(JSON.stringify(err));
+    };
+
+    fbLoginSuccess(success) {
+        if (success.status === 'connected') {
+            this.events.publish('user:login');
+
+            console.log("Successful Facebook login!");
+            console.log(JSON.stringify(success));
+        }
+    }
+
     getCurrentUserProfile() {
         console.log("Fb-provider: getCurrentUserProfile() reached...");
         this.p = new Promise((resolve, reject) => {

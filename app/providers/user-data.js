@@ -31,11 +31,6 @@ export class UserData {
 
     getPaceUser(userID) {
         console.log("UserData: getPaceUser() reached...");
-        // if (this.paceUser) {
-        //     console.log("User already loaded");
-        //     console.log(JSON.stringify(this.paceUser.json()));
-        //     return Promise.resolve(this.paceUser);
-        // }
 
         // Don't have the data yet
         return new Promise(resolve => {
@@ -47,7 +42,7 @@ export class UserData {
                 console.log(JSON.stringify(paceUser.json()));
                 resolve(paceUser)
             }, error => {
-                console.log("Error occurred while fetching user data...");
+                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                 console.log(JSON.stringify(error.json()));
             }, () => console.log('User data fetching complete!'));
         });
@@ -71,11 +66,6 @@ export class UserData {
     login(username, password) {
         this.storage.set(this.HAS_LOGGED_IN, true);
         this.events.publish('user:login');
-    }
-
-    signup(username, password) {
-        this.storage.set(this.HAS_LOGGED_IN, true);
-        this.events.publish('user:signup');
     }
 
     FbLogout() {

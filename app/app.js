@@ -7,8 +7,6 @@ import {LoginPage} from './pages/login/login';
 import {DashboardPage} from './pages/dashboard/dashboard';
 import {SignupPage} from './pages/signup/signup';
 import {FbProvider} from './providers/fb-provider';
-// import {TutorialPage} from './pages/tutorial/tutorial';
-
 
 @App({
     templateUrl: 'build/app.html',
@@ -41,7 +39,6 @@ class PaceApp {
             StatusBar.styleDefault();
         });
 
-        // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
