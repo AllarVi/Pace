@@ -336,15 +336,8 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
 
             console.log("Facebook login initialized...");
             this.fb.login().then(function () {
-                _this.fb.getCurrentUserProfile().then(function (profileData) {
-                    console.log("Parsing out profile data:");
-                    _this.email = profileData.email;
-                    console.log(_this.email);
-                    _this.name = profileData.name;
-                    console.log(_this.name);
-
-                    _this.nav.push(_tabs.TabsPage);
-                });
+                console.log("Navigating to home...");
+                _this.nav.push(_tabs.TabsPage);
             });
         }
     }, {
@@ -564,7 +557,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
 }()) || _class);
 
 },{"../about/about":2,"../dashboard/dashboard":3,"../profile/profile":6,"ionic-angular":330}],9:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -575,17 +568,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class;
 
-var _ionicAngular = require('ionic-angular');
+var _ionicAngular = require("ionic-angular");
 
-var _core = require('angular2/core');
+var _core = require("angular2/core");
 
-var _userData = require('../providers/user-data');
+var _userData = require("../providers/user-data");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(FbProvider, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
             return [[_ionicAngular.Events], [_ionicAngular.Platform], [_userData.UserData]];
         }
@@ -605,7 +598,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 
 
     _createClass(FbProvider, [{
-        key: 'getFbLoginStatus',
+        key: "getFbLoginStatus",
         value: function getFbLoginStatus() {
             var _this = this;
 
@@ -613,7 +606,6 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             this.loginStatus = new Promise(function (resolve, reject) {
                 _this.platform.ready().then(function () {
                     if (_this.platform.is('cordova')) {
-                        console.log("Running on a device or simulator...");
                         facebookConnectPlugin.getLoginStatus(function (success) {
                             console.log("getLoginStatus connetion...");
                             if (success.status === 'connected') {
@@ -622,9 +614,8 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
                                 _this.events.publish('user:login');
 
                                 // Check if we have our user saved
-                                _this.userData.getUser(success.authResponse.userID).then(function (user) {
+                                _this.userData.getUser(success.authResponse.userID).then(function () {
                                     console.log("Fb-provider: getUser(): ");
-                                    console.log(JSON.stringify(user.json()));
                                     resolve(success);
                                 });
                             } else if (success.status === 'not_authorized') {
@@ -646,7 +637,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             return this.loginStatus;
         }
     }, {
-        key: 'login',
+        key: "login",
         value: function login() {
             var _this2 = this;
 
@@ -663,7 +654,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             return this.p;
         }
     }, {
-        key: 'fbLoginStatusSuccess',
+        key: "fbLoginStatusSuccess",
         value: function fbLoginStatusSuccess(FbLoginStatus, resolve, reject) {
             var _this3 = this;
 
@@ -674,8 +665,11 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
                 console.log("getFbLoginStatus", FbLoginStatus.status);
 
                 facebookConnectPlugin.login(['email', 'public_profile'], function (success) {
-                    _this3.fbLoginSuccess(success);
-                    resolve(success);
+                    console.log("Login call successful!");
+                    _this3.fbLoginSuccess(success).then(function () {
+                        console.log("Resolving after fbLoginSuccess...");
+                        resolve();
+                    });
                 }, function (err) {
                     _this3.fbLoginError(err);
                     reject(err);
@@ -683,31 +677,48 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             }
         }
     }, {
-        key: 'fbLoginError',
+        key: "fbLoginError",
         value: function fbLoginError(err) {
             console.log("Unsuccessful Facebook login!");
             console.log(JSON.stringify(err));
         }
     }, {
-        key: 'fbLoginSuccess',
+        key: "fbLoginSuccess",
         value: function fbLoginSuccess(success) {
-            if (success.status === 'connected') {
-                this.events.publish('user:login');
+            var _this4 = this;
 
-                console.log("Successful Facebook login!");
-                console.log(JSON.stringify(success));
-            }
+            this.p = new Promise(function (resolve, reject) {
+                if (success.status === 'connected') {
+                    _this4.getCurrentUserProfile(success.authResponse.accessToken).then(function (profileData) {
+                        console.log("fbLoginSuccess: getCurrentUserProfile:");
+                        console.log(JSON.stringify(profileData));
+
+                        _this4.userData.saveNewPaceUser(profileData, success.status).then(function () {
+                            console.log("Publishing login...");
+                            _this4.events.publish('user:login');
+                            resolve();
+                        }, function (err) {
+                            console.log(JSON.stringify(err));
+                            reject();
+                        });
+                    });
+                }
+            });
+            return this.p;
         }
+
+        // This method is to get the user profile info from the facebook api
+
     }, {
-        key: 'getCurrentUserProfile',
-        value: function getCurrentUserProfile() {
+        key: "getCurrentUserProfile",
+        value: function getCurrentUserProfile(authResponse) {
             console.log("Fb-provider: getCurrentUserProfile() reached...");
             this.p = new Promise(function (resolve, reject) {
-                facebookConnectPlugin.api('me?fields=email,name', null, function (profileData) {
+                facebookConnectPlugin.api('me?fields=email,name&access_token=' + authResponse.accessToken, null, function (profileData) {
                     console.log(JSON.stringify(profileData));
+                    console.log("Resolving...");
                     resolve(profileData);
                 }, function (err) {
-                    console.log(JSON.stringify(err));
                     reject(err);
                 });
             });
@@ -719,7 +730,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 }()) || _class);
 
 },{"../providers/user-data":10,"angular2/core":13,"ionic-angular":330}],10:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -729,22 +740,22 @@ exports.UserData = undefined;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class;
-// import {FbProvider} from '../providers/fb-provider';
 
+var _core = require("angular2/core");
 
-var _core = require('angular2/core');
+var _ionicAngular = require("ionic-angular");
 
-var _ionicAngular = require('ionic-angular');
+var _http = require("angular2/http");
 
-var _http = require('angular2/http');
-
-require('rxjs/add/operator/map');
+require("rxjs/add/operator/map");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// import {FbProvider} from '../providers/fb-provider';
+
 var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(UserData, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
             return [[_ionicAngular.Events], [_http.Http]];
         }
@@ -762,7 +773,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     }
 
     _createClass(UserData, [{
-        key: 'getUser',
+        key: "getUser",
         value: function getUser(userID) {
             var _this = this;
 
@@ -775,7 +786,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             });
         }
     }, {
-        key: 'getPaceUser',
+        key: "getPaceUser",
         value: function getPaceUser(userID) {
             var _this2 = this;
 
@@ -799,17 +810,46 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             });
         }
     }, {
-        key: 'hasFavorite',
+        key: "saveNewPaceUser",
+        value: function saveNewPaceUser(userProfile, status) {
+            var _this3 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this3.url = 'http://localhost:8080/api/user';
+                console.log("Making request to: " + _this3.url);
+
+                _this3.paceUser = JSON.stringify({
+                    facebookId: userProfile.id,
+                    name: userProfile.name,
+                    authResponse: status,
+                    picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+                });
+
+                _this3.http.post(_this3.url, _this3.paceUser).subscribe(function (paceUser) {
+                    console.log("Created user from BackPace...");
+                    console.log(JSON.stringify(paceUser.json()));
+                    resolve(paceUser);
+                }, function (error) {
+                    console.log("Error occurred while creating user data... probably need to enable correct cors mapping");
+                    console.log(JSON.stringify(error.json()));
+                    reject();
+                }, function () {
+                    return console.log('User data fetching complete!');
+                });
+            });
+        }
+    }, {
+        key: "hasFavorite",
         value: function hasFavorite(sessionName) {
             return this._favorites.indexOf(sessionName) > -1;
         }
     }, {
-        key: 'addFavorite',
+        key: "addFavorite",
         value: function addFavorite(sessionName) {
             this._favorites.push(sessionName);
         }
     }, {
-        key: 'removeFavorite',
+        key: "removeFavorite",
         value: function removeFavorite(sessionName) {
             var index = this._favorites.indexOf(sessionName);
             if (index > -1) {
@@ -817,24 +857,24 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             }
         }
     }, {
-        key: 'login',
+        key: "login",
         value: function login(username, password) {
             this.storage.set(this.HAS_LOGGED_IN, true);
             this.events.publish('user:login');
         }
     }, {
-        key: 'FbLogout',
+        key: "FbLogout",
         value: function FbLogout() {
-            var _this3 = this;
+            var _this4 = this;
 
             return new Promise(function (resolve, reject) {
-                _this3.storage.remove(_this3.HAS_LOGGED_IN);
+                _this4.storage.remove(_this4.HAS_LOGGED_IN);
                 console.log("UserData: logout() reached...");
 
                 facebookConnectPlugin.logout(function () {
                     console.log("Logging out...");
 
-                    _this3.events.publish('user:logout');
+                    _this4.events.publish('user:logout');
 
                     resolve();
                 }, function (err) {
@@ -849,7 +889,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
         // Return a promise
 
     }, {
-        key: 'hasLoggedIn',
+        key: "hasLoggedIn",
         value: function hasLoggedIn() {
             return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
                 return value;

@@ -1,8 +1,8 @@
-import {Injectable} from 'angular2/core';
-import {Storage, LocalStorage, Events} from 'ionic-angular';
-import {Http} from 'angular2/http';
+import {Injectable} from "angular2/core";
+import {Storage, LocalStorage, Events} from "ionic-angular";
+import {Http} from "angular2/http";
+import "rxjs/add/operator/map";
 // import {FbProvider} from '../providers/fb-provider';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserData {
@@ -44,6 +44,30 @@ export class UserData {
             }, error => {
                 console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                 console.log(JSON.stringify(error.json()));
+            }, () => console.log('User data fetching complete!'));
+        });
+    }
+
+    saveNewPaceUser(userProfile, status) {
+        return new Promise((resolve, reject) => {
+            this.url = 'http://localhost:8080/api/user';
+            console.log("Making request to: " + this.url);
+
+            this.paceUser = JSON.stringify({
+                facebookId: userProfile.id,
+                name: userProfile.name,
+                authResponse: status,
+                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+            });
+
+            this.http.post(this.url, this.paceUser).subscribe(paceUser => {
+                console.log("Created user from BackPace...");
+                console.log(JSON.stringify(paceUser.json()));
+                resolve(paceUser)
+            }, error => {
+                console.log("Error occurred while creating user data... probably need to enable correct cors mapping");
+                console.log(JSON.stringify(error.json()));
+                reject();
             }, () => console.log('User data fetching complete!'));
         });
     }

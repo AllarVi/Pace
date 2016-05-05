@@ -1,6 +1,6 @@
-import {Page, Platform, Events} from 'ionic-angular';
-import {Injectable} from 'angular2/core';
-import {UserData} from '../providers/user-data';
+import {Page, Platform, Events} from "ionic-angular";
+import {Injectable} from "angular2/core";
+import {UserData} from "../providers/user-data";
 
 @Injectable()
 export class FbProvider {
@@ -22,7 +22,6 @@ export class FbProvider {
         this.loginStatus = new Promise((resolve, reject) => {
             this.platform.ready().then(() => {
                 if (this.platform.is('cordova')) {
-                    console.log("Running on a device or simulator...");
                     facebookConnectPlugin.getLoginStatus((success) => {
                         console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
@@ -31,9 +30,8 @@ export class FbProvider {
                             this.events.publish('user:login');
 
                             // Check if we have our user saved
-                            this.userData.getUser(success.authResponse.userID).then((user) => {
+                            this.userData.getUser(success.authResponse.userID).then(() => {
                                 console.log("Fb-provider: getUser(): ");
-                                console.log(JSON.stringify(user.json()));
                                 resolve(success);
                             });
                         } else if (success.status === 'not_authorized') {
@@ -77,8 +75,11 @@ export class FbProvider {
             console.log("getFbLoginStatus", FbLoginStatus.status);
 
             facebookConnectPlugin.login(['email', 'public_profile'], (success) => {
-                this.fbLoginSuccess(success);
-                resolve(success);
+                console.log("Login call successful!");
+                this.fbLoginSuccess(success).then(() => {
+                    console.log("Resolving after fbLoginSuccess...");
+                    resolve();
+                });
             }, (err) => {
                 this.fbLoginError(err);
                 reject(err);
@@ -92,23 +93,38 @@ export class FbProvider {
     };
 
     fbLoginSuccess(success) {
-        if (success.status === 'connected') {
-            this.events.publish('user:login');
+        this.p = new Promise((resolve, reject) => {
+            if (success.status === 'connected') {
+                this.getCurrentUserProfile(success.authResponse.accessToken).then(
+                    (profileData) => {
+                        console.log("fbLoginSuccess: getCurrentUserProfile:");
+                        console.log(JSON.stringify(profileData));
 
-            console.log("Successful Facebook login!");
-            console.log(JSON.stringify(success));
-        }
+                        this.userData.saveNewPaceUser(profileData, success.status).then(() => {
+                            console.log("Publishing login...");
+                            this.events.publish('user:login');
+                            resolve()
+                        }, err => {
+                            console.log(JSON.stringify(err));
+                            reject()
+                        });
+                    }
+                );
+            }
+        });
+        return this.p;
     }
 
-    getCurrentUserProfile() {
+    // This method is to get the user profile info from the facebook api
+    getCurrentUserProfile(authResponse) {
         console.log("Fb-provider: getCurrentUserProfile() reached...");
         this.p = new Promise((resolve, reject) => {
-            facebookConnectPlugin.api('me?fields=email,name', null,
+            facebookConnectPlugin.api('me?fields=email,name&access_token=' + authResponse.accessToken, null,
                 (profileData) => {
                     console.log(JSON.stringify(profileData));
+                    console.log("Resolving...");
                     resolve(profileData);
                 }, (err) => {
-                    console.log(JSON.stringify(err));
                     reject(err);
                 });
         });

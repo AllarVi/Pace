@@ -46,17 +46,8 @@ export class LoginPage {
     fbLogin() {
         console.log("Facebook login initialized...");
         this.fb.login().then(() => {
-            this.fb.getCurrentUserProfile().then(
-                (profileData) => {
-                    console.log("Parsing out profile data:");
-                    this.email = profileData.email;
-                    console.log(this.email);
-                    this.name = profileData.name;
-                    console.log(this.name);
-
-                    this.nav.push(TabsPage);
-                }
-            );
+            console.log("Navigating to home...");
+            this.nav.push(TabsPage);
         });
     }
 
