@@ -20,7 +20,20 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.pace"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.pacewayer"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.pacewayer"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.pacewayer"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.pacewayer"
+        }
+    }
 }

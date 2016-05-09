@@ -23,7 +23,7 @@
         <ion-segment-button value="progress">
             Progress
         </ion-segment-button>
-        <ion-segment-button value="ducklings">
+        <ion-segment-button value="achievements">
             Achievements
         </ion-segment-button>
     </ion-segment>
@@ -74,13 +74,10 @@
             </ion-item>
         </ion-list>
 
-        <ion-list *ngSwitchWhen="'ducklings'">
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-duckling-1.jpg">-->
-                </ion-thumbnail>
-                <h2>Daffy</h2>
-            </ion-item>
+        <ion-list *ngSwitchWhen="'achievements'">
+            <ion-card>
+                <img [src]="image">
+            </ion-card>
             <ion-item>
                 <ion-thumbnail item-left>
                     <!--<img src="img/thumbnail-duckling-2.jpg">-->
@@ -108,6 +105,6 @@
     <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
 </button>
 
-<button primary fab-bottom-mini fab-right-mini style="z-index: 999" class="button-fab-mini">
+<button primary fab-bottom-mini fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
     <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>
 </button>

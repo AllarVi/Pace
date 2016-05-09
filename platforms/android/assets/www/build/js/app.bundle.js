@@ -381,6 +381,8 @@ var _dec, _class, _dec2, _class2;
 
 var _ionicAngular = require('ionic-angular');
 
+var _core = require('angular2/core');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
@@ -389,15 +391,18 @@ var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
     _createClass(ProfilePage, null, [{
         key: 'parameters',
         get: function get() {
-            return [[_ionicAngular.NavController]];
+            return [[_core.NgZone], [_ionicAngular.NavController]];
         }
     }]);
 
-    function ProfilePage(nav, navParams) {
+    function ProfilePage(ngZone, nav, navParams) {
         _classCallCheck(this, ProfilePage);
 
+        this.ngZone = ngZone;
         this.nav = nav;
         this.navParams = navParams;
+
+        this.image = null;
     }
 
     _createClass(ProfilePage, [{
@@ -405,6 +410,30 @@ var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
         value: function openModal(characterNum) {
             var modal = _ionicAngular.Modal.create(ModalsContentPage, characterNum);
             this.nav.present(modal);
+        }
+    }, {
+        key: 'snapImage',
+        value: function snapImage() {
+            var _this = this;
+
+            var options = {
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                encodingType: Camera.EncodingType.JPEG,
+                quality: 100,
+                allowEdit: false,
+                saveToPhotoAlbum: true
+            };
+
+            navigator.camera.getPicture(function (data) {
+                var imgData = "data:image/jpeg;base64," + data;
+                _this.ngZone.run(function () {
+                    return _this.image = imgData;
+                });
+            }, function (error) {
+                console.log("Error occurred while taking an image!");
+                console.log(error);
+            }, options);
         }
     }]);
 
@@ -453,7 +482,7 @@ var ModalsContentPage = (_dec2 = (0, _ionicAngular.Page)({
     return ModalsContentPage;
 }()) || _class2);
 
-},{"ionic-angular":330}],7:[function(require,module,exports){
+},{"angular2/core":13,"ionic-angular":330}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

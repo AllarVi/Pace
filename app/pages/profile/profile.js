@@ -1,21 +1,49 @@
 import {IonicApp, Modal, Platform, NavController, NavParams, Page, ViewController} from 'ionic-angular';
+import {NgZone} from 'angular2/core';
 
 @Page({
     templateUrl: 'build/pages/profile/profile.html'
 })
 export class ProfilePage {
     static get parameters() {
-        return [[NavController]];
+        return [[NgZone], [NavController]];
     }
 
-    constructor(nav, navParams) {
+    constructor(ngZone, nav, navParams) {
+        this.ngZone = ngZone;
         this.nav = nav;
         this.navParams = navParams;
+
+        this.image = null;
     }
 
     openModal(characterNum) {
         let modal = Modal.create(ModalsContentPage, characterNum);
         this.nav.present(modal);
+    }
+
+    snapImage() {
+        // var options = {
+        //     destinationType: Camera.DestinationType.DATA_URL,
+        //     sourceType: Camera.PictureSourceType.CAMERA,
+        //     encodingType: Camera.EncodingType.JPEG,
+        //     quality: 100,
+        //     allowEdit: false,
+        //     saveToPhotoAlbum: true
+        // };
+
+        var options = {
+            limit: 3,
+            duration: 15
+        };
+
+        navigator.device.capture.captureVideo((data) => {
+            // var imgData = "data:image/jpeg;base64," + data;
+            this.ngZone.run(() => this.image = data);
+        }, (error) => {
+            console.log("Error occurred while taking an image!");
+            console.log(error);
+        }, options);
     }
 }
 
