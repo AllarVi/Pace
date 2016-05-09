@@ -74,12 +74,12 @@
     <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     <name>Pace</name>
     <description>
-        An Ionic Framework application for the Pace.
+        An Ionic 2 application for the Pace.
     </description>
     <author email="allar.viinamae@hotmail.com" href="http://ionicframework.com/">
-        Allar
+        Allar Viinamae
     </author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://127.0.0.1:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

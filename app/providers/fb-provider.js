@@ -118,8 +118,10 @@ export class FbProvider {
     // This method is to get the user profile info from the facebook api
     getCurrentUserProfile(authResponse) {
         console.log("Fb-provider: getCurrentUserProfile() reached...");
+        this.uri = "me?fields=email,name&access_token=" + authResponse;
+        console.log(this.uri);
         this.p = new Promise((resolve, reject) => {
-            facebookConnectPlugin.api('me?fields=email,name&access_token=' + authResponse.accessToken, null,
+            facebookConnectPlugin.api(this.uri, null,
                 (profileData) => {
                     console.log(JSON.stringify(profileData));
                     console.log("Resolving...");

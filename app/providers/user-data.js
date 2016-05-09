@@ -65,7 +65,7 @@ export class UserData {
                 console.log(JSON.stringify(paceUser.json()));
                 resolve(paceUser)
             }, error => {
-                console.log("Error occurred while creating user data... probably need to enable correct cors mapping");
+                console.log("Error... is backend running? probably need to enable cors mapping?");
                 console.log(JSON.stringify(error.json()));
                 reject();
             }, () => console.log('User data fetching complete!'));

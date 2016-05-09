@@ -8024,9 +8024,16 @@ body {
   width: auto;
   margin-right: 10px; }
 
-.tutorial-page .toolbar-background {
-  background: #fff;
-  border-color: transparent; }
+.login-page .logo {
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center; }
+
+.login-page .logo img {
+  max-width: 150px; }
+
+.facebook-btn {
+  background-color: #3b5998; }
 
 .tutorial-page .slide-zoom {
   height: 100%; }
@@ -8050,14 +8057,6 @@ body {
   .tutorial-page p b {
     color: #000000; }
 
-.login-page .logo {
-  padding: 20px 0;
-  min-height: 200px;
-  text-align: center; }
-
-.login-page .logo img {
-  max-width: 150px; }
-
 ion-label {
   margin: 0 8px 0 0; }
 
@@ -8071,6 +8070,39 @@ ion-label {
   /* Default 5px; */
   padding-bottom: 0;
   /* Default 5px; */ }
+
+.button-fab-mini {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  min-width: 0;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-clip: padding-box;
+  overflow: hidden;
+  font-size: 14px; }
+  .button-fab-mini ion-icon {
+    font-size: 2.0rem; }
+
+[fab-center-mini] {
+  left: 50%;
+  margin-left: -20px; }
+
+[fab-top-mini] {
+  top: 16px; }
+
+[fab-right-mini] {
+  right: 24px; }
+
+[fab-bottom-mini] {
+  bottom: 86px; }
+
+[fab-left-mini] {
+  left: 16px; }
+
+[fab-fixed-mini] {
+  position: fixed; }
 
 .profile-image {
   max-height: none;

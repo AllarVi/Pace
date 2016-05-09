@@ -10242,6 +10242,39 @@ ion-label {
   padding-bottom: 0;
   /* Default 5px; */ }
 
+.button-fab-mini {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  min-width: 0;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-clip: padding-box;
+  overflow: hidden;
+  font-size: 14px; }
+  .button-fab-mini ion-icon {
+    font-size: 2.0rem; }
+
+[fab-center-mini] {
+  left: 50%;
+  margin-left: -20px; }
+
+[fab-top-mini] {
+  top: 16px; }
+
+[fab-right-mini] {
+  right: 24px; }
+
+[fab-bottom-mini] {
+  bottom: 86px; }
+
+[fab-left-mini] {
+  left: 16px; }
+
+[fab-fixed-mini] {
+  position: fixed; }
+
 .profile-image {
   max-height: none;
   max-width: none;

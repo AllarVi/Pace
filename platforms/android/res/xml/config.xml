@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pace" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.pacewayer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="FacebookConnectPlugin">
         <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
@@ -36,10 +36,10 @@
     <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     <name>Pace</name>
     <description>
-        An Ionic Framework application for the Pace.
+        An Ionic 2 application for the Pace.
     </description>
     <author email="allar.viinamae@hotmail.com" href="http://ionicframework.com/">
-        Allar
+        Allar Viinamae
     </author>
     <content original-src="index.html" src="http://192.168.56.1:8100" />
     <access origin="*" />

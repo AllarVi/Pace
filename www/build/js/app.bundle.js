@@ -712,9 +712,13 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
     }, {
         key: "getCurrentUserProfile",
         value: function getCurrentUserProfile(authResponse) {
+            var _this5 = this;
+
             console.log("Fb-provider: getCurrentUserProfile() reached...");
+            this.uri = "me?fields=email,name&access_token=" + authResponse;
+            console.log(this.uri);
             this.p = new Promise(function (resolve, reject) {
-                facebookConnectPlugin.api('me?fields=email,name&access_token=' + authResponse.accessToken, null, function (profileData) {
+                facebookConnectPlugin.api(_this5.uri, null, function (profileData) {
                     console.log(JSON.stringify(profileData));
                     console.log("Resolving...");
                     resolve(profileData);
@@ -830,7 +834,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
                     console.log(JSON.stringify(paceUser.json()));
                     resolve(paceUser);
                 }, function (error) {
-                    console.log("Error occurred while creating user data... probably need to enable correct cors mapping");
+                    console.log("Error... is backend running? probably need to enable cors mapping?");
                     console.log(JSON.stringify(error.json()));
                     reject();
                 }, function () {

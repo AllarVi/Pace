@@ -25,8 +25,6 @@ var _fbProvider = require('./providers/fb-provider');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import {TutorialPage} from './pages/tutorial/tutorial';
-
 var PaceApp = (_dec = (0, _ionicAngular.App)({
     templateUrl: 'build/app.html',
     providers: [_userData.UserData, _fbProvider.FbProvider],
@@ -56,16 +54,13 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
         this.loggedIn = false;
 
         this.fbProvider = fbProvider;
-        this.fbLoginStatus = null;
 
         // Call any initial plugins when ready
         platform.ready().then(function () {
             _ionicNative.StatusBar.styleDefault();
         });
 
-        // this.root = TutorialPage; // Uncomment if tutorial page is needed when the app loads
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
-            _this.fbLoginStatus = FbLoginStatus;
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 _this.root = _dashboard.DashboardPage;
@@ -121,7 +116,7 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
         key: 'initLogout',
         value: function initLogout(nav, userData) {
             var actionSheet = _ionicAngular.ActionSheet.create({
-                title: 'Are you sure?',
+                title: 'Exit now?',
                 buttons: [{
                     text: 'Log out',
                     role: 'destructive',
@@ -273,7 +268,7 @@ var GroupDetailPage = exports.GroupDetailPage = (_dec = (0, _ionicAngular.Page)(
 }()) || _class);
 
 },{"ionic-angular":330}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -284,15 +279,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class;
 
-var _ionicAngular = require('ionic-angular');
+var _ionicAngular = require("ionic-angular");
 
-var _tabs = require('../tabs/tabs');
+var _tabs = require("../tabs/tabs");
 
-var _signup = require('../signup/signup');
+var _userData = require("../../providers/user-data");
 
-var _userData = require('../../providers/user-data');
-
-var _fbProvider = require('../../providers/fb-provider');
+var _fbProvider = require("../../providers/fb-provider");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -300,13 +293,13 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     templateUrl: 'build/pages/login/login.html'
 }), _dec(_class = function () {
     _createClass(LoginPage, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
-            return [[_ionicAngular.NavController], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
+            return [[_ionicAngular.NavController], [_ionicAngular.MenuController], [_userData.UserData], [_ionicAngular.Platform], [_fbProvider.FbProvider]];
         }
     }]);
 
-    function LoginPage(nav, userData, platform, fbProvider) {
+    function LoginPage(nav, menu, userData, platform, fbProvider) {
         _classCallCheck(this, LoginPage);
 
         this.platform = platform;
@@ -315,32 +308,40 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         this.name = '';
 
         this.nav = nav;
+        this.menu = menu;
         this.userData = userData;
 
         this.login = {};
         this.submitted = false;
+
+        this.slides = [{
+            title: "Welcome to <b>ICA</b>",
+            description: "The <b>Ionic Conference App</b> is a practical preview of the Ionic Framework in action, and a demonstration of proper code use.",
+            image: "img/ica-slidebox-img-1.png"
+        }, {
+            title: "What is Ionic?",
+            description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
+            image: "img/ica-slidebox-img-2.png"
+        }, {
+            title: " What is Ionic Platform?",
+            description: "The <b>Ionic Platform</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
+            image: "img/ica-slidebox-img-3.png"
+        }];
     }
 
     _createClass(LoginPage, [{
-        key: 'fbLogin',
+        key: "fbLogin",
         value: function fbLogin() {
             var _this = this;
 
             console.log("Facebook login initialized...");
             this.fb.login().then(function () {
-                _this.fb.getCurrentUserProfile().then(function (profileData) {
-                    console.log("Parsing out profile data:");
-                    _this.email = profileData.email;
-                    console.log(_this.email);
-                    _this.name = profileData.name;
-                    console.log(_this.name);
-
-                    _this.nav.push(_tabs.TabsPage);
-                });
+                console.log("Navigating to home...");
+                _this.nav.push(_tabs.TabsPage);
             });
         }
     }, {
-        key: 'onLogin',
+        key: "onLogin",
         value: function onLogin(form) {
             this.submitted = true;
 
@@ -350,16 +351,23 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
             }
         }
     }, {
-        key: 'onSignup',
-        value: function onSignup() {
-            this.nav.push(_signup.SignupPage);
+        key: "onPageDidEnter",
+        value: function onPageDidEnter() {
+            // the left menu should be disabled on the tutorial page
+            this.menu.enable(false);
+        }
+    }, {
+        key: "onPageDidLeave",
+        value: function onPageDidLeave() {
+            // enable the left menu when leaving the tutorial page
+            this.menu.enable(true);
         }
     }]);
 
     return LoginPage;
 }()) || _class);
 
-},{"../../providers/fb-provider":9,"../../providers/user-data":10,"../signup/signup":7,"../tabs/tabs":8,"ionic-angular":330}],6:[function(require,module,exports){
+},{"../../providers/fb-provider":9,"../../providers/user-data":10,"../tabs/tabs":8,"ionic-angular":330}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -549,7 +557,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
 }()) || _class);
 
 },{"../about/about":2,"../dashboard/dashboard":3,"../profile/profile":6,"ionic-angular":330}],9:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -560,17 +568,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class;
 
-var _ionicAngular = require('ionic-angular');
+var _ionicAngular = require("ionic-angular");
 
-var _core = require('angular2/core');
+var _core = require("angular2/core");
 
-var _userData = require('../providers/user-data');
+var _userData = require("../providers/user-data");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(FbProvider, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
             return [[_ionicAngular.Events], [_ionicAngular.Platform], [_userData.UserData]];
         }
@@ -590,7 +598,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 
 
     _createClass(FbProvider, [{
-        key: 'getFbLoginStatus',
+        key: "getFbLoginStatus",
         value: function getFbLoginStatus() {
             var _this = this;
 
@@ -598,7 +606,6 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             this.loginStatus = new Promise(function (resolve, reject) {
                 _this.platform.ready().then(function () {
                     if (_this.platform.is('cordova')) {
-                        console.log("Running on a device or simulator...");
                         facebookConnectPlugin.getLoginStatus(function (success) {
                             console.log("getLoginStatus connetion...");
                             if (success.status === 'connected') {
@@ -606,9 +613,9 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 
                                 _this.events.publish('user:login');
 
-                                _this.userData.getUser(success.authResponse.userID).then(function (user) {
+                                // Check if we have our user saved
+                                _this.userData.getUser(success.authResponse.userID).then(function () {
                                     console.log("Fb-provider: getUser(): ");
-                                    console.log(JSON.stringify(user.json()));
                                     resolve(success);
                                 });
                             } else if (success.status === 'not_authorized') {
@@ -630,43 +637,92 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
             return this.loginStatus;
         }
     }, {
-        key: 'login',
+        key: "login",
         value: function login() {
             var _this2 = this;
 
             console.log("Fb-provider: login() reached...");
             this.p = new Promise(function (resolve, reject) {
                 if (_this2.platform.is('cordova')) {
-                    console.log("Connecting to facebookConnectPlugin...");
-                    facebookConnectPlugin.login(['email'], function (success) {
-                        if (success.status === 'connected') {
-                            _this2.events.publish('user:login');
-                            console.log("Successful connection to Facebook API!");
-                            console.log(JSON.stringify(success));
-                        }
-                        resolve(success);
-                    }, function (err) {
-                        console.log("Unsuccessful connection to Facebook API!");
-                        console.log(JSON.stringify(err));
-                        reject(err);
+                    _this2.getFbLoginStatus().then(function (FbLoginStatus) {
+                        _this2.fbLoginStatusSuccess(FbLoginStatus, resolve, reject);
                     });
                 } else {
-                    console.log("Please run me on a device");
                     reject('Please run me on a device');
                 }
             });
             return this.p;
         }
     }, {
-        key: 'getCurrentUserProfile',
-        value: function getCurrentUserProfile() {
-            console.log("Fb-provider: getCurrentUserProfile() reached...");
+        key: "fbLoginStatusSuccess",
+        value: function fbLoginStatusSuccess(FbLoginStatus, resolve, reject) {
+            var _this3 = this;
+
+            console.log("PaceApp: User status:", FbLoginStatus.status);
+            if (FbLoginStatus.status === 'connected') {
+                console.log("We shouldn't get here...");
+            } else {
+                console.log("getFbLoginStatus", FbLoginStatus.status);
+
+                facebookConnectPlugin.login(['email', 'public_profile'], function (success) {
+                    console.log("Login call successful!");
+                    _this3.fbLoginSuccess(success).then(function () {
+                        console.log("Resolving after fbLoginSuccess...");
+                        resolve();
+                    });
+                }, function (err) {
+                    _this3.fbLoginError(err);
+                    reject(err);
+                });
+            }
+        }
+    }, {
+        key: "fbLoginError",
+        value: function fbLoginError(err) {
+            console.log("Unsuccessful Facebook login!");
+            console.log(JSON.stringify(err));
+        }
+    }, {
+        key: "fbLoginSuccess",
+        value: function fbLoginSuccess(success) {
+            var _this4 = this;
+
             this.p = new Promise(function (resolve, reject) {
-                facebookConnectPlugin.api('me?fields=email,name', null, function (profileData) {
+                if (success.status === 'connected') {
+                    _this4.getCurrentUserProfile(success.authResponse.accessToken).then(function (profileData) {
+                        console.log("fbLoginSuccess: getCurrentUserProfile:");
+                        console.log(JSON.stringify(profileData));
+
+                        _this4.userData.saveNewPaceUser(profileData, success.status).then(function () {
+                            console.log("Publishing login...");
+                            _this4.events.publish('user:login');
+                            resolve();
+                        }, function (err) {
+                            console.log(JSON.stringify(err));
+                            reject();
+                        });
+                    });
+                }
+            });
+            return this.p;
+        }
+
+        // This method is to get the user profile info from the facebook api
+
+    }, {
+        key: "getCurrentUserProfile",
+        value: function getCurrentUserProfile(authResponse) {
+            var _this5 = this;
+
+            console.log("Fb-provider: getCurrentUserProfile() reached...");
+            this.uri = "me?fields=email,name&access_token=" + authResponse;
+            console.log(this.uri);
+            this.p = new Promise(function (resolve, reject) {
+                facebookConnectPlugin.api(_this5.uri, null, function (profileData) {
                     console.log(JSON.stringify(profileData));
+                    console.log("Resolving...");
                     resolve(profileData);
                 }, function (err) {
-                    console.log(JSON.stringify(err));
                     reject(err);
                 });
             });
@@ -678,7 +734,7 @@ var FbProvider = exports.FbProvider = (_dec = (0, _core.Injectable)(), _dec(_cla
 }()) || _class);
 
 },{"../providers/user-data":10,"angular2/core":13,"ionic-angular":330}],10:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -688,22 +744,22 @@ exports.UserData = undefined;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class;
-// import {FbProvider} from '../providers/fb-provider';
 
+var _core = require("angular2/core");
 
-var _core = require('angular2/core');
+var _ionicAngular = require("ionic-angular");
 
-var _ionicAngular = require('ionic-angular');
+var _http = require("angular2/http");
 
-var _http = require('angular2/http');
-
-require('rxjs/add/operator/map');
+require("rxjs/add/operator/map");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// import {FbProvider} from '../providers/fb-provider';
+
 var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
     _createClass(UserData, null, [{
-        key: 'parameters',
+        key: "parameters",
         get: function get() {
             return [[_ionicAngular.Events], [_http.Http]];
         }
@@ -721,7 +777,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     }
 
     _createClass(UserData, [{
-        key: 'getUser',
+        key: "getUser",
         value: function getUser(userID) {
             var _this = this;
 
@@ -734,20 +790,15 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             });
         }
     }, {
-        key: 'getPaceUser',
+        key: "getPaceUser",
         value: function getPaceUser(userID) {
             var _this2 = this;
 
             console.log("UserData: getPaceUser() reached...");
-            // if (this.paceUser) {
-            //     console.log("User already loaded");
-            //     console.log(JSON.stringify(this.paceUser.json()));
-            //     return Promise.resolve(this.paceUser);
-            // }
 
             // Don't have the data yet
             return new Promise(function (resolve) {
-                _this2.url = 'http://localhost:8080/user?facebookId=' + userID;
+                _this2.url = 'http://localhost:8080/api/user?facebookId=' + userID;
                 console.log("Making request to: " + _this2.url);
                 console.log("Fetching user data from BackPace...");
                 _this2.http.get(_this2.url).subscribe(function (paceUser) {
@@ -755,7 +806,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
                     console.log(JSON.stringify(paceUser.json()));
                     resolve(paceUser);
                 }, function (error) {
-                    console.log("Error occurred while fetching user data...");
+                    console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                     console.log(JSON.stringify(error.json()));
                 }, function () {
                     return console.log('User data fetching complete!');
@@ -763,17 +814,46 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             });
         }
     }, {
-        key: 'hasFavorite',
+        key: "saveNewPaceUser",
+        value: function saveNewPaceUser(userProfile, status) {
+            var _this3 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this3.url = 'http://localhost:8080/api/user';
+                console.log("Making request to: " + _this3.url);
+
+                _this3.paceUser = JSON.stringify({
+                    facebookId: userProfile.id,
+                    name: userProfile.name,
+                    authResponse: status,
+                    picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+                });
+
+                _this3.http.post(_this3.url, _this3.paceUser).subscribe(function (paceUser) {
+                    console.log("Created user from BackPace...");
+                    console.log(JSON.stringify(paceUser.json()));
+                    resolve(paceUser);
+                }, function (error) {
+                    console.log("Error... is backend running? probably need to enable cors mapping?");
+                    console.log(JSON.stringify(error.json()));
+                    reject();
+                }, function () {
+                    return console.log('User data fetching complete!');
+                });
+            });
+        }
+    }, {
+        key: "hasFavorite",
         value: function hasFavorite(sessionName) {
             return this._favorites.indexOf(sessionName) > -1;
         }
     }, {
-        key: 'addFavorite',
+        key: "addFavorite",
         value: function addFavorite(sessionName) {
             this._favorites.push(sessionName);
         }
     }, {
-        key: 'removeFavorite',
+        key: "removeFavorite",
         value: function removeFavorite(sessionName) {
             var index = this._favorites.indexOf(sessionName);
             if (index > -1) {
@@ -781,30 +861,24 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
             }
         }
     }, {
-        key: 'login',
+        key: "login",
         value: function login(username, password) {
             this.storage.set(this.HAS_LOGGED_IN, true);
             this.events.publish('user:login');
         }
     }, {
-        key: 'signup',
-        value: function signup(username, password) {
-            this.storage.set(this.HAS_LOGGED_IN, true);
-            this.events.publish('user:signup');
-        }
-    }, {
-        key: 'FbLogout',
+        key: "FbLogout",
         value: function FbLogout() {
-            var _this3 = this;
+            var _this4 = this;
 
             return new Promise(function (resolve, reject) {
-                _this3.storage.remove(_this3.HAS_LOGGED_IN);
+                _this4.storage.remove(_this4.HAS_LOGGED_IN);
                 console.log("UserData: logout() reached...");
 
                 facebookConnectPlugin.logout(function () {
                     console.log("Logging out...");
 
-                    _this3.events.publish('user:logout');
+                    _this4.events.publish('user:logout');
 
                     resolve();
                 }, function (err) {
@@ -819,7 +893,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
         // Return a promise
 
     }, {
-        key: 'hasLoggedIn',
+        key: "hasLoggedIn",
         value: function hasLoggedIn() {
             return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
                 return value;

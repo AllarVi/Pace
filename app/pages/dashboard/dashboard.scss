@@ -11,3 +11,57 @@ ion-label {
   padding-top: 0; /* Default 5px; */
   padding-bottom: 0; /* Default 5px; */
 }
+
+// FABulous Buttons (Floating Mini Action Button from material)
+// By Allar
+// --------------------------------------------------
+
+$button-fab-size-mini: 40px !default;
+
+.button-fab-mini {
+  position: absolute;
+  width: $button-fab-size-mini;
+  height: $button-fab-size-mini;
+  line-height: $button-fab-size-mini;
+  min-width: 0;
+  vertical-align: middle;
+
+  border-radius: 50%;
+  background-clip: padding-box;
+
+  overflow: hidden;
+
+  font-size: 14px;
+
+  ion-icon {
+    font-size: 2.0rem;
+    //flex: 1;
+    //font-size: 2.8rem;
+  }
+
+}
+
+[fab-center-mini] {
+  left: 50%;
+  margin-left: -$button-fab-size-mini / 2;
+}
+
+[fab-top-mini] {
+  top: 16px;
+}
+
+[fab-right-mini] {
+  right: 24px;
+}
+
+[fab-bottom-mini] {
+  bottom: 86px;
+}
+
+[fab-left-mini] {
+  left: 16px;
+}
+
+[fab-fixed-mini] {
+  position: fixed;
+}
