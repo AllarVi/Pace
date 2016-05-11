@@ -39,14 +39,17 @@ class PaceApp {
             StatusBar.styleDefault();
         });
 
-        this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
+        // TODO: Comment this in
+        /*this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 this.root = DashboardPage;
             } else {
                 this.root = LoginPage;
             }
-        });
+        });*/
+        // TODO: Remove this
+        this.root = DashboardPage;
 
         // create an list of pages that can be navigated to from the left menu
         // the left menu only works after login

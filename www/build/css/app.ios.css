@@ -8095,8 +8095,11 @@ ion-label {
 [fab-right-mini] {
   right: 24px; }
 
-[fab-bottom-mini] {
+[fab-bottom-mini-achievement] {
   bottom: 86px; }
+
+[fab-bottom-mini-goal] {
+  bottom: 138px; }
 
 [fab-left-mini] {
   left: 16px; }
@@ -8108,3 +8111,27 @@ ion-label {
   max-height: none;
   max-width: none;
   border-radius: 50%; }
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden; }
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.groupTab .segment-button {
+  border-style: none;
+  color: #f53d3d;
+  font-size: inherit; }
+
+.groupTab .segment-button ion-icon {
+  font-size: inherit; }

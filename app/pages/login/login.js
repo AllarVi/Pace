@@ -26,9 +26,9 @@ export class LoginPage {
 
         this.slides = [
             {
-                title: "Welcome to <b>ICA</b>",
-                description: "The <b>Ionic Conference App</b> is a practical preview of the Ionic Framework in action, and a demonstration of proper code use.",
-                image: "img/ica-slidebox-img-1.png"
+                title: "Welcome to <b>Pace</b>",
+                description: "This is a practical preview of the Ionic 2 in action by Allar Viinamäe.",
+                image: "img/discus-thrower.png"
             },
             {
                 title: "What is Ionic?",

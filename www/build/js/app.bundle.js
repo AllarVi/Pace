@@ -60,14 +60,17 @@ var PaceApp = (_dec = (0, _ionicAngular.App)({
             _ionicNative.StatusBar.styleDefault();
         });
 
-        this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
+        // TODO: Comment this in
+        /*this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
-                _this.root = _dashboard.DashboardPage;
+                this.root = DashboardPage;
             } else {
-                _this.root = _login.LoginPage;
+                this.root = LoginPage;
             }
-        });
+        });*/
+        // TODO: Remove this
+        this.root = _dashboard.DashboardPage;
 
         // create an list of pages that can be navigated to from the left menu
         // the left menu only works after login
@@ -315,9 +318,9 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         this.submitted = false;
 
         this.slides = [{
-            title: "Welcome to <b>ICA</b>",
-            description: "The <b>Ionic Conference App</b> is a practical preview of the Ionic Framework in action, and a demonstration of proper code use.",
-            image: "img/ica-slidebox-img-1.png"
+            title: "Welcome to <b>Pace</b>",
+            description: "This is a practical preview of the Ionic 2 in action by Allar Viinamäe.",
+            image: "img/discus-thrower.png"
         }, {
             title: "What is Ionic?",
             description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
@@ -430,10 +433,15 @@ var ProfilePage = exports.ProfilePage = (_dec = (0, _ionicAngular.Page)({
                 duration: 15
             };
 
-            navigator.device.capture.captureVideo(function (data) {
+            navigator.device.capture.captureVideo(function (mediaFiles) {
                 // var imgData = "data:image/jpeg;base64," + data;
                 _this.ngZone.run(function () {
-                    return _this.image = data;
+                    var i, path, len;
+                    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                        path = mediaFiles[i].fullPath;
+                    }
+
+                    _this.image = path;
                 });
             }, function (error) {
                 console.log("Error occurred while taking an image!");

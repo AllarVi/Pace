@@ -37,9 +37,16 @@ export class ProfilePage {
             duration: 15
         };
 
-        navigator.device.capture.captureVideo((data) => {
+        navigator.device.capture.captureVideo((mediaFiles) => {
             // var imgData = "data:image/jpeg;base64," + data;
-            this.ngZone.run(() => this.image = data);
+            this.ngZone.run(() => {
+                var i, path, len;
+                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                    path = mediaFiles[i].fullPath;
+                }
+
+                this.image = path;
+            });
         }, (error) => {
             console.log("Error occurred while taking an image!");
             console.log(error);
