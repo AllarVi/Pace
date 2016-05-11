@@ -1,2 +1,2 @@
 # Pace
-Pace by Allar Viinamäe
+by Allar Viinamäe
