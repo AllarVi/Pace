@@ -22,12 +22,13 @@ import { BrowserDomAdapter } from './browser/browser_adapter';
 import { wtfInit } from 'angular2/src/core/profile/wtf_init';
 import { MessageBasedRenderer } from 'angular2/src/web_workers/ui/renderer';
 import { MessageBasedXHRImpl } from 'angular2/src/web_workers/ui/xhr_impl';
-import { BrowserPlatformLocation } from 'angular2/src/router/browser_platform_location';
+import { BrowserPlatformLocation } from 'angular2/src/router/location/browser_platform_location';
 import { ServiceMessageBrokerFactory, ServiceMessageBrokerFactory_ } from 'angular2/src/web_workers/shared/service_message_broker';
 import { ClientMessageBrokerFactory, ClientMessageBrokerFactory_ } from 'angular2/src/web_workers/shared/client_message_broker';
 import { Serializer } from 'angular2/src/web_workers/shared/serializer';
 import { ON_WEB_WORKER } from 'angular2/src/web_workers/shared/api';
 import { RenderStore } from 'angular2/src/web_workers/shared/render_store';
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from './dom/events/hammer_gestures';
 export const WORKER_SCRIPT = CONST_EXPR(new OpaqueToken("WebWorkerScript"));
 // Message based Worker classes that listen on the MessageBus
 export const WORKER_RENDER_MESSAGING_PROVIDERS = CONST_EXPR([MessageBasedRenderer, MessageBasedXHRImpl]);
@@ -50,6 +51,7 @@ export const WORKER_RENDER_APPLICATION_COMMON = CONST_EXPR([
     new Provider(EVENT_MANAGER_PLUGINS, { useClass: DomEventsPlugin, multi: true }),
     new Provider(EVENT_MANAGER_PLUGINS, { useClass: KeyEventsPlugin, multi: true }),
     new Provider(EVENT_MANAGER_PLUGINS, { useClass: HammerGesturesPlugin, multi: true }),
+    new Provider(HAMMER_GESTURE_CONFIG, { useClass: HammerGestureConfig }),
     new Provider(DomRootRenderer, { useClass: DomRootRenderer_ }),
     new Provider(RootRenderer, { useExisting: DomRootRenderer }),
     new Provider(SharedStylesHost, { useExisting: DomSharedStylesHost }),

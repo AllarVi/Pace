@@ -16,17 +16,18 @@
 @import
   "components/grid/grid",
   "components/icon/icon",
+  "components/img/img",
   "components/infinite-scroll/infinite-scroll",
+  "components/loading/loading",
   "components/menu/menu",
   "components/modal/modal",
   "components/refresher/refresher",
   "components/scroll/scroll",
+  "components/show-hide-when/show-hide-when",
   "components/slides/slides",
-  "components/spinner/spinner";
+  "components/spinner/spinner",
+  "components/virtual-scroll/virtual-scroll";
 
 
-// Ionicons (to be replaced with SVGs)
-$ionicons: true !default;
-@if ($ionicons) {
-  @import "fonts/ionicons";
-}
+// Ionicons
+@import "fonts/ionicons";

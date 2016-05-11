@@ -39,7 +39,8 @@ var _nextRootElementId = 0;
 /**
  * Builds a ComponentFixture for use in component level tests.
  */
-export let TestComponentBuilder = class {
+let TestComponentBuilder_1;
+export let TestComponentBuilder = TestComponentBuilder_1 = class TestComponentBuilder {
     constructor(_injector) {
         this._injector = _injector;
         /** @internal */
@@ -55,7 +56,7 @@ export let TestComponentBuilder = class {
     }
     /** @internal */
     _clone() {
-        var clone = new TestComponentBuilder(this._injector);
+        var clone = new TestComponentBuilder_1(this._injector);
         clone._viewOverrides = MapWrapper.clone(this._viewOverrides);
         clone._directiveOverrides = MapWrapper.clone(this._directiveOverrides);
         clone._templateOverrides = MapWrapper.clone(this._templateOverrides);
@@ -183,12 +184,12 @@ export let TestComponentBuilder = class {
             DOM.remove(oldRoots[i]);
         }
         DOM.appendChild(doc.body, rootEl);
-        return this._injector.get(DynamicComponentLoader)
-            .loadAsRoot(rootComponentType, `#${rootElId}`, this._injector)
-            .then((componentRef) => { return new ComponentFixture_(componentRef); });
+        var promise = this._injector.get(DynamicComponentLoader)
+            .loadAsRoot(rootComponentType, `#${rootElId}`, this._injector);
+        return promise.then((componentRef) => { return new ComponentFixture_(componentRef); });
     }
 };
-TestComponentBuilder = __decorate([
+TestComponentBuilder = TestComponentBuilder_1 = __decorate([
     Injectable(), 
     __metadata('design:paramtypes', [Injector])
 ], TestComponentBuilder);

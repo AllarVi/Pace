@@ -18,6 +18,7 @@
   "components/item/item.ios",
   "components/label/label.ios",
   "components/list/list.ios",
+  "components/loading/loading.ios",
   "components/menu/menu.ios",
   "components/modal/modal.ios",
   "components/radio/radio.ios",
@@ -26,9 +27,10 @@
   "components/select/select.ios",
   "components/tabs/tabs.ios",
   "components/toggle/toggle.ios",
+  "components/toast/toast.ios",
   "components/toolbar/toolbar.ios";
 
 
-  // iOS Platform
-  @import
-    "platform/cordova.ios";
+// iOS Platform
+@import
+  "platform/cordova.ios";

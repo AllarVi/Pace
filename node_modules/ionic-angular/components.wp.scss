@@ -18,6 +18,7 @@
   "components/item/item.wp",
   "components/label/label.wp",
   "components/list/list.wp",
+  "components/loading/loading.wp",
   "components/menu/menu.wp",
   "components/modal/modal.wp",
   "components/radio/radio.wp",
@@ -26,4 +27,16 @@
   "components/select/select.wp",
   "components/tabs/tabs.wp",
   "components/toggle/toggle.wp",
+  "components/toast/toast.wp",
   "components/toolbar/toolbar.wp";
+
+
+// Windows w/ iOS Platform
+@import
+  "platform/cordova.wp";
+
+
+// Noto Sans Font
+@at-root {
+  @import "./fonts/noto-sans";
+}

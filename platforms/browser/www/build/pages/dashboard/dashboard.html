@@ -1,0 +1,186 @@
+<ion-navbar *navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+</ion-navbar>
+
+<ion-content class="outer-content speaker-list">
+
+    <ion-card>
+
+        <ion-card-header>
+            <button ion-item (click)="goToGroupDetail(group)">
+                <ion-avatar item-left>
+                    <img src="http://pics.clipartpng.com/Basketball_PNG_Clipart-842.png">
+                </ion-avatar>
+                Kossurühm - Leaderboard
+            </button>
+        </ion-card-header>
+
+        <ion-list>
+            <ion-item class="leaderboard-header">
+                <ion-row>
+                    <ion-col width-10>
+                        <p>Rk</p>
+                    </ion-col>
+                    <ion-col width-40>
+                        <p>Name</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Tier</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Points</p>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        1
+                    </ion-col>
+                    <ion-col width-50>
+                        Marin
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        2
+                    </ion-col>
+                    <ion-col width-50>
+                        Sten
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        3
+                    </ion-col>
+                    <ion-col width-50>
+                        Taaniel
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-card>
+
+    <ion-card>
+
+        <ion-card-header>
+            <button ion-item>
+                <ion-avatar item-left>
+                    <img src="http://www.pngall.com/wp-content/uploads/2016/03/Volleyball-PNG-Picture.png">
+                </ion-avatar>
+                Võrkpallirühm - Leaderboard
+            </button>
+        </ion-card-header>
+
+        <ion-list>
+            <ion-item class="leaderboard-header">
+                <ion-row>
+                    <ion-col width-10>
+                        <p>Rk</p>
+                    </ion-col>
+                    <ion-col width-40>
+                        <p>Name</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Tier</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Points</p>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        1
+                    </ion-col>
+                    <ion-col width-50>
+                        Marin
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        2
+                    </ion-col>
+                    <ion-col width-50>
+                        Sten
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+            <ion-item>
+                <ion-row>
+                    <ion-col width-10>
+                        3
+                    </ion-col>
+                    <ion-col width-50>
+                        Taaniel
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        1200
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-card>
+
+</ion-content>
+
+<button fab primary fab-bottom fab-right style="z-index: 999">
+    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
+</button>
+
+<button primary fab-bottom-mini fab-right-mini style="z-index: 999" class="button-fab-mini">
+    <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>
+</button>

@@ -57,8 +57,10 @@ export class RouteParams {
  * ])
  * class AppCmp {}
  *
- * @Component({...})
- * @View({ template: 'user: {{isAdmin}}' })
+ * @Component({
+ *   ...,
+ *   template: 'user: {{isAdmin}}'
+ * })
  * class UserCmp {
  *   string: isAdmin;
  *   constructor(data: RouteData) {
@@ -149,7 +151,7 @@ export class Instruction {
     // default instructions override these
     toLinkUrl() {
         return this.urlPath + this._stringifyAux() +
-            (isPresent(this.child) ? this.child._toLinkUrl() : '');
+            (isPresent(this.child) ? this.child._toLinkUrl() : '') + this.toUrlQuery();
     }
     // this is the non-root version (called recursively)
     /** @internal */
@@ -202,12 +204,9 @@ export class ResolvedInstruction extends Instruction {
 /**
  * Represents a resolved default route
  */
-export class DefaultInstruction extends Instruction {
+export class DefaultInstruction extends ResolvedInstruction {
     constructor(component, child) {
         super(component, child, {});
-    }
-    resolveComponent() {
-        return PromiseWrapper.resolve(this.component);
     }
     toLinkUrl() { return ''; }
     /** @internal */
@@ -245,9 +244,9 @@ export class UnresolvedInstruction extends Instruction {
         if (isPresent(this.component)) {
             return PromiseWrapper.resolve(this.component);
         }
-        return this._resolver().then((resolution) => {
-            this.child = resolution.child;
-            return this.component = resolution.component;
+        return this._resolver().then((instruction) => {
+            this.child = isPresent(instruction) ? instruction.child : null;
+            return this.component = isPresent(instruction) ? instruction.component : null;
         });
     }
 }
@@ -259,8 +258,7 @@ export class RedirectInstruction extends ResolvedInstruction {
     get specificity() { return this._specificity; }
 }
 /**
- * A `ComponentInstruction` represents the route state for a single component. An `Instruction` is
- * composed of a tree of these `ComponentInstruction`s.
+ * A `ComponentInstruction` represents the route state for a single component.
  *
  * `ComponentInstructions` is a public API. Instances of `ComponentInstruction` are passed
  * to route lifecycle hooks, like {@link CanActivate}.
@@ -272,13 +270,17 @@ export class RedirectInstruction extends ResolvedInstruction {
  * You should not modify this object. It should be treated as immutable.
  */
 export class ComponentInstruction {
-    constructor(urlPath, urlParams, data, componentType, terminal, specificity, params = null) {
+    /**
+     * @internal
+     */
+    constructor(urlPath, urlParams, data, componentType, terminal, specificity, params = null, routeName) {
         this.urlPath = urlPath;
         this.urlParams = urlParams;
         this.componentType = componentType;
         this.terminal = terminal;
         this.specificity = specificity;
         this.params = params;
+        this.routeName = routeName;
         this.reuse = false;
         this.routeData = isPresent(data) ? data : BLANK_ROUTE_DATA;
     }

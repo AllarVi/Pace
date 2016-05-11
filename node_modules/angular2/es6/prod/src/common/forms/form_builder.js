@@ -52,7 +52,7 @@ import * as modelModule from './model';
  * }
  * ```
  */
-export let FormBuilder = class {
+export let FormBuilder = class FormBuilder {
     /**
      * Construct a new {@link ControlGroup} with the given map of configuration.
      * Valid keys for the `extra` parameter map are `optionals` and `validator`.
@@ -61,7 +61,7 @@ export let FormBuilder = class {
      */
     group(controlsConfig, extra = null) {
         var controls = this._reduceControls(controlsConfig);
-        var optionals = isPresent(extra) ? StringMapWrapper.get(extra, "optionals") : null;
+        var optionals = (isPresent(extra) ? StringMapWrapper.get(extra, "optionals") : null);
         var validator = isPresent(extra) ? StringMapWrapper.get(extra, "validator") : null;
         var asyncValidator = isPresent(extra) ? StringMapWrapper.get(extra, "asyncValidator") : null;
         return new modelModule.ControlGroup(controls, optionals, validator, asyncValidator);

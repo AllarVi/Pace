@@ -11,7 +11,7 @@ import { CONST } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { isListLikeIterable, iterateListLike } from 'angular2/src/facade/collection';
 import { isBlank, isPresent, stringify, getMapKey, looseIdentical, isArray } from 'angular2/src/facade/lang';
-export let DefaultIterableDifferFactory = class {
+export let DefaultIterableDifferFactory = class DefaultIterableDifferFactory {
     supports(obj) { return isListLikeIterable(obj); }
     create(cdRef, trackByFn) {
         return new DefaultIterableDiffer(trackByFn);
@@ -300,6 +300,9 @@ export class DefaultIterableDiffer {
         }
         if (this._removalsTail !== null) {
             this._removalsTail._nextRemoved = null;
+        }
+        if (this._identityChangesTail !== null) {
+            this._identityChangesTail._nextIdentityChange = null;
         }
     }
     /** @internal */
