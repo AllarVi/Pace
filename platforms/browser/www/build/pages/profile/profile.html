@@ -16,7 +16,7 @@
         <p>Athlete</p>
     </ion-item>
 
-    <ion-segment padding [(ngModel)]="pet">
+    <ion-segment padding [(ngModel)]="tab">
         <ion-segment-button value="goals">
             Goals
         </ion-segment-button>
@@ -31,19 +31,20 @@
     <!--   <div padding>
       </div>  -->
 
-    <div [ngSwitch]="pet">
-        <ion-list *ngSwitchWhen="'goals'">
+    <div [ngSwitch]="tab">
+        <ion-list *ngSwitchDefault>
+        <!--<ion-list *ngSwitchWhen="'goals'">-->
             <ion-list-header>
                 Gymnastics
             </ion-list-header>
             <a ion-item (click)="openModal({charNum: 0})">
-                Backflip
+                Salto (360°) backward
             </a>
             <a ion-item (click)="openModal({charNum: 1})">
-                Frodo Baggins
+                Round off
             </a>
             <a ion-item (click)="openModal({charNum: 2})">
-                Sam
+                Flic flac
             </a>
         </ion-list>
 
@@ -76,35 +77,51 @@
 
         <ion-list *ngSwitchWhen="'achievements'">
             <ion-card>
-                <img [src]="image">
+                <!--<img [src]="image">-->
+                <!--<video>-->
+                <!--<source [src]="image" type="video/mp4">-->
+                <!--</video>-->
+                <div class="video-container">
+                    <iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>
+                </div>
+
+                <ion-card-content>
+                    <h2 class="card-title">
+                        100 m freestyle under 1:46
+                    </h2>
+                    <p>
+                        Swimming
+                    </p>
+                </ion-card-content>
+
+                <ion-row no-padding>
+                    <ion-col>
+                        <button clear small danger>
+                            <ion-icon name='star'></ion-icon>
+                            Favorite
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button clear small danger>
+                            <ion-icon name='share-alt'></ion-icon>
+                            Share
+                        </button>
+                    </ion-col>
+                </ion-row>
             </ion-card>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-duckling-2.jpg">-->
-                </ion-thumbnail>
-                <h2>Huey</h2>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-duckling-3.jpg">-->
-                </ion-thumbnail>
-                <h2>Dewey</h2>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-duckling-4.jpg">-->
-                </ion-thumbnail>
-                <h2>Louie</h2>
-            </ion-item>
         </ion-list>
     </div>
 
 </ion-content>
 
-<button fab primary fab-bottom fab-right style="z-index: 999">
-    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
+<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
+    <ion-icon ios="ios-flag" md="md-flag" is-active="false"></ion-icon>
 </button>
 
-<button primary fab-bottom-mini fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
+<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
     <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>
+</button>
+
+<button fab primary fab-bottom fab-right style="z-index: 999">
+    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
 </button>

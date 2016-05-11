@@ -1,29 +1,22 @@
-import {IonicApp, Page, NavController, MenuController, Platform} from "ionic-angular";
-import {TabsPage} from "../tabs/tabs";
-import {UserData} from "../../providers/user-data";
-import {FbProvider} from "../../providers/fb-provider";
-
-@Page({
-    templateUrl: 'build/pages/login/login.html'
-})
-export class LoginPage {
-    static get parameters() {
-        return [[NavController], [MenuController], [UserData], [Platform], [FbProvider]];
-    }
-
-    constructor(nav, menu, userData, platform, fbProvider) {
-        this.platform = platform;
-        this.fb = fbProvider;
-        this.email = '';
-        this.name = '';
-
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var ionic_angular_1 = require("ionic-angular");
+var tabs_1 = require("../tabs/tabs");
+var LoginPage = (function () {
+    function LoginPage(nav, menu, userData, platform, fb) {
         this.nav = nav;
         this.menu = menu;
         this.userData = userData;
-
+        this.fb = fb;
+        this.email = '';
+        this.name = '';
         this.login = {};
         this.submitted = false;
-
         this.slides = [
             {
                 title: "Welcome to <b>Pace</b>",
@@ -42,31 +35,36 @@ export class LoginPage {
             }
         ];
     }
-
-    fbLogin() {
+    LoginPage.prototype.fbLogin = function () {
+        var _this = this;
         console.log("Facebook login initialized...");
-        this.fb.login().then(() => {
+        this.fb.login().then(function () {
             console.log("Navigating to home...");
-            this.nav.push(TabsPage);
+            _this.nav.push(tabs_1.TabsPage);
         });
-    }
-
-    onLogin(form) {
+    };
+    LoginPage.prototype.onLogin = function (form) {
         this.submitted = true;
-
         if (form.valid) {
             this.userData.login();
-            this.nav.push(TabsPage);
+            console.log("Pushing to TabsPage...");
+            this.nav.push(tabs_1.TabsPage);
         }
-    }
-
-    onPageDidEnter() {
+    };
+    LoginPage.prototype.onPageDidEnter = function () {
         // the left menu should be disabled on the tutorial page
         this.menu.enable(false);
-    }
-
-    onPageDidLeave() {
+    };
+    LoginPage.prototype.onPageDidLeave = function () {
         // enable the left menu when leaving the tutorial page
         this.menu.enable(true);
-    }
-}
+    };
+    LoginPage = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: 'build/pages/login/login.html'
+        })
+    ], LoginPage);
+    return LoginPage;
+}());
+exports.LoginPage = LoginPage;
+//# sourceMappingURL=login.js.map

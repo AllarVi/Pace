@@ -2,153 +2,184 @@
     <ion-title>Kossurühm</ion-title>
 </ion-navbar>
 
-<ion-content padding>
-    <img src="img/team_cover_placeholder.png"/>
+<ion-toolbar>
+  <button (click)="randomize()" block>
+    Randomize chart
+  </button>
+</ion-toolbar>
+<ion-content>
 
-    <ion-row no-padding>
-        <ion-col>
-            <button clear small danger>
-                <ion-icon name='star'></ion-icon>
-                Home
-            </button>
-        </ion-col>
-        <ion-col text-center>
-            <button clear small danger>
-                <ion-icon name='star'></ion-icon>
-                Members
-            </button>
-        </ion-col>
-        <ion-col text-right>
-            <button clear small danger>
-                <ion-icon name='star'></ion-icon>
-                Velocity
-            </button>
-        </ion-col>
-    </ion-row>
-
-    <ion-card-content>
-        <ion-list>
-            <ion-item class="leaderboard-header">
-                <ion-row>
-                    <ion-col width-10>
-                        <p>Rk</p>
-                    </ion-col>
-                    <ion-col width-40>
-                        <p>Name</p>
-                    </ion-col>
-                    <ion-col width-20>
-                        <p>Tier</p>
-                    </ion-col>
-                    <ion-col width-20>
-                        <p>Points</p>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        1
-                    </ion-col>
-                    <ion-col width-50>
-                        Marin
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        2
-                    </ion-col>
-                    <ion-col width-50>
-                        Sten
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        3
-                    </ion-col>
-                    <ion-col width-50>
-                        Taaniel
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        4
-                    </ion-col>
-                    <ion-col width-50>
-                        Taaniel
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        5
-                    </ion-col>
-                    <ion-col width-50>
-                        Taaniel
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        6
-                    </ion-col>
-                    <ion-col width-50>
-                        Taaniel
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-
-        </ion-list>
-    </ion-card-content>
+  <div class="chart-container">
+    <base-chart class="chart"
+                [data]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [series]="lineChartSeries"
+                [colours]="lineChartColours"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></base-chart>
+  </div>
 
 </ion-content>
+
+<!--<ion-content padding>-->
+    <!--<img src="img/team_cover_placeholder.png"/>-->
+
+    <!--<ion-segment padding [(ngModel)]="groupTab" class="groupTab">-->
+        <!--<ion-segment-button clear small danger value="scores">-->
+            <!--<ion-icon name='star'></ion-icon>-->
+            <!--Scores-->
+        <!--</ion-segment-button>-->
+        <!--<ion-segment-button clear small danger value="members">-->
+            <!--<ion-icon name='star'></ion-icon>-->
+            <!--Members-->
+        <!--</ion-segment-button>-->
+        <!--<ion-segment-button clear small danger value="velocity">-->
+            <!--<ion-icon name='star'></ion-icon>-->
+            <!--Velocity-->
+        <!--</ion-segment-button>-->
+    <!--</ion-segment>-->
+
+    <!--<div [ngSwitch]="groupTab">-->
+        <!--<ion-list *ngSwitchDefault>-->
+            <!--<ion-item class="leaderboard-header">-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--<p>Rk</p>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-40>-->
+                        <!--<p>Name</p>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<p>Tier</p>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<p>Points</p>-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--1-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Marin-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--2-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Sten-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--3-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Taaniel-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--4-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Taaniel-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--5-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Taaniel-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+            <!--<ion-item>-->
+                <!--<ion-row>-->
+                    <!--<ion-col width-10>-->
+                        <!--6-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-50>-->
+                        <!--Taaniel-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--<ion-icon name="trophy"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <!--<ion-col width-20>-->
+                        <!--1200-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-item>-->
+
+
+        <!--</ion-list>-->
+        <!--<ion-list *ngSwitchWhen="'members'"></ion-list>-->
+        <!--<ion-list *ngSwitchWhen="'velocity'">-->
+            <!--<div class="chart-container">-->
+                <!--<base-chart class="chart"-->
+                            <!--[data]="lineChartData"-->
+                            <!--[labels]="lineChartLabels"-->
+                            <!--[options]="lineChartOptions"-->
+                            <!--[series]="lineChartSeries"-->
+                            <!--[colours]="lineChartColours"-->
+                            <!--[legend]="lineChartLegend"-->
+                            <!--[chartType]="lineChartType"-->
+                            <!--(chartHover)="chartHovered($event)"-->
+                            <!--(chartClick)="chartClicked($event)"></base-chart>-->
+            <!--</div>-->
+        <!--</ion-list>-->
+    <!--</div>-->
+
+<!--</ion-content>-->

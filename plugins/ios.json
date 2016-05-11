@@ -10,29 +10,26 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.ionic.conference"
         },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.pacewayer"
+        },
         "cordova-plugin-facebook4": {
             "APP_ID": "269321573400083",
             "APP_NAME": "Pace",
-            "PACKAGE_NAME": "io.ionic.conference"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.pace"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.pace"
-        },
-        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.pacewayer"
         },
         "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.pacewayer"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.pacewayer"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.pacewayer"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.pacewayer"
-        },
-        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.pacewayer"
         }
     }

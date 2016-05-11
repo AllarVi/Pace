@@ -50,8 +50,6 @@
     <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
       <key>NSExceptionDomains</key>
       <dict>
         <key>m.facebook.com</key>
@@ -71,6 +69,8 @@
           <true/>
         </dict>
       </dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
     </dict>
     <key>NSMainNibFile</key>
     <string/>
@@ -92,7 +92,5 @@
       <string>UIInterfaceOrientationPortrait</string>
       <string>UIInterfaceOrientationPortraitUpsideDown</string>
     </array>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string/>
   </dict>
 </plist>
