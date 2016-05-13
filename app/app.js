@@ -21,8 +21,6 @@ var PaceApp = (function () {
         this.events = events;
         this.userData = userData;
         this.fbProvider = fbProvider;
-        this.loggedIn = false;
-        this.rootPage = dashboard_1.DashboardPage;
         // create an list of pages that can be navigated to from the left menu
         // the left menu only works after login
         // the login page disables the left menu
@@ -38,6 +36,8 @@ var PaceApp = (function () {
             { title: 'Login', component: login_1.LoginPage, icon: 'log-in' },
             { title: 'Logout', component: tabs_1.TabsPage, icon: 'log-out' }
         ];
+        this.rootPage = login_1.LoginPage;
+        this.loggedIn = false;
         // Call any initial plugins when ready
         platform.ready().then(function () {
             ionic_native_1.StatusBar.styleDefault();
@@ -51,29 +51,30 @@ var PaceApp = (function () {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 console.log("Navigating to Dashboard Page");
-                _this.rootPage = dashboard_1.DashboardPage;
+                _this.nav.setRoot(dashboard_1.DashboardPage);
             }
             else {
                 console.log("Navigating to Login Page...");
-                _this.rootPage = login_1.LoginPage;
+                _this.nav.setRoot(login_1.LoginPage);
             }
         });
     }
     PaceApp.prototype.openPage = function (page) {
         var _this = this;
+        var nav = this.app.getComponent('nav');
         if (page.index) {
             console.log("Setting navRoot to index:");
-            this.nav.setRoot(page.component, { tabIndex: page.index });
+            nav.setRoot(page.component, { tabIndex: page.index });
         }
         else {
             console.log("Setting navRoot to component:");
-            this.nav.setRoot(page.component);
+            nav.setRoot(page.component);
         }
         if (page.title === 'Logout') {
             // Give the menu time to close before changing to logged out
             setTimeout(function () {
                 console.log("Logging out initialized...");
-                _this.initLogout(_this.nav, _this.userData);
+                _this.initLogout(nav, _this.userData);
             }, 1000);
         }
     };
@@ -114,9 +115,6 @@ var PaceApp = (function () {
         this.events.subscribe('user:login', function () {
             _this.loggedIn = true;
         });
-        this.events.subscribe('user:signup', function () {
-            _this.loggedIn = true;
-        });
         this.events.subscribe('user:logout', function () {
             _this.loggedIn = false;
         });
@@ -128,13 +126,7 @@ var PaceApp = (function () {
         ionic_angular_1.App({
             templateUrl: 'build/app.html',
             providers: [user_data_1.UserData, fb_provider_1.FbProvider],
-            config: {
-                platforms: {
-                    android: {
-                        tabbarLayout: 'icon-hide'
-                    }
-                }
-            }
+            config: {}
         })
     ], PaceApp);
     return PaceApp;

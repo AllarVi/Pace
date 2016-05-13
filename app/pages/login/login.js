@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var ionic_angular_1 = require("ionic-angular");
 var tabs_1 = require("../tabs/tabs");
+var dashboard_1 = require("../dashboard/dashboard");
 var LoginPage = (function () {
     function LoginPage(nav, menu, userData, platform, fb) {
         this.nav = nav;
@@ -39,8 +40,10 @@ var LoginPage = (function () {
         var _this = this;
         console.log("Facebook login initialized...");
         this.fb.login().then(function () {
+            _this.userData.login();
             console.log("Navigating to home...");
-            _this.nav.push(tabs_1.TabsPage);
+            // this.nav.push(TabsPage);
+            _this.nav.setRoot(dashboard_1.DashboardPage);
         });
     };
     LoginPage.prototype.onLogin = function (form) {
@@ -48,6 +51,7 @@ var LoginPage = (function () {
         if (form.valid) {
             this.userData.login();
             console.log("Pushing to TabsPage...");
+            // this.nav.push(TabsPage);
             this.nav.push(tabs_1.TabsPage);
         }
     };

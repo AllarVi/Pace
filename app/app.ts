@@ -1,6 +1,6 @@
 import 'es6-shim';
 import {ViewChild} from 'angular2/core';
-import {App, IonicApp, Events, Platform, ActionSheet, Nav} from 'ionic-angular';
+import {App, Events, Platform, ActionSheet, Nav, IonicApp} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
@@ -18,52 +18,12 @@ interface PageObj {
 @App({
     templateUrl: 'build/app.html',
     providers: [UserData, FbProvider],
-    config: {
-        platforms: {
-            android: {
-                tabbarLayout: 'icon-hide'
-            }
-        }
-    }
+    config: {}
 })
 class PaceApp {
 
     @ViewChild(Nav)
     nav:Nav;
-
-    loggedIn = false;
-
-    rootPage:any = DashboardPage;
-
-    constructor(private app:IonicApp, private events:Events, private userData:UserData, platform:Platform, private fbProvider:FbProvider) {
-
-        // Call any initial plugins when ready
-        platform.ready().then(() => {
-            StatusBar.styleDefault();
-
-            // Keyboard.setAccessoryBarVisible(false);
-
-        });
-
-        this.userData.hasLoggedIn().then((hasLoggedIn) => {
-            this.loggedIn = (hasLoggedIn == 'true');
-        });
-
-        this.listenToLoginEvents();
-
-
-        this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
-            console.log("PaceApp: User status:", FbLoginStatus.status);
-            if (FbLoginStatus.status === 'connected') {
-                console.log("Navigating to Dashboard Page");
-                this.rootPage = DashboardPage;
-            } else {
-                console.log("Navigating to Login Page...");
-                this.rootPage = LoginPage;
-            }
-        });
-
-    }
 
     // create an list of pages that can be navigated to from the left menu
     // the left menu only works after login
@@ -83,21 +43,56 @@ class PaceApp {
         {title: 'Logout', component: TabsPage, icon: 'log-out'}
     ];
 
+    rootPage:any = LoginPage;
+
+    loggedIn = false;
+
+    constructor(private app: IonicApp, private events:Events, private userData:UserData, platform:Platform, private fbProvider:FbProvider) {
+
+        // Call any initial plugins when ready
+        platform.ready().then(() => {
+            StatusBar.styleDefault();
+
+            // Keyboard.setAccessoryBarVisible(false);
+
+        });
+
+        this.userData.hasLoggedIn().then((hasLoggedIn) => {
+            this.loggedIn = (hasLoggedIn == 'true');
+        });
+
+        this.listenToLoginEvents();
+
+        this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
+            console.log("PaceApp: User status:", FbLoginStatus.status);
+            if (FbLoginStatus.status === 'connected') {
+                console.log("Navigating to Dashboard Page");
+                this.nav.setRoot(DashboardPage);
+            } else {
+                console.log("Navigating to Login Page...");
+                this.nav.setRoot(LoginPage);
+            }
+        });
+
+    }
+
     openPage(page:PageObj) {
+        
+        let nav = this.app.getComponent('nav');
 
         if (page.index) {
             console.log("Setting navRoot to index:");
-            this.nav.setRoot(page.component, {tabIndex: page.index});
+            nav.setRoot(page.component, {tabIndex: page.index});
         } else {
             console.log("Setting navRoot to component:");
-            this.nav.setRoot(page.component);
+            nav.setRoot(page.component);
         }
 
         if (page.title === 'Logout') {
             // Give the menu time to close before changing to logged out
             setTimeout(() => {
                 console.log("Logging out initialized...");
-                this.initLogout(this.nav, this.userData);
+                this.initLogout(nav, this.userData);
             }, 1000);
         }
     }
@@ -143,9 +138,6 @@ class PaceApp {
             this.loggedIn = true;
         });
 
-        this.events.subscribe('user:signup', () => {
-            this.loggedIn = true;
-        });
 
         this.events.subscribe('user:logout', () => {
             this.loggedIn = false;

@@ -2,20 +2,77 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.html" afterPath="$PROJECT_DIR$/app/app.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js" afterPath="$PROJECT_DIR$/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.js.map" afterPath="$PROJECT_DIR$/app/app.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.ts" afterPath="$PROJECT_DIR$/app/app.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/about/about.html" afterPath="$PROJECT_DIR$/app/pages/about/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/fb-provider.js" afterPath="$PROJECT_DIR$/app/providers/fb-provider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/fb-provider.js.map" afterPath="$PROJECT_DIR$/app/providers/fb-provider.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/fb-provider.ts" afterPath="$PROJECT_DIR$/app/providers/fb-provider.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.js" afterPath="$PROJECT_DIR$/app/providers/user-data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.js.map" afterPath="$PROJECT_DIR$/app/providers/user-data.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.ts" afterPath="$PROJECT_DIR$/app/providers/user-data.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/login/login.js" afterPath="$PROJECT_DIR$/app/pages/login/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/login/login.js.map" afterPath="$PROJECT_DIR$/app/pages/login/login.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/login/login.ts" afterPath="$PROJECT_DIR$/app/pages/login/login.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/tabs/tabs.js" afterPath="$PROJECT_DIR$/app/pages/tabs/tabs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/tabs/tabs.js.map" afterPath="$PROJECT_DIR$/app/pages/tabs/tabs.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/tabs/tabs.ts" afterPath="$PROJECT_DIR$/app/pages/tabs/tabs.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/README.md" afterPath="$PROJECT_DIR$/node_modules/chart.js/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/bower.json" afterPath="$PROJECT_DIR$/node_modules/chart.js/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.bundle.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.bundle.min.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.bundle.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.min.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/dist/Chart.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/docs/01-Scales.md" afterPath="$PROJECT_DIR$/node_modules/chart.js/docs/01-Scales.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/docs/03-Bar-Chart.md" afterPath="$PROJECT_DIR$/node_modules/chart.js/docs/03-Bar-Chart.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/docs/07-Advanced.md" afterPath="$PROJECT_DIR$/node_modules/chart.js/docs/07-Advanced.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/docs/08-Notes.md" afterPath="$PROJECT_DIR$/node_modules/chart.js/docs/08-Notes.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/gulpfile.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/package.json" afterPath="$PROJECT_DIR$/node_modules/chart.js/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.bar.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.bubble.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.bubble.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.doughnut.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.doughnut.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.line.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.line.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.polarArea.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.polarArea.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.radar.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/controllers/controller.radar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.controller.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.helpers.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.helpers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.scale.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/core/core.scale.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/src/scales/scale.time.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/src/scales/scale.time.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/core.helpers.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/core.helpers.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/scale.category.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/scale.category.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/scale.linear.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/scale.linear.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/scale.logarithmic.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/scale.logarithmic.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/scale.radialLinear.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/scale.radialLinear.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/chart.js/test/scale.time.tests.js" afterPath="$PROJECT_DIR$/node_modules/chart.js/test/scale.time.tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/.eslintrc" afterPath="$PROJECT_DIR$/node_modules/es6-shim/.eslintrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/.jscs.json" afterPath="$PROJECT_DIR$/node_modules/es6-shim/.jscs.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/CHANGELOG.md" afterPath="$PROJECT_DIR$/node_modules/es6-shim/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/component.json" afterPath="$PROJECT_DIR$/node_modules/es6-shim/component.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.map" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.min.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-sham.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.map" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.min.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/es6-shim.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/package.json" afterPath="$PROJECT_DIR$/node_modules/es6-shim/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test-sham/function.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test-sham/function.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/array.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/array.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/browser-onload.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/browser-onload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/map.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/math.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/math.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/number.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/number.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/all.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/all.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/promises-es6.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/promises-es6.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/race.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/race.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/reject.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/reject.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/resolve.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/resolve.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/simple.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/simple.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/subclass.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/promise/subclass.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/reflect.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/reflect.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/regexp.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/regexp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/es6-shim/test/string.js" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/string.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/app.html" afterPath="$PROJECT_DIR$/www/build/app.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/about/about.html" afterPath="$PROJECT_DIR$/www/build/pages/about/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/es6-shim.min.js" afterPath="$PROJECT_DIR$/www/build/js/es6-shim.min.js" />
     </list>
     <ignored path="pacewayer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,14 +111,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="login.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/login/login.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+            <state relative-caret-position="315">
+              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
               <folding>
                 <element signature="e#0#86#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pages/login/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,8 +156,8 @@
       <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/app.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
+            <state relative-caret-position="630">
+              <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -98,22 +165,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="app.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="633">
-              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+            <state relative-caret-position="375">
+              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <file leaf-file-name="tabs.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pages/tabs/tabs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tabs.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pages/tabs/tabs.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#46#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,8 +218,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/pages/speaker-detail/speaker-detail.js" />
-        <option value="$PROJECT_DIR$/app/pages/speaker-detail/speaker-detail.html" />
         <option value="$PROJECT_DIR$/platforms/ios/www/build/pages/about/about.html" />
         <option value="$PROJECT_DIR$/app/pages/tabs/tabs.js" />
         <option value="$PROJECT_DIR$/app/theme/_ionic.ios.scss" />
@@ -154,7 +231,6 @@
         <option value="$PROJECT_DIR$/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
         <option value="$PROJECT_DIR$/www/build/pages/profile/profile.html" />
         <option value="$PROJECT_DIR$/app/providers/fb-provider/fb-provider.js" />
-        <option value="$PROJECT_DIR$/app/app.html" />
         <option value="$PROJECT_DIR$/app/providers/user.js" />
         <option value="$PROJECT_DIR$/app/providers/conference-data.js" />
         <option value="$PROJECT_DIR$/ionic.config.json" />
@@ -188,6 +264,10 @@
         <option value="$PROJECT_DIR$/app/pages/about/about.html" />
         <option value="$PROJECT_DIR$/app/providers/fb-provider.ts" />
         <option value="$PROJECT_DIR$/app/providers/user-data.ts" />
+        <option value="$PROJECT_DIR$/app/pages/tabs/tabs.ts" />
+        <option value="$PROJECT_DIR$/www/build/app.html" />
+        <option value="$PROJECT_DIR$/app/app.html" />
+        <option value="$PROJECT_DIR$/app/pages/login/login.ts" />
         <option value="$PROJECT_DIR$/app/app.ts" />
       </list>
     </option>
@@ -208,7 +288,7 @@
     <option name="x" value="-1920" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
-    <option name="height" value="1177" />
+    <option name="height" value="1173" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -539,7 +619,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="providers" />
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1120,7 +1204,7 @@
       <workItem from="1462890590367" duration="12000" />
       <workItem from="1462912604719" duration="20826000" />
       <workItem from="1463005884056" duration="1429000" />
-      <workItem from="1463073006285" duration="2925000" />
+      <workItem from="1463073006285" duration="7760000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -1290,31 +1374,40 @@
       <option name="project" value="LOCAL" />
       <updated>1463006573481</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Updated npm dependencies">
+      <created>1463169426220</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1463169426220</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215078000" />
+    <option name="totallyTimeSpent" value="219913000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1177" extended-state="6" />
+    <frame x="-1920" y="23" width="1920" height="1173" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274596" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32796487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21105991" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21184088" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839963" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15015975" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11927582" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11927582" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27948305" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32562444" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1323,9 +1416,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1362,7 +1453,8 @@
     <MESSAGE value="Updated npm packages" />
     <MESSAGE value="Added segment to group detail page and played around with design" />
     <MESSAGE value="Updated README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md" />
+    <MESSAGE value="Updated npm dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated npm dependencies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1375,17 +1467,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platforms/android/AndroidManifest.xml" />
-    <entry file="file://$PROJECT_DIR$/app/pages/tutorial/tutorial.js" />
-    <entry file="file://$PROJECT_DIR$/app/pages/tutorial/tutorial.html" />
-    <entry file="file://$PROJECT_DIR$/app/pages/tutorial/tutorial.scss" />
-    <entry file="file://$PROJECT_DIR$/app/app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ionic-native/dist/ionic.native.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -1461,13 +1542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/login/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/providers/user-data.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
@@ -1528,6 +1602,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1602,14 +1677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1661,16 +1728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/login/login.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/providers/fb-provider.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -1687,16 +1744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="633">
@@ -1707,9 +1754,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="540">
+          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/build/app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/build/app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/tabs/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/login/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/tabs/tabs.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/login/login.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

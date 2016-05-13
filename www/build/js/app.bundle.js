@@ -25,8 +25,6 @@ var PaceApp = (function () {
         this.events = events;
         this.userData = userData;
         this.fbProvider = fbProvider;
-        this.loggedIn = false;
-        this.rootPage = dashboard_1.DashboardPage;
         // create an list of pages that can be navigated to from the left menu
         // the left menu only works after login
         // the login page disables the left menu
@@ -42,6 +40,8 @@ var PaceApp = (function () {
             { title: 'Login', component: login_1.LoginPage, icon: 'log-in' },
             { title: 'Logout', component: tabs_1.TabsPage, icon: 'log-out' }
         ];
+        this.rootPage = login_1.LoginPage;
+        this.loggedIn = false;
         // Call any initial plugins when ready
         platform.ready().then(function () {
             ionic_native_1.StatusBar.styleDefault();
@@ -55,29 +55,30 @@ var PaceApp = (function () {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
                 console.log("Navigating to Dashboard Page");
-                _this.rootPage = dashboard_1.DashboardPage;
+                _this.nav.setRoot(dashboard_1.DashboardPage);
             }
             else {
                 console.log("Navigating to Login Page...");
-                _this.rootPage = login_1.LoginPage;
+                _this.nav.setRoot(login_1.LoginPage);
             }
         });
     }
     PaceApp.prototype.openPage = function (page) {
         var _this = this;
+        var nav = this.app.getComponent('nav');
         if (page.index) {
             console.log("Setting navRoot to index:");
-            this.nav.setRoot(page.component, { tabIndex: page.index });
+            nav.setRoot(page.component, { tabIndex: page.index });
         }
         else {
             console.log("Setting navRoot to component:");
-            this.nav.setRoot(page.component);
+            nav.setRoot(page.component);
         }
         if (page.title === 'Logout') {
             // Give the menu time to close before changing to logged out
             setTimeout(function () {
                 console.log("Logging out initialized...");
-                _this.initLogout(_this.nav, _this.userData);
+                _this.initLogout(nav, _this.userData);
             }, 1000);
         }
     };
@@ -118,9 +119,6 @@ var PaceApp = (function () {
         this.events.subscribe('user:login', function () {
             _this.loggedIn = true;
         });
-        this.events.subscribe('user:signup', function () {
-            _this.loggedIn = true;
-        });
         this.events.subscribe('user:logout', function () {
             _this.loggedIn = false;
         });
@@ -133,13 +131,7 @@ var PaceApp = (function () {
         ionic_angular_1.App({
             templateUrl: 'build/app.html',
             providers: [user_data_1.UserData, fb_provider_1.FbProvider],
-            config: {
-                platforms: {
-                    android: {
-                        tabbarLayout: 'icon-hide'
-                    }
-                }
-            }
+            config: {}
         }), 
         __metadata('design:paramtypes', [ionic_angular_1.IonicApp, ionic_angular_1.Events, user_data_1.UserData, ionic_angular_1.Platform, fb_provider_1.FbProvider])
     ], PaceApp);
@@ -311,6 +303,7 @@ var ionic_angular_1 = require("ionic-angular");
 var tabs_1 = require("../tabs/tabs");
 var user_data_1 = require("../../providers/user-data");
 var fb_provider_1 = require("../../providers/fb-provider");
+var dashboard_1 = require("../dashboard/dashboard");
 var LoginPage = (function () {
     function LoginPage(nav, menu, userData, platform, fb) {
         this.nav = nav;
@@ -343,8 +336,10 @@ var LoginPage = (function () {
         var _this = this;
         console.log("Facebook login initialized...");
         this.fb.login().then(function () {
+            _this.userData.login();
             console.log("Navigating to home...");
-            _this.nav.push(tabs_1.TabsPage);
+            // this.nav.push(TabsPage);
+            _this.nav.setRoot(dashboard_1.DashboardPage);
         });
     };
     LoginPage.prototype.onLogin = function (form) {
@@ -352,6 +347,7 @@ var LoginPage = (function () {
         if (form.valid) {
             this.userData.login();
             console.log("Pushing to TabsPage...");
+            // this.nav.push(TabsPage);
             this.nav.push(tabs_1.TabsPage);
         }
     };
@@ -373,7 +369,7 @@ var LoginPage = (function () {
 }());
 exports.LoginPage = LoginPage;
 
-},{"../../providers/fb-provider":8,"../../providers/user-data":9,"../tabs/tabs":7,"ionic-angular":344}],6:[function(require,module,exports){
+},{"../../providers/fb-provider":8,"../../providers/user-data":9,"../dashboard/dashboard":3,"../tabs/tabs":7,"ionic-angular":344}],6:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -500,11 +496,12 @@ var profile_1 = require('../profile/profile');
 var TabsPage = (function () {
     function TabsPage(navParams) {
         this.navParams = navParams;
-        this.mySelectedIndex = this.navParams.data.tabIndex || 0;
         // set the root pages for each tab
         this.tab1Root = dashboard_1.DashboardPage; // 1
         this.tab2Root = profile_1.ProfilePage; // 2
         this.tab3Root = about_1.AboutPage; // 0
+        console.log("TabIndex:", this.navParams.data.tabIndex);
+        this.mySelectedIndex = this.navParams.data.tabIndex || 0;
     }
     TabsPage = __decorate([
         ionic_angular_1.Page({
@@ -36056,8 +36053,8 @@ exports.Codegen = Codegen;
   * https://github.com/paulmillr/es6-shim
   * @license es6-shim Copyright 2013-2016 by Paul Miller (http://paulmillr.com)
   *   and contributors,  MIT License
-  * es6-shim: v0.35.0
-  * see https://github.com/paulmillr/es6-shim/blob/0.35.0/LICENSE
+  * es6-shim: v0.35.1
+  * see https://github.com/paulmillr/es6-shim/blob/0.35.1/LICENSE
   * Details and documentation:
   * https://github.com/paulmillr/es6-shim/
   */
@@ -36087,7 +36084,9 @@ exports.Codegen = Codegen;
   var keys = Object.keys;
 
   var not = function notThunker(func) {
-    return function notThunk() { return !_apply(func, this, arguments); };
+    return function notThunk() {
+      return !_apply(func, this, arguments);
+    };
   };
   var throwsError = function (func) {
     try {
@@ -36108,10 +36107,12 @@ exports.Codegen = Codegen;
   var isCallableWithoutNew = not(throwsError);
   var arePropertyDescriptorsSupported = function () {
     // if Object.defineProperty exists but throws, it's IE 8
-    return !throwsError(function () { Object.defineProperty({}, 'x', { get: function () {} }); });
+    return !throwsError(function () {
+      Object.defineProperty({}, 'x', { get: function () {} });
+    });
   };
   var supportsDescriptors = !!Object.defineProperty && arePropertyDescriptorsSupported();
-  var functionsHaveNames = (function foo() {}).name === 'foo';
+  var functionsHaveNames = (function foo() {}).name === 'foo'; // eslint-disable-line no-extra-parens
 
   var _forEach = Function.call.bind(Array.prototype.forEach);
   var _reduce = Function.call.bind(Array.prototype.reduce);
@@ -36239,7 +36240,7 @@ exports.Codegen = Codegen;
   var _indexOf = Function.call.bind(String.prototype.indexOf);
   var _arrayIndexOfApply = Function.apply.bind(Array.prototype.indexOf);
   var _concat = Function.call.bind(Array.prototype.concat);
-  var _sort = Function.call.bind(Array.prototype.sort);
+  // var _sort = Function.call.bind(Array.prototype.sort);
   var _strSlice = Function.call.bind(String.prototype.slice);
   var _push = Function.call.bind(Array.prototype.push);
   var _pushApply = Function.apply.bind(Array.prototype.push);
@@ -36248,6 +36249,7 @@ exports.Codegen = Codegen;
   var _min = Math.min;
   var _floor = Math.floor;
   var _abs = Math.abs;
+  var _exp = Math.exp;
   var _log = Math.log;
   var _sqrt = Math.sqrt;
   var _hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -36268,6 +36270,12 @@ exports.Codegen = Codegen;
   var numberIsFinite = Number.isFinite || function isFinite(value) {
     return typeof value === 'number' && globalIsFinite(value);
   };
+  var _sign = isCallable(Math.sign) ? Math.sign : function sign(value) {
+    var number = Number(value);
+    if (number === 0) { return number; }
+    if (numberIsNaN(number)) { return number; }
+    return number < 0 ? -1 : 1;
+  };
 
   // taken directly from https://github.com/ljharb/is-arguments/blob/master/index.js
   // can be replaced with require('is-arguments') if we ever use a build process instead
@@ -36286,7 +36294,6 @@ exports.Codegen = Codegen;
 
   var Type = {
     primitive: function (x) { return x === null || (typeof x !== 'function' && typeof x !== 'object'); },
-    object: function (x) { return x !== null && typeof x === 'object'; },
     string: function (x) { return _toString(x) === '[object String]'; },
     regex: function (x) { return _toString(x) === '[object RegExp]'; },
     symbol: function (x) {
@@ -36324,7 +36331,7 @@ exports.Codegen = Codegen;
   var $String = String;
 
   var ES = {
-    // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-call-f-v-args
+    // http://www.ecma-international.org/ecma-262/6.0/#sec-call
     Call: function Call(F, V) {
       var args = arguments.length > 2 ? arguments[2] : [];
       if (!ES.IsCallable(F)) {
@@ -36444,7 +36451,7 @@ exports.Codegen = Codegen;
     },
 
     IteratorComplete: function (iterResult) {
-      return !!(iterResult.done);
+      return !!iterResult.done;
     },
 
     IteratorClose: function (iterator, completionIsThrow) {
@@ -36739,7 +36746,9 @@ exports.Codegen = Codegen;
   // https://bugzilla.mozilla.org/show_bug.cgi?id=1062484
   if (String.fromCodePoint && String.fromCodePoint.length !== 1) {
     var originalFromCodePoint = String.fromCodePoint;
-    overrideNative(String, 'fromCodePoint', function fromCodePoint(codePoints) { return ES.Call(originalFromCodePoint, this, arguments); });
+    overrideNative(String, 'fromCodePoint', function fromCodePoint(codePoints) {
+      return ES.Call(originalFromCodePoint, this, arguments);
+    });
   }
 
   var StringShims = {
@@ -36865,7 +36874,7 @@ exports.Codegen = Codegen;
       var length = thisStr.length;
       if (position >= 0 && position < length) {
         var first = thisStr.charCodeAt(position);
-        var isEnd = (position + 1 === length);
+        var isEnd = position + 1 === length;
         if (first < 0xD800 || first > 0xDBFF || isEnd) { return first; }
         var second = thisStr.charCodeAt(position + 1);
         if (second < 0xDC00 || second > 0xDFFF) { return first; }
@@ -36937,19 +36946,28 @@ exports.Codegen = Codegen;
   var hasStringTrimBug = nonWS.trim().length !== nonWS.length;
   defineProperty(String.prototype, 'trim', trimShim, hasStringTrimBug);
 
-  // see https://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype-@@iterator
+  // Given an argument x, it will return an IteratorResult object,
+  // with value set to x and done to false.
+  // Given no arguments, it will return an iterator completion object.
+  var iteratorResult = function (x) {
+    return { value: x, done: arguments.length === 0 };
+  };
+
+  // see http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype-@@iterator
   var StringIterator = function (s) {
     ES.RequireObjectCoercible(s);
     this._s = ES.ToString(s);
     this._i = 0;
   };
   StringIterator.prototype.next = function () {
-    var s = this._s, i = this._i;
+    var s = this._s;
+    var i = this._i;
     if (typeof s === 'undefined' || i >= s.length) {
       this._s = void 0;
-      return { value: void 0, done: true };
+      return iteratorResult();
     }
-    var first = s.charCodeAt(i), second, len;
+    var first = s.charCodeAt(i);
+    var second, len;
     if (first < 0xD800 || first > 0xDBFF || (i + 1) === s.length) {
       len = 1;
     } else {
@@ -36957,7 +36975,7 @@ exports.Codegen = Codegen;
       len = (second < 0xDC00 || second > 0xDFFF) ? 1 : 2;
     }
     this._i = i + len;
-    return { value: s.substr(i, len), done: false };
+    return iteratorResult(s.substr(i, len));
   };
   addIterator(StringIterator.prototype);
   addIterator(String.prototype, function () {
@@ -37023,7 +37041,7 @@ exports.Codegen = Codegen;
           if (mapping) {
             value = typeof T === 'undefined' ? mapFn(value, i) : _call(mapFn, T, value, i);
           }
-          result[i] = value;
+          createDataPropertyOrThrow(result, i, value);
         }
       }
 
@@ -37045,24 +37063,18 @@ exports.Codegen = Codegen;
   defineProperties(Array, ArrayShims);
   addDefaultSpecies(Array);
 
-  // Given an argument x, it will return an IteratorResult object,
-  // with value set to x and done to false.
-  // Given no arguments, it will return an iterator completion object.
-  var iteratorResult = function (x) {
-    return { value: x, done: arguments.length === 0 };
-  };
-
   // Our ArrayIterator is private; see
   // https://github.com/paulmillr/es6-shim/issues/252
   ArrayIterator = function (array, kind) {
-      this.i = 0;
-      this.array = array;
-      this.kind = kind;
+    this.i = 0;
+    this.array = array;
+    this.kind = kind;
   };
 
   defineProperties(ArrayIterator.prototype, {
     next: function () {
-      var i = this.i, array = this.array;
+      var i = this.i;
+      var array = this.array;
       if (!(this instanceof ArrayIterator)) {
         throw new TypeError('Not an ArrayIterator');
       }
@@ -37079,15 +37091,16 @@ exports.Codegen = Codegen;
             retval = [i, array[i]];
           }
           this.i = i + 1;
-          return { value: retval, done: false };
+          return iteratorResult(retval);
         }
       }
       this.array = void 0;
-      return { value: void 0, done: true };
+      return iteratorResult();
     }
   });
   addIterator(ArrayIterator.prototype);
 
+/*
   var orderKeys = function orderKeys(a, b) {
     var aNumeric = String(ES.ToInteger(a)) === a;
     var bNumeric = String(ES.ToInteger(b)) === b;
@@ -37101,6 +37114,7 @@ exports.Codegen = Codegen;
       return a.localeCompare(b);
     }
   };
+
   var getAllKeys = function getAllKeys(object) {
     var ownKeys = [];
     var keys = [];
@@ -37113,6 +37127,7 @@ exports.Codegen = Codegen;
 
     return _concat(ownKeys, keys);
   };
+  */
 
   // note: this is positioned here because it depends on ArrayIterator
   var arrayOfSupportsSubclassing = Array.of === ArrayShims.of || (function () {
@@ -37193,7 +37208,9 @@ exports.Codegen = Codegen;
       for (var i = 0, value; i < length; i++) {
         value = list[i];
         if (thisArg) {
-          if (_call(predicate, thisArg, value, i, list)) { return value; }
+          if (_call(predicate, thisArg, value, i, list)) {
+            return value;
+          }
         } else if (predicate(value, i, list)) {
           return value;
         }
@@ -37209,7 +37226,9 @@ exports.Codegen = Codegen;
       var thisArg = arguments.length > 1 ? arguments[1] : null;
       for (var i = 0; i < length; i++) {
         if (thisArg) {
-          if (_call(predicate, thisArg, list[i], i, list)) { return i; }
+          if (_call(predicate, thisArg, list[i], i, list)) {
+            return i;
+          }
         } else if (predicate(list[i], i, list)) {
           return i;
         }
@@ -37278,7 +37297,9 @@ exports.Codegen = Codegen;
   var arrayFromSwallowsNegativeLengths = (function () {
     // Detects a Firefox bug in v32
     // https://bugzilla.mozilla.org/show_bug.cgi?id=1063993
-    return valueOrFalseIfThrows(function () { return Array.from({ length: -1 }).length === 0; });
+    return valueOrFalseIfThrows(function () {
+      return Array.from({ length: -1 }).length === 0;
+    });
   }());
   var arrayFromHandlesIterables = (function () {
     // Detects a bug in Webkit nightly r181886
@@ -37291,7 +37312,9 @@ exports.Codegen = Codegen;
   var arrayFromHandlesUndefinedMapFunction = (function () {
     // Microsoft Edge v0.11 throws if the mapFn argument is *provided* but undefined,
     // but the spec doesn't care if it's provided or not - undefined doesn't throw.
-    return valueOrFalseIfThrows(function () { return Array.from([0], void 0); });
+    return valueOrFalseIfThrows(function () {
+      return Array.from([0], void 0);
+    });
   }());
   if (!arrayFromHandlesUndefinedMapFunction) {
     var origArrayFrom = Array.from;
@@ -37307,7 +37330,7 @@ exports.Codegen = Codegen;
   var int32sAsOne = -(Math.pow(2, 32) - 1);
   var toLengthsCorrectly = function (method, reversed) {
     var obj = { length: int32sAsOne };
-    obj[reversed ? ((obj.length >>> 0) - 1) : 0] = true;
+    obj[reversed ? (obj.length >>> 0) - 1 : 0] = true;
     return valueOrFalseIfThrows(function () {
       _call(method, obj, function () {
         // note: in nonconforming browsers, this will be called
@@ -37607,7 +37630,8 @@ exports.Codegen = Codegen;
       Object.getPrototypeOf(Object.create(null)) === null) {
     (function () {
       var FAKENULL = Object.create(null);
-      var gpo = Object.getPrototypeOf, spo = Object.setPrototypeOf;
+      var gpo = Object.getPrototypeOf;
+      var spo = Object.setPrototypeOf;
       Object.getPrototypeOf = function (o) {
         var result = gpo(o);
         return result === FAKENULL ? null : result;
@@ -37639,7 +37663,7 @@ exports.Codegen = Codegen;
             _push(regexKeys, k);
           }
         }
-       return regexKeys;
+        return regexKeys;
       }
       return regexRejectingObjectKeys(value);
     });
@@ -37679,7 +37703,7 @@ exports.Codegen = Codegen;
     if (!objectSealAcceptsPrimitives) {
       var originalObjectSeal = Object.seal;
       overrideNative(Object, 'seal', function seal(value) {
-        if (!Type.object(value)) { return value; }
+        if (!ES.TypeIsObject(value)) { return value; }
         return originalObjectSeal(value);
       });
     }
@@ -37689,7 +37713,7 @@ exports.Codegen = Codegen;
     if (!objectIsSealedAcceptsPrimitives) {
       var originalObjectIsSealed = Object.isSealed;
       overrideNative(Object, 'isSealed', function isSealed(value) {
-        if (!Type.object(value)) { return true; }
+        if (!ES.TypeIsObject(value)) { return true; }
         return originalObjectIsSealed(value);
       });
     }
@@ -37699,7 +37723,7 @@ exports.Codegen = Codegen;
     if (!objectFreezeAcceptsPrimitives) {
       var originalObjectFreeze = Object.freeze;
       overrideNative(Object, 'freeze', function freeze(value) {
-        if (!Type.object(value)) { return value; }
+        if (!ES.TypeIsObject(value)) { return value; }
         return originalObjectFreeze(value);
       });
     }
@@ -37709,7 +37733,7 @@ exports.Codegen = Codegen;
     if (!objectIsFrozenAcceptsPrimitives) {
       var originalObjectIsFrozen = Object.isFrozen;
       overrideNative(Object, 'isFrozen', function isFrozen(value) {
-        if (!Type.object(value)) { return true; }
+        if (!ES.TypeIsObject(value)) { return true; }
         return originalObjectIsFrozen(value);
       });
     }
@@ -37719,7 +37743,7 @@ exports.Codegen = Codegen;
     if (!objectPreventExtensionsAcceptsPrimitives) {
       var originalObjectPreventExtensions = Object.preventExtensions;
       overrideNative(Object, 'preventExtensions', function preventExtensions(value) {
-        if (!Type.object(value)) { return value; }
+        if (!ES.TypeIsObject(value)) { return value; }
         return originalObjectPreventExtensions(value);
       });
     }
@@ -37729,7 +37753,7 @@ exports.Codegen = Codegen;
     if (!objectIsExtensibleAcceptsPrimitives) {
       var originalObjectIsExtensible = Object.isExtensible;
       overrideNative(Object, 'isExtensible', function isExtensible(value) {
-        if (!Type.object(value)) { return false; }
+        if (!ES.TypeIsObject(value)) { return false; }
         return originalObjectIsExtensible(value);
       });
     }
@@ -37872,16 +37896,19 @@ exports.Codegen = Codegen;
   var BINARY_32_EPSILON = Math.pow(2, -23);
   var BINARY_32_MAX_VALUE = Math.pow(2, 127) * (2 - BINARY_32_EPSILON);
   var BINARY_32_MIN_VALUE = Math.pow(2, -126);
+  var E = Math.E;
+  var LOG2E = Math.LOG2E;
+  var LOG10E = Math.LOG10E;
   var numberCLZ = Number.prototype.clz;
   delete Number.prototype.clz; // Safari 8 has Number#clz
 
   var MathShims = {
     acosh: function acosh(value) {
       var x = Number(value);
-      if (Number.isNaN(x) || value < 1) { return NaN; }
+      if (numberIsNaN(x) || value < 1) { return NaN; }
       if (x === 1) { return 0; }
       if (x === Infinity) { return x; }
-      return _log(x / Math.E + _sqrt(x + 1) * _sqrt(x - 1) / Math.E) + 1;
+      return _log(x / E + _sqrt(x + 1) * _sqrt(x - 1) / E) + 1;
     },
 
     asinh: function asinh(value) {
@@ -37889,12 +37916,12 @@ exports.Codegen = Codegen;
       if (x === 0 || !globalIsFinite(x)) {
         return x;
       }
-      return x < 0 ? -Math.asinh(-x) : _log(x + _sqrt(x * x + 1));
+      return x < 0 ? -asinh(-x) : _log(x + _sqrt(x * x + 1));
     },
 
     atanh: function atanh(value) {
       var x = Number(value);
-      if (Number.isNaN(x) || x < -1 || x > 1) {
+      if (numberIsNaN(x) || x < -1 || x > 1) {
         return NaN;
       }
       if (x === -1) { return -Infinity; }
@@ -37906,12 +37933,13 @@ exports.Codegen = Codegen;
     cbrt: function cbrt(value) {
       var x = Number(value);
       if (x === 0) { return x; }
-      var negate = x < 0, result;
+      var negate = x < 0;
+      var result;
       if (negate) { x = -x; }
       if (x === Infinity) {
         result = Infinity;
       } else {
-        result = Math.exp(_log(x) / 3);
+        result = _exp(_log(x) / 3);
         // from http://en.wikipedia.org/wiki/Cube_root#Numerical_methods
         result = (x / (result * result) + (2 * result)) / 3;
       }
@@ -37925,17 +37953,17 @@ exports.Codegen = Codegen;
       if (number === 0) {
         return 32;
       }
-      return numberCLZ ? ES.Call(numberCLZ, number) : 31 - _floor(_log(number + 0.5) * Math.LOG2E);
+      return numberCLZ ? ES.Call(numberCLZ, number) : 31 - _floor(_log(number + 0.5) * LOG2E);
     },
 
     cosh: function cosh(value) {
       var x = Number(value);
       if (x === 0) { return 1; } // +0 or -0
-      if (Number.isNaN(x)) { return NaN; }
+      if (numberIsNaN(x)) { return NaN; }
       if (!globalIsFinite(x)) { return Infinity; }
       if (x < 0) { x = -x; }
-      if (x > 21) { return Math.exp(x) / 2; }
-      return (Math.exp(x) + Math.exp(-x)) / 2;
+      if (x > 21) { return _exp(x) / 2; }
+      return (_exp(x) + _exp(-x)) / 2;
     },
 
     expm1: function expm1(value) {
@@ -37943,7 +37971,7 @@ exports.Codegen = Codegen;
       if (x === -Infinity) { return -1; }
       if (!globalIsFinite(x) || x === 0) { return x; }
       if (_abs(x) > 0.5) {
-        return Math.exp(x) - 1;
+        return _exp(x) - 1;
       }
       // A more precise approximation using Taylor series expansion
       // from https://github.com/paulmillr/es6-shim/issues/314#issuecomment-70293986
@@ -37968,35 +37996,30 @@ exports.Codegen = Codegen;
           result += 1;
           largest = value;
         } else {
-          result += (value > 0 ? (value / largest) * (value / largest) : value);
+          result += value > 0 ? (value / largest) * (value / largest) : value;
         }
       }
       return largest === Infinity ? Infinity : largest * _sqrt(result);
     },
 
     log2: function log2(value) {
-      return _log(value) * Math.LOG2E;
+      return _log(value) * LOG2E;
     },
 
     log10: function log10(value) {
-      return _log(value) * Math.LOG10E;
+      return _log(value) * LOG10E;
     },
 
     log1p: function log1p(value) {
       var x = Number(value);
-      if (x < -1 || Number.isNaN(x)) { return NaN; }
+      if (x < -1 || numberIsNaN(x)) { return NaN; }
       if (x === 0 || x === Infinity) { return x; }
       if (x === -1) { return -Infinity; }
 
       return (1 + x) - 1 === 0 ? x : x * (_log(1 + x) / ((1 + x) - 1));
     },
 
-    sign: function sign(value) {
-      var number = Number(value);
-      if (number === 0) { return number; }
-      if (Number.isNaN(number)) { return number; }
-      return number < 0 ? -1 : 1;
-    },
+    sign: _sign,
 
     sinh: function sinh(value) {
       var x = Number(value);
@@ -38005,20 +38028,17 @@ exports.Codegen = Codegen;
       if (_abs(x) < 1) {
         return (Math.expm1(x) - Math.expm1(-x)) / 2;
       }
-      return (Math.exp(x - 1) - Math.exp(-x - 1)) * Math.E / 2;
+      return (_exp(x - 1) - _exp(-x - 1)) * E / 2;
     },
 
     tanh: function tanh(value) {
       var x = Number(value);
-      if (Number.isNaN(x) || x === 0) { return x; }
+      if (numberIsNaN(x) || x === 0) { return x; }
       // can exit early at +-20 as JS loses precision for true value at this integer
       if (x >= 20) { return 1; }
       if (x <= -20) { return -1; }
-      var a = Math.expm1(x);
-      var b = Math.expm1(-x);
-      if (a === Infinity) { return 1; }
-      if (b === Infinity) { return -1; }
-      return (a - b) / (Math.exp(x) + Math.exp(-x));
+
+      return (Math.expm1(x) - Math.expm1(-x)) / (_exp(x) + _exp(-x));
     },
 
     trunc: function trunc(value) {
@@ -38036,7 +38056,7 @@ exports.Codegen = Codegen;
       var bl = b & 0xffff;
       // the shift by 0 fixes the sign on the high part
       // the final |0 converts the unsigned value into a signed value
-      return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
+      return (al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0;
     },
 
     fround: function fround(x) {
@@ -38044,7 +38064,7 @@ exports.Codegen = Codegen;
       if (v === 0 || v === Infinity || v === -Infinity || numberIsNaN(v)) {
         return v;
       }
-      var sign = Math.sign(v);
+      var sign = _sign(v);
       var abs = _abs(v);
       if (abs < BINARY_32_MIN_VALUE) {
         return sign * roundTiesToEven(abs / BINARY_32_MIN_VALUE / BINARY_32_EPSILON) * BINARY_32_MIN_VALUE * BINARY_32_EPSILON;
@@ -38081,7 +38101,7 @@ exports.Codegen = Codegen;
 
   // When engines use Math.floor(x + 0.5) internally, Math.round can be buggy for large integers.
   // This behavior should be governed by "round to nearest, ties to even mode"
-  // see https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ecmascript-language-types-number-type
+  // see http://www.ecma-international.org/ecma-262/6.0/#sec-terms-and-definitions-number-type
   // These are the boundary cases where it breaks.
   var smallestPositiveNumberWhereRoundBreaks = inverseEpsilon + 1;
   var largestPositiveNumberWhereRoundBreaks = 2 * inverseEpsilon - 1;
@@ -38401,7 +38421,9 @@ exports.Codegen = Codegen;
 
     var performPromiseAll = function (iteratorRecord, C, resultCapability) {
       var it = iteratorRecord.iterator;
-      var values = [], remaining = { count: 1 }, next, nextValue;
+      var values = [];
+      var remaining = { count: 1 };
+      var next, nextValue;
       var index = 0;
       while (true) {
         try {
@@ -38432,7 +38454,8 @@ exports.Codegen = Codegen;
     };
 
     var performPromiseRace = function (iteratorRecord, C, resultCapability) {
-      var it = iteratorRecord.iterator, next, nextValue, nextPromise;
+      var it = iteratorRecord.iterator;
+      var next, nextValue, nextPromise;
       while (true) {
         try {
           next = ES.IteratorStep(it);
@@ -38527,7 +38550,9 @@ exports.Codegen = Codegen;
         }
         if (ES.IsPromise(v)) {
           var constructor = v.constructor;
-          if (constructor === C) { return v; }
+          if (constructor === C) {
+            return v;
+          }
         }
         var capability = new PromiseCapability(C);
         var resolveFunc = capability.resolve;
@@ -38840,15 +38865,18 @@ exports.Codegen = Codegen;
 
         MapIterator.prototype = {
           next: function next() {
-            var i = this.i, kind = this.kind, head = this.head, result;
+            var i = this.i;
+            var kind = this.kind;
+            var head = this.head;
             if (typeof this.i === 'undefined') {
-              return { value: void 0, done: true };
+              return iteratorResult();
             }
             while (i.isRemoved() && i !== head) {
               // back up off of removed entries
               i = i.prev;
             }
             // advance to next unreturned element.
+            var result;
             while (i.next !== head) {
               i = i.next;
               if (!i.isRemoved()) {
@@ -38860,12 +38888,12 @@ exports.Codegen = Codegen;
                   result = [i.key, i.value];
                 }
                 this.i = i;
-                return { value: result, done: false };
+                return iteratorResult(result);
               }
             }
             // once the iterator is done, it is done forever.
             this.i = void 0;
-            return { value: void 0, done: true };
+            return iteratorResult();
           }
         };
         addIterator(MapIterator.prototype);
@@ -38918,7 +38946,8 @@ exports.Codegen = Codegen;
                 return;
               }
             }
-            var head = this._head, i = head;
+            var head = this._head;
+            var i = head;
             while ((i = i.next) !== head) {
               if (ES.SameValueZero(i.key, key)) {
                 return i.value;
@@ -38933,7 +38962,8 @@ exports.Codegen = Codegen;
               // fast O(1) path
               return typeof this._storage[fkey] !== 'undefined';
             }
-            var head = this._head, i = head;
+            var head = this._head;
+            var i = head;
             while ((i = i.next) !== head) {
               if (ES.SameValueZero(i.key, key)) {
                 return true;
@@ -38944,7 +38974,9 @@ exports.Codegen = Codegen;
 
           set: function set(key, value) {
             requireMapSlot(this, 'set');
-            var head = this._head, i = head, entry;
+            var head = this._head;
+            var i = head;
+            var entry;
             var fkey = fastkey(key);
             if (fkey !== null) {
               // fast O(1) path
@@ -38977,7 +39009,8 @@ exports.Codegen = Codegen;
 
           'delete': function (key) {
             requireMapSlot(this, 'delete');
-            var head = this._head, i = head;
+            var head = this._head;
+            var i = head;
             var fkey = fastkey(key);
             if (fkey !== null) {
               // fast O(1) path
@@ -39004,7 +39037,9 @@ exports.Codegen = Codegen;
             requireMapSlot(this, 'clear');
             this._size = 0;
             this._storage = emptyObject();
-            var head = this._head, i = head, p = i.next;
+            var head = this._head;
+            var i = head;
+            var p = i.next;
             while ((i = p) !== head) {
               i.key = i.value = empty;
               p = i.next;
@@ -39344,8 +39379,9 @@ exports.Codegen = Codegen;
         defineProperty(globals.Set.prototype, 'constructor', globals.Set, true);
         Value.preserveToString(globals.Set, OrigSet);
       }
+      var newMap = new globals.Map();
       var mapIterationThrowsStopIterator = !valueOrFalseIfThrows(function () {
-        return (new Map()).keys().next().done;
+        return newMap.keys().next().done;
       });
       /*
         - In Firefox < 23, Map#size is a function.
@@ -39357,14 +39393,14 @@ exports.Codegen = Codegen;
       if (
         typeof globals.Map.prototype.clear !== 'function' ||
         new globals.Set().size !== 0 ||
-        new globals.Map().size !== 0 ||
+        newMap.size !== 0 ||
         typeof globals.Map.prototype.keys !== 'function' ||
         typeof globals.Set.prototype.keys !== 'function' ||
         typeof globals.Map.prototype.forEach !== 'function' ||
         typeof globals.Set.prototype.forEach !== 'function' ||
         isCallableWithoutNew(globals.Map) ||
         isCallableWithoutNew(globals.Set) ||
-        typeof (new globals.Map().keys().next) !== 'function' || // Safari 8
+        typeof newMap.keys().next !== 'function' || // Safari 8
         mapIterationThrowsStopIterator || // Firefox 25
         !mapSupportsSubclassing
       ) {
@@ -39707,7 +39743,7 @@ exports.Codegen = Codegen;
   }
 
   // Annex B HTML methods
-  // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-additional-properties-of-the-string.prototype-object
+  // http://www.ecma-international.org/ecma-262/6.0/#sec-additional-properties-of-the-string.prototype-object
   var stringHTMLshims = {
     anchor: function anchor(name) { return ES.CreateHTML(this, 'a', 'name', name); },
     big: function big() { return ES.CreateHTML(this, 'big', '', ''); },

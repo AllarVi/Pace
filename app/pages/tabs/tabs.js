@@ -12,11 +12,12 @@ var profile_1 = require('../profile/profile');
 var TabsPage = (function () {
     function TabsPage(navParams) {
         this.navParams = navParams;
-        this.mySelectedIndex = this.navParams.data.tabIndex || 0;
         // set the root pages for each tab
         this.tab1Root = dashboard_1.DashboardPage; // 1
         this.tab2Root = profile_1.ProfilePage; // 2
         this.tab3Root = about_1.AboutPage; // 0
+        console.log("TabIndex:", this.navParams.data.tabIndex);
+        this.mySelectedIndex = this.navParams.data.tabIndex || 0;
     }
     TabsPage = __decorate([
         ionic_angular_1.Page({

@@ -5,17 +5,19 @@ import {ProfilePage} from '../profile/profile';
 
 
 @Page({
-  templateUrl: 'build/pages/tabs/tabs.html'
+    templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {
 
-  constructor(private navParams:NavParams) {
-  }
+    // set the root pages for each tab
+    tab1Root:any = DashboardPage; // 1
+    tab2Root:any = ProfilePage; // 2
+    tab3Root:any = AboutPage; // 0
 
-  mySelectedIndex = this.navParams.data.tabIndex || 0;
+    mySelectedIndex:number;
 
-  // set the root pages for each tab
-  tab1Root = DashboardPage; // 1
-  tab2Root = ProfilePage; // 2
-  tab3Root = AboutPage; // 0
+    constructor(private navParams:NavParams) {
+        console.log("TabIndex:", this.navParams.data.tabIndex);
+        this.mySelectedIndex = this.navParams.data.tabIndex || 0;
+    }
 }
