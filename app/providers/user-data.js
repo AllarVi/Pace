@@ -47,15 +47,17 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
-    UserData.prototype.saveNewPaceUser = function (userProfile, status) {
+    UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.url = 'http://localhost:8080/api/user';
+            console.log(JSON.stringify(userProfile));
             console.log("Making request to: " + _this.url);
             _this.paceUser = JSON.stringify({
                 facebookId: userProfile.id,
                 name: userProfile.name,
                 authResponse: status,
+                accessToken: accessToken,
                 picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
             });
             _this.http.post(_this.url, _this.paceUser).subscribe(function (paceUser) {

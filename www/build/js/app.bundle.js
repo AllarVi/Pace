@@ -20,6 +20,7 @@ var dashboard_1 = require('./pages/dashboard/dashboard');
 var fb_provider_1 = require('./providers/fb-provider');
 var PaceApp = (function () {
     function PaceApp(app, events, userData, platform, fbProvider) {
+        var _this = this;
         this.app = app;
         this.events = events;
         this.userData = userData;
@@ -38,29 +39,29 @@ var PaceApp = (function () {
             { title: 'Logout', component: tabs_1.TabsPage, icon: 'log-out' }
         ];
         this.loggedOutPages = [
-            { title: 'Login', component: login_1.LoginPage, icon: 'log-in' }
+            { title: 'Login', component: login_1.LoginPage, icon: 'log-in' },
+            { title: 'Logout', component: tabs_1.TabsPage, icon: 'log-out' }
         ];
         // Call any initial plugins when ready
         platform.ready().then(function () {
             ionic_native_1.StatusBar.styleDefault();
             // Keyboard.setAccessoryBarVisible(false);
         });
-        // this.userData.hasLoggedIn().then((hasLoggedIn) => {
-        //   this.loggedIn = (hasLoggedIn == 'true');
-        // });
-        //
-        // this.listenToLoginEvents();
-        //
-        // this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
-        //   console.log("PaceApp: User status:", FbLoginStatus.status);
-        //   if (FbLoginStatus.status === 'connected') {
-        //     console.log("Navigating to Dashboard Page");
-        //     this.rootPage = DashboardPage;
-        //   } else {
-        //     console.log("Navigating to Login Page...");
-        //     this.rootPage = LoginPage;
-        //   }
-        // });
+        this.userData.hasLoggedIn().then(function (hasLoggedIn) {
+            _this.loggedIn = (hasLoggedIn == 'true');
+        });
+        this.listenToLoginEvents();
+        this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
+            console.log("PaceApp: User status:", FbLoginStatus.status);
+            if (FbLoginStatus.status === 'connected') {
+                console.log("Navigating to Dashboard Page");
+                _this.rootPage = dashboard_1.DashboardPage;
+            }
+            else {
+                console.log("Navigating to Login Page...");
+                _this.rootPage = login_1.LoginPage;
+            }
+        });
     }
     PaceApp.prototype.openPage = function (page) {
         var _this = this;
@@ -623,7 +624,7 @@ var FbProvider = (function () {
                 _this.getCurrentUserProfile(success.authResponse.accessToken).then(function (profileData) {
                     console.log("fbLoginSuccess: getCurrentUserProfile:");
                     console.log(JSON.stringify(profileData));
-                    _this.userData.saveNewPaceUser(profileData, success.status).then(function () {
+                    _this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(function () {
                         console.log("Publishing login...");
                         _this.events.publish('user:login');
                         resolve();
@@ -713,15 +714,17 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
-    UserData.prototype.saveNewPaceUser = function (userProfile, status) {
+    UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.url = 'http://localhost:8080/api/user';
+            console.log(JSON.stringify(userProfile));
             console.log("Making request to: " + _this.url);
             _this.paceUser = JSON.stringify({
                 facebookId: userProfile.id,
                 name: userProfile.name,
                 authResponse: status,
+                accessToken: accessToken,
                 picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
             });
             _this.http.post(_this.url, _this.paceUser).subscribe(function (paceUser) {

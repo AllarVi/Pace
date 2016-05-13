@@ -94,7 +94,7 @@ export class FbProvider {
             console.log("fbLoginSuccess: getCurrentUserProfile:");
             console.log(JSON.stringify(profileData));
 
-            this.userData.saveNewPaceUser(profileData, success.status).then(() => {
+            this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(() => {
               console.log("Publishing login...");
               this.events.publish('user:login');
               resolve()

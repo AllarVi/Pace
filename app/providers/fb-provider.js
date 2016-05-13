@@ -100,7 +100,7 @@ var FbProvider = (function () {
                 _this.getCurrentUserProfile(success.authResponse.accessToken).then(function (profileData) {
                     console.log("fbLoginSuccess: getCurrentUserProfile:");
                     console.log(JSON.stringify(profileData));
-                    _this.userData.saveNewPaceUser(profileData, success.status).then(function () {
+                    _this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(function () {
                         console.log("Publishing login...");
                         _this.events.publish('user:login');
                         resolve();
