@@ -9,15 +9,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require('es6-shim');
-var core_1 = require('angular2/core');
-var ionic_angular_1 = require('ionic-angular');
-var ionic_native_1 = require('ionic-native');
-var user_data_1 = require('./providers/user-data');
-var tabs_1 = require('./pages/tabs/tabs');
-var login_1 = require('./pages/login/login');
-var dashboard_1 = require('./pages/dashboard/dashboard');
-var fb_provider_1 = require('./providers/fb-provider');
+var core_1 = require("angular2/core");
+var ionic_angular_1 = require("ionic-angular");
+var ionic_native_1 = require("ionic-native");
+var user_data_1 = require("./providers/user-data");
+var tabs_1 = require("./pages/tabs/tabs");
+var login_1 = require("./pages/login/login");
+var dashboard_1 = require("./pages/dashboard/dashboard");
+var fb_provider_1 = require("./providers/fb-provider");
+require("es6-shim");
 var PaceApp = (function () {
     function PaceApp(app, events, userData, platform, fbProvider) {
         var _this = this;
@@ -40,7 +40,7 @@ var PaceApp = (function () {
             { title: 'Login', component: login_1.LoginPage, icon: 'log-in' },
             { title: 'Logout', component: tabs_1.TabsPage, icon: 'log-out' }
         ];
-        this.rootPage = login_1.LoginPage;
+        this.rootPage = dashboard_1.DashboardPage;
         this.loggedIn = false;
         // Call any initial plugins when ready
         platform.ready().then(function () {
@@ -54,8 +54,14 @@ var PaceApp = (function () {
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
-                console.log("Navigating to Dashboard Page");
-                _this.nav.setRoot(dashboard_1.DashboardPage);
+                _this.userData.getUserShortTeamView().then(function (shortTeamView) {
+                    console.log(JSON.stringify(shortTeamView));
+                    console.log("Done loading shortTeamView!");
+                    console.log("Navigating to Dashboard Page");
+                    _this.nav.setRoot(dashboard_1.DashboardPage, {
+                        param1: shortTeamView
+                    });
+                });
             }
             else {
                 console.log("Navigating to Login Page...");
@@ -174,12 +180,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var ionic_angular_1 = require('ionic-angular');
-var group_detail_1 = require('../group-detail/group-detail');
+var ionic_angular_1 = require("ionic-angular");
+var group_detail_1 = require("../group-detail/group-detail");
+var user_data_1 = require("../../providers/user-data");
 var DashboardPage = (function () {
-    function DashboardPage(nav) {
+    function DashboardPage(nav, userData, navParams) {
         this.nav = nav;
+        this.userData = userData;
+        this.navParams = navParams;
+        this.shortTeamView = navParams.get('param1');
+        this.initDashboard();
     }
+    DashboardPage.prototype.initDashboard = function () {
+        var _this = this;
+        this.userData.getUserShortTeamView().then(function (shortTeamView) {
+            console.log(JSON.stringify(shortTeamView));
+            console.log("Done loading shortTeamView!");
+            _this.shortTeamView = shortTeamView;
+        });
+    };
     DashboardPage.prototype.goToGroupDetail = function (group) {
         this.nav.push(group_detail_1.GroupDetailPage, group);
     };
@@ -187,13 +206,13 @@ var DashboardPage = (function () {
         ionic_angular_1.Page({
             templateUrl: 'build/pages/dashboard/dashboard.html'
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, user_data_1.UserData, ionic_angular_1.NavParams])
     ], DashboardPage);
     return DashboardPage;
 }());
 exports.DashboardPage = DashboardPage;
 
-},{"../group-detail/group-detail":4,"ionic-angular":344}],4:[function(require,module,exports){
+},{"../../providers/user-data":9,"../group-detail/group-detail":4,"ionic-angular":344}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -338,7 +357,7 @@ var LoginPage = (function () {
         this.fb.login().then(function () {
             _this.userData.login();
             console.log("Navigating to home...");
-            // this.nav.push(TabsPage);
+            // this.nav.push(DashboardPage);
             _this.nav.setRoot(dashboard_1.DashboardPage);
         });
     };
@@ -593,6 +612,7 @@ var FbProvider = (function () {
         console.log("PaceApp: User status:", FbLoginStatus.status);
         if (FbLoginStatus.status === 'connected') {
             console.log("We shouldn't get here...");
+            resolve();
         }
         else {
             console.log("getFbLoginStatus", FbLoginStatus.status);
@@ -672,7 +692,6 @@ var core_1 = require("angular2/core");
 var ionic_angular_1 = require("ionic-angular");
 var http_1 = require("angular2/http");
 require("rxjs/add/operator/map");
-// import {FbProvider} from '../providers/fb-provider';
 var UserData = (function () {
     function UserData(events, http) {
         this.events = events;
@@ -682,6 +701,9 @@ var UserData = (function () {
         this.HAS_LOGGED_IN = 'hasLoggedIn';
         this.url = null;
         this.paceUser = null;
+        this.userId = null;
+        this.userToken = null;
+        this.shortTeamView = null;
     }
     UserData.prototype.getUser = function (userID) {
         var _this = this;
@@ -704,11 +726,31 @@ var UserData = (function () {
             _this.http.get(_this.url).subscribe(function (paceUser) {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
+                _this.extracted(paceUser);
                 resolve(paceUser);
             }, function (error) {
                 console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                 console.log(JSON.stringify(error.json()));
             }, function () { return console.log('User data fetching complete!'); });
+        });
+    };
+    UserData.prototype.getUserShortTeamView = function () {
+        var _this = this;
+        console.log("UserData: getUserShortTeamView() reached...");
+        return new Promise(function (resolve, reject) {
+            // this.userId = '1273703759309879';
+            // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
+            _this.url = 'http://localhost:8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
+            console.log("Making request to: " + _this.url);
+            console.log("Fetching short team views from BackPace...");
+            _this.http.get(_this.url).subscribe(function (shortTeamView) {
+                console.log("ShortTeamView from BackPace...");
+                _this.shortTeamView = shortTeamView.json();
+                resolve(_this.shortTeamView);
+            }, function (error) {
+                console.log("Error occurred in getUserShortTeamView()");
+                reject(error);
+            });
         });
     };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
@@ -727,6 +769,7 @@ var UserData = (function () {
             _this.http.post(_this.url, _this.paceUser).subscribe(function (paceUser) {
                 console.log("Created user from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
+                _this.extracted(paceUser);
                 resolve(paceUser);
             }, function (error) {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
@@ -735,12 +778,12 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
-    UserData.prototype.hasFavorite = function (sessionName) {
-        return (this._favorites.indexOf(sessionName) > -1);
+    UserData.prototype.extracted = function (paceUser) {
+        this.paceUser = paceUser.json();
+        this.userId = this.paceUser.facebookId;
+        this.userToken = this.paceUser.accessToken;
     };
-    UserData.prototype.addFavorite = function (sessionName) {
-        this._favorites.push(sessionName);
-    };
+    ;
     UserData.prototype.removeFavorite = function (sessionName) {
         var index = this._favorites.indexOf(sessionName);
         if (index > -1) {

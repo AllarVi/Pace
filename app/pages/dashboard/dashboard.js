@@ -8,8 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var ionic_angular_1 = require('ionic-angular');
 var group_detail_1 = require('../group-detail/group-detail');
 var DashboardPage = (function () {
-    function DashboardPage(nav) {
+    function DashboardPage(nav, userData) {
+        var _this = this;
         this.nav = nav;
+        this.userData = userData;
+        this.shortTeamView = null;
+        this.userData.getUserShortTeamView().then(function (shortTeamView) {
+            _this.shortTeamView = shortTeamView;
+            console.log("Done loading shortTeamView!");
+        });
     }
     DashboardPage.prototype.goToGroupDetail = function (group) {
         this.nav.push(group_detail_1.GroupDetailPage, group);

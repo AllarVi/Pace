@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("angular2/core");
 var ionic_angular_1 = require("ionic-angular");
 require("rxjs/add/operator/map");
-// import {FbProvider} from '../providers/fb-provider';
 var UserData = (function () {
     function UserData(events, http) {
         this.events = events;
@@ -18,6 +17,8 @@ var UserData = (function () {
         this.HAS_LOGGED_IN = 'hasLoggedIn';
         this.url = null;
         this.paceUser = null;
+        this.userId = null;
+        this.userToken = null;
     }
     UserData.prototype.getUser = function (userID) {
         var _this = this;
@@ -40,11 +41,32 @@ var UserData = (function () {
             _this.http.get(_this.url).subscribe(function (paceUser) {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
+                _this.paceUser = paceUser.json();
+                _this.userId = _this.paceUser.facebookId;
+                _this.userToken = _this.paceUser.accessToken;
                 resolve(paceUser);
             }, function (error) {
                 console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                 console.log(JSON.stringify(error.json()));
             }, function () { return console.log('User data fetching complete!'); });
+        });
+    };
+    UserData.prototype.getUserShortTeamView = function () {
+        var _this = this;
+        console.log("UserData: getUserShortTeamView() reached...");
+        return new Promise(function (resolve) {
+            // this.userId = '1273703759309879';
+            // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
+            _this.url = 'http://localhost:8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
+            console.log("Making request to: " + _this.url);
+            console.log("Fetching short team views from BackPace...");
+            _this.http.get(_this.url).subscribe(function (shortTeamView) {
+                console.log("ShortTeamView from BackPace...");
+                console.log(JSON.stringify(shortTeamView.json()));
+                resolve(shortTeamView);
+            }, function (error) {
+                console.log(JSON.stringify(error.json()));
+            });
         });
     };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {

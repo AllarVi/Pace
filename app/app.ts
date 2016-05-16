@@ -1,12 +1,12 @@
-import 'es6-shim';
-import {ViewChild} from 'angular2/core';
-import {App, Events, Platform, ActionSheet, Nav, IonicApp} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-import {UserData} from './providers/user-data';
-import {TabsPage} from './pages/tabs/tabs';
-import {LoginPage} from './pages/login/login';
-import {DashboardPage} from './pages/dashboard/dashboard';
-import {FbProvider} from './providers/fb-provider';
+import {ViewChild} from "angular2/core";
+import {App, Events, Platform, ActionSheet, Nav, IonicApp} from "ionic-angular";
+import {StatusBar} from "ionic-native";
+import {UserData} from "./providers/user-data";
+import {TabsPage} from "./pages/tabs/tabs";
+import {LoginPage} from "./pages/login/login";
+import {DashboardPage} from "./pages/dashboard/dashboard";
+import {FbProvider} from "./providers/fb-provider";
+import "es6-shim";
 
 interface PageObj {
     title:string;
@@ -43,11 +43,11 @@ class PaceApp {
         {title: 'Logout', component: TabsPage, icon: 'log-out'}
     ];
 
-    rootPage:any = LoginPage;
+    rootPage:any = DashboardPage;
 
     loggedIn = false;
 
-    constructor(private app: IonicApp, private events:Events, private userData:UserData, platform:Platform, private fbProvider:FbProvider) {
+    constructor(private app:IonicApp, private events:Events, private userData:UserData, platform:Platform, private fbProvider:FbProvider) {
 
         // Call any initial plugins when ready
         platform.ready().then(() => {
@@ -66,8 +66,15 @@ class PaceApp {
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
             console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
-                console.log("Navigating to Dashboard Page");
-                this.nav.setRoot(DashboardPage);
+                this.userData.getUserShortTeamView().then((shortTeamView) => {
+                    console.log(JSON.stringify(shortTeamView));
+                    console.log("Done loading shortTeamView!");
+
+                    console.log("Navigating to Dashboard Page");
+                    this.nav.setRoot(DashboardPage, {
+                        param1: shortTeamView
+                    });
+                });
             } else {
                 console.log("Navigating to Login Page...");
                 this.nav.setRoot(LoginPage);
@@ -77,7 +84,7 @@ class PaceApp {
     }
 
     openPage(page:PageObj) {
-        
+
         let nav = this.app.getComponent('nav');
 
         if (page.index) {

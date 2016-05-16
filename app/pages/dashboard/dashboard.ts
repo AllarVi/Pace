@@ -1,5 +1,6 @@
-import {NavController, Page, ActionSheet} from 'ionic-angular';
-import {GroupDetailPage} from '../group-detail/group-detail';
+import {NavController, Page, NavParams} from "ionic-angular";
+import {GroupDetailPage} from "../group-detail/group-detail";
+import {UserData} from "../../providers/user-data";
 
 
 @Page({
@@ -7,7 +8,20 @@ import {GroupDetailPage} from '../group-detail/group-detail';
 })
 export class DashboardPage {
 
-    constructor(private nav: NavController) {
+    shortTeamView:any;
+
+    constructor(private nav:NavController, private userData:UserData, private navParams:NavParams) {
+        this.shortTeamView = navParams.get('param1');
+        this.initDashboard();
+    }
+
+    private initDashboard() {
+        this.userData.getUserShortTeamView().then((shortTeamView) => {
+            console.log(JSON.stringify(shortTeamView));
+            console.log("Done loading shortTeamView!");
+
+            this.shortTeamView = shortTeamView;
+        });
     }
 
     goToGroupDetail(group) {

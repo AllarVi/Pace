@@ -42,7 +42,7 @@ export class LoginPage {
         this.fb.login().then(() => {
             this.userData.login();
             console.log("Navigating to home...");
-            // this.nav.push(TabsPage);
+            // this.nav.push(DashboardPage);
             this.nav.setRoot(DashboardPage);
         });
     }

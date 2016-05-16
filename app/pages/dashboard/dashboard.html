@@ -7,14 +7,14 @@
 
 <ion-content class="outer-content">
 
-    <ion-card>
+    <ion-card *ngFor="#team of shortTeamView">
 
         <ion-card-header>
             <button ion-item (click)="goToGroupDetail(group)">
-                <ion-avatar item-left>
-                    <img src="http://pics.clipartpng.com/Basketball_PNG_Clipart-842.png">
-                </ion-avatar>
-                Kossurühm - Leaderboard
+                <!--<ion-avatar item-left>-->
+                    <!--<img src="http://pics.clipartpng.com/Basketball_PNG_Clipart-842.png">-->
+                <!--</ion-avatar>-->
+                {{team.teamName}} - Leaderboard
             </button>
         </ion-card-header>
 
@@ -36,53 +36,19 @@
                 </ion-row>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngFor="#member of team.shortTableRowMap">
                 <ion-row>
                     <ion-col width-10>
-                        1
+                        {{member.rank}}
                     </ion-col>
                     <ion-col width-50>
-                        Marin
+                        {{member.userName}}
                     </ion-col>
                     <ion-col width-20>
                         <ion-icon name="trophy"></ion-icon>
                     </ion-col>
                     <ion-col width-20>
-                        1200
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        2
-                    </ion-col>
-                    <ion-col width-50>
-                        Sten
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1160
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <ion-item>
-                <ion-row>
-                    <ion-col width-10>
-                        3
-                    </ion-col>
-                    <ion-col width-50>
-                        Taaniel
-                    </ion-col>
-                    <ion-col width-20>
-                        <ion-icon name="trophy"></ion-icon>
-                    </ion-col>
-                    <ion-col width-20>
-                        1010
+                        {{member.points}}
                     </ion-col>
                 </ion-row>
             </ion-item>

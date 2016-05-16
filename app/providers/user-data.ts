@@ -2,7 +2,6 @@ import {Injectable} from "angular2/core";
 import {Storage, LocalStorage, Events} from "ionic-angular";
 import {Http} from "angular2/http";
 import "rxjs/add/operator/map";
-// import {FbProvider} from '../providers/fb-provider';
 
 @Injectable()
 export class UserData {
@@ -16,6 +15,9 @@ export class UserData {
 
     url = null;
     paceUser = null;
+
+    userId = null;
+    userToken = null;
 
     getUser(userID) {
         console.log("UserData: getUser() reached...", "UserID:", userID);
@@ -39,11 +41,35 @@ export class UserData {
             this.http.get(this.url).subscribe(paceUser => {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
+
+                this.extracted(paceUser);
                 resolve(paceUser)
             }, error => {
                 console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
                 console.log(JSON.stringify(error.json()));
             }, () => console.log('User data fetching complete!'));
+        });
+    }
+
+    shortTeamView = null;
+
+    getUserShortTeamView() {
+        console.log("UserData: getUserShortTeamView() reached...");
+
+        return new Promise((resolve, reject) => {
+            // this.userId = '1273703759309879';
+            // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
+            this.url = 'http://localhost:8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
+            console.log("Making request to: " + this.url);
+            console.log("Fetching short team views from BackPace...");
+            this.http.get(this.url).subscribe(shortTeamView => {
+                console.log("ShortTeamView from BackPace...");
+                this.shortTeamView = shortTeamView.json();
+                resolve(this.shortTeamView);
+            }, error => {
+                console.log("Error occurred in getUserShortTeamView()");
+                reject(error);
+            });
         });
     }
 
@@ -64,6 +90,7 @@ export class UserData {
             this.http.post(this.url, this.paceUser).subscribe(paceUser => {
                 console.log("Created user from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
+                this.extracted(paceUser);
                 resolve(paceUser)
             }, error => {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
@@ -73,13 +100,11 @@ export class UserData {
         });
     }
 
-    hasFavorite(sessionName) {
-        return (this._favorites.indexOf(sessionName) > -1);
-    }
-
-    addFavorite(sessionName) {
-        this._favorites.push(sessionName);
-    }
+    private extracted(paceUser) {
+        this.paceUser = paceUser.json();
+        this.userId = this.paceUser.facebookId;
+        this.userToken = this.paceUser.accessToken;
+    };
 
     removeFavorite(sessionName) {
         let index = this._favorites.indexOf(sessionName);
