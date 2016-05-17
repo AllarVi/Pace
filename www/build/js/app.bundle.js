@@ -202,6 +202,10 @@ var DashboardPage = (function () {
     DashboardPage.prototype.goToGroupDetail = function (group) {
         this.nav.push(group_detail_1.GroupDetailPage, group);
     };
+    DashboardPage.prototype.openModal = function (characterNum) {
+        var modal = ionic_angular_1.Modal.create(ModalsContentPage, characterNum);
+        this.nav.present(modal);
+    };
     DashboardPage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/dashboard/dashboard.html'
@@ -211,6 +215,53 @@ var DashboardPage = (function () {
     return DashboardPage;
 }());
 exports.DashboardPage = DashboardPage;
+var ModalsContentPage = (function () {
+    function ModalsContentPage(platform, params, viewCtrl, userData) {
+        this.platform = platform;
+        this.params = params;
+        this.viewCtrl = viewCtrl;
+        this.userData = userData;
+        this.searchQuery = '';
+        this.initializeItems();
+    }
+    ModalsContentPage.prototype.initializeItems = function () {
+        var _this = this;
+        this.userData.getGroups().then(function (teams) {
+            _this.teams = teams;
+        });
+    };
+    ModalsContentPage.prototype.getItems = function (searchbar) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set q to the value of the searchbar
+        var q = searchbar.value;
+        // if the value is an empty string don't filter the items
+        if (q.trim() == '') {
+            return;
+        }
+        this.teams = this.teams.filter(function (v) {
+            return v.toLowerCase().indexOf(q.toLowerCase()) > -1;
+        });
+    };
+    ModalsContentPage.prototype.joinTeam = function (teamId) {
+        this.userData.joinTeam(teamId).then(function (success) {
+            console.log(JSON.stringify(success));
+            console.log("Joined team!");
+        }, function () {
+            console.log("Joining team failed!");
+        });
+    };
+    ModalsContentPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    ModalsContentPage = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: './build/pages/dashboard-group-add/dashboard-group-add.html'
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.Platform, ionic_angular_1.NavParams, ionic_angular_1.ViewController, user_data_1.UserData])
+    ], ModalsContentPage);
+    return ModalsContentPage;
+}());
 
 },{"../../providers/user-data":9,"../group-detail/group-detail":4,"ionic-angular":344}],4:[function(require,module,exports){
 "use strict";
@@ -704,6 +755,8 @@ var UserData = (function () {
         this.userId = null;
         this.userToken = null;
         this.shortTeamView = null;
+        this.teams = null;
+        this.groupData = null;
     }
     UserData.prototype.getUser = function (userID) {
         var _this = this;
@@ -742,7 +795,6 @@ var UserData = (function () {
             // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
             _this.url = 'http://localhost:8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
             console.log("Making request to: " + _this.url);
-            console.log("Fetching short team views from BackPace...");
             _this.http.get(_this.url).subscribe(function (shortTeamView) {
                 console.log("ShortTeamView from BackPace...");
                 _this.shortTeamView = shortTeamView.json();
@@ -751,6 +803,39 @@ var UserData = (function () {
                 console.log("Error occurred in getUserShortTeamView()");
                 reject(error);
             });
+        });
+    };
+    UserData.prototype.getGroups = function () {
+        var _this = this;
+        console.log("UserData: getGroups() reached...");
+        return new Promise(function (resolve, reject) {
+            _this.url = 'http://localhost:8080/api/dashboard/join_group?groups=all&token=' + _this.userToken;
+            console.log("Making request to: " + _this.url);
+            _this.http.get(_this.url).subscribe(function (teams) {
+                _this.teams = teams.json();
+                resolve(_this.teams);
+            }, function (error) {
+                console.log("Error occurred in getGroups()");
+                reject(error);
+            });
+        });
+    };
+    UserData.prototype.joinTeam = function (teamId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.url = 'http://localhost:8080/api/dashboard/join_group?facebookId=' + _this.userId + '&token=' +
+                _this.userToken;
+            console.log("Making request to: " + _this.url);
+            _this.groupData = JSON.stringify({
+                teamId: teamId
+            });
+            _this.http.post(_this.url, _this.groupData).subscribe(function (success) {
+                console.log("Joined team...");
+                resolve(success);
+            }, function () {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, function () { return console.log('Joining team complete!'); });
         });
     };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {

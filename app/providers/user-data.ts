@@ -61,7 +61,6 @@ export class UserData {
             // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
             this.url = 'http://localhost:8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
             console.log("Making request to: " + this.url);
-            console.log("Fetching short team views from BackPace...");
             this.http.get(this.url).subscribe(shortTeamView => {
                 console.log("ShortTeamView from BackPace...");
                 this.shortTeamView = shortTeamView.json();
@@ -70,6 +69,45 @@ export class UserData {
                 console.log("Error occurred in getUserShortTeamView()");
                 reject(error);
             });
+        });
+    }
+
+    teams = null;
+
+    getGroups() {
+        console.log("UserData: getGroups() reached...");
+        return new Promise((resolve, reject) => {
+            this.url = 'http://localhost:8080/api/dashboard/join_group?groups=all&token=' + this.userToken;
+            console.log("Making request to: " + this.url);
+            this.http.get(this.url).subscribe(teams => {
+                this.teams = teams.json();
+                resolve(this.teams);
+            }, error => {
+                console.log("Error occurred in getGroups()");
+                reject(error);
+            });
+        });
+    }
+
+    groupData = null;
+
+    joinTeam(teamId) {
+        return new Promise((resolve, reject) => {
+            this.url = 'http://localhost:8080/api/dashboard/join_group?facebookId=' + this.userId + '&token=' +
+                this.userToken;
+            console.log("Making request to: " + this.url);
+
+            this.groupData = JSON.stringify({
+                teamId: teamId
+            });
+
+            this.http.post(this.url, this.groupData).subscribe(success => {
+                console.log("Joined team...");
+                resolve(success);
+            }, () => {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, () => console.log('Joining team complete!'));
         });
     }
 

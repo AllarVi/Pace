@@ -57,90 +57,6 @@
 
     </ion-card>
 
-    <!--<ion-card>-->
-
-    <!--<ion-card-header>-->
-    <!--<button ion-item>-->
-    <!--<ion-avatar item-left>-->
-    <!--<img src="http://www.pngall.com/wp-content/uploads/2016/03/Volleyball-PNG-Picture.png">-->
-    <!--</ion-avatar>-->
-    <!--Võrkpallirühm - Leaderboard-->
-    <!--</button>-->
-    <!--</ion-card-header>-->
-
-    <!--<ion-list>-->
-    <!--<ion-item class="leaderboard-header">-->
-    <!--<ion-row>-->
-    <!--<ion-col width-10>-->
-    <!--<p>Rk</p>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-40>-->
-    <!--<p>Name</p>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--<p>Tier</p>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--<p>Points</p>-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--</ion-item>-->
-
-    <!--<ion-item>-->
-    <!--<ion-row>-->
-    <!--<ion-col width-10>-->
-    <!--1-->
-    <!--</ion-col>-->
-    <!--<ion-col width-50>-->
-    <!--Kristi-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--<ion-icon name="trophy"></ion-icon>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--1050-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--</ion-item>-->
-
-    <!--<ion-item>-->
-    <!--<ion-row>-->
-    <!--<ion-col width-10>-->
-    <!--2-->
-    <!--</ion-col>-->
-    <!--<ion-col width-50>-->
-    <!--Janne-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--<ion-icon name="trophy"></ion-icon>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--980-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--</ion-item>-->
-
-    <!--<ion-item>-->
-    <!--<ion-row>-->
-    <!--<ion-col width-10>-->
-    <!--3-->
-    <!--</ion-col>-->
-    <!--<ion-col width-50>-->
-    <!--Mari-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--<ion-icon name="trophy"></ion-icon>-->
-    <!--</ion-col>-->
-    <!--<ion-col width-20>-->
-    <!--970-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--</ion-item>-->
-
-    <!--</ion-list>-->
-
-    <!--</ion-card>-->
-
     <ion-card>
         <!--<ion-card-header>-->
         <!--<button ion-item>-->
@@ -150,7 +66,7 @@
         <!--</ion-card-header>-->
 
         <ion-card-content>
-            <button ion-item>
+            <button ion-item (click)="openModal({charNum: 0})">
                 <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>
                 Join Group
             </button>
