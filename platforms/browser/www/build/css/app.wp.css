@@ -9970,6 +9970,9 @@ ion-label {
 .groupTab .segment-button ion-icon {
   font-size: inherit; }
 
+.groupTab .segment-button.segment-activated {
+  background-color: transparent; }
+
 .chart {
   display: block; }
 
@@ -9990,7 +9993,7 @@ ion-label {
     position: relative;
     margin-bottom: 4px;
     border-radius: 5px;
-    padding: 2px 2px 2px 60px;
+    padding: 0px 5px 2px 15px;
     font-size: smaller;
     cursor: default; }
     .chart-legend li span, .bar-legend li span, .line-legend li span, .pie-legend li span, .radar-legend li span, .polararea-legend li span, .doughnut-legend li span {

@@ -358,7 +358,7 @@ var GroupDetailPage = (function () {
 }());
 exports.GroupDetailPage = GroupDetailPage;
 
-},{"ionic-angular":344,"ng2-charts/ng2-charts":435}],5:[function(require,module,exports){
+},{"ionic-angular":344,"ng2-charts/ng2-charts":422}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -450,52 +450,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var ionic_angular_1 = require('ionic-angular');
-var core_1 = require('angular2/core');
+var ionic_angular_1 = require("ionic-angular");
+var core_1 = require("angular2/core");
+var ionic_native_1 = require('ionic-native');
+var user_data_1 = require("../../providers/user-data");
 var ProfilePage = (function () {
-    function ProfilePage(ngZone, nav, navParams) {
+    function ProfilePage(ngZone, nav, navParams, userData) {
         this.ngZone = ngZone;
         this.nav = nav;
         this.navParams = navParams;
+        this.userData = userData;
+        this.paceUserData = null;
         this.image = null;
+        this.paceUserData = this.userData.getPaceUserData();
     }
     ProfilePage.prototype.openModal = function (characterNum) {
         var modal = ionic_angular_1.Modal.create(ModalsContentPage, characterNum);
         this.nav.present(modal);
     };
     ProfilePage.prototype.snapImage = function () {
-        // var options = {
-        //     destinationType: Camera.DestinationType.DATA_URL,
-        //     sourceType: Camera.PictureSourceType.CAMERA,
-        //     encodingType: Camera.EncodingType.JPEG,
-        //     quality: 100,
-        //     allowEdit: false,
-        //     saveToPhotoAlbum: true
-        // };
         var _this = this;
         var options = {
-            limit: 3,
-            duration: 15
+            destinationType: 0,
+            sourceType: 1,
+            encodingType: 0,
+            quality: 100,
+            allowEdit: false,
+            saveToPhotoAlbum: false
         };
-        navigator.device.capture.captureVideo(function (mediaFiles) {
-            // var imgData = "data:image/jpeg;base64," + data;
-            _this.ngZone.run(function () {
-                var i, path, len;
-                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-                    path = mediaFiles[i].fullPath;
-                }
-                _this.image = path;
+        ionic_native_1.Camera.getPicture(options).then(function (data) {
+            var imgData = "data:image/jpeg;base64," + data;
+            _this.userData.uploadImage("test", _this.image).then(function (success) {
+                console.log(JSON.stringify(success));
+                console.log("File upload finished...");
+            }, function () {
+                console.log("File upload failed...");
             });
+            _this.ngZone.run(function () { return _this.image = imgData; });
         }, function (error) {
-            console.log("Error occurred while taking an image!");
-            console.log(error);
-        }, options);
+            alert(error);
+        });
+        // var options = {
+        //     limit: 3,
+        //     duration: 15
+        // };
+        // navigator.device.capture.captureVideo((mediaFiles) => {
+        //   // var imgData = "data:image/jpeg;base64," + data;
+        //   this.ngZone.run(() => {
+        //     var i, path, len;
+        //     for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+        //       path = mediaFiles[i].fullPath;
+        //     }
+        //
+        //     this.image = path;
+        //   });
+        // }, (error) => {
+        //   console.log("Error occurred while taking an image!");
+        //   console.log(error);
+        // }, options);
     };
     ProfilePage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/profile/profile.html'
         }), 
-        __metadata('design:paramtypes', [core_1.NgZone, ionic_angular_1.NavController, ionic_angular_1.NavParams])
+        __metadata('design:paramtypes', [core_1.NgZone, ionic_angular_1.NavController, ionic_angular_1.NavParams, user_data_1.UserData])
     ], ProfilePage);
     return ProfilePage;
 }());
@@ -548,7 +566,7 @@ var ModalsContentPage = (function () {
     return ModalsContentPage;
 }());
 
-},{"angular2/core":12,"ionic-angular":344}],7:[function(require,module,exports){
+},{"../../providers/user-data":9,"angular2/core":12,"ionic-angular":344,"ionic-native":366}],7:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -747,6 +765,8 @@ var UserData = (function () {
     function UserData(events, http) {
         this.events = events;
         this.http = http;
+        // BASE_URL = 'localhost';
+        this.BASE_URL = '10.224.4.183';
         this._favorites = [];
         this.storage = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.HAS_LOGGED_IN = 'hasLoggedIn';
@@ -773,7 +793,7 @@ var UserData = (function () {
         console.log("UserData: getPaceUser() reached...");
         // Don't have the data yet
         return new Promise(function (resolve) {
-            _this.url = 'http://localhost:8080/api/user?facebookId=' + userID;
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/user?facebookId=' + userID;
             console.log("Making request to: " + _this.url);
             console.log("Fetching user data from BackPace...");
             _this.http.get(_this.url).subscribe(function (paceUser) {
@@ -787,13 +807,14 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
+    UserData.prototype.getPaceUserData = function () {
+        return this.paceUser;
+    };
     UserData.prototype.getUserShortTeamView = function () {
         var _this = this;
         console.log("UserData: getUserShortTeamView() reached...");
         return new Promise(function (resolve, reject) {
-            // this.userId = '1273703759309879';
-            // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
-            _this.url = 'http://localhost:8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
             console.log("Making request to: " + _this.url);
             _this.http.get(_this.url).subscribe(function (shortTeamView) {
                 console.log("ShortTeamView from BackPace...");
@@ -809,7 +830,10 @@ var UserData = (function () {
         var _this = this;
         console.log("UserData: getGroups() reached...");
         return new Promise(function (resolve, reject) {
-            _this.url = 'http://localhost:8080/api/dashboard/join_group?groups=all&token=' + _this.userToken;
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard/join_group'
+                + '?facebookId=' + _this.userId
+                + '&token=' + _this.userToken
+                + '&groups=all';
             console.log("Making request to: " + _this.url);
             _this.http.get(_this.url).subscribe(function (teams) {
                 _this.teams = teams.json();
@@ -823,7 +847,7 @@ var UserData = (function () {
     UserData.prototype.joinTeam = function (teamId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.url = 'http://localhost:8080/api/dashboard/join_group?facebookId=' + _this.userId + '&token=' +
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard/join_group?facebookId=' + _this.userId + '&token=' +
                 _this.userToken;
             console.log("Making request to: " + _this.url);
             _this.groupData = JSON.stringify({
@@ -838,10 +862,29 @@ var UserData = (function () {
             }, function () { return console.log('Joining team complete!'); });
         });
     };
+    UserData.prototype.uploadImage = function (fileName, image) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/fileUpload' +
+                '?name=' + fileName +
+                '&file=' + image;
+            console.log("Making request to: " + _this.url);
+            var params = JSON.stringify({
+                headers: { 'Content-Type': undefined }
+            });
+            _this.http.post(_this.url, params).subscribe(function (success) {
+                console.log("File upload request complete...");
+                resolve(success);
+            }, function () {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, function () { return console.log('File upload complete!'); });
+        });
+    };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.url = 'http://localhost:8080/api/user';
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/user';
             console.log(JSON.stringify(userProfile));
             console.log("Making request to: " + _this.url);
             _this.paceUser = JSON.stringify({
@@ -909,7 +952,7 @@ var UserData = (function () {
 }());
 exports.UserData = UserData;
 
-},{"angular2/core":12,"angular2/http":13,"ionic-angular":344,"rxjs/add/operator/map":442}],10:[function(require,module,exports){
+},{"angular2/core":12,"angular2/http":13,"ionic-angular":344,"rxjs/add/operator/map":429}],10:[function(require,module,exports){
 'use strict';"use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -28126,7 +28169,7 @@ var EventEmitter = (function (_super) {
     return EventEmitter;
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
-},{"angular2/src/facade/lang":196,"angular2/src/facade/promise":198,"rxjs/Observable":437,"rxjs/Subject":439,"rxjs/observable/PromiseObservable":443,"rxjs/operator/toPromise":445}],189:[function(require,module,exports){
+},{"angular2/src/facade/lang":196,"angular2/src/facade/promise":198,"rxjs/Observable":424,"rxjs/Subject":426,"rxjs/observable/PromiseObservable":430,"rxjs/operator/toPromise":432}],189:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29637,7 +29680,7 @@ var JSONPBackend_ = (function (_super) {
     return JSONPBackend_;
 }(JSONPBackend));
 exports.JSONPBackend_ = JSONPBackend_;
-},{"../base_response_options":204,"../enums":205,"../interfaces":209,"../static_response":211,"./browser_jsonp":199,"angular2/core":12,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196,"rxjs/Observable":437}],202:[function(require,module,exports){
+},{"../base_response_options":204,"../enums":205,"../interfaces":209,"../static_response":211,"./browser_jsonp":199,"angular2/core":12,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196,"rxjs/Observable":424}],202:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -29766,7 +29809,7 @@ var XHRBackend = (function () {
     return XHRBackend;
 }());
 exports.XHRBackend = XHRBackend;
-},{"../base_response_options":204,"../enums":205,"../headers":206,"../http_utils":208,"../static_response":211,"./browser_xhr":200,"angular2/core":12,"angular2/src/facade/lang":196,"rxjs/Observable":437}],203:[function(require,module,exports){
+},{"../base_response_options":204,"../enums":205,"../headers":206,"../http_utils":208,"../static_response":211,"./browser_xhr":200,"angular2/core":12,"angular2/src/facade/lang":196,"rxjs/Observable":424}],203:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -39957,7 +40000,7 @@ exports.Codegen = Codegen;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":436}],264:[function(require,module,exports){
+},{"_process":423}],264:[function(require,module,exports){
 "use strict";
 var dom_1 = require('../util/dom');
 var util_1 = require('../util/util');
@@ -73006,7 +73049,7 @@ function InstanceProperty(target, key, descriptor) {
 }
 exports.InstanceProperty = InstanceProperty;
 
-},{"../util":420,"rxjs/Observable":421}],408:[function(require,module,exports){
+},{"../util":420,"rxjs/Observable":424}],408:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -74123,617 +74166,6 @@ exports.get = get;
 
 },{}],421:[function(require,module,exports){
 "use strict";
-var root_1 = require('./util/root');
-var SymbolShim_1 = require('./util/SymbolShim');
-var toSubscriber_1 = require('./util/toSubscriber');
-var tryCatch_1 = require('./util/tryCatch');
-var errorObject_1 = require('./util/errorObject');
-/**
- * A representation of any set of values over any amount of time. This the most basic building block
- * of RxJS.
- *
- * @class Observable<T>
- */
-var Observable = (function () {
-    /**
-     * @constructor
-     * @param {Function} subscribe the function that is
-     * called when the Observable is initially subscribed to. This function is given a Subscriber, to which new values
-     * can be `next`ed, or an `error` method can be called to raise an error, or `complete` can be called to notify
-     * of a successful completion.
-     */
-    function Observable(subscribe) {
-        this._isScalar = false;
-        if (subscribe) {
-            this._subscribe = subscribe;
-        }
-    }
-    /**
-     * @method lift
-     * @param {Operator} operator the operator defining the operation to take on the observable
-     * @returns {Observable} a new observable with the Operator applied
-     * @description creates a new Observable, with this Observable as the source, and the passed
-     * operator defined as the new observable's operator.
-     */
-    Observable.prototype.lift = function (operator) {
-        var observable = new Observable();
-        observable.source = this;
-        observable.operator = operator;
-        return observable;
-    };
-    /**
-     * @method subscribe
-     * @param {PartialObserver|Function} observerOrNext (optional) either an observer defining all functions to be called,
-     *  or the first of three possible handlers, which is the handler for each value emitted from the observable.
-     * @param {Function} error (optional) a handler for a terminal event resulting from an error. If no error handler is provided,
-     *  the error will be thrown as unhandled
-     * @param {Function} complete (optional) a handler for a terminal event resulting from successful completion.
-     * @returns {Subscription} a subscription reference to the registered handlers
-     * @description registers handlers for handling emitted values, error and completions from the observable, and
-     *  executes the observable's subscriber function, which will take action to set up the underlying data stream
-     */
-    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
-        var operator = this.operator;
-        var subscriber = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
-        if (operator) {
-            subscriber.add(this._subscribe(operator.call(subscriber)));
-        }
-        else {
-            subscriber.add(this._subscribe(subscriber));
-        }
-        if (subscriber.syncErrorThrowable) {
-            subscriber.syncErrorThrowable = false;
-            if (subscriber.syncErrorThrown) {
-                throw subscriber.syncErrorValue;
-            }
-        }
-        return subscriber;
-    };
-    /**
-     * @method forEach
-     * @param {Function} next a handler for each value emitted by the observable
-     * @param {any} [thisArg] a `this` context for the `next` handler function
-     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
-     * @returns {Promise} a promise that either resolves on observable completion or
-     *  rejects with the handled error
-     */
-    Observable.prototype.forEach = function (next, thisArg, PromiseCtor) {
-        if (!PromiseCtor) {
-            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-                PromiseCtor = root_1.root.Rx.config.Promise;
-            }
-            else if (root_1.root.Promise) {
-                PromiseCtor = root_1.root.Promise;
-            }
-        }
-        if (!PromiseCtor) {
-            throw new Error('no Promise impl found');
-        }
-        var source = this;
-        return new PromiseCtor(function (resolve, reject) {
-            source.subscribe(function (value) {
-                var result = tryCatch_1.tryCatch(next).call(thisArg, value);
-                if (result === errorObject_1.errorObject) {
-                    reject(errorObject_1.errorObject.e);
-                }
-            }, reject, resolve);
-        });
-    };
-    Observable.prototype._subscribe = function (subscriber) {
-        return this.source.subscribe(subscriber);
-    };
-    /**
-     * @method Symbol.observable
-     * @returns {Observable} this instance of the observable
-     * @description an interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
-     */
-    Observable.prototype[SymbolShim_1.SymbolShim.observable] = function () {
-        return this;
-    };
-    // HACK: Since TypeScript inherits static properties too, we have to
-    // fight against TypeScript here so Subject can have a different static create signature
-    /**
-     * @static
-     * @method create
-     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
-     * @returns {Observable} a new cold observable
-     * @description creates a new cold Observable by calling the Observable constructor
-     */
-    Observable.create = function (subscribe) {
-        return new Observable(subscribe);
-    };
-    return Observable;
-}());
-exports.Observable = Observable;
-
-},{"./util/SymbolShim":426,"./util/errorObject":427,"./util/root":431,"./util/toSubscriber":432,"./util/tryCatch":433}],422:[function(require,module,exports){
-"use strict";
-exports.empty = {
-    isUnsubscribed: true,
-    next: function (value) { },
-    error: function (err) { throw err; },
-    complete: function () { }
-};
-
-},{}],423:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var isFunction_1 = require('./util/isFunction');
-var Subscription_1 = require('./Subscription');
-var rxSubscriber_1 = require('./symbol/rxSubscriber');
-var Observer_1 = require('./Observer');
-var Subscriber = (function (_super) {
-    __extends(Subscriber, _super);
-    function Subscriber(destinationOrNext, error, complete) {
-        _super.call(this);
-        this.syncErrorValue = null;
-        this.syncErrorThrown = false;
-        this.syncErrorThrowable = false;
-        this.isStopped = false;
-        switch (arguments.length) {
-            case 0:
-                this.destination = Observer_1.empty;
-                break;
-            case 1:
-                if (!destinationOrNext) {
-                    this.destination = Observer_1.empty;
-                    break;
-                }
-                if (typeof destinationOrNext === 'object') {
-                    if (destinationOrNext instanceof Subscriber) {
-                        this.destination = destinationOrNext;
-                    }
-                    else {
-                        this.syncErrorThrowable = true;
-                        this.destination = new SafeSubscriber(this, destinationOrNext);
-                    }
-                    break;
-                }
-            default:
-                this.syncErrorThrowable = true;
-                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
-                break;
-        }
-    }
-    Subscriber.create = function (next, error, complete) {
-        var subscriber = new Subscriber(next, error, complete);
-        subscriber.syncErrorThrowable = false;
-        return subscriber;
-    };
-    Subscriber.prototype.next = function (value) {
-        if (!this.isStopped) {
-            this._next(value);
-        }
-    };
-    Subscriber.prototype.error = function (err) {
-        if (!this.isStopped) {
-            this.isStopped = true;
-            this._error(err);
-        }
-    };
-    Subscriber.prototype.complete = function () {
-        if (!this.isStopped) {
-            this.isStopped = true;
-            this._complete();
-        }
-    };
-    Subscriber.prototype.unsubscribe = function () {
-        if (this.isUnsubscribed) {
-            return;
-        }
-        this.isStopped = true;
-        _super.prototype.unsubscribe.call(this);
-    };
-    Subscriber.prototype._next = function (value) {
-        this.destination.next(value);
-    };
-    Subscriber.prototype._error = function (err) {
-        this.destination.error(err);
-        this.unsubscribe();
-    };
-    Subscriber.prototype._complete = function () {
-        this.destination.complete();
-        this.unsubscribe();
-    };
-    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function () {
-        return this;
-    };
-    return Subscriber;
-}(Subscription_1.Subscription));
-exports.Subscriber = Subscriber;
-var SafeSubscriber = (function (_super) {
-    __extends(SafeSubscriber, _super);
-    function SafeSubscriber(_parent, observerOrNext, error, complete) {
-        _super.call(this);
-        this._parent = _parent;
-        var next;
-        var context = this;
-        if (isFunction_1.isFunction(observerOrNext)) {
-            next = observerOrNext;
-        }
-        else if (observerOrNext) {
-            context = observerOrNext;
-            next = observerOrNext.next;
-            error = observerOrNext.error;
-            complete = observerOrNext.complete;
-        }
-        this._context = context;
-        this._next = next;
-        this._error = error;
-        this._complete = complete;
-    }
-    SafeSubscriber.prototype.next = function (value) {
-        if (!this.isStopped && this._next) {
-            var _parent = this._parent;
-            if (!_parent.syncErrorThrowable) {
-                this.__tryOrUnsub(this._next, value);
-            }
-            else if (this.__tryOrSetError(_parent, this._next, value)) {
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.error = function (err) {
-        if (!this.isStopped) {
-            var _parent = this._parent;
-            if (this._error) {
-                if (!_parent.syncErrorThrowable) {
-                    this.__tryOrUnsub(this._error, err);
-                    this.unsubscribe();
-                }
-                else {
-                    this.__tryOrSetError(_parent, this._error, err);
-                    this.unsubscribe();
-                }
-            }
-            else if (!_parent.syncErrorThrowable) {
-                this.unsubscribe();
-                throw err;
-            }
-            else {
-                _parent.syncErrorValue = err;
-                _parent.syncErrorThrown = true;
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.complete = function () {
-        if (!this.isStopped) {
-            var _parent = this._parent;
-            if (this._complete) {
-                if (!_parent.syncErrorThrowable) {
-                    this.__tryOrUnsub(this._complete);
-                    this.unsubscribe();
-                }
-                else {
-                    this.__tryOrSetError(_parent, this._complete);
-                    this.unsubscribe();
-                }
-            }
-            else {
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
-        try {
-            fn.call(this._context, value);
-        }
-        catch (err) {
-            this.unsubscribe();
-            throw err;
-        }
-    };
-    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
-        try {
-            fn.call(this._context, value);
-        }
-        catch (err) {
-            parent.syncErrorValue = err;
-            parent.syncErrorThrown = true;
-            return true;
-        }
-        return false;
-    };
-    SafeSubscriber.prototype._unsubscribe = function () {
-        var _parent = this._parent;
-        this._context = null;
-        this._parent = null;
-        _parent.unsubscribe();
-    };
-    return SafeSubscriber;
-}(Subscriber));
-
-},{"./Observer":422,"./Subscription":424,"./symbol/rxSubscriber":425,"./util/isFunction":429}],424:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var isArray_1 = require('./util/isArray');
-var isObject_1 = require('./util/isObject');
-var isFunction_1 = require('./util/isFunction');
-var tryCatch_1 = require('./util/tryCatch');
-var errorObject_1 = require('./util/errorObject');
-var Subscription = (function () {
-    function Subscription(_unsubscribe) {
-        this.isUnsubscribed = false;
-        if (_unsubscribe) {
-            this._unsubscribe = _unsubscribe;
-        }
-    }
-    Subscription.prototype.unsubscribe = function () {
-        var hasErrors = false;
-        var errors;
-        if (this.isUnsubscribed) {
-            return;
-        }
-        this.isUnsubscribed = true;
-        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
-        this._subscriptions = null;
-        if (isFunction_1.isFunction(_unsubscribe)) {
-            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
-            if (trial === errorObject_1.errorObject) {
-                hasErrors = true;
-                (errors = errors || []).push(errorObject_1.errorObject.e);
-            }
-        }
-        if (isArray_1.isArray(_subscriptions)) {
-            var index = -1;
-            var len = _subscriptions.length;
-            while (++index < len) {
-                var sub = _subscriptions[index];
-                if (isObject_1.isObject(sub)) {
-                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
-                    if (trial === errorObject_1.errorObject) {
-                        hasErrors = true;
-                        errors = errors || [];
-                        var err = errorObject_1.errorObject.e;
-                        if (err instanceof UnsubscriptionError) {
-                            errors = errors.concat(err.errors);
-                        }
-                        else {
-                            errors.push(err);
-                        }
-                    }
-                }
-            }
-        }
-        if (hasErrors) {
-            throw new UnsubscriptionError(errors);
-        }
-    };
-    Subscription.prototype.add = function (subscription) {
-        // return early if:
-        //  1. the subscription is null
-        //  2. we're attempting to add our this
-        //  3. we're attempting to add the static `empty` Subscription
-        if (!subscription || (subscription === this) || (subscription === Subscription.EMPTY)) {
-            return;
-        }
-        var sub = subscription;
-        switch (typeof subscription) {
-            case 'function':
-                sub = new Subscription(subscription);
-            case 'object':
-                if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
-                    break;
-                }
-                else if (this.isUnsubscribed) {
-                    sub.unsubscribe();
-                }
-                else {
-                    (this._subscriptions || (this._subscriptions = [])).push(sub);
-                }
-                break;
-            default:
-                throw new Error('Unrecognized subscription ' + subscription + ' added to Subscription.');
-        }
-    };
-    Subscription.prototype.remove = function (subscription) {
-        // return early if:
-        //  1. the subscription is null
-        //  2. we're attempting to remove ourthis
-        //  3. we're attempting to remove the static `empty` Subscription
-        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
-            return;
-        }
-        var subscriptions = this._subscriptions;
-        if (subscriptions) {
-            var subscriptionIndex = subscriptions.indexOf(subscription);
-            if (subscriptionIndex !== -1) {
-                subscriptions.splice(subscriptionIndex, 1);
-            }
-        }
-    };
-    Subscription.EMPTY = (function (empty) {
-        empty.isUnsubscribed = true;
-        return empty;
-    }(new Subscription()));
-    return Subscription;
-}());
-exports.Subscription = Subscription;
-var UnsubscriptionError = (function (_super) {
-    __extends(UnsubscriptionError, _super);
-    function UnsubscriptionError(errors) {
-        _super.call(this, 'unsubscriptoin error(s)');
-        this.errors = errors;
-        this.name = 'UnsubscriptionError';
-    }
-    return UnsubscriptionError;
-}(Error));
-exports.UnsubscriptionError = UnsubscriptionError;
-
-},{"./util/errorObject":427,"./util/isArray":428,"./util/isFunction":429,"./util/isObject":430,"./util/tryCatch":433}],425:[function(require,module,exports){
-"use strict";
-var SymbolShim_1 = require('../util/SymbolShim');
-/**
- * rxSubscriber symbol is a symbol for retreiving an "Rx safe" Observer from an object
- * "Rx safety" can be defined as an object that has all of the traits of an Rx Subscriber,
- * including the ability to add and remove subscriptions to the subscription chain and
- * guarantees involving event triggering (can't "next" after unsubscription, etc).
- */
-exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
-
-},{"../util/SymbolShim":426}],426:[function(require,module,exports){
-"use strict";
-var root_1 = require('./root');
-function polyfillSymbol(root) {
-    var Symbol = ensureSymbol(root);
-    ensureIterator(Symbol, root);
-    ensureObservable(Symbol);
-    ensureFor(Symbol);
-    return Symbol;
-}
-exports.polyfillSymbol = polyfillSymbol;
-function ensureFor(Symbol) {
-    if (!Symbol.for) {
-        Symbol.for = symbolForPolyfill;
-    }
-}
-exports.ensureFor = ensureFor;
-var id = 0;
-function ensureSymbol(root) {
-    if (!root.Symbol) {
-        root.Symbol = function symbolFuncPolyfill(description) {
-            return "@@Symbol(" + description + "):" + id++;
-        };
-    }
-    return root.Symbol;
-}
-exports.ensureSymbol = ensureSymbol;
-function symbolForPolyfill(key) {
-    return '@@' + key;
-}
-exports.symbolForPolyfill = symbolForPolyfill;
-function ensureIterator(Symbol, root) {
-    if (!Symbol.iterator) {
-        if (typeof Symbol.for === 'function') {
-            Symbol.iterator = Symbol.for('iterator');
-        }
-        else if (root.Set && typeof new root.Set()['@@iterator'] === 'function') {
-            // Bug for mozilla version
-            Symbol.iterator = '@@iterator';
-        }
-        else if (root.Map) {
-            // es6-shim specific logic
-            var keys = Object.getOwnPropertyNames(root.Map.prototype);
-            for (var i = 0; i < keys.length; ++i) {
-                var key = keys[i];
-                if (key !== 'entries' && key !== 'size' && root.Map.prototype[key] === root.Map.prototype['entries']) {
-                    Symbol.iterator = key;
-                    break;
-                }
-            }
-        }
-        else {
-            Symbol.iterator = '@@iterator';
-        }
-    }
-}
-exports.ensureIterator = ensureIterator;
-function ensureObservable(Symbol) {
-    if (!Symbol.observable) {
-        if (typeof Symbol.for === 'function') {
-            Symbol.observable = Symbol.for('observable');
-        }
-        else {
-            Symbol.observable = '@@observable';
-        }
-    }
-}
-exports.ensureObservable = ensureObservable;
-exports.SymbolShim = polyfillSymbol(root_1.root);
-
-},{"./root":431}],427:[function(require,module,exports){
-"use strict";
-// typeof any so that it we don't have to cast when comparing a result to the error object
-exports.errorObject = { e: {} };
-
-},{}],428:[function(require,module,exports){
-"use strict";
-exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
-
-},{}],429:[function(require,module,exports){
-"use strict";
-function isFunction(x) {
-    return typeof x === 'function';
-}
-exports.isFunction = isFunction;
-
-},{}],430:[function(require,module,exports){
-"use strict";
-function isObject(x) {
-    return x != null && typeof x === 'object';
-}
-exports.isObject = isObject;
-
-},{}],431:[function(require,module,exports){
-(function (global){
-"use strict";
-var objectTypes = {
-    'boolean': false,
-    'function': true,
-    'object': true,
-    'number': false,
-    'string': false,
-    'undefined': false
-};
-exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
-/* tslint:disable:no-unused-variable */
-var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-var freeGlobal = objectTypes[typeof global] && global;
-if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
-    exports.root = freeGlobal;
-}
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{}],432:[function(require,module,exports){
-"use strict";
-var Subscriber_1 = require('../Subscriber');
-var rxSubscriber_1 = require('../symbol/rxSubscriber');
-function toSubscriber(nextOrObserver, error, complete) {
-    if (nextOrObserver && typeof nextOrObserver === 'object') {
-        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
-            return nextOrObserver;
-        }
-        else if (typeof nextOrObserver[rxSubscriber_1.rxSubscriber] === 'function') {
-            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
-        }
-    }
-    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
-}
-exports.toSubscriber = toSubscriber;
-
-},{"../Subscriber":423,"../symbol/rxSubscriber":425}],433:[function(require,module,exports){
-"use strict";
-var errorObject_1 = require('./errorObject');
-var tryCatchTarget;
-function tryCatcher() {
-    try {
-        return tryCatchTarget.apply(this, arguments);
-    }
-    catch (e) {
-        errorObject_1.errorObject.e = e;
-        return errorObject_1.errorObject;
-    }
-}
-function tryCatch(fn) {
-    tryCatchTarget = fn;
-    return tryCatcher;
-}
-exports.tryCatch = tryCatch;
-;
-
-},{"./errorObject":427}],434:[function(require,module,exports){
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -75010,14 +74442,14 @@ var BaseChart = (function () {
 exports.BaseChart = BaseChart;
 exports.CHART_DIRECTIVES = [Charts, BaseChart];
 
-},{"angular2/common":10,"angular2/core":12}],435:[function(require,module,exports){
+},{"angular2/common":10,"angular2/core":12}],422:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(require('./components/charts/charts'));
 
-},{"./components/charts/charts":434}],436:[function(require,module,exports){
+},{"./components/charts/charts":421}],423:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -75113,11 +74545,141 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],437:[function(require,module,exports){
-arguments[4][421][0].apply(exports,arguments)
-},{"./util/SymbolShim":449,"./util/errorObject":450,"./util/root":454,"./util/toSubscriber":456,"./util/tryCatch":457,"dup":421}],438:[function(require,module,exports){
-arguments[4][422][0].apply(exports,arguments)
-},{"dup":422}],439:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
+"use strict";
+var root_1 = require('./util/root');
+var SymbolShim_1 = require('./util/SymbolShim');
+var toSubscriber_1 = require('./util/toSubscriber');
+var tryCatch_1 = require('./util/tryCatch');
+var errorObject_1 = require('./util/errorObject');
+/**
+ * A representation of any set of values over any amount of time. This the most basic building block
+ * of RxJS.
+ *
+ * @class Observable<T>
+ */
+var Observable = (function () {
+    /**
+     * @constructor
+     * @param {Function} subscribe the function that is
+     * called when the Observable is initially subscribed to. This function is given a Subscriber, to which new values
+     * can be `next`ed, or an `error` method can be called to raise an error, or `complete` can be called to notify
+     * of a successful completion.
+     */
+    function Observable(subscribe) {
+        this._isScalar = false;
+        if (subscribe) {
+            this._subscribe = subscribe;
+        }
+    }
+    /**
+     * @method lift
+     * @param {Operator} operator the operator defining the operation to take on the observable
+     * @returns {Observable} a new observable with the Operator applied
+     * @description creates a new Observable, with this Observable as the source, and the passed
+     * operator defined as the new observable's operator.
+     */
+    Observable.prototype.lift = function (operator) {
+        var observable = new Observable();
+        observable.source = this;
+        observable.operator = operator;
+        return observable;
+    };
+    /**
+     * @method subscribe
+     * @param {PartialObserver|Function} observerOrNext (optional) either an observer defining all functions to be called,
+     *  or the first of three possible handlers, which is the handler for each value emitted from the observable.
+     * @param {Function} error (optional) a handler for a terminal event resulting from an error. If no error handler is provided,
+     *  the error will be thrown as unhandled
+     * @param {Function} complete (optional) a handler for a terminal event resulting from successful completion.
+     * @returns {Subscription} a subscription reference to the registered handlers
+     * @description registers handlers for handling emitted values, error and completions from the observable, and
+     *  executes the observable's subscriber function, which will take action to set up the underlying data stream
+     */
+    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
+        var operator = this.operator;
+        var subscriber = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+        if (operator) {
+            subscriber.add(this._subscribe(operator.call(subscriber)));
+        }
+        else {
+            subscriber.add(this._subscribe(subscriber));
+        }
+        if (subscriber.syncErrorThrowable) {
+            subscriber.syncErrorThrowable = false;
+            if (subscriber.syncErrorThrown) {
+                throw subscriber.syncErrorValue;
+            }
+        }
+        return subscriber;
+    };
+    /**
+     * @method forEach
+     * @param {Function} next a handler for each value emitted by the observable
+     * @param {any} [thisArg] a `this` context for the `next` handler function
+     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
+     * @returns {Promise} a promise that either resolves on observable completion or
+     *  rejects with the handled error
+     */
+    Observable.prototype.forEach = function (next, thisArg, PromiseCtor) {
+        if (!PromiseCtor) {
+            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+                PromiseCtor = root_1.root.Rx.config.Promise;
+            }
+            else if (root_1.root.Promise) {
+                PromiseCtor = root_1.root.Promise;
+            }
+        }
+        if (!PromiseCtor) {
+            throw new Error('no Promise impl found');
+        }
+        var source = this;
+        return new PromiseCtor(function (resolve, reject) {
+            source.subscribe(function (value) {
+                var result = tryCatch_1.tryCatch(next).call(thisArg, value);
+                if (result === errorObject_1.errorObject) {
+                    reject(errorObject_1.errorObject.e);
+                }
+            }, reject, resolve);
+        });
+    };
+    Observable.prototype._subscribe = function (subscriber) {
+        return this.source.subscribe(subscriber);
+    };
+    /**
+     * @method Symbol.observable
+     * @returns {Observable} this instance of the observable
+     * @description an interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
+     */
+    Observable.prototype[SymbolShim_1.SymbolShim.observable] = function () {
+        return this;
+    };
+    // HACK: Since TypeScript inherits static properties too, we have to
+    // fight against TypeScript here so Subject can have a different static create signature
+    /**
+     * @static
+     * @method create
+     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+     * @returns {Observable} a new cold observable
+     * @description creates a new cold Observable by calling the Observable constructor
+     */
+    Observable.create = function (subscribe) {
+        return new Observable(subscribe);
+    };
+    return Observable;
+}());
+exports.Observable = Observable;
+
+},{"./util/SymbolShim":436,"./util/errorObject":437,"./util/root":441,"./util/toSubscriber":443,"./util/tryCatch":444}],425:[function(require,module,exports){
+"use strict";
+exports.empty = {
+    isUnsubscribed: true,
+    next: function (value) { },
+    error: function (err) { throw err; },
+    complete: function () { }
+};
+
+},{}],426:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -75315,17 +74877,327 @@ var SubjectObservable = (function (_super) {
     return SubjectObservable;
 }(Observable_1.Observable));
 
-},{"./Observable":437,"./Subscriber":440,"./Subscription":441,"./subject/SubjectSubscription":446,"./symbol/rxSubscriber":447,"./util/ObjectUnsubscribedError":448,"./util/throwError":455}],440:[function(require,module,exports){
-arguments[4][423][0].apply(exports,arguments)
-},{"./Observer":438,"./Subscription":441,"./symbol/rxSubscriber":447,"./util/isFunction":452,"dup":423}],441:[function(require,module,exports){
-arguments[4][424][0].apply(exports,arguments)
-},{"./util/errorObject":450,"./util/isArray":451,"./util/isFunction":452,"./util/isObject":453,"./util/tryCatch":457,"dup":424}],442:[function(require,module,exports){
+},{"./Observable":424,"./Subscriber":427,"./Subscription":428,"./subject/SubjectSubscription":433,"./symbol/rxSubscriber":434,"./util/ObjectUnsubscribedError":435,"./util/throwError":442}],427:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isFunction_1 = require('./util/isFunction');
+var Subscription_1 = require('./Subscription');
+var rxSubscriber_1 = require('./symbol/rxSubscriber');
+var Observer_1 = require('./Observer');
+var Subscriber = (function (_super) {
+    __extends(Subscriber, _super);
+    function Subscriber(destinationOrNext, error, complete) {
+        _super.call(this);
+        this.syncErrorValue = null;
+        this.syncErrorThrown = false;
+        this.syncErrorThrowable = false;
+        this.isStopped = false;
+        switch (arguments.length) {
+            case 0:
+                this.destination = Observer_1.empty;
+                break;
+            case 1:
+                if (!destinationOrNext) {
+                    this.destination = Observer_1.empty;
+                    break;
+                }
+                if (typeof destinationOrNext === 'object') {
+                    if (destinationOrNext instanceof Subscriber) {
+                        this.destination = destinationOrNext;
+                    }
+                    else {
+                        this.syncErrorThrowable = true;
+                        this.destination = new SafeSubscriber(this, destinationOrNext);
+                    }
+                    break;
+                }
+            default:
+                this.syncErrorThrowable = true;
+                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+                break;
+        }
+    }
+    Subscriber.create = function (next, error, complete) {
+        var subscriber = new Subscriber(next, error, complete);
+        subscriber.syncErrorThrowable = false;
+        return subscriber;
+    };
+    Subscriber.prototype.next = function (value) {
+        if (!this.isStopped) {
+            this._next(value);
+        }
+    };
+    Subscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._error(err);
+        }
+    };
+    Subscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._complete();
+        }
+    };
+    Subscriber.prototype.unsubscribe = function () {
+        if (this.isUnsubscribed) {
+            return;
+        }
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function (value) {
+        this.destination.next(value);
+    };
+    Subscriber.prototype._error = function (err) {
+        this.destination.error(err);
+        this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function () {
+        this.destination.complete();
+        this.unsubscribe();
+    };
+    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function () {
+        return this;
+    };
+    return Subscriber;
+}(Subscription_1.Subscription));
+exports.Subscriber = Subscriber;
+var SafeSubscriber = (function (_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+        _super.call(this);
+        this._parent = _parent;
+        var next;
+        var context = this;
+        if (isFunction_1.isFunction(observerOrNext)) {
+            next = observerOrNext;
+        }
+        else if (observerOrNext) {
+            context = observerOrNext;
+            next = observerOrNext.next;
+            error = observerOrNext.error;
+            complete = observerOrNext.complete;
+        }
+        this._context = context;
+        this._next = next;
+        this._error = error;
+        this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function (value) {
+        if (!this.isStopped && this._next) {
+            var _parent = this._parent;
+            if (!_parent.syncErrorThrowable) {
+                this.__tryOrUnsub(this._next, value);
+            }
+            else if (this.__tryOrSetError(_parent, this._next, value)) {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._error) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._error, err);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._error, err);
+                    this.unsubscribe();
+                }
+            }
+            else if (!_parent.syncErrorThrowable) {
+                this.unsubscribe();
+                throw err;
+            }
+            else {
+                _parent.syncErrorValue = err;
+                _parent.syncErrorThrown = true;
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._complete) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._complete);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._complete);
+                    this.unsubscribe();
+                }
+            }
+            else {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            this.unsubscribe();
+            throw err;
+        }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            parent.syncErrorValue = err;
+            parent.syncErrorThrown = true;
+            return true;
+        }
+        return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function () {
+        var _parent = this._parent;
+        this._context = null;
+        this._parent = null;
+        _parent.unsubscribe();
+    };
+    return SafeSubscriber;
+}(Subscriber));
+
+},{"./Observer":425,"./Subscription":428,"./symbol/rxSubscriber":434,"./util/isFunction":439}],428:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isArray_1 = require('./util/isArray');
+var isObject_1 = require('./util/isObject');
+var isFunction_1 = require('./util/isFunction');
+var tryCatch_1 = require('./util/tryCatch');
+var errorObject_1 = require('./util/errorObject');
+var Subscription = (function () {
+    function Subscription(_unsubscribe) {
+        this.isUnsubscribed = false;
+        if (_unsubscribe) {
+            this._unsubscribe = _unsubscribe;
+        }
+    }
+    Subscription.prototype.unsubscribe = function () {
+        var hasErrors = false;
+        var errors;
+        if (this.isUnsubscribed) {
+            return;
+        }
+        this.isUnsubscribed = true;
+        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
+        this._subscriptions = null;
+        if (isFunction_1.isFunction(_unsubscribe)) {
+            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+            if (trial === errorObject_1.errorObject) {
+                hasErrors = true;
+                (errors = errors || []).push(errorObject_1.errorObject.e);
+            }
+        }
+        if (isArray_1.isArray(_subscriptions)) {
+            var index = -1;
+            var len = _subscriptions.length;
+            while (++index < len) {
+                var sub = _subscriptions[index];
+                if (isObject_1.isObject(sub)) {
+                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+                    if (trial === errorObject_1.errorObject) {
+                        hasErrors = true;
+                        errors = errors || [];
+                        var err = errorObject_1.errorObject.e;
+                        if (err instanceof UnsubscriptionError) {
+                            errors = errors.concat(err.errors);
+                        }
+                        else {
+                            errors.push(err);
+                        }
+                    }
+                }
+            }
+        }
+        if (hasErrors) {
+            throw new UnsubscriptionError(errors);
+        }
+    };
+    Subscription.prototype.add = function (subscription) {
+        // return early if:
+        //  1. the subscription is null
+        //  2. we're attempting to add our this
+        //  3. we're attempting to add the static `empty` Subscription
+        if (!subscription || (subscription === this) || (subscription === Subscription.EMPTY)) {
+            return;
+        }
+        var sub = subscription;
+        switch (typeof subscription) {
+            case 'function':
+                sub = new Subscription(subscription);
+            case 'object':
+                if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
+                    break;
+                }
+                else if (this.isUnsubscribed) {
+                    sub.unsubscribe();
+                }
+                else {
+                    (this._subscriptions || (this._subscriptions = [])).push(sub);
+                }
+                break;
+            default:
+                throw new Error('Unrecognized subscription ' + subscription + ' added to Subscription.');
+        }
+    };
+    Subscription.prototype.remove = function (subscription) {
+        // return early if:
+        //  1. the subscription is null
+        //  2. we're attempting to remove ourthis
+        //  3. we're attempting to remove the static `empty` Subscription
+        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+            return;
+        }
+        var subscriptions = this._subscriptions;
+        if (subscriptions) {
+            var subscriptionIndex = subscriptions.indexOf(subscription);
+            if (subscriptionIndex !== -1) {
+                subscriptions.splice(subscriptionIndex, 1);
+            }
+        }
+    };
+    Subscription.EMPTY = (function (empty) {
+        empty.isUnsubscribed = true;
+        return empty;
+    }(new Subscription()));
+    return Subscription;
+}());
+exports.Subscription = Subscription;
+var UnsubscriptionError = (function (_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+        _super.call(this, 'unsubscriptoin error(s)');
+        this.errors = errors;
+        this.name = 'UnsubscriptionError';
+    }
+    return UnsubscriptionError;
+}(Error));
+exports.UnsubscriptionError = UnsubscriptionError;
+
+},{"./util/errorObject":437,"./util/isArray":438,"./util/isFunction":439,"./util/isObject":440,"./util/tryCatch":444}],429:[function(require,module,exports){
 "use strict";
 var Observable_1 = require('../../Observable');
 var map_1 = require('../../operator/map');
 Observable_1.Observable.prototype.map = map_1.map;
 
-},{"../../Observable":437,"../../operator/map":444}],443:[function(require,module,exports){
+},{"../../Observable":424,"../../operator/map":431}],430:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -75418,7 +75290,7 @@ function dispatchError(_a) {
     }
 }
 
-},{"../Observable":437,"../util/root":454}],444:[function(require,module,exports){
+},{"../Observable":424,"../util/root":441}],431:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -75477,7 +75349,7 @@ var MapSubscriber = (function (_super) {
     return MapSubscriber;
 }(Subscriber_1.Subscriber));
 
-},{"../Subscriber":440}],445:[function(require,module,exports){
+},{"../Subscriber":427}],432:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 function toPromise(PromiseCtor) {
@@ -75500,7 +75372,7 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":454}],446:[function(require,module,exports){
+},{"../util/root":441}],433:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -75536,9 +75408,18 @@ var SubjectSubscription = (function (_super) {
 }(Subscription_1.Subscription));
 exports.SubjectSubscription = SubjectSubscription;
 
-},{"../Subscription":441}],447:[function(require,module,exports){
-arguments[4][425][0].apply(exports,arguments)
-},{"../util/SymbolShim":449,"dup":425}],448:[function(require,module,exports){
+},{"../Subscription":428}],434:[function(require,module,exports){
+"use strict";
+var SymbolShim_1 = require('../util/SymbolShim');
+/**
+ * rxSubscriber symbol is a symbol for retreiving an "Rx safe" Observer from an object
+ * "Rx safety" can be defined as an object that has all of the traits of an Rx Subscriber,
+ * including the ability to add and remove subscriptions to the subscription chain and
+ * guarantees involving event triggering (can't "next" after unsubscription, etc).
+ */
+exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
+
+},{"../util/SymbolShim":436}],435:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -75559,17 +75440,100 @@ var ObjectUnsubscribedError = (function (_super) {
 }(Error));
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
 
-},{}],449:[function(require,module,exports){
-arguments[4][426][0].apply(exports,arguments)
-},{"./root":454,"dup":426}],450:[function(require,module,exports){
-arguments[4][427][0].apply(exports,arguments)
-},{"dup":427}],451:[function(require,module,exports){
-arguments[4][428][0].apply(exports,arguments)
-},{"dup":428}],452:[function(require,module,exports){
-arguments[4][429][0].apply(exports,arguments)
-},{"dup":429}],453:[function(require,module,exports){
-arguments[4][430][0].apply(exports,arguments)
-},{"dup":430}],454:[function(require,module,exports){
+},{}],436:[function(require,module,exports){
+"use strict";
+var root_1 = require('./root');
+function polyfillSymbol(root) {
+    var Symbol = ensureSymbol(root);
+    ensureIterator(Symbol, root);
+    ensureObservable(Symbol);
+    ensureFor(Symbol);
+    return Symbol;
+}
+exports.polyfillSymbol = polyfillSymbol;
+function ensureFor(Symbol) {
+    if (!Symbol.for) {
+        Symbol.for = symbolForPolyfill;
+    }
+}
+exports.ensureFor = ensureFor;
+var id = 0;
+function ensureSymbol(root) {
+    if (!root.Symbol) {
+        root.Symbol = function symbolFuncPolyfill(description) {
+            return "@@Symbol(" + description + "):" + id++;
+        };
+    }
+    return root.Symbol;
+}
+exports.ensureSymbol = ensureSymbol;
+function symbolForPolyfill(key) {
+    return '@@' + key;
+}
+exports.symbolForPolyfill = symbolForPolyfill;
+function ensureIterator(Symbol, root) {
+    if (!Symbol.iterator) {
+        if (typeof Symbol.for === 'function') {
+            Symbol.iterator = Symbol.for('iterator');
+        }
+        else if (root.Set && typeof new root.Set()['@@iterator'] === 'function') {
+            // Bug for mozilla version
+            Symbol.iterator = '@@iterator';
+        }
+        else if (root.Map) {
+            // es6-shim specific logic
+            var keys = Object.getOwnPropertyNames(root.Map.prototype);
+            for (var i = 0; i < keys.length; ++i) {
+                var key = keys[i];
+                if (key !== 'entries' && key !== 'size' && root.Map.prototype[key] === root.Map.prototype['entries']) {
+                    Symbol.iterator = key;
+                    break;
+                }
+            }
+        }
+        else {
+            Symbol.iterator = '@@iterator';
+        }
+    }
+}
+exports.ensureIterator = ensureIterator;
+function ensureObservable(Symbol) {
+    if (!Symbol.observable) {
+        if (typeof Symbol.for === 'function') {
+            Symbol.observable = Symbol.for('observable');
+        }
+        else {
+            Symbol.observable = '@@observable';
+        }
+    }
+}
+exports.ensureObservable = ensureObservable;
+exports.SymbolShim = polyfillSymbol(root_1.root);
+
+},{"./root":441}],437:[function(require,module,exports){
+"use strict";
+// typeof any so that it we don't have to cast when comparing a result to the error object
+exports.errorObject = { e: {} };
+
+},{}],438:[function(require,module,exports){
+"use strict";
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+
+},{}],439:[function(require,module,exports){
+"use strict";
+function isFunction(x) {
+    return typeof x === 'function';
+}
+exports.isFunction = isFunction;
+
+},{}],440:[function(require,module,exports){
+"use strict";
+function isObject(x) {
+    return x != null && typeof x === 'object';
+}
+exports.isObject = isObject;
+
+},{}],441:[function(require,module,exports){
 (function (global){
 "use strict";
 var objectTypes = {
@@ -75591,18 +75555,51 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],455:[function(require,module,exports){
+},{}],442:[function(require,module,exports){
 "use strict";
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],456:[function(require,module,exports){
-arguments[4][432][0].apply(exports,arguments)
-},{"../Subscriber":440,"../symbol/rxSubscriber":447,"dup":432}],457:[function(require,module,exports){
-arguments[4][433][0].apply(exports,arguments)
-},{"./errorObject":450,"dup":433}],458:[function(require,module,exports){
+},{}],443:[function(require,module,exports){
+"use strict";
+var Subscriber_1 = require('../Subscriber');
+var rxSubscriber_1 = require('../symbol/rxSubscriber');
+function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver && typeof nextOrObserver === 'object') {
+        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+            return nextOrObserver;
+        }
+        else if (typeof nextOrObserver[rxSubscriber_1.rxSubscriber] === 'function') {
+            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+        }
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+}
+exports.toSubscriber = toSubscriber;
 
-},{}]},{},[1,458])
+},{"../Subscriber":427,"../symbol/rxSubscriber":434}],444:[function(require,module,exports){
+"use strict";
+var errorObject_1 = require('./errorObject');
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+
+},{"./errorObject":437}],445:[function(require,module,exports){
+
+},{}]},{},[1,445])
 
 
 //# sourceMappingURL=app.bundle.js.map

@@ -9,9 +9,10 @@
 
     <ion-item>
         <ion-thumbnail item-left>
-            <img class="profile-image" src="img/michael-phelps.png">
+            <!--<img class="profile-image" src="img/michael-phelps.png">-->
+            <img class="profile-image" [src]="paceUserData.picture">
         </ion-thumbnail>
-        <h2>Michael Phelps</h2>
+        <h2>{{paceUserData.name}}</h2>
         <h3>1564 p</h3>
         <p>Athlete</p>
     </ion-item>
@@ -33,7 +34,7 @@
 
     <div [ngSwitch]="tab">
         <ion-list *ngSwitchDefault>
-        <!--<ion-list *ngSwitchWhen="'goals'">-->
+            <!--<ion-list *ngSwitchWhen="'goals'">-->
             <ion-list-header>
                 Gymnastics
             </ion-list-header>
@@ -77,12 +78,11 @@
 
         <ion-list *ngSwitchWhen="'achievements'">
             <ion-card>
-                <!--<img [src]="image">-->
-                <!--<video>-->
-                <!--<source [src]="image" type="video/mp4">-->
-                <!--</video>-->
-                <div class="video-container">
-                    <iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>
+                <div>
+                    <!--<iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>-->
+                    <ion-card>
+                        <img [src]="image">
+                    </ion-card>
                 </div>
 
                 <ion-card-content>
@@ -103,6 +103,12 @@
                     </ion-col>
                     <ion-col>
                         <button clear small danger>
+                            <ion-icon name='edit'></ion-icon>
+                            Edit
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button clear small danger>
                             <ion-icon name='share-alt'></ion-icon>
                             Share
                         </button>
@@ -114,11 +120,12 @@
 
 </ion-content>
 
-<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
+<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini">
     <ion-icon ios="ios-flag" md="md-flag" is-active="false"></ion-icon>
 </button>
 
-<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini" (click)="snapImage()">
+<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini"
+        (click)="snapImage()">
     <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>
 </button>
 

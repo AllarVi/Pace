@@ -2,16 +2,963 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/pages/dashboard-group-add/dashboard-group-add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/CoreOperators.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/CoreOperators.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/CoreOperators.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/InnerSubscriber.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/InnerSubscriber.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/InnerSubscriber.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Notification.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Notification.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Notification.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observer.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Observer.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Operator.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Operator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Operator.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/OuterSubscriber.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/OuterSubscriber.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/OuterSubscriber.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.DOM.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.DOM.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.DOM.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.KitchenSink.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.KitchenSink.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.KitchenSink.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Rx.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Scheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Scheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Scheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscriber.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscriber.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscriber.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscription.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscription.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/Subscription.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindCallback.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindCallback.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindCallback.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindNodeCallback.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindNodeCallback.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/bindNodeCallback.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/combineLatest.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/combineLatest.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/combineLatest.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/concat.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/concat.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/defer.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/defer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/defer.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/ajax.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/ajax.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/webSocket.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/webSocket.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/dom/webSocket.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/empty.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/empty.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/empty.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/forkJoin.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/forkJoin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/forkJoin.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/from.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/from.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/from.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromArray.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromArray.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromArray.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEvent.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEvent.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEvent.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEventPattern.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEventPattern.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromEventPattern.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromPromise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromPromise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/fromPromise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/interval.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/interval.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/interval.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/merge.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/merge.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/merge.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/never.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/never.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/never.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/of.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/of.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/of.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/race.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/race.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/race.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/range.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/range.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/range.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/throw.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/throw.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/throw.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/timer.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/timer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/timer.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/zip.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/zip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/observable/zip.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/buffer.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/buffer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/buffer.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferCount.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferCount.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferCount.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferToggle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferToggle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferToggle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/bufferWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/cache.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/cache.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/cache.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/catch.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/catch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/catch.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineLatest.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineLatest.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/combineLatest.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concat.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concat.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/concatMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/count.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/count.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/count.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounce.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounce.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounceTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounceTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/debounceTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/defaultIfEmpty.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/defaultIfEmpty.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/defaultIfEmpty.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delay.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delay.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delayWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delayWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/delayWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/dematerialize.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/dematerialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/dematerialize.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinct.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinct.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinct.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctKey.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctKey.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctKey.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilChanged.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilChanged.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilChanged.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilKeyChanged.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilKeyChanged.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/distinctUntilKeyChanged.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/do.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/do.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/do.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/elementAt.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/elementAt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/elementAt.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/every.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/every.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/every.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaust.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaust.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaust.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaustMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaustMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/exhaustMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/expand.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/expand.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/expand.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/filter.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/filter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/filter.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/finally.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/finally.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/finally.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/find.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/find.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/find.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/findIndex.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/findIndex.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/findIndex.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/first.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/first.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/first.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/groupBy.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/groupBy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/groupBy.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/ignoreElements.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/ignoreElements.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/ignoreElements.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspect.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspect.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspect.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspectTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspectTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/inspectTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/isEmpty.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/isEmpty.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/isEmpty.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/last.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/last.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/last.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/let.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/let.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/let.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/map.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/map.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/map.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/materialize.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/materialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/materialize.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/max.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/max.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/max.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/merge.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/merge.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/merge.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeScan.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeScan.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/mergeScan.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/min.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/multicast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/multicast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/multicast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/observeOn.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/observeOn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/observeOn.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pairwise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pairwise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pairwise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/partition.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/partition.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/partition.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pluck.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pluck.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/pluck.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publish.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publish.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publish.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishBehavior.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishBehavior.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishBehavior.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishLast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishLast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishLast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishReplay.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishReplay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/publishReplay.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/race.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/race.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/race.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/reduce.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/reduce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/reduce.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/repeat.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/repeat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/repeat.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retry.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retry.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retry.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retryWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retryWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/retryWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sample.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sample.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sample.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sampleTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sampleTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/sampleTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/scan.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/scan.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/scan.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/share.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/share.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/share.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/single.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/single.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/single.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skip.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skip.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipUntil.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipUntil.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipUntil.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipWhile.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipWhile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/skipWhile.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/startWith.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/startWith.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/startWith.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/subscribeOn.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/subscribeOn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/subscribeOn.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switch.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switch.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/switchMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/take.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/take.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/take.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeLast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeLast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeLast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeUntil.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeUntil.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeUntil.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeWhile.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeWhile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/takeWhile.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttleTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttleTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/throttleTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeInterval.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeInterval.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeInterval.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeout.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeout.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeout.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeoutWith.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeoutWith.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/timeoutWith.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toArray.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toArray.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toArray.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toPromise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toPromise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/toPromise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/window.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/window.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/window.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowCount.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowCount.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowCount.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowToggle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowToggle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowToggle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/windowWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/withLatestFrom.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/withLatestFrom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/withLatestFrom.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zip.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zip.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zipAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zipAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/add/operator/zipAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.umd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.umd.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/bundles/Rx.umd.min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayLikeObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayLikeObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayLikeObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ArrayObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundCallbackObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundCallbackObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundCallbackObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundNodeCallbackObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundNodeCallbackObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/BoundNodeCallbackObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ConnectableObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ConnectableObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ConnectableObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/DeferObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/DeferObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/DeferObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/EmptyObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/EmptyObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/EmptyObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ErrorObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ErrorObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ErrorObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ForkJoinObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ForkJoinObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ForkJoinObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventPatternObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventPatternObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromEventPatternObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/FromObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IntervalObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IntervalObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IntervalObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IteratorObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IteratorObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/IteratorObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/NeverObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/NeverObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/NeverObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/PromiseObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/PromiseObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/PromiseObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/RangeObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/RangeObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/RangeObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ScalarObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ScalarObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/ScalarObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/SubscribeOnObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/SubscribeOnObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/SubscribeOnObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/TimerObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/TimerObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/TimerObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/AjaxObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/AjaxObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/AjaxObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/WebSocketSubject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/WebSocketSubject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/observable/dom/WebSocketSubject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/buffer.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/buffer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/buffer.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferCount.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferCount.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferCount.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferToggle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferToggle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferToggle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/bufferWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/cache.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/cache.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/cache.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/catch.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/catch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/catch.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineLatest.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineLatest.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/combineLatest.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concat.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concat.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/concatMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/count.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/count.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/count.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounce.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounce.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounceTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounceTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/debounceTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/defaultIfEmpty.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/defaultIfEmpty.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/defaultIfEmpty.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delay.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delay.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delayWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delayWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/delayWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/dematerialize.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/dematerialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/dematerialize.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinct.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinct.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinct.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctKey.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctKey.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctKey.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilChanged.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilChanged.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilChanged.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilKeyChanged.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilKeyChanged.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/distinctUntilKeyChanged.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/do.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/do.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/do.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/elementAt.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/elementAt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/elementAt.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/every.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/every.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/every.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaust.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaust.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaust.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaustMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaustMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/exhaustMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/expand.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/expand.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/expand.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/filter.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/filter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/filter.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/finally.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/finally.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/finally.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/find.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/find.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/find.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/findIndex.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/findIndex.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/findIndex.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/first.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/first.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/first.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/groupBy.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/groupBy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/groupBy.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/ignoreElements.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/ignoreElements.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/ignoreElements.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspect.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspect.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspect.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspectTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspectTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/inspectTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/isEmpty.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/isEmpty.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/isEmpty.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/last.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/last.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/last.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/let.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/let.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/let.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/map.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/map.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/map.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/materialize.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/materialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/materialize.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/max.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/max.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/max.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/merge.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/merge.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/merge.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeScan.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeScan.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/mergeScan.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/min.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/multicast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/multicast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/multicast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/observeOn.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/observeOn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/observeOn.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pairwise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pairwise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pairwise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/partition.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/partition.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/partition.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pluck.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pluck.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/pluck.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publish.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publish.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publish.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishBehavior.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishBehavior.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishBehavior.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishLast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishLast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishLast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishReplay.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishReplay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/publishReplay.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/race.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/race.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/race.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/reduce.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/reduce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/reduce.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/repeat.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/repeat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/repeat.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retry.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retry.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retry.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retryWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retryWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/retryWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sample.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sample.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sample.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sampleTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sampleTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/sampleTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/scan.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/scan.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/scan.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/share.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/share.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/share.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/single.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/single.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/single.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skip.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skip.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipUntil.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipUntil.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipUntil.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipWhile.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipWhile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/skipWhile.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/startWith.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/startWith.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/startWith.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/subscribeOn.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/subscribeOn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/subscribeOn.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switch.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switch.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMapTo.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMapTo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/switchMapTo.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/take.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/take.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/take.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeLast.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeLast.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeLast.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeUntil.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeUntil.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeUntil.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeWhile.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeWhile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/takeWhile.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttleTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttleTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/throttleTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeInterval.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeInterval.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeInterval.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeout.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeout.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeout.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeoutWith.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeoutWith.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/timeoutWith.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toArray.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toArray.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toArray.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toPromise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toPromise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/toPromise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/window.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/window.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/window.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowCount.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowCount.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowCount.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowTime.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowTime.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowTime.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowToggle.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowToggle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowToggle.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowWhen.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowWhen.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/windowWhen.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/withLatestFrom.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/withLatestFrom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/withLatestFrom.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zip.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zip.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zipAll.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zipAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/operator/zipAll.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/Action.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/Action.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/Action.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameAction.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameAction.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameAction.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AnimationFrameScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapAction.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapAction.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapAction.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/AsapScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/FutureAction.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/FutureAction.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/FutureAction.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueAction.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueAction.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueAction.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/QueueScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/VirtualTimeScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/VirtualTimeScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/VirtualTimeScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/animationFrame.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/animationFrame.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/animationFrame.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/asap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/asap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/asap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/queue.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/queue.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/scheduler/queue.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/AsyncSubject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/AsyncSubject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/AsyncSubject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/BehaviorSubject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/BehaviorSubject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/BehaviorSubject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/ReplaySubject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/ReplaySubject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/ReplaySubject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/SubjectSubscription.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/SubjectSubscription.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/subject/SubjectSubscription.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/symbol/rxSubscriber.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/symbol/rxSubscriber.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/symbol/rxSubscriber.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/ColdObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/ColdObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/ColdObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/HotObservable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/HotObservable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/HotObservable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLog.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLog.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLog.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLoggable.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLoggable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/SubscriptionLoggable.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestMessage.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestMessage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestMessage.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/testing/TestScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/AnimationFrame.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/AnimationFrame.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/AnimationFrame.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ArgumentOutOfRangeError.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ArgumentOutOfRangeError.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ArgumentOutOfRangeError.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/EmptyError.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/EmptyError.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/EmptyError.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/FastMap.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/FastMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/FastMap.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Immediate.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Immediate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Immediate.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Map.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Map.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/Map.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/MapPolyfill.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/MapPolyfill.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/MapPolyfill.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ObjectUnsubscribedError.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ObjectUnsubscribedError.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/ObjectUnsubscribedError.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/SymbolShim.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/SymbolShim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/SymbolShim.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/applyMixins.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/applyMixins.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/applyMixins.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/assign.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/assign.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/assign.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/errorObject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/errorObject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/errorObject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isArray.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isArray.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isArray.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isDate.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isDate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isDate.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isFunction.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isFunction.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isFunction.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isNumeric.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isNumeric.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isNumeric.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isObject.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isObject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isObject.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isPromise.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isPromise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isPromise.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isScheduler.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isScheduler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/isScheduler.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/noop.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/noop.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/noop.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/not.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/not.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/not.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/root.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/root.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/root.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/subscribeToResult.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/subscribeToResult.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/subscribeToResult.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/throwError.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/throwError.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/throwError.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/toSubscriber.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/toSubscriber.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/toSubscriber.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/tryCatch.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/tryCatch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/ionic-native/node_modules/rxjs/util/tryCatch.js.map" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/dashboard/dashboard.html" afterPath="$PROJECT_DIR$/app/pages/dashboard/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" afterPath="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.html" afterPath="$PROJECT_DIR$/app/pages/profile/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.ts" afterPath="$PROJECT_DIR$/app/pages/profile/profile.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.ts" afterPath="$PROJECT_DIR$/app/providers/user-data.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.xml" afterPath="$PROJECT_DIR$/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/browser.json" afterPath="$PROJECT_DIR$/platforms/browser/browser.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/config.xml" afterPath="$PROJECT_DIR$/platforms/browser/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/platform_www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/app.html" afterPath="$PROJECT_DIR$/platforms/browser/www/build/app.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/css/app.ios.css" afterPath="$PROJECT_DIR$/platforms/browser/www/build/css/app.ios.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/css/app.md.css" afterPath="$PROJECT_DIR$/platforms/browser/www/build/css/app.md.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/css/app.wp.css" afterPath="$PROJECT_DIR$/platforms/browser/www/build/css/app.wp.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/platforms/browser/www/build/js/app.bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/platforms/browser/www/build/js/app.bundle.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/js/es6-shim.min.js" afterPath="$PROJECT_DIR$/platforms/browser/www/build/js/es6-shim.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/pages/about/about.html" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/about/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/pages/dashboard/dashboard.html" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/dashboard/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/pages/group-detail/group-detail.html" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/group-detail/group-detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/build/pages/profile/profile.html" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/profile/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/config.xml" afterPath="$PROJECT_DIR$/platforms/browser/www/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/browser/www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/browser/www/index.html" afterPath="$PROJECT_DIR$/platforms/browser/www/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace/Pace-Info.plist" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Pace-Info.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace/config.xml" afterPath="$PROJECT_DIR$/platforms/ios/Pace/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/ios.json" afterPath="$PROJECT_DIR$/platforms/ios/ios.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/platform_www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/www/cordova_plugins.js" afterPath="$PROJECT_DIR$/platforms/ios/www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/browser.json" afterPath="$PROJECT_DIR$/plugins/browser.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/fetch.json" afterPath="$PROJECT_DIR$/plugins/fetch.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/ios.json" afterPath="$PROJECT_DIR$/plugins/ios.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/dashboard/dashboard.html" afterPath="$PROJECT_DIR$/www/build/pages/dashboard/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/profile/profile.html" afterPath="$PROJECT_DIR$/www/build/pages/profile/profile.html" />
     </list>
     <ignored path="pacewayer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +990,8 @@
       <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/dashboard/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="68" column="62" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="62" />
+            <state relative-caret-position="255">
+              <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -65,20 +1012,8 @@
       <file leaf-file-name="profile.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/pages/dashboard/dashboard.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="74" column="10" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
+            <state relative-caret-position="255">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#0#94#0" expanded="true" />
               </folding>
@@ -86,12 +1021,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user-data.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user-data.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="108" column="25" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="585">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,11 +1043,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
+            <state relative-caret-position="225">
+              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -138,7 +1075,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/www/build/css/app.ios.css" />
-        <option value="$PROJECT_DIR$/app/pages/profile/profile.ts" />
         <option value="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.ts" />
         <option value="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.js" />
         <option value="$PROJECT_DIR$/app/pages/dashboard/dashboard.js" />
@@ -159,7 +1095,6 @@
         <option value="$PROJECT_DIR$/app/pages/profile/profile.scss" />
         <option value="$PROJECT_DIR$/app/pages/login/login.js" />
         <option value="$PROJECT_DIR$/app/pages/dashboard/dashboard.scss" />
-        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
         <option value="$PROJECT_DIR$/app/theme/app.core.scss" />
         <option value="$PROJECT_DIR$/app/pages/group-detail/group-detail.scss" />
         <option value="$PROJECT_DIR$/app/pages/about/about.scss" />
@@ -188,6 +1123,8 @@
         <option value="$PROJECT_DIR$/app/pages/dashboard-group-add/dashboard-group-add.html" />
         <option value="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" />
         <option value="$PROJECT_DIR$/app/providers/user-data.ts" />
+        <option value="$PROJECT_DIR$/app/pages/profile/profile.ts" />
+        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
       </list>
     </option>
   </component>
@@ -456,9 +1393,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -639,6 +1573,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1157,7 +2094,9 @@
       <workItem from="1463073006285" duration="15488000" />
       <workItem from="1463391722013" duration="50000" />
       <workItem from="1463391866461" duration="17664000" />
-      <workItem from="1463468406535" duration="3049000" />
+      <workItem from="1463468406535" duration="3119000" />
+      <workItem from="1463490661928" duration="8061000" />
+      <workItem from="1463556452955" duration="4076000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -1355,11 +2294,18 @@
       <option name="project" value="LOCAL" />
       <updated>1463414870583</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="feat(dashboard): Working on user case &quot;join team&quot;">
+      <created>1463472264871</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1463472264871</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248404000" />
+    <option name="totallyTimeSpent" value="260611000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -1373,8 +2319,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33627018" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274596" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33627018" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22778675" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
@@ -1406,7 +2352,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Working on dashboard tab" />
     <MESSAGE value="Made some changes on page group-detail" />
     <MESSAGE value="Working on profile page" />
     <MESSAGE value="Working on profile page -&gt; goals tab" />
@@ -1431,7 +2376,8 @@
     <MESSAGE value="Changed navigation, should now work as expected" />
     <MESSAGE value="Checkpoint" />
     <MESSAGE value="(feat) Dashboard now displays teams from actual database" />
-    <option name="LAST_COMMIT_MESSAGE" value="(feat) Dashboard now displays teams from actual database" />
+    <MESSAGE value="feat(dashboard): Working on user case &quot;join team&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(dashboard): Working on user case &quot;join team&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1444,13 +2390,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/providers/user-data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ionic-angular/bundles/ionic.wp.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -1707,27 +2646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/providers/fb-provider.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/login/login.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1749,14 +2667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -1764,27 +2674,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#104#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/dashboard/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="68" column="62" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1797,20 +2690,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/login/login.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/build/js/app.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="251" column="11" selection-start-line="251" selection-start-column="11" selection-end-line="251" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/providers/fb-provider.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="18" column="47" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/dashboard/dashboard.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="74" column="10" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
+        <state relative-caret-position="-37">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#0#94#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
+    <entry file="file://$PROJECT_DIR$/app/pages/dashboard/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="108" column="25" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
+        <state relative-caret-position="255">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding />
         </state>
       </provider>

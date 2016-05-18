@@ -26,6 +26,9 @@
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.pacewayer"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.pacewayer"
         }
     },
     "dependent_plugins": {

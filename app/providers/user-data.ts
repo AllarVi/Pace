@@ -1,10 +1,13 @@
 import {Injectable} from "angular2/core";
 import {Storage, LocalStorage, Events} from "ionic-angular";
-import {Http} from "angular2/http";
+import {Http, Headers} from "angular2/http";
 import "rxjs/add/operator/map";
 
 @Injectable()
 export class UserData {
+
+    // BASE_URL = 'localhost';
+    BASE_URL = '10.224.4.183';
 
     constructor(private events:Events, private http:Http) {
     }
@@ -35,7 +38,7 @@ export class UserData {
 
         // Don't have the data yet
         return new Promise(resolve => {
-            this.url = 'http://localhost:8080/api/user?facebookId=' + userID;
+            this.url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
             console.log("Making request to: " + this.url);
             console.log("Fetching user data from BackPace...");
             this.http.get(this.url).subscribe(paceUser => {
@@ -50,6 +53,10 @@ export class UserData {
             }, () => console.log('User data fetching complete!'));
         });
     }
+    
+    getPaceUserData() {
+        return this.paceUser;
+    }
 
     shortTeamView = null;
 
@@ -57,9 +64,7 @@ export class UserData {
         console.log("UserData: getUserShortTeamView() reached...");
 
         return new Promise((resolve, reject) => {
-            // this.userId = '1273703759309879';
-            // this.userToken = 'EAAD08lC2fhMBAJndhmi8SZCDoFrZAPKBjVZAjYdOjdx9n39StxZAtBtuLKUVEzq6HHTVHZC3B6ZCGymj2iQbLj4PIPNsbkgA7mZAxoFKejCFIuegh6da8keBarMj5yMFCQsS7EiqeZB4oY2nycUl4ZAhx6iGZAPCCNevhdDWhTM5uK0FJspaSNSm8sEeDODaM01SAZD';
-            this.url = 'http://localhost:8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
+            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
             console.log("Making request to: " + this.url);
             this.http.get(this.url).subscribe(shortTeamView => {
                 console.log("ShortTeamView from BackPace...");
@@ -77,7 +82,10 @@ export class UserData {
     getGroups() {
         console.log("UserData: getGroups() reached...");
         return new Promise((resolve, reject) => {
-            this.url = 'http://localhost:8080/api/dashboard/join_group?groups=all&token=' + this.userToken;
+            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group'
+                + '?facebookId=' + this.userId
+                + '&token=' + this.userToken
+                + '&groups=all';
             console.log("Making request to: " + this.url);
             this.http.get(this.url).subscribe(teams => {
                 this.teams = teams.json();
@@ -93,7 +101,7 @@ export class UserData {
 
     joinTeam(teamId) {
         return new Promise((resolve, reject) => {
-            this.url = 'http://localhost:8080/api/dashboard/join_group?facebookId=' + this.userId + '&token=' +
+            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group?facebookId=' + this.userId + '&token=' +
                 this.userToken;
             console.log("Making request to: " + this.url);
 
@@ -111,9 +119,32 @@ export class UserData {
         });
     }
 
+    uploadImage(fileName, image) {
+        return new Promise((resolve, reject) => {
+            this.url = 'http://' + this.BASE_URL + ':8080/api/fileUpload' +
+                '?name=' + fileName +
+                '&file=' + image;
+
+
+            console.log("Making request to: " + this.url);
+
+            var params = JSON.stringify({
+                headers: {'Content-Type': undefined}
+            });
+
+            this.http.post(this.url, params).subscribe(success => {
+                console.log("File upload request complete...");
+                resolve(success);
+            }, () => {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, () => console.log('File upload complete!'));
+        });
+    }
+
     saveNewPaceUser(userProfile, status, accessToken) {
         return new Promise((resolve, reject) => {
-            this.url = 'http://localhost:8080/api/user';
+            this.url = 'http://' + this.BASE_URL + ':8080/api/user';
             console.log(JSON.stringify(userProfile));
             console.log("Making request to: " + this.url);
 
