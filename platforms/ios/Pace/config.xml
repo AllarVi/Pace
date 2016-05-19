@@ -49,7 +49,7 @@
     <author email="allar.viinamae@hotmail.com" href="http://ionicframework.com/">
         Allar Viinamae
     </author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://127.0.0.1:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

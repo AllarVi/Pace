@@ -53,9 +53,23 @@ export class UserData {
             }, () => console.log('User data fetching complete!'));
         });
     }
-    
+
     getPaceUserData() {
         return this.paceUser;
+    }
+
+    getPaceUserPicture() {
+        return new Promise((resolve, reject) => {
+            var url = this.paceUser.picture + '&redirect=false';
+            console.log("Making request to", url);
+            this.http.get(url).subscribe(success => {
+                console.log("Success!");
+                resolve(success.data.url);
+            }, error => {
+                console.log("Error!");
+                reject(error);
+            });
+        });
     }
 
     shortTeamView = null;

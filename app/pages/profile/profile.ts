@@ -10,17 +10,23 @@ import {UserData} from "../../providers/user-data";
 export class ProfilePage {
 
     paceUserData = null;
-    
+    profileAvatar = null;
+
+    image = null;
+
     constructor(private ngZone:NgZone, private nav:NavController, private navParams:NavParams, private userData:UserData) {
         this.paceUserData = this.userData.getPaceUserData();
+        
+        // Fetching profile avatar from Facebook
+        this.userData.getPaceUserPicture().then((profileAvatar) => {
+            this.profileAvatar = profileAvatar;
+        });
     }
 
     openModal(characterNum) {
         let modal = Modal.create(ModalsContentPage, characterNum);
         this.nav.present(modal);
     }
-
-    image = null;
 
     snapImage() {
         var options = {

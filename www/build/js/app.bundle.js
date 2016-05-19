@@ -456,13 +456,19 @@ var ionic_native_1 = require('ionic-native');
 var user_data_1 = require("../../providers/user-data");
 var ProfilePage = (function () {
     function ProfilePage(ngZone, nav, navParams, userData) {
+        var _this = this;
         this.ngZone = ngZone;
         this.nav = nav;
         this.navParams = navParams;
         this.userData = userData;
         this.paceUserData = null;
+        this.profileAvatar = null;
         this.image = null;
         this.paceUserData = this.userData.getPaceUserData();
+        // Fetching profile avatar from Facebook
+        this.userData.getPaceUserPicture().then(function (profileAvatar) {
+            _this.profileAvatar = profileAvatar;
+        });
     }
     ProfilePage.prototype.openModal = function (characterNum) {
         var modal = ionic_angular_1.Modal.create(ModalsContentPage, characterNum);
@@ -809,6 +815,20 @@ var UserData = (function () {
     };
     UserData.prototype.getPaceUserData = function () {
         return this.paceUser;
+    };
+    UserData.prototype.getPaceUserPicture = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var url = _this.paceUser.picture + '&redirect=false';
+            console.log("Making request to", url);
+            _this.http.get(url).subscribe(function (success) {
+                console.log("Success!");
+                resolve(success.data.url);
+            }, function (error) {
+                console.log("Error!");
+                reject(error);
+            });
+        });
     };
     UserData.prototype.getUserShortTeamView = function () {
         var _this = this;
