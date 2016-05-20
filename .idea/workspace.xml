@@ -1,16 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="feat(profile): Working on showing profile avatar">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" />
+    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/img/olympic_rings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/img/team_cover.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/android-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/android-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/blackberry-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/blackberry-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/browser-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/browser-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/firefox-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/firefox-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/fireos-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/fireos-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ios-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ios-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ubuntu-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ubuntu-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/windows-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/windows-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/wp8-fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/wp8-success.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/back.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/shoot.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-left.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-middle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-right.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/.eslintrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/dashboard-group-add/dashboard-group-add.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVCamera.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVCamera.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVExif.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVJpegHeaderWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVJpegHeaderWriter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/UIImage+CropScaleOrientation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/UIImage+CropScaleOrientation.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/frameworks.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/CONTRIBUTING.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/NOTICE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/RELEASENOTES.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/android/android.spec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/helpers/cameraHelper.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/ios/ios.spec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/de/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/de/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/es/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/es/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/fr/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/fr/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/it/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/it/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ja/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ja/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ko/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ko/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/pl/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/pl/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ru/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/zh/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/zh/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/jsdoc2md/TEMPLATE.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/plugin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/CameraLauncher.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/ExifHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/FileHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/blackberry10/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/firefoxos/CameraProxy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVCamera.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVCamera.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVExif.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVJpegHeaderWriter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVJpegHeaderWriter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/UIImage+CropScaleOrientation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/UIImage+CropScaleOrientation.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/CaptureWidget.qml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/camera.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/camera.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/windows/CameraProxy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/wp/Camera.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/contents.xcworkspacedata" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/xcshareddata/CDVCameraTest.xccheckout" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/xcshareddata/xcschemes/CordovaLib.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraLibTests/CameraTest.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraLibTests/Info.plist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.pbxproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.xcworkspace/contents.xcworkspacedata" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.xcworkspace/xcshareddata/CDVCameraTest.xccheckout" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/xcshareddata/xcschemes/CDVCameraLib.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/xcshareddata/xcschemes/CDVCameraLibTests.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/de/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/es/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/fr/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/it/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/ja/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/ko/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/pl/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/zh/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/plugin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/tests.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/Camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraConstants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraPopoverHandle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/blackberry10/assets/camera.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/blackberry10/assets/camera.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/dashboard-group-add/dashboard-group-add.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/profile-achievements-modal/profile-achievements-modal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" afterPath="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.html" afterPath="$PROJECT_DIR$/app/pages/profile/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" afterPath="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.ts" afterPath="$PROJECT_DIR$/app/pages/profile/profile.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.ts" afterPath="$PROJECT_DIR$/app/providers/user-data.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/profile/profile.html" afterPath="$PROJECT_DIR$/www/build/pages/profile/profile.html" />
     </list>
     <ignored path="pacewayer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,10 +182,10 @@
       <file leaf-file-name="profile.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="409">
+              <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
               <folding>
-                <element signature="e#0#84#0" expanded="true" />
+                <element signature="e#0#91#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,9 +204,12 @@
       <file leaf-file-name="profile-achievements-modal.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="165">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <marker date="1463739390000" expanded="true" signature="332:704" placeholder="..." />
+                <marker date="1463739390000" expanded="true" signature="347:689" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -484,73 +615,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="providers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tabs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="profile-goals-modal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="profile-achievements-modal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -576,74 +641,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard-group-add" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pacewayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ionic-conference-app" />
@@ -1163,7 +1166,7 @@
       <workItem from="1463490661928" duration="8061000" />
       <workItem from="1463556452955" duration="4375000" />
       <workItem from="1463642499108" duration="13587000" />
-      <workItem from="1463723914244" duration="4776000" />
+      <workItem from="1463723914244" duration="6484000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -1382,19 +1385,27 @@
       <option name="project" value="LOCAL" />
       <updated>1463663794362</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="feat(profile-achievements-modal): User can now see all available achievements when editing already achieved one">
+      <created>1463728783825</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1463728783825</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="279273000" />
+    <option name="totallyTimeSpent" value="280981000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.49676898" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33627018" sideWeight="0.503231" order="2" side_tool="true" content_ui="tabs" />
@@ -1406,6 +1417,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22778675" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27948305" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32452276" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1415,9 +1427,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2197092" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32452276" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1433,7 +1443,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Working on profile page -&gt; goals tab" />
     <MESSAGE value="Some code cleanup" />
     <MESSAGE value="Working on Facebook authentication. Today managed to get getLoginStatus() working." />
     <MESSAGE value="Facebook-auth diary: Communication with backend services now work." />
@@ -1458,7 +1467,8 @@
     <MESSAGE value="feat(dashboard): Working on user case &quot;join team&quot;" />
     <MESSAGE value="feat(profile): Working on adding achievements" />
     <MESSAGE value="feat(profile): Working on showing profile avatar" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(profile): Working on showing profile avatar" />
+    <MESSAGE value="feat(profile-achievements-modal): User can now see all available achievements when editing already achieved one" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(profile-achievements-modal): User can now see all available achievements when editing already achieved one" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1814,14 +1824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1830,12 +1832,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1463739390000" expanded="true" signature="332:704" placeholder="..." />
+            <marker date="1463739390000" expanded="true" signature="347:689" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        <state relative-caret-position="409">
+          <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
           <folding>
-            <element signature="e#0#84#0" expanded="true" />
+            <element signature="e#0#91#0" expanded="true" />
           </folding>
         </state>
       </provider>

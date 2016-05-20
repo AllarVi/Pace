@@ -554,9 +554,10 @@ var ProfileGoalsModal = (function () {
     return ProfileGoalsModal;
 }());
 var ProfileAchievementsModal = (function () {
-    function ProfileAchievementsModal(userData, viewCtrl) {
+    function ProfileAchievementsModal(userData, viewCtrl, nav) {
         this.userData = userData;
         this.viewCtrl = viewCtrl;
+        this.nav = nav;
         this.arrayOfKeys = null;
         this.arrayOfValues = null;
         this.initAchievements();
@@ -568,6 +569,27 @@ var ProfileAchievementsModal = (function () {
             _this.arrayOfValues = Object.keys(achievements).map(function (key) { return achievements[key]; });
         });
     };
+    ProfileAchievementsModal.prototype.doConfirm = function (achievementTitle) {
+        var confirm = ionic_angular_1.Alert.create({
+            title: 'Did you really achieve "' + achievementTitle + '"?',
+            message: '',
+            buttons: [
+                {
+                    text: 'No',
+                    handler: function () {
+                        console.log('Disagree clicked');
+                    }
+                },
+                {
+                    text: 'Yes!',
+                    handler: function () {
+                        console.log('Agree clicked');
+                    }
+                }
+            ]
+        });
+        this.nav.present(confirm);
+    };
     ProfileAchievementsModal.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
@@ -575,7 +597,7 @@ var ProfileAchievementsModal = (function () {
         ionic_angular_1.Page({
             templateUrl: './build/pages/profile-achievements-modal/profile-achievements-modal.html'
         }), 
-        __metadata('design:paramtypes', [user_data_1.UserData, ionic_angular_1.ViewController])
+        __metadata('design:paramtypes', [user_data_1.UserData, ionic_angular_1.ViewController, ionic_angular_1.NavController])
     ], ProfileAchievementsModal);
     return ProfileAchievementsModal;
 }());

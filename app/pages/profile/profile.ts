@@ -1,4 +1,4 @@
-import {Modal, NavController, NavParams, Page, ViewController} from "ionic-angular";
+import {Modal, NavController, NavParams, Page, Alert, ViewController} from "ionic-angular";
 import {NgZone} from "angular2/core";
 import {Camera} from "ionic-native";
 import {UserData} from "../../providers/user-data";
@@ -113,7 +113,7 @@ class ProfileAchievementsModal {
     arrayOfValues = null;
 
     constructor(private userData:UserData,
-                private viewCtrl:ViewController) {
+                private viewCtrl:ViewController, private nav:NavController) {
 
         this.initAchievements();
     }
@@ -124,6 +124,29 @@ class ProfileAchievementsModal {
             this.arrayOfValues = Object.keys(achievements).map(key => achievements[key]);
         });
     }
+
+    doConfirm(achievementTitle) {
+        let confirm = Alert.create({
+            title: 'Did you really achieve "' + achievementTitle + '"?',
+            message: '',
+            buttons: [
+                {
+                    text: 'No',
+                    handler: () => {
+                        console.log('Disagree clicked');
+                    }
+                },
+                {
+                    text: 'Yes!',
+                    handler: () => {
+                        console.log('Agree clicked');
+                    }
+                }
+            ]
+        });
+        this.nav.present(confirm);
+    }
+
 
     dismiss() {
         this.viewCtrl.dismiss();
