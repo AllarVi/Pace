@@ -199,8 +199,11 @@ var DashboardPage = (function () {
             _this.shortTeamView = shortTeamView;
         });
     };
-    DashboardPage.prototype.goToGroupDetail = function (group) {
-        this.nav.push(group_detail_1.GroupDetailPage, group);
+    DashboardPage.prototype.goToGroupDetail = function (team) {
+        console.log("Team ID: " + team.id);
+        this.nav.push(group_detail_1.GroupDetailPage, {
+            team: team
+        });
     };
     DashboardPage.prototype.openModal = function (characterNum) {
         var modal = ionic_angular_1.Modal.create(ModalsContentPage, characterNum);
@@ -242,9 +245,11 @@ var ModalsContentPage = (function () {
         });
     };
     ModalsContentPage.prototype.joinTeam = function (teamId) {
+        var _this = this;
         this.userData.joinTeam(teamId).then(function (success) {
             console.log(JSON.stringify(success));
             console.log("Joined team!");
+            _this.viewCtrl.dismiss();
         }, function () {
             console.log("Joining team failed!");
         });
@@ -272,12 +277,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var ionic_angular_1 = require('ionic-angular');
-// import {CHART_DIRECTIVES} from './charts';
+var ionic_angular_1 = require("ionic-angular");
 var ng2_charts_1 = require("ng2-charts/ng2-charts");
+var user_data_1 = require("../../providers/user-data");
+// import {CHART_DIRECTIVES} from './charts';
 var GroupDetailPage = (function () {
-    function GroupDetailPage(navParams) {
+    function GroupDetailPage(navParams, userData) {
+        var _this = this;
         this.navParams = navParams;
+        this.userData = userData;
+        this.team = null;
+        this.teamMembers = null;
+        this.teamName = null;
         // lineChart
         this.lineChartData = [
             [65, 59, 80, 81, 56, 55, 40],
@@ -293,8 +304,12 @@ var GroupDetailPage = (function () {
         this.lineChartLegend = true;
         this.lineChartType = 'Line';
         this.group = this.navParams.data;
+        this.team = this.navParams.get('team');
+        this.teamName = this.team.teamName;
+        this.userData.getTeamScores(this.team.id).then(function (teamMembers) {
+            _this.teamMembers = teamMembers;
+        });
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
-        console.log(this.getColours(['#FF9800', '#49cd97', '#ef2e0a']));
     }
     GroupDetailPage.prototype.rgba = function (colour, alpha) {
         return 'rgba(' + colour.concat(alpha).join(',') + ')';
@@ -350,13 +365,13 @@ var GroupDetailPage = (function () {
             templateUrl: 'build/pages/group-detail/group-detail.html',
             directives: [ng2_charts_1.CHART_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavParams])
+        __metadata('design:paramtypes', [ionic_angular_1.NavParams, user_data_1.UserData])
     ], GroupDetailPage);
     return GroupDetailPage;
 }());
 exports.GroupDetailPage = GroupDetailPage;
 
-},{"ionic-angular":344,"ng2-charts/ng2-charts":422}],5:[function(require,module,exports){
+},{"../../providers/user-data":9,"ionic-angular":344,"ng2-charts/ng2-charts":422}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -830,11 +845,9 @@ var UserData = (function () {
     UserData.prototype.getPaceUser = function (userID) {
         var _this = this;
         console.log("UserData: getPaceUser() reached...");
-        // Don't have the data yet
         return new Promise(function (resolve) {
             _this.url = 'http://' + _this.BASE_URL + ':8080/api/user?facebookId=' + userID;
             console.log("Making request to: " + _this.url);
-            console.log("Fetching user data from BackPace...");
             _this.http.get(_this.url).subscribe(function (paceUser) {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
@@ -846,17 +859,30 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
+    UserData.prototype.getTeamScores = function (teamId) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/team?facebookId=' + _this.userId + '&token=' + _this.userToken + '&teamId=' + teamId;
+            console.log("Making request to: " + _this.url);
+            _this.http.get(_this.url).subscribe(function (teamMembers) {
+                resolve(teamMembers.json());
+            }, function (error) {
+                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+                console.log(JSON.stringify(error.json()));
+            });
+        });
+    };
     UserData.prototype.getPaceUserData = function () {
         return this.paceUser;
     };
     UserData.prototype.getPaceUserPicture = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var url = _this.paceUser.picture + '&redirect=false';
-            console.log("Making request to", url);
-            _this.http.get(url).subscribe(function (success) {
+            _this.url = _this.paceUser.picture + '&redirect=false';
+            console.log("Making request to", _this.url);
+            _this.http.get(_this.url).subscribe(function (success) {
                 console.log("Success!");
-                resolve(success.data.url);
+                resolve(success);
             }, function (error) {
                 console.log("Error!");
                 reject(error);

@@ -24,8 +24,11 @@ export class DashboardPage {
         });
     }
 
-    goToGroupDetail(group) {
-        this.nav.push(GroupDetailPage, group);
+    goToGroupDetail(team) {
+        console.log("Team ID: " + team.id);
+        this.nav.push(GroupDetailPage, {
+            team: team
+        });
     }
 
     openModal(characterNum) {
@@ -77,6 +80,7 @@ class ModalsContentPage {
         this.userData.joinTeam(teamId).then((success) => {
             console.log(JSON.stringify(success));
             console.log("Joined team!");
+            this.viewCtrl.dismiss();
         }, () => {
             console.log("Joining team failed!")
         });

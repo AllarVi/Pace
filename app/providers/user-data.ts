@@ -40,12 +40,9 @@ export class UserData {
 
     getPaceUser(userID) {
         console.log("UserData: getPaceUser() reached...");
-
-        // Don't have the data yet
         return new Promise(resolve => {
             this.url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
             console.log("Making request to: " + this.url);
-            console.log("Fetching user data from BackPace...");
             this.http.get(this.url).subscribe(paceUser => {
                 console.log("User data from BackPace...");
                 console.log(JSON.stringify(paceUser.json()));
@@ -59,17 +56,30 @@ export class UserData {
         });
     }
 
+    getTeamScores(teamId) {
+        return new Promise(resolve => {
+            this.url = 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
+            console.log("Making request to: " + this.url);
+            this.http.get(this.url).subscribe(teamMembers => {
+                resolve(teamMembers.json())
+            }, error => {
+                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+                console.log(JSON.stringify(error.json()));
+            });
+        });
+    }
+
     getPaceUserData() {
         return this.paceUser;
     }
 
     getPaceUserPicture() {
         return new Promise((resolve, reject) => {
-            var url = this.paceUser.picture + '&redirect=false';
-            console.log("Making request to", url);
-            this.http.get(url).subscribe(success => {
+            this.url = this.paceUser.picture + '&redirect=false';
+            console.log("Making request to", this.url);
+            this.http.get(this.url).subscribe(success => {
                 console.log("Success!");
-                resolve(success.data.url);
+                resolve(success);
             }, error => {
                 console.log("Error!");
                 reject(error);

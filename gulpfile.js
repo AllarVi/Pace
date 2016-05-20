@@ -23,8 +23,7 @@ gulp.task('run:before', [shouldWatch ? 'watch' : 'build']);
  * https://github.com/driftyco/ionic-gulp-tasks
  *
  * Using these will allow you to stay up to date if the default Ionic 2 build
- * changes, but you are of course welcome (and encouraged) to customize your
- * build however you see fit.
+ * changes.
  */
 var buildBrowserify = require('ionic-gulp-browserify-typescript');
 var buildSass = require('ionic-gulp-sass-build');

@@ -10,7 +10,7 @@
     <ion-card *ngFor="#team of shortTeamView">
 
         <ion-card-header>
-            <button ion-item (click)="goToGroupDetail(group)">
+            <button ion-item (click)="goToGroupDetail(team)">
                 <!--<ion-avatar item-left>-->
                     <!--<img src="http://pics.clipartpng.com/Basketball_PNG_Clipart-842.png">-->
                 <!--</ion-avatar>-->
@@ -36,7 +36,7 @@
                 </ion-row>
             </ion-item>
 
-            <ion-item *ngFor="#member of team.shortTableRowMap">
+            <ion-item *ngFor="#member of team.fullScoresTableList">
                 <ion-row>
                     <ion-col width-10>
                         {{member.rank}}
@@ -58,13 +58,6 @@
     </ion-card>
 
     <ion-card>
-        <!--<ion-card-header>-->
-        <!--<button ion-item>-->
-        <!--<ion-icon name="cart" item-left></ion-icon>-->
-        <!--Shopping-->
-        <!--</button>-->
-        <!--</ion-card-header>-->
-
         <ion-card-content>
             <button ion-item (click)="openModal({charNum: 0})">
                 <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>
