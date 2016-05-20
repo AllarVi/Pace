@@ -1,4 +1,4 @@
-import {NavController, Page, NavParams, Modal, Platform, ViewController} from "ionic-angular";
+import {NavController, Page, NavParams, Modal, ViewController} from "ionic-angular";
 import {GroupDetailPage} from "../group-detail/group-detail";
 import {UserData} from "../../providers/user-data";
 
@@ -43,9 +43,7 @@ class ModalsContentPage {
     searchQuery:string = '';
     teams:any;
 
-    constructor(public platform:Platform,
-                public params:NavParams,
-                public viewCtrl:ViewController, private userData:UserData) {
+    constructor(public viewCtrl:ViewController, private userData:UserData) {
 
         this.initializeItems();
 

@@ -29,9 +29,6 @@
         </ion-segment-button>
     </ion-segment>
 
-    <!--   <div padding>
-      </div>  -->
-
     <div [ngSwitch]="tab">
         <ion-list *ngSwitchDefault>
             <!--<ion-list *ngSwitchWhen="'goals'">-->
@@ -51,28 +48,16 @@
 
         <ion-list *ngSwitchWhen="'progress'">
             <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-kitten-1.jpg">-->
-                </ion-thumbnail>
-                <h2>Luna</h2>
+                <h2>Siia</h2>
             </ion-item>
             <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-kitten-3.jpg">-->
-                </ion-thumbnail>
-                <h2>Milo</h2>
+                <h2>tuleb</h2>
             </ion-item>
             <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-kitten-4.jpg">-->
-                </ion-thumbnail>
-                <h2>Bandit</h2>
+                <h2>isiklik</h2>
             </ion-item>
             <ion-item>
-                <ion-thumbnail item-left>
-                    <!--<img src="img/thumbnail-kitten-2.jpg">-->
-                </ion-thumbnail>
-                <h2>Nala</h2>
+                <h2>progress.</h2>
             </ion-item>
         </ion-list>
 
@@ -96,21 +81,9 @@
 
                 <ion-row no-padding>
                     <ion-col>
-                        <button clear small danger>
-                            <ion-icon name='star'></ion-icon>
-                            Favorite
-                        </button>
-                    </ion-col>
-                    <ion-col>
-                        <button clear small danger>
-                            <ion-icon name='edit'></ion-icon>
+                        <button clear small danger (click)="openProfileAchievementsModal({charNum: 0})">
+                            <ion-icon name='create'></ion-icon>
                             Edit
-                        </button>
-                    </ion-col>
-                    <ion-col>
-                        <button clear small danger>
-                            <ion-icon name='share-alt'></ion-icon>
-                            Share
                         </button>
                     </ion-col>
                 </ion-row>

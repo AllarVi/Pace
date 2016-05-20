@@ -94,7 +94,6 @@ export class UserData {
     teams = null;
 
     getGroups() {
-        console.log("UserData: getGroups() reached...");
         return new Promise((resolve, reject) => {
             this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group'
                 + '?facebookId=' + this.userId
@@ -133,7 +132,22 @@ export class UserData {
         });
     }
 
-    uploadImage(fileName, image) {
+    getAllAchievements() {
+        return new Promise((resolve, reject) => {
+            this.url = 'http://' + this.BASE_URL + ':8080/api/profile/goal'
+                + '?facebookId=' + this.userId
+                + '&token=' + this.userToken;
+            console.log("Making request to: " + this.url);
+            this.http.get(this.url).subscribe(goals => {
+                resolve(goals.json());
+            }, error => {
+                console.log("Error occurred in getAllAchievements()");
+                reject(error);
+            });
+        });
+    }
+
+    uploadAchievement(fileName, image) {
         return new Promise((resolve, reject) => {
             this.url = 'http://' + this.BASE_URL + ':8080/api/fileUpload' +
                 '?name=' + fileName +

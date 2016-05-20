@@ -216,9 +216,7 @@ var DashboardPage = (function () {
 }());
 exports.DashboardPage = DashboardPage;
 var ModalsContentPage = (function () {
-    function ModalsContentPage(platform, params, viewCtrl, userData) {
-        this.platform = platform;
-        this.params = params;
+    function ModalsContentPage(viewCtrl, userData) {
         this.viewCtrl = viewCtrl;
         this.userData = userData;
         this.searchQuery = '';
@@ -258,7 +256,7 @@ var ModalsContentPage = (function () {
         ionic_angular_1.Page({
             templateUrl: './build/pages/dashboard-group-add/dashboard-group-add.html'
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.Platform, ionic_angular_1.NavParams, ionic_angular_1.ViewController, user_data_1.UserData])
+        __metadata('design:paramtypes', [ionic_angular_1.ViewController, user_data_1.UserData])
     ], ModalsContentPage);
     return ModalsContentPage;
 }());
@@ -452,14 +450,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var ionic_angular_1 = require("ionic-angular");
 var core_1 = require("angular2/core");
-var ionic_native_1 = require('ionic-native');
+var ionic_native_1 = require("ionic-native");
 var user_data_1 = require("../../providers/user-data");
 var ProfilePage = (function () {
-    function ProfilePage(ngZone, nav, navParams, userData) {
+    function ProfilePage(ngZone, nav, userData) {
         var _this = this;
         this.ngZone = ngZone;
         this.nav = nav;
-        this.navParams = navParams;
         this.userData = userData;
         this.paceUserData = null;
         this.profileAvatar = null;
@@ -471,7 +468,11 @@ var ProfilePage = (function () {
         });
     }
     ProfilePage.prototype.openModal = function (characterNum) {
-        var modal = ionic_angular_1.Modal.create(ModalsContentPage, characterNum);
+        var modal = ionic_angular_1.Modal.create(ProfileGoalsModal, characterNum);
+        this.nav.present(modal);
+    };
+    ProfilePage.prototype.openProfileAchievementsModal = function (characterNum) {
+        var modal = ionic_angular_1.Modal.create(ProfileAchievementsModal, characterNum);
         this.nav.present(modal);
     };
     ProfilePage.prototype.snapImage = function () {
@@ -486,7 +487,7 @@ var ProfilePage = (function () {
         };
         ionic_native_1.Camera.getPicture(options).then(function (data) {
             var imgData = "data:image/jpeg;base64," + data;
-            _this.userData.uploadImage("test", _this.image).then(function (success) {
+            _this.userData.uploadAchievement("test", _this.image).then(function (success) {
                 console.log(JSON.stringify(success));
                 console.log("File upload finished...");
             }, function () {
@@ -496,37 +497,18 @@ var ProfilePage = (function () {
         }, function (error) {
             alert(error);
         });
-        // var options = {
-        //     limit: 3,
-        //     duration: 15
-        // };
-        // navigator.device.capture.captureVideo((mediaFiles) => {
-        //   // var imgData = "data:image/jpeg;base64," + data;
-        //   this.ngZone.run(() => {
-        //     var i, path, len;
-        //     for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-        //       path = mediaFiles[i].fullPath;
-        //     }
-        //
-        //     this.image = path;
-        //   });
-        // }, (error) => {
-        //   console.log("Error occurred while taking an image!");
-        //   console.log(error);
-        // }, options);
     };
     ProfilePage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/profile/profile.html'
         }), 
-        __metadata('design:paramtypes', [core_1.NgZone, ionic_angular_1.NavController, ionic_angular_1.NavParams, user_data_1.UserData])
+        __metadata('design:paramtypes', [core_1.NgZone, ionic_angular_1.NavController, user_data_1.UserData])
     ], ProfilePage);
     return ProfilePage;
 }());
 exports.ProfilePage = ProfilePage;
-var ModalsContentPage = (function () {
-    function ModalsContentPage(platform, params, viewCtrl) {
-        this.platform = platform;
+var ProfileGoalsModal = (function () {
+    function ProfileGoalsModal(params, viewCtrl) {
         this.params = params;
         this.viewCtrl = viewCtrl;
         this.characters = [
@@ -560,16 +542,42 @@ var ModalsContentPage = (function () {
         ];
         this.character = this.characters[this.params.get('charNum')];
     }
-    ModalsContentPage.prototype.dismiss = function () {
+    ProfileGoalsModal.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
-    ModalsContentPage = __decorate([
+    ProfileGoalsModal = __decorate([
         ionic_angular_1.Page({
             templateUrl: './build/pages/profile-goals-modal/profile-goals-modal.html'
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.Platform, ionic_angular_1.NavParams, ionic_angular_1.ViewController])
-    ], ModalsContentPage);
-    return ModalsContentPage;
+        __metadata('design:paramtypes', [ionic_angular_1.NavParams, ionic_angular_1.ViewController])
+    ], ProfileGoalsModal);
+    return ProfileGoalsModal;
+}());
+var ProfileAchievementsModal = (function () {
+    function ProfileAchievementsModal(userData, viewCtrl) {
+        this.userData = userData;
+        this.viewCtrl = viewCtrl;
+        this.arrayOfKeys = null;
+        this.arrayOfValues = null;
+        this.initAchievements();
+    }
+    ProfileAchievementsModal.prototype.initAchievements = function () {
+        var _this = this;
+        this.userData.getAllAchievements().then(function (achievements) {
+            _this.arrayOfKeys = Object.keys(achievements);
+            _this.arrayOfValues = Object.keys(achievements).map(function (key) { return achievements[key]; });
+        });
+    };
+    ProfileAchievementsModal.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    ProfileAchievementsModal = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: './build/pages/profile-achievements-modal/profile-achievements-modal.html'
+        }), 
+        __metadata('design:paramtypes', [user_data_1.UserData, ionic_angular_1.ViewController])
+    ], ProfileAchievementsModal);
+    return ProfileAchievementsModal;
 }());
 
 },{"../../providers/user-data":9,"angular2/core":12,"ionic-angular":344,"ionic-native":366}],7:[function(require,module,exports){
@@ -848,7 +856,6 @@ var UserData = (function () {
     };
     UserData.prototype.getGroups = function () {
         var _this = this;
-        console.log("UserData: getGroups() reached...");
         return new Promise(function (resolve, reject) {
             _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard/join_group'
                 + '?facebookId=' + _this.userId
@@ -882,7 +889,22 @@ var UserData = (function () {
             }, function () { return console.log('Joining team complete!'); });
         });
     };
-    UserData.prototype.uploadImage = function (fileName, image) {
+    UserData.prototype.getAllAchievements = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/profile/goal'
+                + '?facebookId=' + _this.userId
+                + '&token=' + _this.userToken;
+            console.log("Making request to: " + _this.url);
+            _this.http.get(_this.url).subscribe(function (goals) {
+                resolve(goals.json());
+            }, function (error) {
+                console.log("Error occurred in getAllAchievements()");
+                reject(error);
+            });
+        });
+    };
+    UserData.prototype.uploadAchievement = function (fileName, image) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.url = 'http://' + _this.BASE_URL + ':8080/api/fileUpload' +
