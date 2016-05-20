@@ -7,7 +7,12 @@ import "rxjs/add/operator/map";
 export class UserData {
 
     // BASE_URL = 'localhost';
-    BASE_URL = '10.224.4.183';
+
+    // TTU
+    // BASE_URL = '10.224.4.183';
+
+    // Viinamae
+    BASE_URL = '192.168.0.101';
 
     constructor(private events:Events, private http:Http) {
     }

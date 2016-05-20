@@ -802,7 +802,10 @@ var UserData = (function () {
         this.events = events;
         this.http = http;
         // BASE_URL = 'localhost';
-        this.BASE_URL = '10.224.4.183';
+        // TTU
+        // BASE_URL = '10.224.4.183';
+        // Viinamae
+        this.BASE_URL = '192.168.0.101';
         this._favorites = [];
         this.storage = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.HAS_LOGGED_IN = 'hasLoggedIn';

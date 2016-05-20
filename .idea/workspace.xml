@@ -2,143 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/img/olympic_rings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/img/team_cover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/android-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/android-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/blackberry-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/blackberry-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/browser-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/browser-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/firefox-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/firefox-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/fireos-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/fireos-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ios-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ios-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ubuntu-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/ubuntu-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/windows-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/windows-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/wp8-fail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/img/wp8-success.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/shoot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-middle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/toolbar-right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/es6-shim/test/.eslintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/Camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/dashboard-group-add/dashboard-group-add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/Camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/browser/www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVCamera.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVCamera.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVExif.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVJpegHeaderWriter.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/CDVJpegHeaderWriter.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/UIImage+CropScaleOrientation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/Pace/Plugins/cordova-plugin-camera/UIImage+CropScaleOrientation.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/frameworks.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/Camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/Camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/CameraConstants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/platforms/ios/www/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/NOTICE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/RELEASENOTES.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/android/android.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/helpers/cameraHelper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/appium-tests/ios/ios.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/de/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/de/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/es/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/es/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/fr/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/fr/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/it/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/it/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ja/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ja/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ko/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ko/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/pl/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/pl/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/ru/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/zh/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/doc/zh/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/jsdoc2md/TEMPLATE.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/CameraLauncher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/ExifHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/android/FileHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/blackberry10/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/browser/CameraProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/firefoxos/CameraProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVCamera.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVCamera.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVExif.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVJpegHeaderWriter.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/CDVJpegHeaderWriter.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/UIImage+CropScaleOrientation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ios/UIImage+CropScaleOrientation.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/CaptureWidget.qml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/camera.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/ubuntu/camera.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/windows/CameraProxy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/src/wp/Camera.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/contents.xcworkspacedata" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/xcshareddata/CDVCameraTest.xccheckout" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest.xcworkspace/xcshareddata/xcschemes/CordovaLib.xcscheme" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraLibTests/CameraTest.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraLibTests/Info.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.pbxproj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.xcworkspace/contents.xcworkspacedata" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/project.xcworkspace/xcshareddata/CDVCameraTest.xccheckout" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/xcshareddata/xcschemes/CDVCameraLib.xcscheme" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/CDVCameraTest/CDVCameraTest.xcodeproj/xcshareddata/xcschemes/CDVCameraLibTests.xcscheme" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/de/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/es/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/fr/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/it/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/ja/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/ko/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/pl/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/doc/zh/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/ios/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/tests.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/Camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraConstants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraPopoverHandle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/CameraPopoverOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/blackberry10/assets/camera.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/blackberry10/assets/camera.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/dashboard-group-add/dashboard-group-add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/profile-achievements-modal/profile-achievements-modal.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/build/pages/profile-goals-modal/profile-goals-modal.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" afterPath="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.ts" afterPath="$PROJECT_DIR$/app/pages/profile/profile.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/profile/profile.html" afterPath="$PROJECT_DIR$/app/pages/profile/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.ts" afterPath="$PROJECT_DIR$/app/providers/user-data.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/profile/profile.html" afterPath="$PROJECT_DIR$/www/build/pages/profile/profile.html" />
     </list>
     <ignored path="pacewayer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -167,11 +37,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user-data.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user-data.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="345">
+              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -179,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="profile.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+            <state relative-caret-position="229">
+              <caret line="123" column="46" selection-start-line="123" selection-start-column="46" selection-end-line="123" selection-end-column="46" />
               <folding>
                 <element signature="e#0#91#0" expanded="true" />
               </folding>
@@ -194,8 +64,8 @@
       <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
+            <state relative-caret-position="300">
+              <caret line="76" column="23" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -204,12 +74,9 @@
       <file leaf-file-name="profile-achievements-modal.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <marker date="1463739390000" expanded="true" signature="332:704" placeholder="..." />
-                <marker date="1463739390000" expanded="true" signature="347:689" placeholder="..." />
-              </folding>
+            <state relative-caret-position="180">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -293,11 +160,11 @@
         <option value="$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.html" />
         <option value="$PROJECT_DIR$/app/pages/dashboard/dashboard.html" />
         <option value="$PROJECT_DIR$/app/pages/dashboard-group-add/dashboard-group-add.html" />
-        <option value="$PROJECT_DIR$/app/providers/user-data.ts" />
-        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
         <option value="$PROJECT_DIR$/app/pages/dashboard/dashboard.ts" />
         <option value="$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html" />
         <option value="$PROJECT_DIR$/app/pages/profile/profile.ts" />
+        <option value="$PROJECT_DIR$/app/pages/profile/profile.html" />
+        <option value="$PROJECT_DIR$/app/providers/user-data.ts" />
       </list>
     </option>
   </component>
@@ -314,9 +181,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1920" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="773" />
+    <option name="width" value="1920" />
+    <option name="height" value="1177" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1166,7 +1034,7 @@
       <workItem from="1463490661928" duration="8061000" />
       <workItem from="1463556452955" duration="4375000" />
       <workItem from="1463642499108" duration="13587000" />
-      <workItem from="1463723914244" duration="6484000" />
+      <workItem from="1463723914244" duration="10374000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -1392,14 +1260,21 @@
       <option name="project" value="LOCAL" />
       <updated>1463728783825</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="feat(profile-achievements-modal): Added alert when user tries to select achievement">
+      <created>1463739553450</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1463739553450</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="280981000" />
+    <option name="totallyTimeSpent" value="284871000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="0" />
+    <frame x="-1920" y="23" width="1920" height="1177" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1411,11 +1286,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33627018" sideWeight="0.503231" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33627018" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21105991" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22778675" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15015975" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27948305" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32452276" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1443,7 +1318,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Some code cleanup" />
     <MESSAGE value="Working on Facebook authentication. Today managed to get getLoginStatus() working." />
     <MESSAGE value="Facebook-auth diary: Communication with backend services now work." />
     <MESSAGE value="Facebook-auth diary: Initial navigation now works based on login status from Facebook" />
@@ -1468,7 +1342,8 @@
     <MESSAGE value="feat(profile): Working on adding achievements" />
     <MESSAGE value="feat(profile): Working on showing profile avatar" />
     <MESSAGE value="feat(profile-achievements-modal): User can now see all available achievements when editing already achieved one" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(profile-achievements-modal): User can now see all available achievements when editing already achieved one" />
+    <MESSAGE value="feat(profile-achievements-modal): Added alert when user tries to select achievement" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(profile-achievements-modal): Added alert when user tries to select achievement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1780,16 +1655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile-goals-modal/profile-goals-modal.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -1826,29 +1691,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
+        <state relative-caret-position="300">
+          <caret line="76" column="23" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <marker date="1463739390000" expanded="true" signature="332:704" placeholder="..." />
-            <marker date="1463739390000" expanded="true" signature="347:689" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/profile/profile.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+        <state relative-caret-position="229">
+          <caret line="123" column="46" selection-start-line="123" selection-start-column="46" selection-end-line="123" selection-end-column="46" />
           <folding>
             <element signature="e#0#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pages/profile-achievements-modal/profile-achievements-modal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/providers/user-data.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
