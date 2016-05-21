@@ -16,7 +16,11 @@ export class GroupDetailPage {
 
     teamName = null;
 
+    currentDate = null;
+
     constructor(private navParams:NavParams, private userData:UserData) {
+
+        this.currentDate = new Date();
 
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;

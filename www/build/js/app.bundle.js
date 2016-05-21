@@ -289,6 +289,7 @@ var GroupDetailPage = (function () {
         this.team = null;
         this.teamMembers = null;
         this.teamName = null;
+        this.currentDate = null;
         // lineChart
         this.lineChartData = [
             [65, 59, 80, 81, 56, 55, 40],
@@ -304,6 +305,7 @@ var GroupDetailPage = (function () {
         this.lineChartLegend = true;
         this.lineChartType = 'Line';
         this.group = this.navParams.data;
+        this.currentDate = new Date();
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
         this.userData.getTeamScores(this.team.id).then(function (teamMembers) {

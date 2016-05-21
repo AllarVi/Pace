@@ -1,5 +1,5 @@
 <ion-navbar *navbar>
-  <ion-title>{{teamName}}</ion-title>
+    <ion-title>{{teamName}}</ion-title>
 </ion-navbar>
 
 <!--<ion-toolbar>-->
@@ -9,83 +9,100 @@
 <!--</ion-toolbar>-->
 
 <ion-content padding>
-  <img src="img/team_cover.png"/>
+    <img src="img/team_cover.png"/>
 
-  <ion-segment padding [(ngModel)]="groupTab" class="groupTab">
-    <ion-segment-button clear small danger value="scores">
-      <ion-icon name='star'></ion-icon>
-      Scores
-    </ion-segment-button>
-    <ion-segment-button clear small danger value="members">
-      <ion-icon name='star'></ion-icon>
-      Members
-    </ion-segment-button>
-    <ion-segment-button clear small danger value="velocity">
-      <ion-icon name='star'></ion-icon>
-      Velocity
-    </ion-segment-button>
-  </ion-segment>
+    <ion-segment padding [(ngModel)]="groupTab" class="groupTab">
+        <ion-segment-button clear small danger value="scores">
+            <ion-icon name='star'></ion-icon>
+            Scores
+        </ion-segment-button>
+        <ion-segment-button clear small danger value="members">
+            <ion-icon name='star'></ion-icon>
+            Members
+        </ion-segment-button>
+        <ion-segment-button clear small danger value="velocity">
+            <ion-icon name='star'></ion-icon>
+            Velocity
+        </ion-segment-button>
+    </ion-segment>
 
-  <div [ngSwitch]="groupTab">
-    <ion-list *ngSwitchDefault>
-      <ion-item class="leaderboard-header">
-        <ion-row>
-          <ion-col width-10>
-            <p>Rk</p>
-          </ion-col>
-          <ion-col width-40>
-            <p>Name</p>
-          </ion-col>
-          <ion-col width-20>
-            <p>Tier</p>
-          </ion-col>
-          <ion-col width-20>
-            <p>Points</p>
-          </ion-col>
-        </ion-row>
-      </ion-item>
+    <div [ngSwitch]="groupTab">
+        <ion-list *ngSwitchDefault>
+            <ion-item class="leaderboard-header">
+                <ion-row>
+                    <ion-col width-10>
+                        <p>Rk</p>
+                    </ion-col>
+                    <ion-col width-40>
+                        <p>Name</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Tier</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Points</p>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
 
-      <ion-item *ngFor="#member of teamMembers">
-        <ion-row>
-          <ion-col width-10>
-            {{member.rank}}
-          </ion-col>
-          <ion-col width-50>
-            {{member.userName}}
-          </ion-col>
-          <ion-col width-20>
-            <ion-icon name="trophy"></ion-icon>
-          </ion-col>
-          <ion-col width-20>
-            {{member.points}}
-          </ion-col>
-        </ion-row>
-      </ion-item>
+            <ion-item *ngFor="#member of teamMembers">
+                <ion-row>
+                    <ion-col width-10>
+                        {{member.rank}}
+                    </ion-col>
+                    <ion-col width-50>
+                        {{member.userName}}
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        {{member.points}}
+                    </ion-col>
+                </ion-row>
+            </ion-item>
 
-    </ion-list>
-    <ion-list *ngSwitchWhen="'members'"></ion-list>
-    <ion-list *ngSwitchWhen="'velocity'">
-      <ion-card>
-        <ion-card-header>
-          Achievements
-        </ion-card-header>
+        </ion-list>
 
-        <ion-card-content>
-          <div class="chart-container">
-            <base-chart class="chart"
-                        [data]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [series]="lineChartSeries"
-                        [colours]="lineChartColours"
-                        [legend]="lineChartLegend"
-                        [chartType]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></base-chart>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-list>
-  </div>
+        <ion-list *ngSwitchWhen="'members'">
+
+            <ion-list-header>
+                {{ currentDate | date:'mediumDate' }}
+            </ion-list-header>
+
+            <ion-item *ngFor="#member of teamMembers">
+                {{member.userName}}
+                <button outline secondary item-right>
+                    Present
+                </button>
+                <button outline danger item-right>
+                    Absent
+                </button>
+            </ion-item>
+
+        </ion-list>
+        <ion-list *ngSwitchWhen="'velocity'">
+            <ion-card>
+                <ion-card-header>
+                    Achievements
+                </ion-card-header>
+
+                <ion-card-content>
+                    <div class="chart-container">
+                        <base-chart class="chart"
+                                    [data]="lineChartData"
+                                    [labels]="lineChartLabels"
+                                    [options]="lineChartOptions"
+                                    [series]="lineChartSeries"
+                                    [colours]="lineChartColours"
+                                    [legend]="lineChartLegend"
+                                    [chartType]="lineChartType"
+                                    (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></base-chart>
+                    </div>
+                </ion-card-content>
+            </ion-card>
+        </ion-list>
+    </div>
 
 </ion-content>
