@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+    <list default="true" id="d6cce803-ddba-41b2-a203-faa1b2889b8f" name="Default" comment="fix(team): Marking attendance and attendance line chart now work">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/platforms/ios/Pace.xcodeproj/project.xcworkspace/xcuserdata/allarviinamae.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/group-detail/group-detail.html" afterPath="$PROJECT_DIR$/app/pages/group-detail/group-detail.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/pages/group-detail/group-detail.ts" afterPath="$PROJECT_DIR$/app/pages/group-detail/group-detail.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/providers/user-data.ts" afterPath="$PROJECT_DIR$/app/providers/user-data.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" afterPath="$PROJECT_DIR$/www/build/js/app.bundle.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/build/pages/group-detail/group-detail.html" afterPath="$PROJECT_DIR$/www/build/pages/group-detail/group-detail.html" />
@@ -85,8 +84,8 @@
       <file leaf-file-name="group-detail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
+            <state relative-caret-position="495">
+              <caret line="72" column="54" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -95,8 +94,8 @@
       <file leaf-file-name="group-detail.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="49" column="15" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+            <state relative-caret-position="453">
+              <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -207,7 +206,7 @@
     <option name="x" value="-1920" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
-    <option name="height" value="1173" />
+    <option name="height" value="1177" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1134,7 +1133,7 @@
       <workItem from="1463556452955" duration="4375000" />
       <workItem from="1463642499108" duration="13587000" />
       <workItem from="1463723914244" duration="19408000" />
-      <workItem from="1463863633931" duration="13661000" />
+      <workItem from="1463863633931" duration="16125000" />
     </task>
     <task id="LOCAL-00001" summary="Working on dashboard tab">
       <created>1459895533429</created>
@@ -1395,14 +1394,21 @@
       <option name="project" value="LOCAL" />
       <updated>1463909110016</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix(team): Marking attendance and attendance line chart now work">
+      <created>1463919513001</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1463919513001</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307566000" />
+    <option name="totallyTimeSpent" value="310030000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1173" extended-state="6" />
+    <frame x="-1920" y="23" width="1920" height="1177" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1414,7 +1420,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33627018" sideWeight="0.503231" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21184088" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21105991" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32599118" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1446,7 +1452,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Facebook-auth diary: Small fix with logging out" />
     <MESSAGE value="Facebook-auth diary: Logging out should now always work as expected" />
     <MESSAGE value="Facebook-auth diary: No big changes" />
     <MESSAGE value="Facebook-auth diary: Visual changes on Login page" />
@@ -1471,7 +1476,8 @@
     <MESSAGE value="feat(team): Teams scores view is now being populated accordingly, also small fixes here and there" />
     <MESSAGE value="feat(team): View for present and absent group members" />
     <MESSAGE value="feat(team): Added attendance chart for teams" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(team): Added attendance chart for teams" />
+    <MESSAGE value="fix(team): Marking attendance and attendance line chart now work" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(team): Marking attendance and attendance line chart now work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1835,8 +1841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="49" column="15" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+        <state relative-caret-position="453">
+          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
@@ -1845,8 +1851,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pages/group-detail/group-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
+        <state relative-caret-position="495">
+          <caret line="72" column="54" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
           <folding />
         </state>
       </provider>

@@ -23,7 +23,7 @@ export class GroupDetailPage {
     attenChartLabels = null;
     maleAttendees = null;
     femaleAttendees = null;
-    
+
     attenChartData = null;
 
     constructor(private navParams:NavParams, private userData:UserData) {
@@ -48,7 +48,7 @@ export class GroupDetailPage {
             this.femaleAttendees = this.currentMonthAttendance.map((element) => {
                 return element.femaleAttendees;
             });
-            
+
             this.attenChartData = [this.maleAttendees, this.femaleAttendees];
 
         });
@@ -56,10 +56,18 @@ export class GroupDetailPage {
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
     }
 
-    markPresent() {
+    markPresent(member) {
         this.userData.markAttendance(this.team.id, "present", this.currentDate.getDate()).then(() => {
             console.log("Marked as present!");
-        })
+        });
+
+        var index = this.teamMembers.indexOf(member);
+        this.teamMembers.splice(index, 1);
+    }
+
+    markAbsent(member) {
+        var index = this.teamMembers.indexOf(member);
+        this.teamMembers.splice(index, 1);
     }
 
     // color stuff

@@ -334,10 +334,16 @@ var GroupDetailPage = (function () {
         });
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
     }
-    GroupDetailPage.prototype.markPresent = function () {
+    GroupDetailPage.prototype.markPresent = function (member) {
         this.userData.markAttendance(this.team.id, "present", this.currentDate.getDate()).then(function () {
             console.log("Marked as present!");
         });
+        var index = this.teamMembers.indexOf(member);
+        this.teamMembers.splice(index, 1);
+    };
+    GroupDetailPage.prototype.markAbsent = function (member) {
+        var index = this.teamMembers.indexOf(member);
+        this.teamMembers.splice(index, 1);
     };
     // color stuff
     GroupDetailPage.prototype.rgba = function (colour, alpha) {

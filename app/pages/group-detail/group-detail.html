@@ -72,10 +72,10 @@
 
             <ion-item *ngFor="#member of teamMembers">
                 {{member.userName}}
-                <button outline secondary item-right (click)="markPresent()">
+                <button outline secondary item-right (click)="markPresent(member)">
                     Present
                 </button>
-                <button outline danger item-right (click)="markAbsent()">
+                <button outline danger item-right (click)="markAbsent(member)">
                     Absent
                 </button>
             </ion-item>
