@@ -56,7 +56,7 @@ export class UserData {
         });
     }
 
-    getTeamScores(teamId) {
+    getTeamData(teamId) {
         return new Promise(resolve => {
             this.url = 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
             console.log("Making request to: " + this.url);
@@ -144,6 +144,24 @@ export class UserData {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
                 reject();
             }, () => console.log('Joining team complete!'));
+        });
+    }
+
+    markAttendance(teamId, attendance, date) {
+        return new Promise((resolve, reject) => {
+            this.url = 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' +
+                this.userToken + '&teamId=' + teamId + '&attendance=' + attendance + '&date=' + date;
+            console.log("Making request to: " + this.url);
+
+            this.groupData = JSON.stringify({});
+
+            this.http.post(this.url, this.groupData).subscribe(success => {
+                console.log("Attendance marked...");
+                resolve(success);
+            }, () => {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, () => console.log('Marking attendance complete!'));
         });
     }
 

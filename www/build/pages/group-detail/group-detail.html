@@ -72,10 +72,10 @@
 
             <ion-item *ngFor="#member of teamMembers">
                 {{member.userName}}
-                <button outline secondary item-right>
+                <button outline secondary item-right (click)="markPresent()">
                     Present
                 </button>
-                <button outline danger item-right>
+                <button outline danger item-right (click)="markAbsent()">
                     Absent
                 </button>
             </ion-item>
@@ -111,8 +111,8 @@
                 <ion-card-content>
                     <div class="chart-container">
                         <base-chart class="chart"
-                                    [data]="attendanceChartData"
-                                    [labels]="attendanceChartLabels"
+                                    [data]="attenChartData"
+                                    [labels]="attenChartLabels"
                                     [options]="lineChartOptions"
                                     [series]="attendanceChartSeries"
                                     [colours]="lineChartColours"

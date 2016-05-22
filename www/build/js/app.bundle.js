@@ -290,6 +290,11 @@ var GroupDetailPage = (function () {
         this.teamMembers = null;
         this.teamName = null;
         this.currentDate = null;
+        this.currentMonthAttendance = null;
+        this.attenChartLabels = null;
+        this.maleAttendees = null;
+        this.femaleAttendees = null;
+        this.attenChartData = null;
         // lineChart
         this.lineChartData = [
             [65, 59, 80, 81, 56, 55, 40],
@@ -306,19 +311,34 @@ var GroupDetailPage = (function () {
         this.lineChartType = 'Line';
         //    Attendance chart
         this.attendanceChartData = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
+            [65, 59, 80],
+            [28, 48, 40]
         ];
-        this.attendanceChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
         this.attendanceChartSeries = ['Men', 'Women'];
         this.currentDate = new Date();
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
-        this.userData.getTeamScores(this.team.id).then(function (teamMembers) {
-            _this.teamMembers = teamMembers;
+        this.userData.getTeamData(this.team.id).then(function (teamData) {
+            _this.teamMembers = teamData['fullScoresTableList'];
+            _this.currentMonthAttendance = teamData['currentMonthAttendance'];
+            _this.attenChartLabels = _this.currentMonthAttendance.map(function (element) {
+                return element.date;
+            });
+            _this.maleAttendees = _this.currentMonthAttendance.map(function (element) {
+                return element.maleAttendees;
+            });
+            _this.femaleAttendees = _this.currentMonthAttendance.map(function (element) {
+                return element.femaleAttendees;
+            });
+            _this.attenChartData = [_this.maleAttendees, _this.femaleAttendees];
         });
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
     }
+    GroupDetailPage.prototype.markPresent = function () {
+        this.userData.markAttendance(this.team.id, "present", this.currentDate.getDate()).then(function () {
+            console.log("Marked as present!");
+        });
+    };
     // color stuff
     GroupDetailPage.prototype.rgba = function (colour, alpha) {
         return 'rgba(' + colour.concat(alpha).join(',') + ')';
@@ -875,7 +895,7 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
-    UserData.prototype.getTeamScores = function (teamId) {
+    UserData.prototype.getTeamData = function (teamId) {
         var _this = this;
         return new Promise(function (resolve) {
             _this.url = 'http://' + _this.BASE_URL + ':8080/api/team?facebookId=' + _this.userId + '&token=' + _this.userToken + '&teamId=' + teamId;
@@ -954,6 +974,22 @@ var UserData = (function () {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
                 reject();
             }, function () { return console.log('Joining team complete!'); });
+        });
+    };
+    UserData.prototype.markAttendance = function (teamId, attendance, date) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.url = 'http://' + _this.BASE_URL + ':8080/api/team?facebookId=' + _this.userId + '&token=' +
+                _this.userToken + '&teamId=' + teamId + '&attendance=' + attendance + '&date=' + date;
+            console.log("Making request to: " + _this.url);
+            _this.groupData = JSON.stringify({});
+            _this.http.post(_this.url, _this.groupData).subscribe(function (success) {
+                console.log("Attendance marked...");
+                resolve(success);
+            }, function () {
+                console.log("Error... is backend running? probably need to enable cors mapping?");
+                reject();
+            }, function () { return console.log('Marking attendance complete!'); });
         });
     };
     UserData.prototype.getAllAchievements = function () {

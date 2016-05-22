@@ -18,6 +18,14 @@ export class GroupDetailPage {
 
     currentDate = null;
 
+    currentMonthAttendance = null;
+
+    attenChartLabels = null;
+    maleAttendees = null;
+    femaleAttendees = null;
+    
+    attenChartData = null;
+
     constructor(private navParams:NavParams, private userData:UserData) {
 
         this.currentDate = new Date();
@@ -25,11 +33,33 @@ export class GroupDetailPage {
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
 
-        this.userData.getTeamScores(this.team.id).then((teamMembers) => {
-            this.teamMembers = teamMembers;
+        this.userData.getTeamData(this.team.id).then((teamData) => {
+            this.teamMembers = teamData['fullScoresTableList'];
+            this.currentMonthAttendance = teamData['currentMonthAttendance'];
+
+            this.attenChartLabels = this.currentMonthAttendance.map((element) => {
+                return element.date;
+            });
+
+            this.maleAttendees = this.currentMonthAttendance.map((element) => {
+                return element.maleAttendees;
+            });
+
+            this.femaleAttendees = this.currentMonthAttendance.map((element) => {
+                return element.femaleAttendees;
+            });
+            
+            this.attenChartData = [this.maleAttendees, this.femaleAttendees];
+
         });
 
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
+    }
+
+    markPresent() {
+        this.userData.markAttendance(this.team.id, "present", this.currentDate.getDate()).then(() => {
+            console.log("Marked as present!");
+        })
     }
 
     // color stuff
@@ -114,10 +144,9 @@ export class GroupDetailPage {
 
 //    Attendance chart
     private attendanceChartData:Array<any> = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
+        [65, 59, 80],
+        [28, 48, 40]
     ];
-    private attendanceChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     private attendanceChartSeries:Array<any> = ['Men', 'Women'];
 
     // events
