@@ -102,6 +102,27 @@
                     </div>
                 </ion-card-content>
             </ion-card>
+
+            <ion-card>
+                <ion-card-header>
+                    Attendance
+                </ion-card-header>
+
+                <ion-card-content>
+                    <div class="chart-container">
+                        <base-chart class="chart"
+                                    [data]="attendanceChartData"
+                                    [labels]="attendanceChartLabels"
+                                    [options]="lineChartOptions"
+                                    [series]="attendanceChartSeries"
+                                    [colours]="lineChartColours"
+                                    [legend]="lineChartLegend"
+                                    [chartType]="lineChartType"
+                                    (chartHover)="attendanceChartHovered($event)"
+                                    (chartClick)="attendanceChartClicked($event)"></base-chart>
+                    </div>
+                </ion-card-content>
+            </ion-card>
         </ion-list>
     </div>
 

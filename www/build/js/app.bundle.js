@@ -304,7 +304,13 @@ var GroupDetailPage = (function () {
         };
         this.lineChartLegend = true;
         this.lineChartType = 'Line';
-        this.group = this.navParams.data;
+        //    Attendance chart
+        this.attendanceChartData = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+        ];
+        this.attendanceChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        this.attendanceChartSeries = ['Men', 'Women'];
         this.currentDate = new Date();
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
@@ -313,6 +319,7 @@ var GroupDetailPage = (function () {
         });
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
     }
+    // color stuff
     GroupDetailPage.prototype.rgba = function (colour, alpha) {
         return 'rgba(' + colour.concat(alpha).join(',') + ')';
     };
@@ -360,6 +367,13 @@ var GroupDetailPage = (function () {
         console.log(e);
     };
     GroupDetailPage.prototype.chartHovered = function (e) {
+        console.log(e);
+    };
+    // events
+    GroupDetailPage.prototype.attendanceChartClicked = function (e) {
+        console.log(e);
+    };
+    GroupDetailPage.prototype.attendancechartHovered = function (e) {
         console.log(e);
     };
     GroupDetailPage = __decorate([

@@ -32,6 +32,7 @@ export class GroupDetailPage {
         this.lineChartColours = this.getColours(['#FF9800', '#49cd97', '#ef2e0a']);
     }
 
+    // color stuff
     rgba(colour, alpha) {
         return 'rgba(' + colour.concat(alpha).join(',') + ')';
     }
@@ -111,5 +112,21 @@ export class GroupDetailPage {
         console.log(e);
     }
 
-    group = this.navParams.data;
+//    Attendance chart
+    private attendanceChartData:Array<any> = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
+    private attendanceChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    private attendanceChartSeries:Array<any> = ['Men', 'Women'];
+
+    // events
+    attendanceChartClicked(e:any) {
+        console.log(e);
+    }
+
+    attendancechartHovered(e:any) {
+        console.log(e);
+    }
+
 }
