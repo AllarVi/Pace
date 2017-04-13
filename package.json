@@ -19,6 +19,7 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "@angular/language-service": "^4.0.2",
     "del": "2.2.0",
     "gulp": "3.9.1",
     "gulp-tsc": "^1.1.5",

@@ -9,12 +9,11 @@ import {DashboardPage} from "../dashboard/dashboard";
 })
 export class LoginPage {
 
-    constructor(private nav:NavController, private menu:MenuController, private userData:UserData, platform:Platform, private fb:FbProvider) {
+    constructor(private nav: NavController, private menu: MenuController, private userData: UserData, platform: Platform, private fbProvider: FbProvider) {
     }
 
     email = '';
     name = '';
-
 
     login = {};
     submitted = false;
@@ -39,11 +38,13 @@ export class LoginPage {
 
     fbLogin() {
         console.log("Facebook login initialized...");
-        this.fb.login().then(() => {
+        this.fbProvider.login().then(() => {
             this.userData.login();
             console.log("Navigating to home...");
             // this.nav.push(DashboardPage);
-            this.nav.setRoot(DashboardPage);
+            this.nav.setRoot(DashboardPage).then((result) => {
+                console.log("fbLogin:setRoot:Dashboard", result);
+            });
         });
     }
 

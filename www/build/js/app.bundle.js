@@ -60,12 +60,16 @@ var PaceApp = (function () {
                     console.log("Navigating to Dashboard Page");
                     _this.nav.setRoot(dashboard_1.DashboardPage, {
                         param1: shortTeamView
+                    }).then(function (result) {
+                        _this.logSetRootFailed(result);
                     });
                 });
             }
             else {
                 console.log("Navigating to Login Page...");
-                _this.nav.setRoot(login_1.LoginPage);
+                _this.nav.setRoot(login_1.LoginPage).then(function (result) {
+                    _this.logSetRootFailed(result);
+                });
             }
         });
     }
@@ -124,10 +128,17 @@ var PaceApp = (function () {
         var _this = this;
         this.events.subscribe('user:login', function () {
             _this.loggedIn = true;
+            _this.nav.setRoot(dashboard_1.DashboardPage, {}).then(function (result) {
+                _this.logSetRootFailed(result);
+            });
         });
         this.events.subscribe('user:logout', function () {
             _this.loggedIn = false;
         });
+    };
+    PaceApp.prototype.logSetRootFailed = function (result) {
+        if (!result)
+            console.log("Failed to set root navigation", result);
     };
     __decorate([
         core_1.ViewChild(ionic_angular_1.Nav), 
@@ -194,8 +205,7 @@ var DashboardPage = (function () {
     DashboardPage.prototype.initDashboard = function () {
         var _this = this;
         this.userData.getUserShortTeamView().then(function (shortTeamView) {
-            console.log(JSON.stringify(shortTeamView));
-            console.log("Done loading shortTeamView!");
+            console.log("Done loading shortTeamView!", shortTeamView);
             _this.shortTeamView = shortTeamView;
         });
     };
@@ -430,11 +440,11 @@ var user_data_1 = require("../../providers/user-data");
 var fb_provider_1 = require("../../providers/fb-provider");
 var dashboard_1 = require("../dashboard/dashboard");
 var LoginPage = (function () {
-    function LoginPage(nav, menu, userData, platform, fb) {
+    function LoginPage(nav, menu, userData, platform, fbProvider) {
         this.nav = nav;
         this.menu = menu;
         this.userData = userData;
-        this.fb = fb;
+        this.fbProvider = fbProvider;
         this.email = '';
         this.name = '';
         this.login = {};
@@ -460,11 +470,13 @@ var LoginPage = (function () {
     LoginPage.prototype.fbLogin = function () {
         var _this = this;
         console.log("Facebook login initialized...");
-        this.fb.login().then(function () {
+        this.fbProvider.login().then(function () {
             _this.userData.login();
             console.log("Navigating to home...");
             // this.nav.push(DashboardPage);
-            _this.nav.setRoot(dashboard_1.DashboardPage);
+            _this.nav.setRoot(dashboard_1.DashboardPage).then(function (result) {
+                console.log("fbLogin:setRoot:Dashboard", result);
+            });
         });
     };
     LoginPage.prototype.onLogin = function (form) {
@@ -726,25 +738,26 @@ var FbProvider = (function () {
                     facebookConnectPlugin.getLoginStatus(function (success) {
                         console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
-                            console.log('getLoginStatus', success.status);
-                            _this.events.publish('user:login');
+                            console.log('Login Status: ', success.status);
                             // Check if we have our user saved
-                            _this.userData.getUser(success.authResponse.userID).then(function () {
-                                console.log("Fb-provider: getUser(): ");
+                            _this.userData.getUser(success.authResponse.userID).then(function (paceUser) {
+                                console.log("Fb-provider: getUser(): ", paceUser);
                                 resolve(success);
                             });
                         }
                         else if (success.status === 'not_authorized') {
-                            console.log('getLoginStatus', success.status);
+                            console.log('Login Status: ', success.status);
                             resolve(success);
                         }
                         else if (success.status === 'unknown') {
-                            console.log('getLoginStatus', success.status);
+                            console.log('Login Status: ', success.status);
                             resolve(success);
                         }
                     }, function (err) {
                         console.log("Unsuccessful login status fetching from Facebook!");
                         reject(err);
+                    }).then(function (loginStatus) {
+                        console.log("Login status from plugin", loginStatus);
                     });
                 }
                 else {
@@ -876,30 +889,71 @@ var UserData = (function () {
     }
     UserData.prototype.getUser = function (userID) {
         var _this = this;
-        console.log("UserData: getUser() reached...", "UserID:", userID);
+        console.log("UserID to make request with:", userID);
         return new Promise(function (resolve) {
             _this.getPaceUser(userID).then(function (paceUser) {
-                console.log("Got PaceUser...");
                 resolve(paceUser);
             });
         });
     };
     UserData.prototype.getPaceUser = function (userID) {
         var _this = this;
-        console.log("UserData: getPaceUser() reached...");
+        console.log("UserData:getPaceUser()");
         return new Promise(function (resolve) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/user?facebookId=' + userID;
-            console.log("Making request to: " + _this.url);
-            _this.http.get(_this.url).subscribe(function (paceUser) {
-                console.log("User data from BackPace...");
-                console.log(JSON.stringify(paceUser.json()));
-                _this.extracted(paceUser);
-                resolve(paceUser);
-            }, function (error) {
-                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-                console.log(JSON.stringify(error.json()));
-            }, function () { return console.log('User data fetching complete!'); });
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetPaceUserUrl(userID);
+            // let paceUser = this.extractPaceUser(this.makeGetHttpReq(url));
+            var paceUser = _this.extractPaceUser(_this.mockGetPaceUser());
+            resolve(paceUser);
         });
+    };
+    UserData.prototype.getUserShortTeamView = function () {
+        var _this = this;
+        console.log("UserData:getUserShortTeamView()");
+        return new Promise(function (resolve) {
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetUserShortTeamViewUrl();
+            // let userShortTeamView = this.extractUserShortTeamView(this.makeGetHttpReq(url));
+            var userShortTeamView = _this.extractUserShortTeamView(_this.mockUserShortTeamView());
+            resolve(userShortTeamView);
+        });
+    };
+    UserData.prototype.extractUserShortTeamView = function (shortTeamView) {
+        // TODO: maybe add shortTeamView.json() for backend
+        this.shortTeamView = shortTeamView;
+        return shortTeamView;
+    };
+    UserData.prototype.extractPaceUser = function (paceUser) {
+        console.log("User data from BackPace...", JSON.stringify(paceUser.json()));
+        this.paceUser = paceUser.json();
+        this.userId = this.paceUser.facebookId;
+        this.userToken = this.paceUser.accessToken;
+        return paceUser;
+    };
+    UserData.prototype.constructGetPaceUserUrl = function (userID) {
+        var url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
+        console.log("Making request to: " + url);
+        return url;
+    };
+    UserData.prototype.constructGetUserShortTeamViewUrl = function () {
+        var url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
+        console.log("Making request to: " + url);
+        return url;
+    };
+    UserData.prototype.makeGetHttpReq = function (url) {
+        var _this = this;
+        this.http.get(url).subscribe(function (result) {
+            return result;
+        }, function (error) {
+            _this.handleGetHttpReqError(error);
+        }, function () { return _this.handleGetHttpReqFinally(); });
+    };
+    UserData.prototype.handleGetHttpReqFinally = function () {
+        console.log('User data fetching complete!');
+    };
+    UserData.prototype.handleGetHttpReqError = function (error) {
+        console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+        console.log(JSON.stringify(error.json()));
     };
     UserData.prototype.getTeamData = function (teamId) {
         var _this = this;
@@ -927,22 +981,6 @@ var UserData = (function () {
                 resolve(success);
             }, function (error) {
                 console.log("Error!");
-                reject(error);
-            });
-        });
-    };
-    UserData.prototype.getUserShortTeamView = function () {
-        var _this = this;
-        console.log("UserData: getUserShortTeamView() reached...");
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard?facebookId=' + _this.userId + '&teamView=short&token=' + _this.userToken;
-            console.log("Making request to: " + _this.url);
-            _this.http.get(_this.url).subscribe(function (shortTeamView) {
-                console.log("ShortTeamView from BackPace...");
-                _this.shortTeamView = shortTeamView.json();
-                resolve(_this.shortTeamView);
-            }, function (error) {
-                console.log("Error occurred in getUserShortTeamView()");
                 reject(error);
             });
         });
@@ -1046,9 +1084,7 @@ var UserData = (function () {
                 picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
             });
             _this.http.post(_this.url, _this.paceUser).subscribe(function (paceUser) {
-                console.log("Created user from BackPace...");
-                console.log(JSON.stringify(paceUser.json()));
-                _this.extracted(paceUser);
+                _this.extractPaceUser(paceUser);
                 resolve(paceUser);
             }, function (error) {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
@@ -1057,12 +1093,6 @@ var UserData = (function () {
             }, function () { return console.log('User data fetching complete!'); });
         });
     };
-    UserData.prototype.extracted = function (paceUser) {
-        this.paceUser = paceUser.json();
-        this.userId = this.paceUser.facebookId;
-        this.userToken = this.paceUser.accessToken;
-    };
-    ;
     UserData.prototype.removeFavorite = function (sessionName) {
         var index = this._favorites.indexOf(sessionName);
         if (index > -1) {
@@ -1094,6 +1124,37 @@ var UserData = (function () {
         return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
             return value;
         });
+    };
+    UserData.prototype.mockUserShortTeamView = function () {
+        var teamKoss = {
+            teamName: "Kossurühm",
+            shortTableRowList: [{
+                    rank: 1,
+                    userName: "Marin",
+                    tier: "...",
+                    points: 1270
+                }]
+        };
+        var teamSalto = {
+            teamName: "Saltopoisid",
+            shortTableRowList: [{
+                    rank: 1,
+                    userName: "Allar",
+                    tier: "...",
+                    points: 1000
+                }]
+        };
+        var mockUserShortTeamView = [];
+        mockUserShortTeamView.push(teamKoss, teamSalto);
+        return mockUserShortTeamView;
+    };
+    UserData.prototype.mockGetPaceUser = function () {
+        return {
+            paceUser: {
+                facebookId: "",
+                accessToken: ""
+            }
+        };
     };
     UserData = __decorate([
         core_1.Injectable(), 
@@ -2824,6 +2885,7 @@ var NgPlural = (function () {
     return NgPlural;
 }());
 exports.NgPlural = NgPlural;
+
 },{"./ng_switch":31,"angular2/core":12,"angular2/src/facade/collection":191,"angular2/src/facade/lang":196}],30:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6326,6 +6388,7 @@ var I18nPluralPipe = (function () {
     return I18nPluralPipe;
 }());
 exports.I18nPluralPipe = I18nPluralPipe;
+
 },{"./invalid_pipe_argument_exception":63,"angular2/core":12,"angular2/src/facade/lang":196}],62:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6390,6 +6453,7 @@ var I18nSelectPipe = (function () {
     return I18nSelectPipe;
 }());
 exports.I18nSelectPipe = I18nSelectPipe;
+
 },{"./invalid_pipe_argument_exception":63,"angular2/core":12,"angular2/src/facade/collection":191,"angular2/src/facade/lang":196}],63:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -6762,6 +6826,7 @@ var ReplacePipe = (function () {
     return ReplacePipe;
 }());
 exports.ReplacePipe = ReplacePipe;
+
 },{"./invalid_pipe_argument_exception":63,"angular2/core":12,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196}],68:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6918,6 +6983,7 @@ function assertArrayOfStrings(identifier, value) {
     }
 }
 exports.assertArrayOfStrings = assertArrayOfStrings;
+
 },{"../facade/exceptions":193,"../facade/lang":196}],71:[function(require,module,exports){
 'use strict';"use strict";
 var collection_1 = require('angular2/src/facade/collection');
@@ -27361,6 +27427,7 @@ var ReflectorReader = (function () {
     return ReflectorReader;
 }());
 exports.ReflectorReader = ReflectorReader;
+
 },{}],179:[function(require,module,exports){
 'use strict';"use strict";
 // Public API for render
@@ -28170,6 +28237,7 @@ var NgZoneImpl = (function () {
     return NgZoneImpl;
 }());
 exports.NgZoneImpl = NgZoneImpl;
+
 },{}],188:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -28370,6 +28438,7 @@ var BaseWrappedException = (function (_super) {
     return BaseWrappedException;
 }(Error));
 exports.BaseWrappedException = BaseWrappedException;
+
 },{}],190:[function(require,module,exports){
 'use strict';"use strict";
 /**
@@ -31671,6 +31740,7 @@ var CachedXHR = (function (_super) {
     return CachedXHR;
 }(xhr_1.XHR));
 exports.CachedXHR = CachedXHR;
+
 },{"angular2/src/compiler/xhr":98,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196,"angular2/src/facade/promise":198}],220:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -32813,6 +32883,7 @@ var RouterLink = (function () {
     return RouterLink;
 }());
 exports.RouterLink = RouterLink;
+
 },{"../location/location":242,"../router":250,"angular2/core":12,"angular2/src/facade/lang":196}],235:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -32994,6 +33065,7 @@ var RouterOutlet = (function () {
     return RouterOutlet;
 }());
 exports.RouterOutlet = RouterOutlet;
+
 },{"../instruction":236,"../lifecycle/lifecycle_annotations":237,"../lifecycle/route_lifecycle_reflector":239,"../router":250,"angular2/core":12,"angular2/src/facade/async":188,"angular2/src/facade/collection":191,"angular2/src/facade/lang":196}],236:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -33378,6 +33450,7 @@ exports.routerOnDeactivate = lifecycle_annotations_impl_2.routerOnDeactivate;
  * {@example router/ts/can_activate/can_activate_example.ts region='canActivate' }
  */
 exports.CanActivate = decorators_1.makeDecorator(lifecycle_annotations_impl_1.CanActivate);
+
 },{"./lifecycle_annotations_impl":238,"angular2/src/core/util/decorators":184}],238:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -33417,6 +33490,7 @@ exports.routerCanDeactivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerCa
 exports.routerOnActivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnActivate"));
 exports.routerOnReuse = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnReuse"));
 exports.routerOnDeactivate = lang_1.CONST_EXPR(new RouteLifecycleHook("routerOnDeactivate"));
+
 },{"angular2/src/facade/lang":196}],239:[function(require,module,exports){
 'use strict';"use strict";
 var lang_1 = require('angular2/src/facade/lang');
@@ -33439,6 +33513,7 @@ function getCanActivateHook(type) {
     return null;
 }
 exports.getCanActivateHook = getCanActivateHook;
+
 },{"./lifecycle_annotations_impl":238,"angular2/src/core/reflection/reflection":175,"angular2/src/facade/lang":196}],240:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -33519,6 +33594,7 @@ var BrowserPlatformLocation = (function (_super) {
     return BrowserPlatformLocation;
 }(platform_location_1.PlatformLocation));
 exports.BrowserPlatformLocation = BrowserPlatformLocation;
+
 },{"./platform_location":245,"angular2/core":12,"angular2/src/platform/dom/dom_adapter":224}],241:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -33635,6 +33711,7 @@ var HashLocationStrategy = (function (_super) {
     return HashLocationStrategy;
 }(location_strategy_1.LocationStrategy));
 exports.HashLocationStrategy = HashLocationStrategy;
+
 },{"./location_strategy":243,"./platform_location":245,"angular2/core":12,"angular2/src/facade/lang":196}],242:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -33783,6 +33860,7 @@ function stripTrailingSlash(url) {
     }
     return url;
 }
+
 },{"./location_strategy":243,"angular2/core":12,"angular2/src/facade/async":188}],243:[function(require,module,exports){
 'use strict';"use strict";
 var lang_1 = require('angular2/src/facade/lang');
@@ -33865,6 +33943,7 @@ function joinWithSlash(start, end) {
     return start + '/' + end;
 }
 exports.joinWithSlash = joinWithSlash;
+
 },{"angular2/core":12,"angular2/src/facade/lang":196}],244:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -33975,6 +34054,7 @@ var PathLocationStrategy = (function (_super) {
     return PathLocationStrategy;
 }(location_strategy_1.LocationStrategy));
 exports.PathLocationStrategy = PathLocationStrategy;
+
 },{"./location_strategy":243,"./platform_location":245,"angular2/core":12,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196}],245:[function(require,module,exports){
 'use strict';"use strict";
 /**
@@ -34022,6 +34102,7 @@ var PlatformLocation = (function () {
     return PlatformLocation;
 }());
 exports.PlatformLocation = PlatformLocation;
+
 },{}],246:[function(require,module,exports){
 'use strict';"use strict";
 var route_config_impl_1 = require('./route_config_impl');
@@ -34038,6 +34119,7 @@ exports.AsyncRoute = route_config_impl_2.AsyncRoute;
  * It takes an array of {@link RouteDefinition}s.
  */
 exports.RouteConfig = decorators_1.makeDecorator(route_config_impl_1.RouteConfig);
+
 },{"./route_config_impl":247,"angular2/src/core/util/decorators":184}],247:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -34262,6 +34344,7 @@ var Redirect = (function (_super) {
     return Redirect;
 }(AbstractRoute));
 exports.Redirect = Redirect;
+
 },{"angular2/src/facade/lang":196}],248:[function(require,module,exports){
 'use strict';"use strict";
 var route_config_decorator_1 = require('./route_config_decorator');
@@ -34357,6 +34440,7 @@ function assertComponentExists(component, path) {
     }
 }
 exports.assertComponentExists = assertComponentExists;
+
 },{"./route_config_decorator":246,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196}],249:[function(require,module,exports){
 'use strict';"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -35468,6 +35552,7 @@ var AsyncRouteHandler = (function () {
     return AsyncRouteHandler;
 }());
 exports.AsyncRouteHandler = AsyncRouteHandler;
+
 },{"../../instruction":236,"angular2/src/facade/lang":196}],254:[function(require,module,exports){
 'use strict';"use strict";
 var async_1 = require('angular2/src/facade/async');
@@ -35485,6 +35570,7 @@ var SyncRouteHandler = (function () {
     return SyncRouteHandler;
 }());
 exports.SyncRouteHandler = SyncRouteHandler;
+
 },{"../../instruction":236,"angular2/src/facade/async":188,"angular2/src/facade/lang":196}],255:[function(require,module,exports){
 'use strict';"use strict";
 var lang_1 = require('angular2/src/facade/lang');
@@ -35752,6 +35838,7 @@ function decodeDynamicSegment(value) {
     value = lang_1.StringWrapper.replaceAll(value, REGEXP_ENC_PERCENT, '%');
     return value;
 }
+
 },{"../../url_parser":260,"../../utils":261,"./route_path":257,"angular2/src/facade/collection":191,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196}],256:[function(require,module,exports){
 'use strict';"use strict";
 var lang_1 = require('angular2/src/facade/lang');
@@ -35783,6 +35870,7 @@ var RegexRoutePath = (function () {
     return RegexRoutePath;
 }());
 exports.RegexRoutePath = RegexRoutePath;
+
 },{"./route_path":257,"angular2/src/facade/lang":196}],257:[function(require,module,exports){
 'use strict';"use strict";
 var MatchedUrl = (function () {
@@ -35804,6 +35892,7 @@ var GeneratedUrl = (function () {
     return GeneratedUrl;
 }());
 exports.GeneratedUrl = GeneratedUrl;
+
 },{}],258:[function(require,module,exports){
 'use strict';"use strict";
 var lang_1 = require('angular2/src/facade/lang');
@@ -35957,6 +36046,7 @@ var RuleSet = (function () {
     return RuleSet;
 }());
 exports.RuleSet = RuleSet;
+
 },{"../route_config/route_config_impl":247,"./route_handlers/async_route_handler":253,"./route_handlers/sync_route_handler":254,"./route_paths/param_route_path":255,"./route_paths/regex_route_path":256,"./rules":259,"angular2/src/facade/async":188,"angular2/src/facade/collection":191,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196}],259:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -36079,6 +36169,7 @@ var RouteRule = (function () {
     return RouteRule;
 }());
 exports.RouteRule = RouteRule;
+
 },{"../instruction":236,"../url_parser":260,"angular2/src/facade/collection":191,"angular2/src/facade/exceptions":193,"angular2/src/facade/lang":196,"angular2/src/facade/promise":198}],260:[function(require,module,exports){
 'use strict';"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -36353,6 +36444,7 @@ function normalizeString(obj) {
     }
 }
 exports.normalizeString = normalizeString;
+
 },{"angular2/src/facade/collection":191,"angular2/src/facade/lang":196}],262:[function(require,module,exports){
 'use strict';"use strict";
 // Note: This class is only here so that we can reference it from TypeScript code.

@@ -19,25 +19,24 @@ export class FbProvider {
                     facebookConnectPlugin.getLoginStatus((success) => {
                         console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
-                            console.log('getLoginStatus', success.status);
-
-                            this.events.publish('user:login');
-
+                            console.log('Login Status: ', success.status);
                             // Check if we have our user saved
-                            this.userData.getUser(success.authResponse.userID).then(() => {
-                                console.log("Fb-provider: getUser(): ");
+                            this.userData.getUser(success.authResponse.userID).then((paceUser) => {
+                                console.log("Fb-provider: getUser(): ", paceUser);
                                 resolve(success);
                             });
                         } else if (success.status === 'not_authorized') {
-                            console.log('getLoginStatus', success.status);
+                            console.log('Login Status: ', success.status);
                             resolve(success);
                         } else if (success.status === 'unknown') {
-                            console.log('getLoginStatus', success.status);
+                            console.log('Login Status: ', success.status);
                             resolve(success);
                         }
                     }, (err) => {
                         console.log("Unsuccessful login status fetching from Facebook!");
                         reject(err);
+                    }).then((loginStatus) => {
+                        console.log("Login status from plugin", loginStatus);
                     });
                 } else {
                     console.log("Please run me on a device!");

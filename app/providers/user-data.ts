@@ -14,7 +14,7 @@ export class UserData {
     // Viinamae
     BASE_URL = '192.168.0.101';
 
-    constructor(private events:Events, private http:Http) {
+    constructor(private events: Events, private http: Http) {
     }
 
     _favorites = [];
@@ -27,33 +27,85 @@ export class UserData {
     userId = null;
     userToken = null;
 
+    shortTeamView = null;
+
+    teams = null;
+
     getUser(userID) {
-        console.log("UserData: getUser() reached...", "UserID:", userID);
+        console.log("UserID to make request with:", userID);
 
         return new Promise(resolve => {
             this.getPaceUser(userID).then((paceUser) => {
-                console.log("Got PaceUser...");
                 resolve(paceUser);
             });
         });
     }
 
     getPaceUser(userID) {
-        console.log("UserData: getPaceUser() reached...");
+        console.log("UserData:getPaceUser()");
         return new Promise(resolve => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
-            console.log("Making request to: " + this.url);
-            this.http.get(this.url).subscribe(paceUser => {
-                console.log("User data from BackPace...");
-                console.log(JSON.stringify(paceUser.json()));
-
-                this.extracted(paceUser);
-                resolve(paceUser)
-            }, error => {
-                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-                console.log(JSON.stringify(error.json()));
-            }, () => console.log('User data fetching complete!'));
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetPaceUserUrl(userID);
+            // let paceUser = this.extractPaceUser(this.makeGetHttpReq(url));
+            let paceUser = this.extractPaceUser(this.mockGetPaceUser());
+            resolve(paceUser)
         });
+    }
+
+    getUserShortTeamView() {
+        console.log("UserData:getUserShortTeamView()");
+        return new Promise(resolve => {
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetUserShortTeamViewUrl();
+            // let userShortTeamView = this.extractUserShortTeamView(this.makeGetHttpReq(url));
+            let userShortTeamView = this.extractUserShortTeamView(this.mockUserShortTeamView());
+            resolve(userShortTeamView)
+        });
+    }
+
+    private extractUserShortTeamView(shortTeamView) {
+        // TODO: maybe add shortTeamView.json() for backend
+        this.shortTeamView = shortTeamView;
+
+        return shortTeamView;
+    }
+
+    private extractPaceUser(paceUser) {
+        console.log("User data from BackPace...", JSON.stringify(paceUser.json()));
+        this.paceUser = paceUser.json();
+        this.userId = this.paceUser.facebookId;
+        this.userToken = this.paceUser.accessToken;
+
+        return paceUser;
+    }
+
+    private constructGetPaceUserUrl(userID) {
+        let url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
+        console.log("Making request to: " + url);
+        return url;
+    }
+
+    private constructGetUserShortTeamViewUrl() {
+        let url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
+        console.log("Making request to: " + url);
+        return url;
+    }
+
+    private makeGetHttpReq(url) {
+        this.http.get(url).subscribe(result => {
+            return result;
+        }, error => {
+            this.handleGetHttpReqError(error);
+        }, () => this.handleGetHttpReqFinally());
+    }
+
+    private handleGetHttpReqFinally() {
+        console.log('User data fetching complete!');
+    }
+
+    private handleGetHttpReqError(error) {
+        console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+        console.log(JSON.stringify(error.json()));
     }
 
     getTeamData(teamId) {
@@ -86,27 +138,6 @@ export class UserData {
             });
         });
     }
-
-    shortTeamView = null;
-
-    getUserShortTeamView() {
-        console.log("UserData: getUserShortTeamView() reached...");
-
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
-            console.log("Making request to: " + this.url);
-            this.http.get(this.url).subscribe(shortTeamView => {
-                console.log("ShortTeamView from BackPace...");
-                this.shortTeamView = shortTeamView.json();
-                resolve(this.shortTeamView);
-            }, error => {
-                console.log("Error occurred in getUserShortTeamView()");
-                reject(error);
-            });
-        });
-    }
-
-    teams = null;
 
     getGroups() {
         return new Promise((resolve, reject) => {
@@ -218,9 +249,7 @@ export class UserData {
             });
 
             this.http.post(this.url, this.paceUser).subscribe(paceUser => {
-                console.log("Created user from BackPace...");
-                console.log(JSON.stringify(paceUser.json()));
-                this.extracted(paceUser);
+                this.extractPaceUser(paceUser);
                 resolve(paceUser)
             }, error => {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
@@ -229,12 +258,6 @@ export class UserData {
             }, () => console.log('User data fetching complete!'));
         });
     }
-
-    private extracted(paceUser) {
-        this.paceUser = paceUser.json();
-        this.userId = this.paceUser.facebookId;
-        this.userToken = this.paceUser.accessToken;
-    };
 
     removeFavorite(sessionName) {
         let index = this._favorites.indexOf(sessionName);
@@ -273,5 +296,39 @@ export class UserData {
         return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
             return value;
         });
+    }
+
+    private mockUserShortTeamView() {
+        let teamKoss = {
+            teamName: "Kossurühm",
+            shortTableRowList: [{
+                rank: 1,
+                userName: "Marin",
+                tier: "...",
+                points: 1270
+            }]
+        };
+
+        let teamSalto = {
+            teamName: "Saltopoisid",
+            shortTableRowList: [{
+                rank: 1,
+                userName: "Allar",
+                tier: "...",
+                points: 1000
+            }]
+        };
+        let mockUserShortTeamView = [];
+        mockUserShortTeamView.push(teamKoss, teamSalto);
+        return mockUserShortTeamView;
+    }
+
+    private mockGetPaceUser() {
+        return {
+            paceUser: {
+                facebookId: "",
+                accessToken: ""
+            }
+        };
     }
 }

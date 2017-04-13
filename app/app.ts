@@ -9,10 +9,10 @@ import {FbProvider} from "./providers/fb-provider";
 import "es6-shim";
 
 interface PageObj {
-    title:string;
-    component:any;
-    icon:string;
-    index?:number;
+    title: string;
+    component: any;
+    icon: string;
+    index?: number;
 }
 
 @App({
@@ -23,31 +23,31 @@ interface PageObj {
 class PaceApp {
 
     @ViewChild(Nav)
-    nav:Nav;
+    nav: Nav;
 
     // create an list of pages that can be navigated to from the left menu
     // the left menu only works after login
     // the login page disables the left menu
-    appPages:PageObj[] = [
+    appPages: PageObj[] = [
         {title: 'Dashboard', component: TabsPage, index: 0, icon: 'home'},
         {title: 'Profile', component: TabsPage, index: 1, icon: 'person'},
         {title: 'About', component: TabsPage, index: 2, icon: 'information-circle'}
     ];
 
-    loggedInPages:PageObj[] = [
+    loggedInPages: PageObj[] = [
         {title: 'Logout', component: TabsPage, icon: 'log-out'}
     ];
 
-    loggedOutPages:PageObj[] = [
+    loggedOutPages: PageObj[] = [
         {title: 'Login', component: LoginPage, icon: 'log-in'},
         {title: 'Logout', component: TabsPage, icon: 'log-out'}
     ];
 
-    rootPage:any = DashboardPage;
+    rootPage: any = DashboardPage;
 
     loggedIn = false;
 
-    constructor(private app:IonicApp, private events:Events, private userData:UserData, platform:Platform, private fbProvider:FbProvider) {
+    constructor(private app: IonicApp, private events: Events, private userData: UserData, platform: Platform, private fbProvider: FbProvider) {
 
         // Call any initial plugins when ready
         platform.ready().then(() => {
@@ -73,17 +73,21 @@ class PaceApp {
                     console.log("Navigating to Dashboard Page");
                     this.nav.setRoot(DashboardPage, {
                         param1: shortTeamView
+                    }).then((result) => {
+                        this.logSetRootFailed(result);
                     });
                 });
             } else {
                 console.log("Navigating to Login Page...");
-                this.nav.setRoot(LoginPage);
+                this.nav.setRoot(LoginPage).then((result) => {
+                    this.logSetRootFailed(result);
+                });
             }
         });
 
     }
 
-    openPage(page:PageObj) {
+    openPage(page: PageObj) {
 
         let nav = this.app.getComponent('nav');
 
@@ -143,11 +147,19 @@ class PaceApp {
     listenToLoginEvents() {
         this.events.subscribe('user:login', () => {
             this.loggedIn = true;
+            this.nav.setRoot(DashboardPage, {}).then((result) => {
+                this.logSetRootFailed(result);
+            });
         });
 
 
         this.events.subscribe('user:logout', () => {
             this.loggedIn = false;
         });
+    }
+
+    private logSetRootFailed(result) {
+        if (!result)
+            console.log("Failed to set root navigation", result);
     }
 }

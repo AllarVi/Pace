@@ -8,18 +8,16 @@ import {UserData} from "../../providers/user-data";
 })
 export class DashboardPage {
 
-    shortTeamView:any;
+    shortTeamView: any;
 
-    constructor(private nav:NavController, private userData:UserData, private navParams:NavParams) {
+    constructor(private nav: NavController, private userData: UserData, private navParams: NavParams) {
         this.shortTeamView = navParams.get('param1');
         this.initDashboard();
     }
 
     private initDashboard() {
         this.userData.getUserShortTeamView().then((shortTeamView) => {
-            console.log(JSON.stringify(shortTeamView));
-            console.log("Done loading shortTeamView!");
-
+            console.log("Done loading shortTeamView!", shortTeamView);
             this.shortTeamView = shortTeamView;
         });
     }
@@ -43,10 +41,10 @@ export class DashboardPage {
 })
 class ModalsContentPage {
 
-    searchQuery:string = '';
-    teams:any;
+    searchQuery: string = '';
+    teams: any;
 
-    constructor(public viewCtrl:ViewController, private userData:UserData) {
+    constructor(public viewCtrl: ViewController, private userData: UserData) {
 
         this.initializeItems();
 
