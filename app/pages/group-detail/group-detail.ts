@@ -61,12 +61,12 @@ export class GroupDetailPage {
             console.log("Marked as present!");
         });
 
-        var index = this.teamMembers.indexOf(member);
+        let index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
     }
 
     markAbsent(member) {
-        var index = this.teamMembers.indexOf(member);
+        let index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
     }
 
@@ -76,7 +76,7 @@ export class GroupDetailPage {
     }
 
     hexToRgb(hex) {
-        var bigint = parseInt(hex.substr(1), 16),
+        let bigint = parseInt(hex.substr(1), 16),
             r = (bigint >> 16) & 255,
             g = (bigint >> 8) & 255,
             b = bigint & 255;
@@ -111,13 +111,6 @@ export class GroupDetailPage {
         return _clrs;
     }
 
-    // lineChart
-    private lineChartData: Array<any> = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-    ];
-    private lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    private lineChartSeries: Array<any> = ['Men', 'Women'];
     private lineChartOptions: any = {
         animation: true,
         responsive: true,
@@ -129,32 +122,6 @@ export class GroupDetailPage {
     private lineChartLegend: boolean = true;
     private lineChartType: string = 'Line';
 
-    private randomize() {
-        let _lineChartData = [];
-        for (let i = 0; i < this.lineChartData.length; i++) {
-            _lineChartData[i] = [];
-            for (let j = 0; j < this.lineChartData[i].length; j++) {
-                _lineChartData[i].push(Math.floor((Math.random() * 100) + 1));
-
-            }
-        }
-        this.lineChartData = _lineChartData;
-    }
-
-    // events
-    chartClicked(e: any) {
-        console.log(e);
-    }
-
-    chartHovered(e: any) {
-        console.log(e);
-    }
-
-//    Attendance chart
-    private attendanceChartData: Array<any> = [
-        [65, 59, 80],
-        [28, 48, 40]
-    ];
     private attendanceChartSeries: Array<any> = ['Men', 'Women'];
 
     // events

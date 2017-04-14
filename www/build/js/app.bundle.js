@@ -308,13 +308,6 @@ var GroupDetailPage = (function () {
         this.maleAttendees = null;
         this.femaleAttendees = null;
         this.attenChartData = null;
-        // lineChart
-        this.lineChartData = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-        ];
-        this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChartSeries = ['Men', 'Women'];
         this.lineChartOptions = {
             animation: true,
             responsive: true,
@@ -322,11 +315,6 @@ var GroupDetailPage = (function () {
         };
         this.lineChartLegend = true;
         this.lineChartType = 'Line';
-        //    Attendance chart
-        this.attendanceChartData = [
-            [65, 59, 80],
-            [28, 48, 40]
-        ];
         this.attendanceChartSeries = ['Men', 'Women'];
         this.currentDate = new Date();
         this.team = this.navParams.get('team');
@@ -390,23 +378,6 @@ var GroupDetailPage = (function () {
             _clrs.push(_this.getColour(_this.hexToRgb(color)));
         });
         return _clrs;
-    };
-    GroupDetailPage.prototype.randomize = function () {
-        var _lineChartData = [];
-        for (var i = 0; i < this.lineChartData.length; i++) {
-            _lineChartData[i] = [];
-            for (var j = 0; j < this.lineChartData[i].length; j++) {
-                _lineChartData[i].push(Math.floor((Math.random() * 100) + 1));
-            }
-        }
-        this.lineChartData = _lineChartData;
-    };
-    // events
-    GroupDetailPage.prototype.chartClicked = function (e) {
-        console.log(e);
-    };
-    GroupDetailPage.prototype.chartHovered = function (e) {
-        console.log(e);
     };
     // events
     GroupDetailPage.prototype.attendanceChartClicked = function (e) {
@@ -1182,7 +1153,38 @@ var UserData = (function () {
     };
     UserData.prototype.mockTeamData = function () {
         return {
-            fullScoresTableList: [],
+            fullScoresTableList: [
+                {
+                    rank: 1,
+                    userName: "Allar",
+                    tier: "...",
+                    points: 1000
+                },
+                {
+                    rank: 2,
+                    userName: "Paul",
+                    tier: "...",
+                    points: 980
+                },
+                {
+                    rank: 3,
+                    userName: "Hannes",
+                    tier: "...",
+                    points: 930
+                },
+                {
+                    rank: 4,
+                    userName: "Stefan",
+                    tier: "...",
+                    points: 900
+                },
+                {
+                    rank: 5,
+                    userName: "Georg",
+                    tier: "...",
+                    points: 200
+                }
+            ],
             currentMonthAttendance: [
                 {
                     date: '13-04-2017',

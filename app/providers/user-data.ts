@@ -32,6 +32,8 @@ export class UserData {
 
     teams = null;
 
+    groupData = null;
+
     getUser(userID) {
         console.log("UserID to make request with:", userID);
 
@@ -163,8 +165,6 @@ export class UserData {
         });
     }
 
-    groupData = null;
-
     joinTeam(teamId) {
         return new Promise((resolve, reject) => {
             this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group?facebookId=' + this.userId + '&token=' +
@@ -227,7 +227,7 @@ export class UserData {
 
             console.log("Making request to: " + this.url);
 
-            var params = JSON.stringify({
+            let params = JSON.stringify({
                 headers: {'Content-Type': undefined}
             });
 
@@ -359,7 +359,38 @@ export class UserData {
 
     private mockTeamData() {
         return {
-            fullScoresTableList: [],
+            fullScoresTableList: [
+                {
+                    rank: 1,
+                    userName: "Allar",
+                    tier: "...",
+                    points: 1000
+                },
+                {
+                    rank: 2,
+                    userName: "Paul",
+                    tier: "...",
+                    points: 980
+                },
+                {
+                    rank: 3,
+                    userName: "Hannes",
+                    tier: "...",
+                    points: 930
+                },
+                {
+                    rank: 4,
+                    userName: "Stefan",
+                    tier: "...",
+                    points: 900
+                },
+                {
+                    rank: 5,
+                    userName: "Georg",
+                    tier: "...",
+                    points: 200
+                }
+            ],
             currentMonthAttendance: [
                 {
                     date: '13-04-2017',
