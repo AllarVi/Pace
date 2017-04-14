@@ -28,6 +28,7 @@ export class UserData {
     userToken = null;
 
     shortTeamView = null;
+    teamData = null;
 
     teams = null;
 
@@ -42,7 +43,6 @@ export class UserData {
     }
 
     getPaceUser(userID) {
-        console.log("UserData:getPaceUser()");
         return new Promise(resolve => {
             // TODO: Uncomment for backend request
             // let url = this.constructGetPaceUserUrl(userID);
@@ -53,7 +53,6 @@ export class UserData {
     }
 
     getUserShortTeamView() {
-        console.log("UserData:getUserShortTeamView()");
         return new Promise(resolve => {
             // TODO: Uncomment for backend request
             // let url = this.constructGetUserShortTeamViewUrl();
@@ -63,11 +62,28 @@ export class UserData {
         });
     }
 
+    getTeamData(teamId) {
+        return new Promise(resolve => {
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetTeamDataUrl(teamId);
+            // let teamData = this.extractTeamData(this.makeGetHttpReq(url));
+            let teamData = this.extractTeamData(this.mockTeamData());
+            resolve(teamData);
+        });
+    }
+
     private extractUserShortTeamView(shortTeamView) {
         // TODO: maybe add shortTeamView.json() for backend
         this.shortTeamView = shortTeamView;
 
         return shortTeamView;
+    }
+
+    private extractTeamData(teamData) {
+        // TODO: maybe add teamData.json() for backend
+        this.teamData = teamData;
+
+        return teamData;
     }
 
     private extractPaceUser(paceUser) {
@@ -91,6 +107,10 @@ export class UserData {
         return url;
     }
 
+    private constructGetTeamDataUrl(teamId) {
+        return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
+    }
+
     private makeGetHttpReq(url) {
         this.http.get(url).subscribe(result => {
             return result;
@@ -106,19 +126,6 @@ export class UserData {
     private handleGetHttpReqError(error) {
         console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
         console.log(JSON.stringify(error.json()));
-    }
-
-    getTeamData(teamId) {
-        return new Promise(resolve => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
-            console.log("Making request to: " + this.url);
-            this.http.get(this.url).subscribe(teamMembers => {
-                resolve(teamMembers.json())
-            }, error => {
-                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-                console.log(JSON.stringify(error.json()));
-            });
-        });
     }
 
     getPaceUserData() {
@@ -300,23 +307,41 @@ export class UserData {
 
     private mockUserShortTeamView() {
         let teamKoss = {
+            id: 1,
             teamName: "Kossurühm",
-            shortTableRowList: [{
-                rank: 1,
-                userName: "Marin",
-                tier: "...",
-                points: 1270
-            }]
+            shortTableRowList: [
+                {
+                    rank: 1,
+                    userName: "Marin",
+                    tier: "...",
+                    points: 1270
+                },
+                {
+                    rank: 2,
+                    userName: "Marianne",
+                    tier: "...",
+                    points: 1250
+                }
+            ]
         };
 
         let teamSalto = {
+            id: 2,
             teamName: "Saltopoisid",
-            shortTableRowList: [{
-                rank: 1,
-                userName: "Allar",
-                tier: "...",
-                points: 1000
-            }]
+            shortTableRowList: [
+                {
+                    rank: 1,
+                    userName: "Allar",
+                    tier: "...",
+                    points: 1000
+                },
+                {
+                    rank: 2,
+                    userName: "Paul",
+                    tier: "...",
+                    points: 980
+                }
+            ]
         };
         let mockUserShortTeamView = [];
         mockUserShortTeamView.push(teamKoss, teamSalto);
@@ -329,6 +354,25 @@ export class UserData {
                 facebookId: "",
                 accessToken: ""
             }
+        };
+    }
+
+    private mockTeamData() {
+        return {
+            fullScoresTableList: [],
+            currentMonthAttendance: [
+                {
+                    date: '13-04-2017',
+                    maleAttendees: 6,
+                    femaleAttendees: 10
+                },
+                {
+                    date: '14-04-2017',
+                    maleAttendees: 8,
+                    femaleAttendees: 4
+                }
+            ]
+
         };
     }
 }

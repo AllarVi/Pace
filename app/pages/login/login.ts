@@ -1,4 +1,4 @@
-import {IonicApp, Page, NavController, MenuController, Platform} from "ionic-angular";
+import {IonicApp, Page, NavController, MenuController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {UserData} from "../../providers/user-data";
 import {FbProvider} from "../../providers/fb-provider";
@@ -9,7 +9,7 @@ import {DashboardPage} from "../dashboard/dashboard";
 })
 export class LoginPage {
 
-    constructor(private nav: NavController, private menu: MenuController, private userData: UserData, platform: Platform, private fbProvider: FbProvider) {
+    constructor(private nav: NavController, private menu: MenuController, private userData: UserData, private fbProvider: FbProvider) {
     }
 
     email = '';
@@ -54,7 +54,6 @@ export class LoginPage {
         if (form.valid) {
             this.userData.login();
             console.log("Pushing to TabsPage...");
-            // this.nav.push(TabsPage);
             this.nav.push(TabsPage);
         }
     }

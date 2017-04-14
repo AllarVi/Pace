@@ -26,7 +26,7 @@ export class GroupDetailPage {
 
     attenChartData = null;
 
-    constructor(private navParams:NavParams, private userData:UserData) {
+    constructor(private navParams: NavParams, private userData: UserData) {
 
         this.currentDate = new Date();
 
@@ -80,7 +80,7 @@ export class GroupDetailPage {
             r = (bigint >> 16) & 255,
             g = (bigint >> 8) & 255,
             b = bigint & 255;
-        console.log("Hex is " + hex, "Big int is ", bigint);
+        // console.log("Hex is " + hex, "Big int is ", bigint);
 
         return [r, g, b];
     }
@@ -112,22 +112,22 @@ export class GroupDetailPage {
     }
 
     // lineChart
-    private lineChartData:Array<any> = [
+    private lineChartData: Array<any> = [
         [65, 59, 80, 81, 56, 55, 40],
         [28, 48, 40, 19, 86, 27, 90]
     ];
-    private lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    private lineChartSeries:Array<any> = ['Men', 'Women'];
-    private lineChartOptions:any = {
+    private lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    private lineChartSeries: Array<any> = ['Men', 'Women'];
+    private lineChartOptions: any = {
         animation: true,
         responsive: true,
         multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>'
     };
 
     //'#FF9800','#49cd97','#ef2e0a'
-    private lineChartColours:Array<any>;
-    private lineChartLegend:boolean = true;
-    private lineChartType:string = 'Line';
+    private lineChartColours: Array<any>;
+    private lineChartLegend: boolean = true;
+    private lineChartType: string = 'Line';
 
     private randomize() {
         let _lineChartData = [];
@@ -142,27 +142,27 @@ export class GroupDetailPage {
     }
 
     // events
-    chartClicked(e:any) {
+    chartClicked(e: any) {
         console.log(e);
     }
 
-    chartHovered(e:any) {
+    chartHovered(e: any) {
         console.log(e);
     }
 
 //    Attendance chart
-    private attendanceChartData:Array<any> = [
+    private attendanceChartData: Array<any> = [
         [65, 59, 80],
         [28, 48, 40]
     ];
-    private attendanceChartSeries:Array<any> = ['Men', 'Women'];
+    private attendanceChartSeries: Array<any> = ['Men', 'Women'];
 
     // events
-    attendanceChartClicked(e:any) {
+    attendanceChartClicked(e: any) {
         console.log(e);
     }
 
-    attendancechartHovered(e:any) {
+    attendancechartHovered(e: any) {
         console.log(e);
     }
 

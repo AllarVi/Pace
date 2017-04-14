@@ -26,6 +26,9 @@ export class DashboardPage {
         console.log("Team ID: " + team.id);
         this.nav.push(GroupDetailPage, {
             team: team
+        }).then((result) => {
+            if (!result)
+                console.log("nav.push.GroupDetailPage failed");
         });
     }
 

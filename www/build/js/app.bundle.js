@@ -213,6 +213,9 @@ var DashboardPage = (function () {
         console.log("Team ID: " + team.id);
         this.nav.push(group_detail_1.GroupDetailPage, {
             team: team
+        }).then(function (result) {
+            if (!result)
+                console.log("nav.push.GroupDetailPage failed");
         });
     };
     DashboardPage.prototype.openModal = function (characterNum) {
@@ -361,7 +364,7 @@ var GroupDetailPage = (function () {
     };
     GroupDetailPage.prototype.hexToRgb = function (hex) {
         var bigint = parseInt(hex.substr(1), 16), r = (bigint >> 16) & 255, g = (bigint >> 8) & 255, b = bigint & 255;
-        console.log("Hex is " + hex, "Big int is ", bigint);
+        // console.log("Hex is " + hex, "Big int is ", bigint);
         return [r, g, b];
     };
     GroupDetailPage.prototype.convertColour = function (colour) {
@@ -440,7 +443,7 @@ var user_data_1 = require("../../providers/user-data");
 var fb_provider_1 = require("../../providers/fb-provider");
 var dashboard_1 = require("../dashboard/dashboard");
 var LoginPage = (function () {
-    function LoginPage(nav, menu, userData, platform, fbProvider) {
+    function LoginPage(nav, menu, userData, fbProvider) {
         this.nav = nav;
         this.menu = menu;
         this.userData = userData;
@@ -484,7 +487,6 @@ var LoginPage = (function () {
         if (form.valid) {
             this.userData.login();
             console.log("Pushing to TabsPage...");
-            // this.nav.push(TabsPage);
             this.nav.push(tabs_1.TabsPage);
         }
     };
@@ -500,7 +502,7 @@ var LoginPage = (function () {
         ionic_angular_1.Page({
             templateUrl: 'build/pages/login/login.html'
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.MenuController, user_data_1.UserData, ionic_angular_1.Platform, fb_provider_1.FbProvider])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.MenuController, user_data_1.UserData, fb_provider_1.FbProvider])
     ], LoginPage);
     return LoginPage;
 }());
@@ -884,6 +886,7 @@ var UserData = (function () {
         this.userId = null;
         this.userToken = null;
         this.shortTeamView = null;
+        this.teamData = null;
         this.teams = null;
         this.groupData = null;
     }
@@ -898,7 +901,6 @@ var UserData = (function () {
     };
     UserData.prototype.getPaceUser = function (userID) {
         var _this = this;
-        console.log("UserData:getPaceUser()");
         return new Promise(function (resolve) {
             // TODO: Uncomment for backend request
             // let url = this.constructGetPaceUserUrl(userID);
@@ -909,7 +911,6 @@ var UserData = (function () {
     };
     UserData.prototype.getUserShortTeamView = function () {
         var _this = this;
-        console.log("UserData:getUserShortTeamView()");
         return new Promise(function (resolve) {
             // TODO: Uncomment for backend request
             // let url = this.constructGetUserShortTeamViewUrl();
@@ -918,10 +919,25 @@ var UserData = (function () {
             resolve(userShortTeamView);
         });
     };
+    UserData.prototype.getTeamData = function (teamId) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            // TODO: Uncomment for backend request
+            // let url = this.constructGetTeamDataUrl(teamId);
+            // let teamData = this.extractTeamData(this.makeGetHttpReq(url));
+            var teamData = _this.extractTeamData(_this.mockTeamData());
+            resolve(teamData);
+        });
+    };
     UserData.prototype.extractUserShortTeamView = function (shortTeamView) {
         // TODO: maybe add shortTeamView.json() for backend
         this.shortTeamView = shortTeamView;
         return shortTeamView;
+    };
+    UserData.prototype.extractTeamData = function (teamData) {
+        // TODO: maybe add teamData.json() for backend
+        this.teamData = teamData;
+        return teamData;
     };
     UserData.prototype.extractPaceUser = function (paceUser) {
         console.log("User data from BackPace...", JSON.stringify(paceUser.json()));
@@ -940,6 +956,9 @@ var UserData = (function () {
         console.log("Making request to: " + url);
         return url;
     };
+    UserData.prototype.constructGetTeamDataUrl = function (teamId) {
+        return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
+    };
     UserData.prototype.makeGetHttpReq = function (url) {
         var _this = this;
         this.http.get(url).subscribe(function (result) {
@@ -954,19 +973,6 @@ var UserData = (function () {
     UserData.prototype.handleGetHttpReqError = function (error) {
         console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
         console.log(JSON.stringify(error.json()));
-    };
-    UserData.prototype.getTeamData = function (teamId) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/team?facebookId=' + _this.userId + '&token=' + _this.userToken + '&teamId=' + teamId;
-            console.log("Making request to: " + _this.url);
-            _this.http.get(_this.url).subscribe(function (teamMembers) {
-                resolve(teamMembers.json());
-            }, function (error) {
-                console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-                console.log(JSON.stringify(error.json()));
-            });
-        });
     };
     UserData.prototype.getPaceUserData = function () {
         return this.paceUser;
@@ -1127,22 +1133,40 @@ var UserData = (function () {
     };
     UserData.prototype.mockUserShortTeamView = function () {
         var teamKoss = {
+            id: 1,
             teamName: "Kossurühm",
-            shortTableRowList: [{
+            shortTableRowList: [
+                {
                     rank: 1,
                     userName: "Marin",
                     tier: "...",
                     points: 1270
-                }]
+                },
+                {
+                    rank: 2,
+                    userName: "Marianne",
+                    tier: "...",
+                    points: 1250
+                }
+            ]
         };
         var teamSalto = {
+            id: 2,
             teamName: "Saltopoisid",
-            shortTableRowList: [{
+            shortTableRowList: [
+                {
                     rank: 1,
                     userName: "Allar",
                     tier: "...",
                     points: 1000
-                }]
+                },
+                {
+                    rank: 2,
+                    userName: "Paul",
+                    tier: "...",
+                    points: 980
+                }
+            ]
         };
         var mockUserShortTeamView = [];
         mockUserShortTeamView.push(teamKoss, teamSalto);
@@ -1154,6 +1178,23 @@ var UserData = (function () {
                 facebookId: "",
                 accessToken: ""
             }
+        };
+    };
+    UserData.prototype.mockTeamData = function () {
+        return {
+            fullScoresTableList: [],
+            currentMonthAttendance: [
+                {
+                    date: '13-04-2017',
+                    maleAttendees: 6,
+                    femaleAttendees: 10
+                },
+                {
+                    date: '14-04-2017',
+                    maleAttendees: 8,
+                    femaleAttendees: 4
+                }
+            ]
         };
     };
     UserData = __decorate([
