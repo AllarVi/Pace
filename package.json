@@ -1,10 +1,10 @@
 {
-  "name": "ionic-conference-app",
-  "description": "Ionic Conference App",
-  "license": "Apache-2.0",
+  "name": "Pace",
+  "description": "Pace",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/driftyco/ionic-conference-app.git"
+    "url": "https://github.com/aglo35/Pace.git"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.15",
