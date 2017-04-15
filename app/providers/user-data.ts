@@ -34,17 +34,8 @@ export class UserData {
 
     groupData = null;
 
-    getUser(userID) {
-        console.log("UserID to make request with:", userID);
-
-        return new Promise(resolve => {
-            this.getPaceUser(userID).then((paceUser) => {
-                resolve(paceUser);
-            });
-        });
-    }
-
     getPaceUser(userID) {
+        console.log("UserID to make request with:", userID);
         return new Promise(resolve => {
             // TODO: Uncomment for backend request
             // let url = this.constructGetPaceUserUrl(userID);
@@ -89,8 +80,8 @@ export class UserData {
     }
 
     private extractPaceUser(paceUser) {
-        console.log("User data from BackPace...", JSON.stringify(paceUser.json()));
-        this.paceUser = paceUser.json();
+        console.log("User data from BackPace...", paceUser);
+        this.paceUser = paceUser;
         this.userId = this.paceUser.facebookId;
         this.userToken = this.paceUser.accessToken;
 
@@ -273,14 +264,18 @@ export class UserData {
         }
     }
 
+    saveLoginStorage(hasLoggedIn) {
+        this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn).then();
+    }
+
     login() {
-        this.storage.set(this.HAS_LOGGED_IN, true);
+        this.saveLoginStorage(true);
         this.events.publish('user:login');
     }
 
     FbLogout() {
         return new Promise((resolve, reject) => {
-            this.storage.remove(this.HAS_LOGGED_IN);
+            this.storage.remove(this.HAS_LOGGED_IN).then();
             console.log("UserData: logout() reached...");
 
             facebookConnectPlugin.logout(() => {
@@ -298,7 +293,6 @@ export class UserData {
         });
     }
 
-    // Return a promise
     hasLoggedIn() {
         return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
             return value;
@@ -350,10 +344,8 @@ export class UserData {
 
     private mockGetPaceUser() {
         return {
-            paceUser: {
-                facebookId: "",
-                accessToken: ""
-            }
+            facebookId: "",
+            accessToken: ""
         };
     }
 

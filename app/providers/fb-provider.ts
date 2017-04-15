@@ -17,12 +17,11 @@ export class FbProvider {
             this.platform.ready().then(() => {
                 if (this.platform.is('cordova')) {
                     facebookConnectPlugin.getLoginStatus((success) => {
-                        console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
                             console.log('Login Status: ', success.status);
-                            // Check if we have our user saved
-                            this.userData.getUser(success.authResponse.userID).then((paceUser) => {
-                                console.log("Fb-provider: getUser(): ", paceUser);
+                            // Check if we have our user saved in the backend
+                            this.userData.getPaceUser(success.authResponse.userID).then(() => {
+                                this.userData.saveLoginStorage(true);
                                 resolve(success);
                             });
                         } else if (success.status === 'not_authorized') {

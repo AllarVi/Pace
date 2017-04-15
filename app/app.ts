@@ -52,36 +52,17 @@ class PaceApp {
         // Call any initial plugins when ready
         platform.ready().then(() => {
             StatusBar.styleDefault();
-
             // Keyboard.setAccessoryBarVisible(false);
-
-        });
-
-        this.userData.hasLoggedIn().then((hasLoggedIn) => {
-            this.loggedIn = (hasLoggedIn == 'true');
         });
 
         this.listenToLoginEvents();
 
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus) => {
-            console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
-                this.userData.getUserShortTeamView().then((shortTeamView) => {
-                    console.log(JSON.stringify(shortTeamView));
-                    console.log("Done loading shortTeamView!");
-
-                    console.log("Navigating to Dashboard Page");
-                    this.nav.setRoot(DashboardPage, {
-                        param1: shortTeamView
-                    }).then((result) => {
-                        this.logSetRootFailed(result);
-                    });
-                });
+                this.initLeftMenuAccount();
+                this.initDashboardPage();
             } else {
-                console.log("Navigating to Login Page...");
-                this.nav.setRoot(LoginPage).then((result) => {
-                    this.logSetRootFailed(result);
-                });
+                this.initLoginPage();
             }
         });
 
@@ -93,10 +74,10 @@ class PaceApp {
 
         if (page.index) {
             console.log("Setting navRoot to index:");
-            nav.setRoot(page.component, {tabIndex: page.index});
+            nav.setRoot(page.component, {tabIndex: page.index}).then();
         } else {
             console.log("Setting navRoot to component:");
-            nav.setRoot(page.component);
+            nav.setRoot(page.component).then();
         }
 
         if (page.title === 'Logout') {
@@ -155,6 +136,30 @@ class PaceApp {
 
         this.events.subscribe('user:logout', () => {
             this.loggedIn = false;
+        });
+    }
+
+    private initLoginPage() {
+        console.log("Navigating to Login Page...");
+        this.nav.setRoot(LoginPage).then((result) => {
+            this.logSetRootFailed(result);
+        });
+    }
+
+    private initDashboardPage() {
+        this.userData.getUserShortTeamView().then((shortTeamView) => {
+            console.log("Navigating to Dashboard Page...");
+            this.nav.setRoot(DashboardPage, {
+                param1: shortTeamView
+            }).then((result) => {
+                this.logSetRootFailed(result);
+            });
+        });
+    }
+
+    private initLeftMenuAccount() {
+        this.userData.hasLoggedIn().then((hasLoggedIn) => {
+            this.loggedIn = (hasLoggedIn == 'true');
         });
     }
 

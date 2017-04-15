@@ -47,29 +47,14 @@ var PaceApp = (function () {
             ionic_native_1.StatusBar.styleDefault();
             // Keyboard.setAccessoryBarVisible(false);
         });
-        this.userData.hasLoggedIn().then(function (hasLoggedIn) {
-            _this.loggedIn = (hasLoggedIn == 'true');
-        });
         this.listenToLoginEvents();
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
-            console.log("PaceApp: User status:", FbLoginStatus.status);
             if (FbLoginStatus.status === 'connected') {
-                _this.userData.getUserShortTeamView().then(function (shortTeamView) {
-                    console.log(JSON.stringify(shortTeamView));
-                    console.log("Done loading shortTeamView!");
-                    console.log("Navigating to Dashboard Page");
-                    _this.nav.setRoot(dashboard_1.DashboardPage, {
-                        param1: shortTeamView
-                    }).then(function (result) {
-                        _this.logSetRootFailed(result);
-                    });
-                });
+                _this.initLeftMenuAccount();
+                _this.initDashboardPage();
             }
             else {
-                console.log("Navigating to Login Page...");
-                _this.nav.setRoot(login_1.LoginPage).then(function (result) {
-                    _this.logSetRootFailed(result);
-                });
+                _this.initLoginPage();
             }
         });
     }
@@ -78,11 +63,11 @@ var PaceApp = (function () {
         var nav = this.app.getComponent('nav');
         if (page.index) {
             console.log("Setting navRoot to index:");
-            nav.setRoot(page.component, { tabIndex: page.index });
+            nav.setRoot(page.component, { tabIndex: page.index }).then();
         }
         else {
             console.log("Setting navRoot to component:");
-            nav.setRoot(page.component);
+            nav.setRoot(page.component).then();
         }
         if (page.title === 'Logout') {
             // Give the menu time to close before changing to logged out
@@ -134,6 +119,30 @@ var PaceApp = (function () {
         });
         this.events.subscribe('user:logout', function () {
             _this.loggedIn = false;
+        });
+    };
+    PaceApp.prototype.initLoginPage = function () {
+        var _this = this;
+        console.log("Navigating to Login Page...");
+        this.nav.setRoot(login_1.LoginPage).then(function (result) {
+            _this.logSetRootFailed(result);
+        });
+    };
+    PaceApp.prototype.initDashboardPage = function () {
+        var _this = this;
+        this.userData.getUserShortTeamView().then(function (shortTeamView) {
+            console.log("Navigating to Dashboard Page...");
+            _this.nav.setRoot(dashboard_1.DashboardPage, {
+                param1: shortTeamView
+            }).then(function (result) {
+                _this.logSetRootFailed(result);
+            });
+        });
+    };
+    PaceApp.prototype.initLeftMenuAccount = function () {
+        var _this = this;
+        this.userData.hasLoggedIn().then(function (hasLoggedIn) {
+            _this.loggedIn = (hasLoggedIn == 'true');
         });
     };
     PaceApp.prototype.logSetRootFailed = function (result) {
@@ -205,7 +214,6 @@ var DashboardPage = (function () {
     DashboardPage.prototype.initDashboard = function () {
         var _this = this;
         this.userData.getUserShortTeamView().then(function (shortTeamView) {
-            console.log("Done loading shortTeamView!", shortTeamView);
             _this.shortTeamView = shortTeamView;
         });
     };
@@ -709,12 +717,11 @@ var FbProvider = (function () {
             _this.platform.ready().then(function () {
                 if (_this.platform.is('cordova')) {
                     facebookConnectPlugin.getLoginStatus(function (success) {
-                        console.log("getLoginStatus connetion...");
                         if (success.status === 'connected') {
                             console.log('Login Status: ', success.status);
-                            // Check if we have our user saved
-                            _this.userData.getUser(success.authResponse.userID).then(function (paceUser) {
-                                console.log("Fb-provider: getUser(): ", paceUser);
+                            // Check if we have our user saved in the backend
+                            _this.userData.getPaceUser(success.authResponse.userID).then(function () {
+                                _this.userData.saveLoginStorage(true);
                                 resolve(success);
                             });
                         }
@@ -861,17 +868,9 @@ var UserData = (function () {
         this.teams = null;
         this.groupData = null;
     }
-    UserData.prototype.getUser = function (userID) {
-        var _this = this;
-        console.log("UserID to make request with:", userID);
-        return new Promise(function (resolve) {
-            _this.getPaceUser(userID).then(function (paceUser) {
-                resolve(paceUser);
-            });
-        });
-    };
     UserData.prototype.getPaceUser = function (userID) {
         var _this = this;
+        console.log("UserID to make request with:", userID);
         return new Promise(function (resolve) {
             // TODO: Uncomment for backend request
             // let url = this.constructGetPaceUserUrl(userID);
@@ -911,8 +910,8 @@ var UserData = (function () {
         return teamData;
     };
     UserData.prototype.extractPaceUser = function (paceUser) {
-        console.log("User data from BackPace...", JSON.stringify(paceUser.json()));
-        this.paceUser = paceUser.json();
+        console.log("User data from BackPace...", paceUser);
+        this.paceUser = paceUser;
         this.userId = this.paceUser.facebookId;
         this.userToken = this.paceUser.accessToken;
         return paceUser;
@@ -1076,14 +1075,17 @@ var UserData = (function () {
             this._favorites.splice(index, 1);
         }
     };
+    UserData.prototype.saveLoginStorage = function (hasLoggedIn) {
+        this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn).then();
+    };
     UserData.prototype.login = function () {
-        this.storage.set(this.HAS_LOGGED_IN, true);
+        this.saveLoginStorage(true);
         this.events.publish('user:login');
     };
     UserData.prototype.FbLogout = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.storage.remove(_this.HAS_LOGGED_IN);
+            _this.storage.remove(_this.HAS_LOGGED_IN).then();
             console.log("UserData: logout() reached...");
             facebookConnectPlugin.logout(function () {
                 console.log("Logging out...");
@@ -1096,7 +1098,6 @@ var UserData = (function () {
             });
         });
     };
-    // Return a promise
     UserData.prototype.hasLoggedIn = function () {
         return this.storage.get(this.HAS_LOGGED_IN).then(function (value) {
             return value;
@@ -1145,10 +1146,8 @@ var UserData = (function () {
     };
     UserData.prototype.mockGetPaceUser = function () {
         return {
-            paceUser: {
-                facebookId: "",
-                accessToken: ""
-            }
+            facebookId: "",
+            accessToken: ""
         };
     };
     UserData.prototype.mockTeamData = function () {

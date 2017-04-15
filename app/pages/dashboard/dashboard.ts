@@ -17,7 +17,6 @@ export class DashboardPage {
 
     private initDashboard() {
         this.userData.getUserShortTeamView().then((shortTeamView) => {
-            console.log("Done loading shortTeamView!", shortTeamView);
             this.shortTeamView = shortTeamView;
         });
     }
@@ -64,7 +63,7 @@ class ModalsContentPage {
         this.initializeItems();
 
         // set q to the value of the searchbar
-        var q = searchbar.value;
+        let q = searchbar.value;
 
         // if the value is an empty string don't filter the items
         if (q.trim() == '') {
