@@ -1,9 +1,6 @@
 {
   "name": "Pace",
   "app_id": "",
-  "v2": true,
-  "watchPatterns": [
-    "www/**/*",
-    "app/**/*"
-  ]
+  "typescript": true,
+  "v2": true
 }

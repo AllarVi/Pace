@@ -6,47 +6,45 @@
     "type": "git",
     "url": "https://github.com/aglo35/Pace.git"
   },
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
-    "chart.js": "^2.1.2",
-    "es6-shim": "^0.35.0",
-    "ionic-angular": "2.0.0-beta.6",
-    "ionic-native": "^1.2.1",
+    "@angular/common": "2.4.8",
+    "@angular/compiler": "2.4.8",
+    "@angular/compiler-cli": "2.4.8",
+    "@angular/core": "2.4.8",
+    "@angular/forms": "2.4.8",
+    "@angular/http": "2.4.8",
+    "@angular/platform-browser": "2.4.8",
+    "@angular/platform-browser-dynamic": "2.4.8",
+    "@angular/platform-server": "2.4.8",
+    "@angular/router": "3.4.8",
+    "chart.js": "^2.5.0",
+    "es6-shim": "0.35.3",
+    "ionic-angular": "^2.3.0",
+    "@ionic-native/core": "3.4.2",
+    "@ionic-native/in-app-browser": "3.4.2",
+    "@ionic-native/splash-screen": "3.4.2",
+    "@ionic-native/status-bar": "3.4.2",
+    "@ionic/storage": "2.0.1",
     "ionicons": "3.0.0",
-    "ng2-charts": "^1.0.3",
+    "ng2-charts": "^1.5.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "^0.6.12"
+    "rxjs": "5.0.1",
+    "sw-toolbox": "3.4.0",
+    "zone.js": "0.7.2"
   },
   "devDependencies": {
     "@angular/language-service": "^4.0.2",
-    "del": "2.2.0",
-    "gulp": "3.9.1",
-    "gulp-tsc": "^1.1.5",
-    "gulp-watch": "4.3.5",
-    "ionic-gulp-browserify-typescript": "^1.1.0",
-    "ionic-gulp-fonts-copy": "^1.0.0",
-    "ionic-gulp-html-copy": "^1.0.0",
-    "ionic-gulp-sass-build": "^1.0.0",
-    "ionic-gulp-scripts-copy": "^1.0.1",
-    "run-sequence": "1.1.5"
+    "@ionic/app-scripts": "^1.3.3",
+    "typescript": "~2.2.1"
   },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    {
-      "locator": "https://github.com/VersoSolutions/CordovaClipboard",
-      "id": "com.verso.cordova.clipboard"
-    },
-    "cordova-plugin-media-capture",
-    "cordova-plugin-inappbrowser",
-    "cordova-plugin-file",
-    "cordova-plugin-camera"
-  ],
-  "cordovaPlatforms": [
-    "ios",
-    {
-      "platform": "android",
-      "locator": "browser"
-    }
-  ]
+  "config": {
+    "ionic_bundler": "rollup",
+    "ionic_source_map_type": "source-map"
+  }
 }

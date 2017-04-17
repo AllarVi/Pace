@@ -1,0 +1,107 @@
+<ion-navbar *navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Profile</ion-title>
+</ion-navbar>
+
+<ion-content padding>
+
+    <ion-item>
+        <ion-thumbnail item-left>
+            <!--<img class="profile-image" src="img/michael-phelps.png">-->
+            <img class="profile-image" [src]=profileAvatar>
+        </ion-thumbnail>
+        <h2>{{paceUserData.name}}</h2>
+        <h3>1564 p</h3>
+        <p>Athlete</p>
+    </ion-item>
+
+    <ion-segment padding [(ngModel)]="tab">
+        <ion-segment-button value="goals">
+            Goals
+        </ion-segment-button>
+        <ion-segment-button value="progress">
+            Progress
+        </ion-segment-button>
+        <ion-segment-button value="achievements">
+            Achievements
+        </ion-segment-button>
+    </ion-segment>
+
+    <!--<div [ngSwitch]="tab">-->
+        <!--<ion-list *ngSwitchDefault>-->
+            <!--&lt;!&ndash;<ion-list *ngSwitchWhen="'goals'">&ndash;&gt;-->
+            <!--<ion-list-header>-->
+                <!--Gymnastics-->
+            <!--</ion-list-header>-->
+            <!--<a ion-item (click)="openModal({charNum: 0})">-->
+                <!--Salto (360°) backward-->
+            <!--</a>-->
+            <!--<a ion-item (click)="openModal({charNum: 1})">-->
+                <!--Round off-->
+            <!--</a>-->
+            <!--<a ion-item (click)="openModal({charNum: 2})">-->
+                <!--Flic flac-->
+            <!--</a>-->
+        <!--</ion-list>-->
+
+        <!--<ion-list *ngSwitchWhen="'progress'">-->
+            <!--<ion-item>-->
+                <!--<h2>Siia</h2>-->
+            <!--</ion-item>-->
+            <!--<ion-item>-->
+                <!--<h2>tuleb</h2>-->
+            <!--</ion-item>-->
+            <!--<ion-item>-->
+                <!--<h2>isiklik</h2>-->
+            <!--</ion-item>-->
+            <!--<ion-item>-->
+                <!--<h2>progress.</h2>-->
+            <!--</ion-item>-->
+        <!--</ion-list>-->
+
+        <!--<ion-list *ngSwitchWhen="'achievements'">-->
+            <!--<ion-card>-->
+                <!--<div>-->
+                    <!--&lt;!&ndash;<iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>&ndash;&gt;-->
+                    <!--<ion-card>-->
+                        <!--<img [src]="image">-->
+                    <!--</ion-card>-->
+                <!--</div>-->
+
+                <!--<ion-card-content>-->
+                    <!--<h2 class="card-title">-->
+                        <!--Round off-->
+                    <!--</h2>-->
+                    <!--<p>-->
+                        <!--gymnastics-->
+                    <!--</p>-->
+                <!--</ion-card-content>-->
+
+                <!--<ion-row no-padding>-->
+                    <!--<ion-col>-->
+                        <!--<button clear small danger (click)="openProfileAchievementsModal({charNum: 0})">-->
+                            <!--<ion-icon name='create'></ion-icon>-->
+                            <!--Edit-->
+                        <!--</button>-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+            <!--</ion-card>-->
+        <!--</ion-list>-->
+    <!--</div>-->
+
+</ion-content>
+
+<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini">
+    <ion-icon ios="ios-flag" md="md-flag" is-active="false"></ion-icon>
+</button>
+
+<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini"
+        (click)="snapImage()">
+    <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>
+</button>
+
+<button fab primary fab-bottom fab-right style="z-index: 999">
+    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>
+</button>
