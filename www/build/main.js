@@ -102386,6 +102386,29 @@ var UserData = (function () {
             resolve(teamData);
         });
     };
+    UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            // this.url = 'http://' + this.BASE_URL + ':8080/api/user';
+            _this.paceUser = JSON.stringify({
+                facebookId: userProfile.id,
+                name: userProfile.name,
+                authResponse: status,
+                accessToken: accessToken,
+                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+            });
+            // this.http.post(this.url, this.paceUser).subscribe(paceUser => {
+            //     this.extractPaceUser(paceUser);
+            //     resolve(paceUser)
+            // }, error => {
+            //     console.log("Error... is backend running? probably need to enable cors mapping?");
+            //     console.log(JSON.stringify(error.json()));
+            //     reject();
+            // }, () => console.log('User data fetching complete!'));
+            var paceUser = _this.extractPaceUser(_this.mockGetPaceUser());
+            resolve(paceUser);
+        });
+    };
     UserData.prototype.extractUserShortTeamView = function (shortTeamView) {
         // TODO: maybe add shortTeamView.json() for backend
         this.shortTeamView = shortTeamView;
@@ -102536,29 +102559,6 @@ var UserData = (function () {
             }, function () { return console.log('File upload complete!'); });
         });
     };
-    UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/user';
-            console.log(JSON.stringify(userProfile));
-            console.log("Making request to: " + _this.url);
-            _this.paceUser = JSON.stringify({
-                facebookId: userProfile.id,
-                name: userProfile.name,
-                authResponse: status,
-                accessToken: accessToken,
-                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
-            });
-            _this.http.post(_this.url, _this.paceUser).subscribe(function (paceUser) {
-                _this.extractPaceUser(paceUser);
-                resolve(paceUser);
-            }, function (error) {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                console.log(JSON.stringify(error.json()));
-                reject();
-            }, function () { return console.log('User data fetching complete!'); });
-        });
-    };
     UserData.prototype.removeFavorite = function (sessionName) {
         var index = this._favorites.indexOf(sessionName);
         if (index > -1) {
@@ -102567,10 +102567,6 @@ var UserData = (function () {
     };
     UserData.prototype.saveLoginStorage = function (hasLoggedIn) {
         this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn);
-    };
-    UserData.prototype.login = function () {
-        this.saveLoginStorage(true);
-        this.events.publish('user:login');
     };
     UserData.prototype.FbLogout = function () {
         var _this = this;
@@ -102693,7 +102689,9 @@ var UserData = (function () {
 }());
 UserData = __decorate$26([
     Injectable(),
-    __metadata$24("design:paramtypes", [Events, Http, Storage])
+    __metadata$24("design:paramtypes", [Events,
+        Http,
+        Storage])
 ], UserData);
 
 var __decorate$25 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -102788,7 +102786,7 @@ var DashboardPage = (function () {
 }());
 DashboardPage = __decorate$24([
     Component({
-        selector: 'page-dashboard',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/'<ion-navbar *navbar>\n    <button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title></ion-title>\n</ion-navbar>\n\n<ion-content class="outer-content">\n\n    <ion-card *ngFor="let team of shortTeamView">\n\n        <ion-card-header>\n            <button ion-item (click)="goToGroupDetail(team)">\n                <!--<ion-avatar item-left>-->\n                <!--<img src="http://pics.clipartpng.com/Basketball_PNG_Clipart-842.png">-->\n                <!--</ion-avatar>-->\n                {{team.teamName}}\n            </button>\n        </ion-card-header>\n\n        <ion-list>\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of team.shortTableRowList">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n        </ion-list>\n\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <button ion-item (click)="openModal({charNum: 0})">\n                <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>\n                Join Group\n            </button>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/
+        selector: 'page-dashboard',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n\n    <ion-card *ngFor="let team of shortTeamView">\n\n        <ion-card-header>\n            <button ion-item (click)="goToGroupDetail(team)">\n                {{team.teamName}}\n            </button>\n        </ion-card-header>\n\n        <ion-list>\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of team.shortTableRowList">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n        </ion-list>\n\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <button ion-item (click)="openModal({charNum: 0})">\n                <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>\n                Join Group\n            </button>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/
     }),
     __metadata$22("design:paramtypes", [NavController, UserData, NavParams])
 ], DashboardPage);
@@ -102860,10 +102858,12 @@ var __metadata$27 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var FbProvider = (function () {
-    function FbProvider(events, platform, userData) {
+    function FbProvider(events, platform, userData, storage) {
         this.events = events;
         this.platform = platform;
         this.userData = userData;
+        this.storage = storage;
+        this.HAS_LOGGED_IN = 'hasLoggedIn';
     }
     FbProvider.prototype.getFbLoginStatus = function () {
         var _this = this;
@@ -102921,7 +102921,7 @@ var FbProvider = (function () {
                 });
             }
             else {
-                reject('Please run me on a device');
+                reject('Please run me on a device!');
             }
         });
     };
@@ -102936,9 +102936,11 @@ var FbProvider = (function () {
             console.log("getFbLoginStatus", FbLoginStatus.status);
             facebookConnectPlugin.login(['email', 'public_profile'], function (success) {
                 console.log("Login call successful!");
-                _this.fbLoginSuccess(success).then(function () {
+                _this.fbLoginSuccess(success).then(function (paceUser) {
+                    _this.storage.set(_this.HAS_LOGGED_IN, true);
+                    _this.events.publish('user:login');
                     console.log("Resolving after fbLoginSuccess...");
-                    resolve();
+                    resolve(paceUser);
                 });
             }, function (err) {
                 _this.fbLoginError(err);
@@ -102948,8 +102950,7 @@ var FbProvider = (function () {
     };
     
     FbProvider.prototype.fbLoginError = function (err) {
-        console.log("Unsuccessful Facebook login!");
-        console.log(JSON.stringify(err));
+        console.log("Unsuccessful Facebook login!", JSON.stringify(err));
     };
     
     FbProvider.prototype.fbLoginSuccess = function (success) {
@@ -102957,12 +102958,9 @@ var FbProvider = (function () {
         return new Promise(function (resolve, reject) {
             if (success.status === 'connected') {
                 _this.getCurrentUserProfile(success.authResponse.accessToken).then(function (profileData) {
-                    console.log("fbLoginSuccess: getCurrentUserProfile:");
-                    console.log(JSON.stringify(profileData));
-                    _this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(function () {
-                        console.log("Publishing login...");
-                        _this.events.publish('user:login');
-                        resolve();
+                    console.log("fbLoginSuccess: getCurrentUserProfile:", JSON.stringify(profileData));
+                    _this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(function (paceUser) {
+                        resolve(paceUser);
                     }, function (err) {
                         console.log(JSON.stringify(err));
                         reject();
@@ -102991,7 +102989,10 @@ var FbProvider = (function () {
 }());
 FbProvider = __decorate$29([
     Injectable(),
-    __metadata$27("design:paramtypes", [Events, Platform, UserData])
+    __metadata$27("design:paramtypes", [Events,
+        Platform,
+        UserData,
+        Storage])
 ], FbProvider);
 
 var __decorate$28 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -103004,31 +103005,17 @@ var __metadata$26 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var LoginPage = (function () {
-    function LoginPage(nav, menu, userData, fbProvider) {
+    function LoginPage(nav, fbProvider) {
         this.nav = nav;
-        this.menu = menu;
-        this.userData = userData;
         this.fbProvider = fbProvider;
     }
     LoginPage.prototype.fbLogin = function () {
         var _this = this;
         console.log("Facebook login initialized...");
         this.fbProvider.login().then(function () {
-            _this.userData.login();
             console.log("Navigating to home...");
-            // this.nav.push(DashboardPage);
-            _this.nav.setRoot(DashboardPage).then(function (result) {
-                console.log("fbLogin:setRoot:Dashboard", result);
-            });
+            _this.nav.push(TabsPage);
         });
-    };
-    LoginPage.prototype.onPageDidEnter = function () {
-        // the left menu should be disabled on the tutorial page
-        this.menu.enable(false);
-    };
-    LoginPage.prototype.onPageDidLeave = function () {
-        // enable the left menu when leaving the tutorial page
-        this.menu.enable(true);
     };
     return LoginPage;
 }());
@@ -103036,7 +103023,8 @@ LoginPage = __decorate$28([
     Component({
         selector: 'page-login',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/login/login.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Login</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-row responsive-sm>\n        <ion-col>\n            <button ion-button (click)="fbLogin()" block class="facebook-btn">Log\n                In with\n                Facebook\n            </button>\n        </ion-col>\n    </ion-row>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/login/login.html"*/
     }),
-    __metadata$26("design:paramtypes", [NavController, MenuController, UserData, FbProvider])
+    __metadata$26("design:paramtypes", [NavController,
+        FbProvider])
 ], LoginPage);
 
 var __decorate$20 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -103086,10 +103074,9 @@ var PaceApp = (function () {
         this.loggedOutPages = [
             { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
         ];
-        console.log("reached");
         this.storage.get('hasLoggedIn')
             .then(function (hasLoggedIn) {
-            console.log("reached here", hasLoggedIn);
+            console.log("hasLoggedIn", hasLoggedIn);
             if (hasLoggedIn) {
                 _this.rootPage = TabsPage;
             }
@@ -103100,8 +103087,8 @@ var PaceApp = (function () {
         });
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
             if (FbLoginStatus.status === 'connected') {
-                _this.initLeftMenuAccount();
-                _this.initDashboardPage();
+                // this.initLeftMenuAccount();
+                // this.initDashboardPage();
             }
             else {
                 // this.initLoginPage();
@@ -103232,7 +103219,7 @@ __decorate$20([
     __metadata$19("design:type", Nav)
 ], PaceApp.prototype, "nav", void 0);
 PaceApp = __decorate$20([
-    Component({template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/app/app.template.html"*/'<!-- left menu -->\n<ion-menu [content]="content">\n\n    <ion-toolbar>\n        <ion-title>Menu</ion-title>\n    </ion-toolbar>\n\n    <ion-content class="outer-content">\n\n        <ion-list>\n            <ion-list-header>\n                Navigate\n            </ion-list-header>\n            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n                <ion-icon item-left [name]="p.icon"></ion-icon>\n                {{p.title}}\n            </button>\n        </ion-list>\n\n        <ion-list *ngIf="loggedIn">\n            <ion-list-header>\n                Account\n            </ion-list-header>\n            <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">\n                <ion-icon item-left [name]="p.icon"></ion-icon>\n                {{p.title}}\n            </button>\n        </ion-list>\n\n        <ion-list *ngIf="!loggedIn">\n            <ion-list-header>\n                Account\n            </ion-list-header>\n            <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">\n                <ion-icon item-left [name]="p.icon"></ion-icon>\n                {{p.title}}\n            </button>\n        </ion-list>\n    </ion-content>\n\n</ion-menu>\n\n\n<!-- main navigation -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/app/app.template.html"*/,
+    Component({template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/app/app.template.html"*/'<ion-split-pane>\n\n    <!-- logged out menu -->\n    <ion-menu id="loggedOutMenu" [content]="content">\n\n        <ion-header>\n            <ion-toolbar>\n                <ion-title>Menu</ion-title>\n            </ion-toolbar>\n        </ion-header>\n\n        <ion-content class="outer-content">\n\n            <ion-list>\n                <ion-list-header>\n                    Navigate\n                </ion-list-header>\n                <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n                    <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>\n                    {{p.title}}\n                </button>\n            </ion-list>\n\n            <ion-list>\n                <ion-list-header>\n                    Account\n                </ion-list-header>\n                <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">\n                    <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>\n                    {{p.title}}\n                </button>\n            </ion-list>\n\n        </ion-content>\n\n    </ion-menu>\n\n    <!-- logged in menu -->\n    <ion-menu id="loggedInMenu" [content]="content">\n\n        <ion-header>\n            <ion-toolbar>\n                <ion-title>Menu</ion-title>\n            </ion-toolbar>\n        </ion-header>\n\n        <ion-content class="outer-content">\n\n            <ion-list>\n                <ion-list-header>\n                    Navigate\n                </ion-list-header>\n                <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n                    <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>\n                    {{p.title}}\n                </button>\n            </ion-list>\n\n            <ion-list>\n                <ion-list-header>\n                    Account\n                </ion-list-header>\n                <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">\n                    <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>\n                    {{p.title}}\n                </button>\n            </ion-list>\n\n        </ion-content>\n\n    </ion-menu>\n\n    <!-- main navigation -->\n    <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>\n\n</ion-split-pane>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/app/app.template.html"*/,
     }),
     __metadata$19("design:paramtypes", [Events,
         UserData,

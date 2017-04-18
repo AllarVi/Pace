@@ -1,4 +1,5 @@
 import {Platform, Events} from "ionic-angular";
+import {Storage} from '@ionic/storage';
 import {UserData} from "./user-data";
 import {Injectable} from "@angular/core";
 
@@ -9,7 +10,12 @@ export class FbProvider {
 
     result: any;
 
-    constructor(private events: Events, private platform: Platform, private userData: UserData) {
+    HAS_LOGGED_IN = 'hasLoggedIn';
+
+    constructor(private events: Events,
+                private platform: Platform,
+                private userData: UserData,
+                private storage: Storage) {
     }
 
     getFbLoginStatus() {
@@ -65,7 +71,7 @@ export class FbProvider {
                     this.fbLoginStatusSuccess(FbLoginStatus, resolve, reject);
                 });
             } else {
-                reject('Please run me on a device');
+                reject('Please run me on a device!');
             }
         });
     }
@@ -80,9 +86,11 @@ export class FbProvider {
 
             facebookConnectPlugin.login(['email', 'public_profile'], (success: any) => {
                 console.log("Login call successful!");
-                this.fbLoginSuccess(success).then(() => {
+                this.fbLoginSuccess(success).then((paceUser) => {
+                    this.storage.set(this.HAS_LOGGED_IN, true);
+                    this.events.publish('user:login');
                     console.log("Resolving after fbLoginSuccess...");
-                    resolve();
+                    resolve(paceUser);
                 });
             }, (err: any) => {
                 this.fbLoginError(err);
@@ -92,8 +100,7 @@ export class FbProvider {
     };
 
     fbLoginError(err: any) {
-        console.log("Unsuccessful Facebook login!");
-        console.log(JSON.stringify(err));
+        console.log("Unsuccessful Facebook login!", JSON.stringify(err));
     };
 
     fbLoginSuccess(success: any) {
@@ -101,13 +108,10 @@ export class FbProvider {
             if (success.status === 'connected') {
                 this.getCurrentUserProfile(success.authResponse.accessToken).then(
                     (profileData) => {
-                        console.log("fbLoginSuccess: getCurrentUserProfile:");
-                        console.log(JSON.stringify(profileData));
+                        console.log("fbLoginSuccess: getCurrentUserProfile:", JSON.stringify(profileData));
 
-                        this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then(() => {
-                            console.log("Publishing login...");
-                            this.events.publish('user:login');
-                            resolve()
+                        this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then((paceUser) => {
+                            resolve(paceUser)
                         }, err => {
                             console.log(JSON.stringify(err));
                             reject()

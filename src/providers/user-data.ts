@@ -1,6 +1,6 @@
 import {Events} from "ionic-angular";
 import {Http} from "@angular/http";
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import {Injectable} from "@angular/core";
 
 declare const facebookConnectPlugin: any;
@@ -16,7 +16,9 @@ export class UserData {
     // Viinamae
     BASE_URL = '192.168.0.101';
 
-    constructor(private events: Events, private http: Http, private storage: Storage) {
+    constructor(private events: Events,
+                private http: Http,
+                private storage: Storage) {
     }
 
     _favorites: Array<any> = [];
@@ -63,6 +65,32 @@ export class UserData {
             // let teamData = this.extractTeamData(this.makeGetHttpReq(url));
             let teamData = this.extractTeamData(this.mockTeamData());
             resolve(teamData);
+        });
+    }
+
+    saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
+        return new Promise((resolve, reject) => {
+            // this.url = 'http://' + this.BASE_URL + ':8080/api/user';
+
+            this.paceUser = JSON.stringify({
+                facebookId: userProfile.id,
+                name: userProfile.name,
+                authResponse: status,
+                accessToken: accessToken,
+                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+            });
+
+            // this.http.post(this.url, this.paceUser).subscribe(paceUser => {
+            //     this.extractPaceUser(paceUser);
+            //     resolve(paceUser)
+            // }, error => {
+            //     console.log("Error... is backend running? probably need to enable cors mapping?");
+            //     console.log(JSON.stringify(error.json()));
+            //     reject();
+            // }, () => console.log('User data fetching complete!'));
+
+            let paceUser = this.extractPaceUser(this.mockGetPaceUser());
+            resolve(paceUser);
         });
     }
 
@@ -233,31 +261,6 @@ export class UserData {
         });
     }
 
-    saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/user';
-            console.log(JSON.stringify(userProfile));
-            console.log("Making request to: " + this.url);
-
-            this.paceUser = JSON.stringify({
-                facebookId: userProfile.id,
-                name: userProfile.name,
-                authResponse: status,
-                accessToken: accessToken,
-                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
-            });
-
-            this.http.post(this.url, this.paceUser).subscribe(paceUser => {
-                this.extractPaceUser(paceUser);
-                resolve(paceUser)
-            }, error => {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                console.log(JSON.stringify(error.json()));
-                reject();
-            }, () => console.log('User data fetching complete!'));
-        });
-    }
-
     removeFavorite(sessionName: any) {
         let index = this._favorites.indexOf(sessionName);
         if (index > -1) {
@@ -267,11 +270,6 @@ export class UserData {
 
     saveLoginStorage(hasLoggedIn: any) {
         this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn);
-    }
-
-    login() {
-        this.saveLoginStorage(true);
-        this.events.publish('user:login');
     }
 
     FbLogout() {

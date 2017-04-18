@@ -73,10 +73,9 @@ export class PaceApp {
                 public storage: Storage,
                 public splashScreen: SplashScreen) {
 
-        console.log("reached");
         this.storage.get('hasLoggedIn')
             .then((hasLoggedIn) => {
-                console.log("reached here", hasLoggedIn);
+                console.log("hasLoggedIn", hasLoggedIn);
                 if (hasLoggedIn) {
                     this.rootPage = TabsPage;
                 } else {
@@ -87,8 +86,8 @@ export class PaceApp {
 
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus: any) => {
             if (FbLoginStatus.status === 'connected') {
-                this.initLeftMenuAccount();
-                this.initDashboardPage();
+                // this.initLeftMenuAccount();
+                // this.initDashboardPage();
             } else {
                 // this.initLoginPage();
             }
@@ -167,7 +166,6 @@ export class PaceApp {
         this.events.subscribe('user:login', () => {
             this.enableMenu(true);
         });
-
 
         this.events.subscribe('user:logout', () => {
             this.enableMenu(false);
