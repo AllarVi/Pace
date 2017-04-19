@@ -1,108 +1,104 @@
-<ion-navbar *navbar>
-    <ion-title>{{teamName}}</ion-title>
-</ion-navbar>
-
-<!--<ion-toolbar>-->
-<!--<button (click)="randomize()" block>-->
-<!--Randomize chart-->
-<!--</button>-->
-<!--</ion-toolbar>-->
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{teamName}}</ion-title>
+    </ion-navbar>
+</ion-header>
 
 <ion-content padding>
     <img src="img/team_cover.png"/>
 
-    <ion-segment padding [(ngModel)]="groupTab" class="groupTab">
-        <ion-segment-button clear small danger value="scores">
-            <ion-icon name='star'></ion-icon>
-            Scores
-        </ion-segment-button>
-        <ion-segment-button clear small danger value="members">
-            <ion-icon name='star'></ion-icon>
-            Members
-        </ion-segment-button>
-        <ion-segment-button clear small danger value="velocity">
-            <ion-icon name='star'></ion-icon>
-            Velocity
-        </ion-segment-button>
-    </ion-segment>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="groupTab">
+            <ion-segment-button value="scores">
+                Scores
+            </ion-segment-button>
+            <ion-segment-button value="members">
+                Members
+            </ion-segment-button>
+            <ion-segment-button value="velocity">
+                Velocity
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 
-    <!--<div [ngSwitch]="groupTab">-->
-        <!--<ion-list *ngSwitchDefault>-->
-            <!--<ion-item class="leaderboard-header">-->
-                <!--<ion-row>-->
-                    <!--<ion-col width-10>-->
-                        <!--<p>Rk</p>-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-40>-->
-                        <!--<p>Name</p>-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-20>-->
-                        <!--<p>Tier</p>-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-20>-->
-                        <!--<p>Points</p>-->
-                    <!--</ion-col>-->
-                <!--</ion-row>-->
-            <!--</ion-item>-->
+    <div [ngSwitch]="groupTab">
+        <ion-list *ngSwitchCase="'scores'">
+            <ion-item class="leaderboard-header">
+                <ion-row>
+                    <ion-col width-10>
+                        <p>Rk</p>
+                    </ion-col>
+                    <ion-col width-40>
+                        <p>Name</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Tier</p>
+                    </ion-col>
+                    <ion-col width-20>
+                        <p>Points</p>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
 
-            <!--<ion-item *ngFor="let member of teamMembers">-->
-                <!--<ion-row>-->
-                    <!--<ion-col width-10>-->
-                        <!--{{member.rank}}-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-50>-->
-                        <!--{{member.userName}}-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-20>-->
-                        <!--<ion-icon name="trophy"></ion-icon>-->
-                    <!--</ion-col>-->
-                    <!--<ion-col width-20>-->
-                        <!--{{member.points}}-->
-                    <!--</ion-col>-->
-                <!--</ion-row>-->
-            <!--</ion-item>-->
+            <ion-item *ngFor="let member of teamMembers">
+                <ion-row>
+                    <ion-col width-10>
+                        {{member.rank}}
+                    </ion-col>
+                    <ion-col width-50>
+                        {{member.userName}}
+                    </ion-col>
+                    <ion-col width-20>
+                        <ion-icon name="trophy"></ion-icon>
+                    </ion-col>
+                    <ion-col width-20>
+                        {{member.points}}
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
 
-        <!--</ion-list>-->
+        <ion-list *ngSwitchCase="'members'">
+            <ion-list-header>
+                {{ currentDate | date:'mediumDate' }}
+            </ion-list-header>
 
-        <!--<ion-list *ngSwitchWhen="'members'">-->
+            <ion-item *ngFor="let member of teamMembers">
+                {{member.userName}}
+                <button outline secondary item-right (click)="markPresent(member)">
+                    Present
+                </button>
+                <button outline danger item-right (click)="markAbsent(member)">
+                    Absent
+                </button>
+            </ion-item>
+        </ion-list>
 
-            <!--<ion-list-header>-->
-                <!--{{ currentDate | date:'mediumDate' }}-->
-            <!--</ion-list-header>-->
+        <ion-list *ngSwitchCase="'velocity'">
+            <ion-card>
+                <ion-card-header>
+                    Attendance
+                </ion-card-header>
 
-            <!--<ion-item *ngFor="let member of teamMembers">-->
-                <!--{{member.userName}}-->
-                <!--<button outline secondary item-right (click)="markPresent(member)">-->
-                    <!--Present-->
-                <!--</button>-->
-                <!--<button outline danger item-right (click)="markAbsent(member)">-->
-                    <!--Absent-->
-                <!--</button>-->
-            <!--</ion-item>-->
-
-        <!--</ion-list>-->
-        <!--<ion-list *ngSwitchWhen="'velocity'">-->
-            <!--<ion-card>-->
-                <!--<ion-card-header>-->
-                    <!--Attendance-->
-                <!--</ion-card-header>-->
-
-                <!--<ion-card-content>-->
+                <ion-card-content>
                     <!--<div class="chart-container">-->
-                        <!--<base-chart class="chart"-->
-                                    <!--[data]="attenChartData"-->
-                                    <!--[labels]="attenChartLabels"-->
-                                    <!--[options]="lineChartOptions"-->
-                                    <!--[series]="attendanceChartSeries"-->
-                                    <!--[colours]="lineChartColours"-->
-                                    <!--[legend]="lineChartLegend"-->
-                                    <!--[chartType]="lineChartType"-->
-                                    <!--(chartHover)="attendanceChartHovered($event)"-->
-                                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->
+                    <!--<base-chart class="chart"-->
+                    <!--[data]="attenChartData"-->
+                    <!--[labels]="attenChartLabels"-->
+                    <!--[options]="lineChartOptions"-->
+                    <!--[series]="attendanceChartSeries"-->
+                    <!--[colours]="lineChartColours"-->
+                    <!--[legend]="lineChartLegend"-->
+                    <!--[chartType]="lineChartType"-->
+                    <!--(chartHover)="attendanceChartHovered($event)"-->
+                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->
                     <!--</div>-->
-                <!--</ion-card-content>-->
-            <!--</ion-card>-->
-        <!--</ion-list>-->
-    <!--</div>-->
+                </ion-card-content>
+            </ion-card>
+        </ion-list>
+    </div>
 
 </ion-content>

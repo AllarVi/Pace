@@ -24,6 +24,8 @@ export class GroupDetailPage {
 
     attenChartData: any;
 
+    groupTab: string = "scores";
+
     constructor(private navParams: NavParams, private userData: UserData) {
 
         this.currentDate = new Date();
