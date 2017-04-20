@@ -11,6 +11,7 @@ export class GroupDetailPage {
     team: any;
 
     teamMembers: any;
+    teamScores: any;
 
     teamName: any;
 
@@ -35,6 +36,11 @@ export class GroupDetailPage {
 
         this.userData.getTeamData(this.team.id).then((teamData: any) => {
             this.teamMembers = teamData['fullScoresTableList'];
+            this.teamScores = Object.assign({}, this.teamMembers);
+            console.log("members", this.teamMembers);
+            console.log("scores", this.teamScores);
+
+
             this.currentMonthAttendance = teamData['currentMonthAttendance'];
 
             this.attenChartLabels = this.currentMonthAttendance.map((element: any) => {
