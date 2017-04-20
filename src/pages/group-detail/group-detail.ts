@@ -10,8 +10,8 @@ export class GroupDetailPage {
 
     team: any;
 
-    teamMembers: any;
-    teamScores: any;
+    teamMembers: Array<Object>;
+    teamScores: Array<Object>;
 
     teamName: any;
 
@@ -36,7 +36,7 @@ export class GroupDetailPage {
 
         this.userData.getTeamData(this.team.id).then((teamData: any) => {
             this.teamMembers = teamData['fullScoresTableList'];
-            this.teamScores = Object.assign({}, this.teamMembers);
+            this.teamScores = Object.assign([], this.teamMembers);
             console.log("members", this.teamMembers);
             console.log("scores", this.teamScores);
 

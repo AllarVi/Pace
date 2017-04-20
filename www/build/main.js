@@ -102714,7 +102714,7 @@ var GroupDetailPage = (function () {
         this.teamName = this.team.teamName;
         this.userData.getTeamData(this.team.id).then(function (teamData) {
             _this.teamMembers = teamData['fullScoresTableList'];
-            _this.teamScores = Object.assign({}, _this.teamMembers);
+            _this.teamScores = Object.assign([], _this.teamMembers);
             console.log("members", _this.teamMembers);
             console.log("scores", _this.teamScores);
             _this.currentMonthAttendance = teamData['currentMonthAttendance'];
@@ -102781,10 +102781,6 @@ var DashboardPage = (function () {
             if (!result)
                 console.log("nav.push.GroupDetailPage failed");
         });
-    };
-    DashboardPage.prototype.openModal = function (characterNum) {
-        // let modal = Modal.create(ModalsContentPage, characterNum);
-        // this.nav.present(modal);
     };
     return DashboardPage;
 }());

@@ -24,18 +24,12 @@ export class DashboardPage {
     }
 
     goToGroupDetail(team: any) {
-        console.log("Team ID: " + team.id);
         this.nav.push(GroupDetailPage, {
             team: team
         }).then((result) => {
             if (!result)
                 console.log("nav.push.GroupDetailPage failed");
         });
-    }
-
-    openModal(characterNum: any) {
-        // let modal = Modal.create(ModalsContentPage, characterNum);
-        // this.nav.present(modal);
     }
 
 }
