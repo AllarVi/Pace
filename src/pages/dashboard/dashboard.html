@@ -10,7 +10,7 @@
 
 <ion-content class="outer-content">
 
-    <ion-card *ngFor="let team of shortTeamView">
+    <ion-card *ngFor="let team of teamView">
 
         <ion-card-header>
             <button ion-item (click)="goToGroupDetail(team)">
@@ -36,7 +36,7 @@
                 </ion-row>
             </ion-item>
 
-            <ion-item *ngFor="let member of team.shortTableRowList">
+            <ion-item *ngFor="let member of team.fullScoresTableList">
                 <ion-row>
                     <ion-col width-10>
                         {{member.rank}}

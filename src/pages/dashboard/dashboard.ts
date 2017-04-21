@@ -10,16 +10,16 @@ import {Component} from "@angular/core";
 })
 export class DashboardPage {
 
-    shortTeamView: any;
+    teamView: any;
 
     constructor(private nav: NavController, private userData: UserData, private navParams: NavParams) {
-        this.shortTeamView = navParams.get('param1');
+        this.teamView = navParams.get('param1');
         this.initDashboard();
     }
 
     private initDashboard() {
-        this.userData.getUserShortTeamView().then((shortTeamView) => {
-            this.shortTeamView = shortTeamView;
+        this.userData.getUserShortTeamView().then((teamView) => {
+            this.teamView = teamView;
         });
     }
 

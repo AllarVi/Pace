@@ -55,9 +55,9 @@ export class FbProvider {
     }
 
     private handleConnected(success: any, resolve) {
-        console.log('Login Status: ', success.status);
+        console.log('Login Status: ', success.status, success.authResponse.accessToken);
         // Check if we have our user saved in the backend
-        this.userData.getPaceUser(success.authResponse.userID).then(() => {
+        this.userData.getPaceUser(success.authResponse.userID, success.authResponse.accessToken).then(() => {
             this.userData.saveLoginStorage(true);
             resolve(success);
         });

@@ -8,13 +8,13 @@ declare const facebookConnectPlugin: any;
 @Injectable()
 export class UserData {
 
-    // BASE_URL = 'localhost';
+    BASE_URL = 'localhost:8181';
 
     // TTU
     // BASE_URL = '10.224.4.183';
 
     // Viinamae
-    BASE_URL = '192.168.0.101';
+    // BASE_URL = '192.168.0.101';
 
     constructor(private events: Events,
                 private http: Http,
@@ -23,6 +23,7 @@ export class UserData {
 
     _favorites: Array<any> = [];
     HAS_LOGGED_IN = 'hasLoggedIn';
+    PACE_USER = 'paceUser';
 
     url: any;
     paceUser: any;
@@ -37,24 +38,30 @@ export class UserData {
 
     groupData: any;
 
-    getPaceUser(userID: any) {
+    getPaceUser(userID: any, accessToken: any) {
         console.log("UserID to make request with:", userID);
         return new Promise(resolve => {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetPaceUserUrl(userID);
-            // let paceUser = this.extractPaceUser(this.makeGetHttpReq(url));
-            let paceUser = this.extractPaceUser(this.mockGetPaceUser());
-            resolve(paceUser)
+            let url = this.constructGetPaceUserUrl(userID, accessToken);
+            this.makeGetHttpReq(url).then(result => {
+                let paceUser = this.extractPaceUser(this.formatToJSON(result));
+                resolve(paceUser)
+            });
         });
+    }
+
+    private formatToJSON(result) {
+        return result.json();
     }
 
     getUserShortTeamView() {
         return new Promise(resolve => {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetUserShortTeamViewUrl();
-            // let userShortTeamView = this.extractUserShortTeamView(this.makeGetHttpReq(url));
-            let userShortTeamView = this.extractUserShortTeamView(this.mockUserShortTeamView());
-            resolve(userShortTeamView)
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructGetUserShortTeamViewUrl(paceUser);
+                this.makeGetHttpReq(url).then(result => {
+                    let userTeamView = this.extractUserShortTeamView(this.formatToJSON(result));
+                    resolve(userTeamView)
+                })
+            });
         });
     }
 
@@ -94,11 +101,10 @@ export class UserData {
         });
     }
 
-    private extractUserShortTeamView(shortTeamView: any) {
-        // TODO: maybe add shortTeamView.json() for backend
-        this.shortTeamView = shortTeamView;
+    private extractUserShortTeamView(teamView: any) {
+        this.shortTeamView = teamView;
 
-        return shortTeamView;
+        return teamView;
     }
 
     private extractTeamData(teamData: any) {
@@ -111,44 +117,49 @@ export class UserData {
     private extractPaceUser(paceUser: any) {
         console.log("User data from BackPace...", paceUser);
         this.paceUser = paceUser;
-        this.userId = this.paceUser.facebookId;
-        this.userToken = this.paceUser.accessToken;
+        this.userId = paceUser.facebookId;
+        this.userToken = paceUser.accessToken;
 
+        this.storage.set(this.PACE_USER, paceUser);
         return paceUser;
     }
 
-    // private constructGetPaceUserUrl(userID: any) {
-    //     let url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
-    //     console.log("Making request to: " + url);
-    //     return url;
-    // }
-    //
-    // private constructGetUserShortTeamViewUrl() {
-    //     let url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
-    //     console.log("Making request to: " + url);
-    //     return url;
-    // }
+    private constructGetPaceUserUrl(userID: any, accessToken: any) {
+        let url = 'http://' + this.BASE_URL + '/api/user?facebookId=' + userID + '&token=' + accessToken;
+        console.log("Making request to: " + url);
+        return url;
+    }
+
+    private constructGetUserShortTeamViewUrl(paceUser: any) {
+        let url = 'http://' + this.BASE_URL + '/api/dashboard?facebookId='
+            + paceUser.facebookId + '&teamView=short&token=' + paceUser.accessToken;
+        console.log("Making request to: " + url);
+        return url;
+    }
+
     //
     // private constructGetTeamDataUrl(teamId: any) {
     //     return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
     // }
     //
-    // private makeGetHttpReq(url: any) {
-    //     this.http.get(url).subscribe(result => {
-    //         return result;
-    //     }, error => {
-    //         this.handleGetHttpReqError(error);
-    //     }, () => this.handleGetHttpReqFinally());
-    // }
+    private makeGetHttpReq(url: any) {
+        return new Promise(resolve => {
+            this.http.get(url).subscribe(result => {
+                resolve(result);
+            }, error => {
+                this.handleGetHttpReqError(error);
+            }, () => this.handleGetHttpReqFinally());
+        });
+    }
 
-    // private handleGetHttpReqFinally() {
-    //     console.log('User data fetching complete!');
-    // }
-    //
-    // private handleGetHttpReqError(error: any) {
-    //     console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-    //     console.log(JSON.stringify(error.json()));
-    // }
+    private handleGetHttpReqFinally() {
+        console.log('User data fetching complete!');
+    }
+
+    private handleGetHttpReqError(error: any) {
+        console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+        console.log(JSON.stringify(error.json()));
+    }
 
     getPaceUserData() {
         return this.paceUser;
@@ -268,7 +279,7 @@ export class UserData {
         }
     }
 
-    saveLoginStorage(hasLoggedIn: any) {
+    saveLoginStorage(hasLoggedIn: boolean) {
         this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn);
     }
 

@@ -127,39 +127,7 @@ export class PaceApp {
     }
 
     initLogout() {
-        // let actionSheet = ActionSheet.create({
-        //     title: 'Exit now?',
-        //     buttons: [
-        //         {
-        //             text: 'Log out',
-        //             role: 'destructive',
-        //             handler: () => {
-        //                 let navTransition = actionSheet.dismiss();
-        //
-        //                 console.log("Starting the async mehtod...");
-        //                 this.userData.FbLogout()
-        //                     .then(() => {
-        //                         console.log("Finished call to Facebook about logging out");
-        //
-        //                         navTransition.then(() => {
-        //                             console.log("Navigating to LoginPage...");
-        //                             this.nav.setRoot(LoginPage).then();
-        //                         });
-        //                     });
-        //                 return false;
-        //             }
-        //         },
-        //         {
-        //             text: 'Cancel',
-        //             role: 'cancel',
-        //             handler: () => {
-        //                 console.log('Cancel clicked');
-        //             }
-        //         }
-        //     ]
-        // });
-        //
-        // this.nav.present(actionSheet);
+        // TODO:
     }
 
     listenToLoginEvents() {

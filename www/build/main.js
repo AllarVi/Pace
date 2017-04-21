@@ -102343,37 +102343,43 @@ var __metadata$24 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var UserData = (function () {
+    // TTU
+    // BASE_URL = '10.224.4.183';
+    // Viinamae
+    // BASE_URL = '192.168.0.101';
     function UserData(events, http, storage) {
         this.events = events;
         this.http = http;
         this.storage = storage;
-        // BASE_URL = 'localhost';
-        // TTU
-        // BASE_URL = '10.224.4.183';
-        // Viinamae
-        this.BASE_URL = '192.168.0.101';
+        this.BASE_URL = 'localhost:8181';
         this._favorites = [];
         this.HAS_LOGGED_IN = 'hasLoggedIn';
+        this.PACE_USER = 'paceUser';
     }
-    UserData.prototype.getPaceUser = function (userID) {
+    UserData.prototype.getPaceUser = function (userID, accessToken) {
         var _this = this;
         console.log("UserID to make request with:", userID);
         return new Promise(function (resolve) {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetPaceUserUrl(userID);
-            // let paceUser = this.extractPaceUser(this.makeGetHttpReq(url));
-            var paceUser = _this.extractPaceUser(_this.mockGetPaceUser());
-            resolve(paceUser);
+            var url = _this.constructGetPaceUserUrl(userID, accessToken);
+            _this.makeGetHttpReq(url).then(function (result) {
+                var paceUser = _this.extractPaceUser(_this.formatToJSON(result));
+                resolve(paceUser);
+            });
         });
+    };
+    UserData.prototype.formatToJSON = function (result) {
+        return result.json();
     };
     UserData.prototype.getUserShortTeamView = function () {
         var _this = this;
         return new Promise(function (resolve) {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetUserShortTeamViewUrl();
-            // let userShortTeamView = this.extractUserShortTeamView(this.makeGetHttpReq(url));
-            var userShortTeamView = _this.extractUserShortTeamView(_this.mockUserShortTeamView());
-            resolve(userShortTeamView);
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                var url = _this.constructGetUserShortTeamViewUrl(paceUser);
+                _this.makeGetHttpReq(url).then(function (result) {
+                    var userTeamView = _this.extractUserShortTeamView(_this.formatToJSON(result));
+                    resolve(userTeamView);
+                });
+            });
         });
     };
     UserData.prototype.getTeamData = function (teamId) {
@@ -102409,10 +102415,10 @@ var UserData = (function () {
             resolve(paceUser);
         });
     };
-    UserData.prototype.extractUserShortTeamView = function (shortTeamView) {
-        // TODO: maybe add shortTeamView.json() for backend
-        this.shortTeamView = shortTeamView;
-        return shortTeamView;
+    UserData.prototype.extractUserShortTeamView = function (teamView) {
+        this.shortTeamView = teamView;
+        console.log("AAA", teamView);
+        return teamView;
     };
     UserData.prototype.extractTeamData = function (teamData) {
         // TODO: maybe add teamData.json() for backend
@@ -102422,41 +102428,44 @@ var UserData = (function () {
     UserData.prototype.extractPaceUser = function (paceUser) {
         console.log("User data from BackPace...", paceUser);
         this.paceUser = paceUser;
-        this.userId = this.paceUser.facebookId;
-        this.userToken = this.paceUser.accessToken;
+        this.userId = paceUser.facebookId;
+        this.userToken = paceUser.accessToken;
+        this.storage.set(this.PACE_USER, paceUser);
         return paceUser;
     };
-    // private constructGetPaceUserUrl(userID: any) {
-    //     let url = 'http://' + this.BASE_URL + ':8080/api/user?facebookId=' + userID;
-    //     console.log("Making request to: " + url);
-    //     return url;
-    // }
-    //
-    // private constructGetUserShortTeamViewUrl() {
-    //     let url = 'http://' + this.BASE_URL + ':8080/api/dashboard?facebookId=' + this.userId + '&teamView=short&token=' + this.userToken;
-    //     console.log("Making request to: " + url);
-    //     return url;
-    // }
+    UserData.prototype.constructGetPaceUserUrl = function (userID, accessToken) {
+        var url = 'http://' + this.BASE_URL + '/api/user?facebookId=' + userID + '&token=' + accessToken;
+        console.log("Making request to: " + url);
+        return url;
+    };
+    UserData.prototype.constructGetUserShortTeamViewUrl = function (paceUser) {
+        var url = 'http://' + this.BASE_URL + '/api/dashboard?facebookId='
+            + paceUser.facebookId + '&teamView=short&token=' + paceUser.accessToken;
+        console.log("Making request to: " + url);
+        return url;
+    };
     //
     // private constructGetTeamDataUrl(teamId: any) {
     //     return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
     // }
     //
-    // private makeGetHttpReq(url: any) {
-    //     this.http.get(url).subscribe(result => {
-    //         return result;
-    //     }, error => {
-    //         this.handleGetHttpReqError(error);
-    //     }, () => this.handleGetHttpReqFinally());
-    // }
-    // private handleGetHttpReqFinally() {
-    //     console.log('User data fetching complete!');
-    // }
-    //
-    // private handleGetHttpReqError(error: any) {
-    //     console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
-    //     console.log(JSON.stringify(error.json()));
-    // }
+    UserData.prototype.makeGetHttpReq = function (url) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(url).subscribe(function (result) {
+                resolve(result);
+            }, function (error) {
+                _this.handleGetHttpReqError(error);
+            }, function () { return _this.handleGetHttpReqFinally(); });
+        });
+    };
+    UserData.prototype.handleGetHttpReqFinally = function () {
+        console.log('User data fetching complete!');
+    };
+    UserData.prototype.handleGetHttpReqError = function (error) {
+        console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+        console.log(JSON.stringify(error.json()));
+    };
     UserData.prototype.getPaceUserData = function () {
         return this.paceUser;
     };
@@ -102715,8 +102724,6 @@ var GroupDetailPage = (function () {
         this.userData.getTeamData(this.team.id).then(function (teamData) {
             _this.teamMembers = teamData['fullScoresTableList'];
             _this.teamScores = Object.assign([], _this.teamMembers);
-            console.log("members", _this.teamMembers);
-            console.log("scores", _this.teamScores);
             _this.currentMonthAttendance = teamData['currentMonthAttendance'];
             _this.attenChartLabels = _this.currentMonthAttendance.map(function (element) {
                 return element.date;
@@ -102745,7 +102752,7 @@ var GroupDetailPage = (function () {
 }());
 GroupDetailPage = __decorate$25([
     Component({
-        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="members">\n                Members\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'members\'">\n            <ion-list-header>\n                {{ currentDate | date:\'mediumDate\' }}\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button outline secondary item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button outline danger item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    Attendance\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
+        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="members">\n                Members\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'members\'">\n            <ion-list-header>\n                {{ currentDate | date:\'mediumDate\' }}\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button outline secondary item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button outline danger item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    Attending [Today]\n                </ion-card-header>\n\n                <ion-card-content>\n\n                </ion-card-content>\n            </ion-card>\n\n            <ion-card>\n                <ion-card-header>\n                    Attendance\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
     }),
     __metadata$23("design:paramtypes", [NavParams, UserData])
 ], GroupDetailPage);
@@ -102764,17 +102771,16 @@ var DashboardPage = (function () {
         this.nav = nav;
         this.userData = userData;
         this.navParams = navParams;
-        this.shortTeamView = navParams.get('param1');
+        this.teamView = navParams.get('param1');
         this.initDashboard();
     }
     DashboardPage.prototype.initDashboard = function () {
         var _this = this;
-        this.userData.getUserShortTeamView().then(function (shortTeamView) {
-            _this.shortTeamView = shortTeamView;
+        this.userData.getUserShortTeamView().then(function (teamView) {
+            _this.teamView = teamView;
         });
     };
     DashboardPage.prototype.goToGroupDetail = function (team) {
-        console.log("Team ID: " + team.id);
         this.nav.push(GroupDetailPage, {
             team: team
         }).then(function (result) {
@@ -102786,7 +102792,7 @@ var DashboardPage = (function () {
 }());
 DashboardPage = __decorate$24([
     Component({
-        selector: 'page-dashboard',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n\n    <ion-card *ngFor="let team of shortTeamView">\n\n        <ion-card-header>\n            <button ion-item (click)="goToGroupDetail(team)">\n                {{team.teamName}}\n            </button>\n        </ion-card-header>\n\n        <ion-list>\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of team.shortTableRowList">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n        </ion-list>\n\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <button ion-item (click)="openModal({charNum: 0})">\n                <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>\n                Join Group\n            </button>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/
+        selector: 'page-dashboard',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n\n    <ion-card *ngFor="let team of teamView">\n\n        <ion-card-header>\n            <button ion-item (click)="goToGroupDetail(team)">\n                {{team.teamName}}\n            </button>\n        </ion-card-header>\n\n        <ion-list>\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of team.fullScoresTableList">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n        </ion-list>\n\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <button ion-item (click)="openModal({charNum: 0})">\n                <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>\n                Join Group\n            </button>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/
     }),
     __metadata$22("design:paramtypes", [NavController, UserData, NavParams])
 ], DashboardPage);
@@ -102904,9 +102910,9 @@ var FbProvider = (function () {
     };
     FbProvider.prototype.handleConnected = function (success, resolve) {
         var _this = this;
-        console.log('Login Status: ', success.status);
+        console.log('Login Status: ', success.status, success.authResponse.accessToken);
         // Check if we have our user saved in the backend
-        this.userData.getPaceUser(success.authResponse.userID).then(function () {
+        this.userData.getPaceUser(success.authResponse.userID, success.authResponse.accessToken).then(function () {
             _this.userData.saveLoginStorage(true);
             resolve(success);
         });
@@ -103123,39 +103129,7 @@ var PaceApp = (function () {
         }
     };
     PaceApp.prototype.initLogout = function () {
-        // let actionSheet = ActionSheet.create({
-        //     title: 'Exit now?',
-        //     buttons: [
-        //         {
-        //             text: 'Log out',
-        //             role: 'destructive',
-        //             handler: () => {
-        //                 let navTransition = actionSheet.dismiss();
-        //
-        //                 console.log("Starting the async mehtod...");
-        //                 this.userData.FbLogout()
-        //                     .then(() => {
-        //                         console.log("Finished call to Facebook about logging out");
-        //
-        //                         navTransition.then(() => {
-        //                             console.log("Navigating to LoginPage...");
-        //                             this.nav.setRoot(LoginPage).then();
-        //                         });
-        //                     });
-        //                 return false;
-        //             }
-        //         },
-        //         {
-        //             text: 'Cancel',
-        //             role: 'cancel',
-        //             handler: () => {
-        //                 console.log('Cancel clicked');
-        //             }
-        //         }
-        //     ]
-        // });
-        //
-        // this.nav.present(actionSheet);
+        // TODO:
     };
     PaceApp.prototype.listenToLoginEvents = function () {
         var _this = this;
