@@ -22,9 +22,9 @@ export class GroupDetailPage {
     attenChartLabels: any;
     maleAttendees: any;
     femaleAttendees: any;
-
     attenChartData: any;
 
+    // Default tab to open
     groupTab: string = "scores";
 
     // Today's attendees
@@ -70,12 +70,7 @@ export class GroupDetailPage {
         this.userData.markAttendance(member, this.team.id, "present", date).then((currentMonthAttendance: any) => {
             console.log("Marked as present!");
             this.currentMonthAttendance = currentMonthAttendance;
-
-            for (let dayOfMonth of currentMonthAttendance) {
-                if (dayOfMonth._date_.day == date.day) {
-                    this.attendees = dayOfMonth.attendees;
-                }
-            }
+            this.extractAttendees(currentMonthAttendance, date);
 
         });
 
@@ -86,6 +81,14 @@ export class GroupDetailPage {
     markAbsent(member: any) {
         let index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
+    }
+
+    private extractAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
+        for (let dayOfMonth of currentMonthAttendance) {
+            if (dayOfMonth._date_.day == date.day) {
+                this.attendees = dayOfMonth.attendees;
+            }
+        }
     }
 
 }

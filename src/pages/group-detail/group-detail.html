@@ -15,8 +15,8 @@
             <ion-segment-button value="scores">
                 Scores
             </ion-segment-button>
-            <ion-segment-button value="members">
-                Members
+            <ion-segment-button value="attendance">
+                Attendance
             </ion-segment-button>
             <ion-segment-button value="velocity">
                 Velocity
@@ -61,17 +61,17 @@
             </ion-item>
         </ion-list>
 
-        <ion-list *ngSwitchCase="'members'">
+        <ion-list *ngSwitchCase="'attendance'">
             <ion-list-header>
                 {{ currentDate | date:'mediumDate' }}
             </ion-list-header>
 
             <ion-item *ngFor="let member of teamMembers">
                 {{member.userName}}
-                <button outline secondary item-right (click)="markPresent(member)">
+                <button ion-button outline item-right (click)="markPresent(member)">
                     Present
                 </button>
-                <button outline danger item-right (click)="markAbsent(member)">
+                <button ion-button outline item-right (click)="markAbsent(member)">
                     Absent
                 </button>
             </ion-item>
@@ -80,7 +80,7 @@
         <ion-list *ngSwitchCase="'velocity'">
             <ion-card>
                 <ion-card-header>
-                    Attending [Today]
+                    Attending on {{ currentDate | date:'mediumDate' }}
                 </ion-card-header>
 
                 <ion-card-content>
@@ -96,7 +96,7 @@
 
             <ion-card>
                 <ion-card-header>
-                    Attendance
+                    Attendance Graph
                 </ion-card-header>
 
                 <ion-card-content>
