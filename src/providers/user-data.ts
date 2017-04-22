@@ -73,29 +73,24 @@ export class UserData {
         });
     }
 
-    saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
-        return new Promise((resolve, reject) => {
-            // this.url = 'http://' + this.BASE_URL + ':8080/api/user';
+    markAttendance(member: any, teamId: any, attendance: any, date: any) {
+        return new Promise(resolve => {
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructMarkAttendanceUrl(paceUser, teamId, attendance);
 
-            this.paceUser = JSON.stringify({
-                facebookId: userProfile.id,
-                name: userProfile.name,
-                authResponse: status,
-                accessToken: accessToken,
-                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+                let markAttendanceData = {
+                    day: date.day,
+                    month: date.month,
+                    year: date.year,
+                    member : member.userName
+                };
+
+                this.makePostHttpReq(url, markAttendanceData).then(result => {
+                    let currentMonthAttendance = this.extractCurrentMonthAttendance(this.formatToJSON(result));
+                    resolve(currentMonthAttendance)
+                })
+
             });
-
-            // this.http.post(this.url, this.paceUser).subscribe(paceUser => {
-            //     this.extractPaceUser(paceUser);
-            //     resolve(paceUser)
-            // }, error => {
-            //     console.log("Error... is backend running? probably need to enable cors mapping?");
-            //     console.log(JSON.stringify(error.json()));
-            //     reject();
-            // }, () => console.log('User data fetching complete!'));
-
-            let paceUser = this.extractPaceUser(this.mockGetPaceUser());
-            resolve(paceUser);
         });
     }
 
@@ -122,23 +117,36 @@ export class UserData {
         return paceUser;
     }
 
+    private extractCurrentMonthAttendance(result: any) {
+        return result.currentMonthAttendance;
+    }
+
     private constructGetPaceUserUrl(userID: any, accessToken: any) {
         let url = 'http://' + this.BASE_URL + '/api/user?facebookId=' + userID + '&token=' + accessToken;
-        console.log("Making request to: " + url);
+        console.log("Making GET request to: " + url);
         return url;
     }
 
     private constructGetUserShortTeamViewUrl(paceUser: any) {
         let url = 'http://' + this.BASE_URL + '/api/dashboard?facebookId='
             + paceUser.facebookId + '&teamView=short&token=' + paceUser.accessToken;
-        console.log("Making request to: " + url);
+        console.log("Making GET request to: " + url);
         return url;
     }
 
 
     private constructGetTeamDataUrl(paceUser: any, teamId: any) {
-        return 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
+        let url = 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
             + '&token=' + paceUser.accessToken + '&teamId=' + teamId;
+        console.log("Making GET request to: " + url);
+        return url;
+    }
+
+    private constructMarkAttendanceUrl(paceUser: any, teamId: any, attendance: any) {
+        let url = 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
+            + '&token=' + paceUser.accessToken + '&teamId=' + teamId + '&attendance=' + attendance;
+        console.log("Making POST request to: " + url);
+        return url;
     }
 
     private makeGetHttpReq(url: any) {
@@ -151,17 +159,62 @@ export class UserData {
         });
     }
 
+    private makePostHttpReq(url: any, data: any) {
+        return new Promise(resolve => {
+            this.http.post(url, data).subscribe(result => {
+                resolve(result);
+            }, error => {
+                this.handlePostHttpReqError(error);
+            }, () => this.handlePostHttpReqFinally());
+        });
+    }
+
     private handleGetHttpReqFinally() {
-        console.log('User data fetching complete!');
+        console.log('GET Http request complete!');
+    }
+
+    private handlePostHttpReqFinally() {
+        console.log('POST Http request complete!');
     }
 
     private handleGetHttpReqError(error: any) {
-        console.log("Error occurred while fetching user data... probably need to enable correct cors mapping");
+        console.log("Error occurred while GET... probably need to enable correct cors mapping");
+        console.log(JSON.stringify(error.json()));
+    }
+
+    private handlePostHttpReqError(error: any) {
+        console.log("Error occurred while POST... probably need to enable correct cors mapping");
         console.log(JSON.stringify(error.json()));
     }
 
     getPaceUserData() {
         return this.paceUser;
+    }
+
+    saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
+        return new Promise((resolve, reject) => {
+            // this.url = 'http://' + this.BASE_URL + ':8080/api/user';
+
+            this.paceUser = JSON.stringify({
+                facebookId: userProfile.id,
+                name: userProfile.name,
+                authResponse: status,
+                accessToken: accessToken,
+                picture: "http://graph.facebook.com/" + userProfile.id + "/picture?type=large"
+            });
+
+            // this.http.post(this.url, this.paceUser).subscribe(paceUser => {
+            //     this.extractPaceUser(paceUser);
+            //     resolve(paceUser)
+            // }, error => {
+            //     console.log("Error... is backend running? probably need to enable cors mapping?");
+            //     console.log(JSON.stringify(error.json()));
+            //     reject();
+            // }, () => console.log('User data fetching complete!'));
+
+            let paceUser = this.extractPaceUser(this.mockGetPaceUser());
+            resolve(paceUser);
+        });
     }
 
     getPaceUserPicture() {
@@ -212,24 +265,6 @@ export class UserData {
                 console.log("Error... is backend running? probably need to enable cors mapping?");
                 reject();
             }, () => console.log('Joining team complete!'));
-        });
-    }
-
-    markAttendance(teamId: any, attendance: any, date: any) {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' +
-                this.userToken + '&teamId=' + teamId + '&attendance=' + attendance + '&date=' + date;
-            console.log("Making request to: " + this.url);
-
-            this.groupData = JSON.stringify({});
-
-            this.http.post(this.url, this.groupData).subscribe(success => {
-                console.log("Attendance marked...");
-                resolve(success);
-            }, () => {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                reject();
-            }, () => console.log('Marking attendance complete!'));
         });
     }
 

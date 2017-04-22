@@ -27,6 +27,9 @@ export class GroupDetailPage {
 
     groupTab: string = "scores";
 
+    // Today's attendees
+    attendees: any;
+
     constructor(private navParams: NavParams, private userData: UserData) {
 
         this.currentDate = new Date();
@@ -58,8 +61,22 @@ export class GroupDetailPage {
     }
 
     markPresent(member: any) {
-        this.userData.markAttendance(this.team.id, "present", this.currentDate.getDate()).then(() => {
+        let date = {
+            day: this.currentDate.getUTCDay(),
+            month: this.currentDate.getUTCMonth(),
+            year: this.currentDate.getUTCFullYear()
+        };
+
+        this.userData.markAttendance(member, this.team.id, "present", date).then((currentMonthAttendance: any) => {
             console.log("Marked as present!");
+            this.currentMonthAttendance = currentMonthAttendance;
+
+            for (let dayOfMonth of currentMonthAttendance) {
+                if (dayOfMonth._date_.day == date.day) {
+                    this.attendees = dayOfMonth.attendees;
+                }
+            }
+
         });
 
         let index = this.teamMembers.indexOf(member);
