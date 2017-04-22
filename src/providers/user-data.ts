@@ -49,10 +49,6 @@ export class UserData {
         });
     }
 
-    private formatToJSON(result) {
-        return result.json();
-    }
-
     getUserShortTeamView() {
         return new Promise(resolve => {
             this.storage.get(this.PACE_USER).then(paceUser => {
@@ -67,11 +63,13 @@ export class UserData {
 
     getTeamData(teamId: any) {
         return new Promise(resolve => {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetTeamDataUrl(teamId);
-            // let teamData = this.extractTeamData(this.makeGetHttpReq(url));
-            let teamData = this.extractTeamData(this.mockTeamData());
-            resolve(teamData);
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructGetTeamDataUrl(paceUser, teamId);
+                this.makeGetHttpReq(url).then(result => {
+                    let teamData = this.extractTeamData(this.formatToJSON(result));
+                    resolve(teamData)
+                })
+            });
         });
     }
 
@@ -108,14 +106,14 @@ export class UserData {
     }
 
     private extractTeamData(teamData: any) {
-        // TODO: maybe add teamData.json() for backend
+        console.log("teamData from BackPace ", teamData);
         this.teamData = teamData;
 
         return teamData;
     }
 
     private extractPaceUser(paceUser: any) {
-        console.log("User data from BackPace...", paceUser);
+        // console.log("paceUser from BackPace ", paceUser);
         this.paceUser = paceUser;
         this.userId = paceUser.facebookId;
         this.userToken = paceUser.accessToken;
@@ -137,11 +135,12 @@ export class UserData {
         return url;
     }
 
-    //
-    // private constructGetTeamDataUrl(teamId: any) {
-    //     return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
-    // }
-    //
+
+    private constructGetTeamDataUrl(paceUser: any, teamId: any) {
+        return 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
+            + '&token=' + paceUser.accessToken + '&teamId=' + teamId;
+    }
+
     private makeGetHttpReq(url: any) {
         return new Promise(resolve => {
             this.http.get(url).subscribe(result => {
@@ -309,47 +308,8 @@ export class UserData {
         });
     };
 
-    private mockUserShortTeamView() {
-        let teamKoss = {
-            id: 1,
-            teamName: "Kossurühm",
-            shortTableRowList: [
-                {
-                    rank: 1,
-                    userName: "Marin",
-                    tier: "...",
-                    points: 1270
-                },
-                {
-                    rank: 2,
-                    userName: "Marianne",
-                    tier: "...",
-                    points: 1250
-                }
-            ]
-        };
-
-        let teamSalto = {
-            id: 2,
-            teamName: "Saltopoisid",
-            shortTableRowList: [
-                {
-                    rank: 1,
-                    userName: "Allar",
-                    tier: "...",
-                    points: 1000
-                },
-                {
-                    rank: 2,
-                    userName: "Paul",
-                    tier: "...",
-                    points: 980
-                }
-            ]
-        };
-        let mockUserShortTeamView = [];
-        mockUserShortTeamView.push(teamKoss, teamSalto);
-        return mockUserShortTeamView;
+    private formatToJSON(result) {
+        return result.json();
     }
 
     private mockGetPaceUser() {
@@ -359,53 +319,4 @@ export class UserData {
         };
     }
 
-    private mockTeamData() {
-        return {
-            fullScoresTableList: [
-                {
-                    rank: 1,
-                    userName: "Allar",
-                    tier: "...",
-                    points: 1000
-                },
-                {
-                    rank: 2,
-                    userName: "Paul",
-                    tier: "...",
-                    points: 980
-                },
-                {
-                    rank: 3,
-                    userName: "Hannes",
-                    tier: "...",
-                    points: 930
-                },
-                {
-                    rank: 4,
-                    userName: "Stefan",
-                    tier: "...",
-                    points: 900
-                },
-                {
-                    rank: 5,
-                    userName: "Georg",
-                    tier: "...",
-                    points: 200
-                }
-            ],
-            currentMonthAttendance: [
-                {
-                    date: '13-04-2017',
-                    maleAttendees: 6,
-                    femaleAttendees: 10
-                },
-                {
-                    date: '14-04-2017',
-                    maleAttendees: 8,
-                    femaleAttendees: 4
-                }
-            ]
-
-        };
-    }
 }

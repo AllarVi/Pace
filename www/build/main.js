@@ -102367,9 +102367,6 @@ var UserData = (function () {
             });
         });
     };
-    UserData.prototype.formatToJSON = function (result) {
-        return result.json();
-    };
     UserData.prototype.getUserShortTeamView = function () {
         var _this = this;
         return new Promise(function (resolve) {
@@ -102385,11 +102382,13 @@ var UserData = (function () {
     UserData.prototype.getTeamData = function (teamId) {
         var _this = this;
         return new Promise(function (resolve) {
-            // TODO: Uncomment for backend request
-            // let url = this.constructGetTeamDataUrl(teamId);
-            // let teamData = this.extractTeamData(this.makeGetHttpReq(url));
-            var teamData = _this.extractTeamData(_this.mockTeamData());
-            resolve(teamData);
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                var url = _this.constructGetTeamDataUrl(paceUser, teamId);
+                _this.makeGetHttpReq(url).then(function (result) {
+                    var teamData = _this.extractTeamData(_this.formatToJSON(result));
+                    resolve(teamData);
+                });
+            });
         });
     };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
@@ -102417,16 +102416,15 @@ var UserData = (function () {
     };
     UserData.prototype.extractUserShortTeamView = function (teamView) {
         this.shortTeamView = teamView;
-        console.log("AAA", teamView);
         return teamView;
     };
     UserData.prototype.extractTeamData = function (teamData) {
-        // TODO: maybe add teamData.json() for backend
+        console.log("teamData from BackPace ", teamData);
         this.teamData = teamData;
         return teamData;
     };
     UserData.prototype.extractPaceUser = function (paceUser) {
-        console.log("User data from BackPace...", paceUser);
+        // console.log("paceUser from BackPace ", paceUser);
         this.paceUser = paceUser;
         this.userId = paceUser.facebookId;
         this.userToken = paceUser.accessToken;
@@ -102444,11 +102442,10 @@ var UserData = (function () {
         console.log("Making request to: " + url);
         return url;
     };
-    //
-    // private constructGetTeamDataUrl(teamId: any) {
-    //     return 'http://' + this.BASE_URL + ':8080/api/team?facebookId=' + this.userId + '&token=' + this.userToken + '&teamId=' + teamId;
-    // }
-    //
+    UserData.prototype.constructGetTeamDataUrl = function (paceUser, teamId) {
+        return 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
+            + '&token=' + paceUser.accessToken + '&teamId=' + teamId;
+    };
     UserData.prototype.makeGetHttpReq = function (url) {
         var _this = this;
         return new Promise(function (resolve) {
@@ -102599,99 +102596,13 @@ var UserData = (function () {
         });
     };
     
-    UserData.prototype.mockUserShortTeamView = function () {
-        var teamKoss = {
-            id: 1,
-            teamName: "Kossurühm",
-            shortTableRowList: [
-                {
-                    rank: 1,
-                    userName: "Marin",
-                    tier: "...",
-                    points: 1270
-                },
-                {
-                    rank: 2,
-                    userName: "Marianne",
-                    tier: "...",
-                    points: 1250
-                }
-            ]
-        };
-        var teamSalto = {
-            id: 2,
-            teamName: "Saltopoisid",
-            shortTableRowList: [
-                {
-                    rank: 1,
-                    userName: "Allar",
-                    tier: "...",
-                    points: 1000
-                },
-                {
-                    rank: 2,
-                    userName: "Paul",
-                    tier: "...",
-                    points: 980
-                }
-            ]
-        };
-        var mockUserShortTeamView = [];
-        mockUserShortTeamView.push(teamKoss, teamSalto);
-        return mockUserShortTeamView;
+    UserData.prototype.formatToJSON = function (result) {
+        return result.json();
     };
     UserData.prototype.mockGetPaceUser = function () {
         return {
             facebookId: "",
             accessToken: ""
-        };
-    };
-    UserData.prototype.mockTeamData = function () {
-        return {
-            fullScoresTableList: [
-                {
-                    rank: 1,
-                    userName: "Allar",
-                    tier: "...",
-                    points: 1000
-                },
-                {
-                    rank: 2,
-                    userName: "Paul",
-                    tier: "...",
-                    points: 980
-                },
-                {
-                    rank: 3,
-                    userName: "Hannes",
-                    tier: "...",
-                    points: 930
-                },
-                {
-                    rank: 4,
-                    userName: "Stefan",
-                    tier: "...",
-                    points: 900
-                },
-                {
-                    rank: 5,
-                    userName: "Georg",
-                    tier: "...",
-                    points: 200
-                }
-            ],
-            currentMonthAttendance: [
-                {
-                    date: '13-04-2017',
-                    maleAttendees: 6,
-                    femaleAttendees: 10
-                },
-                {
-                    date: '14-04-2017',
-                    maleAttendees: 8,
-                    femaleAttendees: 4
-                }
-            ]
         };
     };
     return UserData;
