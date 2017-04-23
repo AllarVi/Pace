@@ -80,8 +80,9 @@
         <ion-list *ngSwitchCase="'velocity'">
             <ion-card>
                 <ion-card-header>
-                    Attending on
-                    <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"></ion-datetime>
+                    <span>Attending on:</span>
+                    <ion-datetime class="inline" displayFormat="DD MMM YYYY"
+                                  [(ngModel)]="curDate"></ion-datetime>
                 </ion-card-header>
 
                 <ion-card-content>
