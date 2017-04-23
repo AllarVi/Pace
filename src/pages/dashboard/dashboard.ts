@@ -1,7 +1,8 @@
-import {NavController, NavParams} from "ionic-angular";
+import {ModalController, NavController, NavParams} from "ionic-angular";
 import {GroupDetailPage} from "../group-detail/group-detail";
 import {UserData} from "../../providers/user-data";
 import {Component} from "@angular/core";
+import {DashboardGroupAddPage} from "../dashboard-group-add/dashboard-group-add";
 
 
 @Component({
@@ -12,7 +13,10 @@ export class DashboardPage {
 
     teamView: any;
 
-    constructor(private nav: NavController, private userData: UserData, private navParams: NavParams) {
+    constructor(private nav: NavController,
+                private userData: UserData,
+                private navParams: NavParams,
+                private modalCtrl: ModalController) {
         this.teamView = navParams.get('param1');
         this.initDashboard();
     }
@@ -30,6 +34,14 @@ export class DashboardPage {
             if (!result)
                 console.log("nav.push.GroupDetailPage failed");
         });
+    }
+
+    openModal(characterNum) {
+        let modal = this.modalCtrl.create(DashboardGroupAddPage, characterNum);
+        modal.onDidDismiss(() => {
+            this.initDashboard();
+        });
+        modal.present();
     }
 
 }

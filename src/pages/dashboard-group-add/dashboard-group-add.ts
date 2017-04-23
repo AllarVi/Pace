@@ -1,4 +1,4 @@
-import {ViewController} from "ionic-angular";
+import {NavParams, Platform, ViewController} from "ionic-angular";
 import {UserData} from "../../providers/user-data";
 import {Component} from "@angular/core";
 
@@ -8,42 +8,41 @@ import {Component} from "@angular/core";
 })
 export class DashboardGroupAddPage {
 
-    searchQuery: string = '';
-    teams: any;
+    groups: any;
 
-    constructor(public viewCtrl: ViewController, private userData: UserData) {
+    constructor(public platform: Platform,
+                public viewCtrl: ViewController,
+                private userData: UserData,
+                public params: NavParams,
+    ) {
 
         this.initializeItems();
 
     }
 
     initializeItems() {
-        this.userData.getGroups().then((teams) => {
-            this.teams = teams;
+        this.userData.getGroups().then((groups) => {
+            this.groups = groups;
         });
     }
 
-    getItems(searchbar: any) {
+    getItems(ev: any) {
         // Reset items back to all of the items
         this.initializeItems();
 
-        // set q to the value of the searchbar
-        let q = searchbar.value;
+        // set val to the value of the ev target
+        let val = ev.target.value;
 
         // if the value is an empty string don't filter the items
-        if (q.trim() == '') {
-            return;
+        if (val && val.trim() != '') {
+            this.groups = this.groups.filter((item) => {
+                return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
         }
-
-        this.teams = this.teams.filter((v: any) => {
-            return v.toLowerCase().indexOf(q.toLowerCase()) > -1;
-
-        })
     }
 
     joinTeam(teamId: any) {
-        this.userData.joinTeam(teamId).then((success) => {
-            console.log(JSON.stringify(success));
+        this.userData.joinGroup(teamId).then(() => {
             console.log("Joined team!");
             this.viewCtrl.dismiss();
         }, () => {
@@ -52,6 +51,6 @@ export class DashboardGroupAddPage {
     }
 
     dismiss() {
-        this.viewCtrl.dismiss().then();
+        this.viewCtrl.dismiss();
     }
 }

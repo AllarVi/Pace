@@ -102343,10 +102343,6 @@ var __metadata$24 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var UserData = (function () {
-    // TTU
-    // BASE_URL = '10.224.4.183';
-    // Viinamae
-    // BASE_URL = '192.168.0.101';
     function UserData(events, http, storage) {
         this.events = events;
         this.http = http;
@@ -102409,6 +102405,33 @@ var UserData = (function () {
             });
         });
     };
+    UserData.prototype.getGroups = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                var url = _this.constructGetGroupsUrl(paceUser);
+                _this.makeGetHttpReq(url).then(function (result) {
+                    var groups = _this.extractGroups(_this.formatToJSON(result));
+                    resolve(groups);
+                });
+            });
+        });
+    };
+    UserData.prototype.joinGroup = function (teamId) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                var url = _this.constructJoinGroupUrl(paceUser);
+                var groupData = JSON.stringify({
+                    teamId: teamId
+                });
+                _this.makePostHttpReq(url, groupData).then(function (result) {
+                    var resultJSON = _this.formatToJSON(result);
+                    resolve(resultJSON);
+                });
+            });
+        });
+    };
     UserData.prototype.extractUserShortTeamView = function (teamView) {
         this.shortTeamView = teamView;
         return teamView;
@@ -102428,6 +102451,9 @@ var UserData = (function () {
     };
     UserData.prototype.extractCurrentMonthAttendance = function (result) {
         return result.currentMonthAttendance;
+    };
+    UserData.prototype.extractGroups = function (result) {
+        return result;
     };
     UserData.prototype.constructGetPaceUserUrl = function (userID, accessToken) {
         var url = 'http://' + this.BASE_URL + '/api/user?facebookId=' + userID + '&token=' + accessToken;
@@ -102449,6 +102475,21 @@ var UserData = (function () {
     UserData.prototype.constructMarkAttendanceUrl = function (paceUser, teamId, attendance) {
         var url = 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
             + '&token=' + paceUser.accessToken + '&teamId=' + teamId + '&attendance=' + attendance;
+        console.log("Making POST request to: " + url);
+        return url;
+    };
+    UserData.prototype.constructGetGroupsUrl = function (paceUser) {
+        var url = 'http://' + this.BASE_URL + '/api/dashboard/join_group'
+            + '?facebookId=' + paceUser.facebookId
+            + '&token=' + paceUser.accessToken
+            + '&groups=all';
+        console.log("Making GET request to: ", url);
+        return url;
+    };
+    UserData.prototype.constructJoinGroupUrl = function (paceUser) {
+        var url = 'http://' + this.BASE_URL + '/api/dashboard/join_group?facebookId=' +
+            paceUser.facebookId + '&token=' +
+            paceUser.accessToken;
         console.log("Making POST request to: " + url);
         return url;
     };
@@ -102524,41 +102565,6 @@ var UserData = (function () {
                 console.log("Error!");
                 reject(error);
             });
-        });
-    };
-    UserData.prototype.getGroups = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard/join_group'
-                + '?facebookId=' + _this.userId
-                + '&token=' + _this.userToken
-                + '&groups=all';
-            console.log("Making request to: " + _this.url);
-            _this.http.get(_this.url).subscribe(function (teams) {
-                _this.teams = teams.json();
-                resolve(_this.teams);
-            }, function (error) {
-                console.log("Error occurred in getGroups()");
-                reject(error);
-            });
-        });
-    };
-    UserData.prototype.joinTeam = function (teamId) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/dashboard/join_group?facebookId=' + _this.userId + '&token=' +
-                _this.userToken;
-            console.log("Making request to: " + _this.url);
-            _this.groupData = JSON.stringify({
-                teamId: teamId
-            });
-            _this.http.post(_this.url, _this.groupData).subscribe(function (success) {
-                console.log("Joined team...");
-                resolve(success);
-            }, function () {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                reject();
-            }, function () { return console.log('Joining team complete!'); });
         });
     };
     UserData.prototype.getAllAchievements = function () {
@@ -102660,7 +102666,8 @@ var GroupDetailPage = (function () {
         this.userData = userData;
         // Default tab to open
         this.groupTab = "scores";
-        this.currentDate = new Date();
+        var now = new Date();
+        this.curDate = now.toISOString().slice(0, 10);
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
         this.userData.getTeamData(this.team.id).then(function (teamData) {
@@ -102682,9 +102689,9 @@ var GroupDetailPage = (function () {
     GroupDetailPage.prototype.markPresent = function (member) {
         var _this = this;
         var date = {
-            day: this.currentDate.getUTCDay(),
-            month: this.currentDate.getUTCMonth(),
-            year: this.currentDate.getUTCFullYear()
+            day: this.curDate.slice(0, 2),
+            month: this.curDate.slice(3, 5),
+            year: this.curDate.slice(6)
         };
         this.userData.markAttendance(member, this.team.id, "present", date).then(function (currentMonthAttendance) {
             console.log("Marked as present!");
@@ -102710,10 +102717,69 @@ var GroupDetailPage = (function () {
 }());
 GroupDetailPage = __decorate$25([
     Component({
-        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="attendance">\n                Attendance\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'attendance\'">\n            <ion-list-header>\n                {{ currentDate | date:\'mediumDate\' }}\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button ion-button outline item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button ion-button outline item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    Attending on {{ currentDate | date:\'mediumDate\' }}\n                </ion-card-header>\n\n                <ion-card-content>\n                    <ion-item *ngFor="let member of attendees">\n                        <ion-row>\n                            <ion-col width-10>\n                                {{member}}\n                            </ion-col>\n                        </ion-row>\n                    </ion-item>\n                </ion-card-content>\n            </ion-card>\n\n            <ion-card>\n                <ion-card-header>\n                    Attendance Graph\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
+        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="attendance">\n                Attendance\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'attendance\'">\n            <ion-list-header>\n                <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"></ion-datetime>\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button ion-button outline item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button ion-button outline item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    Attending on\n                    <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"></ion-datetime>\n                </ion-card-header>\n\n                <ion-card-content>\n                    <ion-item *ngFor="let member of attendees">\n                        {{member}}\n                    </ion-item>\n                </ion-card-content>\n            </ion-card>\n\n            <ion-card>\n                <ion-card-header>\n                    Attendance Graph\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
     }),
     __metadata$23("design:paramtypes", [NavParams, UserData])
 ], GroupDetailPage);
+
+var __decorate$27 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$25 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var DashboardGroupAddPage = (function () {
+    function DashboardGroupAddPage(platform, viewCtrl, userData, params) {
+        this.platform = platform;
+        this.viewCtrl = viewCtrl;
+        this.userData = userData;
+        this.params = params;
+        this.initializeItems();
+    }
+    DashboardGroupAddPage.prototype.initializeItems = function () {
+        var _this = this;
+        this.userData.getGroups().then(function (groups) {
+            _this.groups = groups;
+        });
+    };
+    DashboardGroupAddPage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.groups = this.groups.filter(function (item) {
+                return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+        }
+    };
+    DashboardGroupAddPage.prototype.joinTeam = function (teamId) {
+        var _this = this;
+        this.userData.joinGroup(teamId).then(function () {
+            console.log("Joined team!");
+            _this.viewCtrl.dismiss();
+        }, function () {
+            console.log("Joining team failed!");
+        });
+    };
+    DashboardGroupAddPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    return DashboardGroupAddPage;
+}());
+DashboardGroupAddPage = __decorate$27([
+    Component({
+        selector: 'page-dashboard-group-add',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard-group-add/dashboard-group-add.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            Join Group\n        </ion-title>\n        <ion-buttons start>\n            <button ion-button (click)="dismiss()">\n                <span primary showWhen="ios">Cancel</span>\n                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n    <ion-list>\n        <ion-item *ngFor="let group of groups">\n            {{ group.teamName }}\n            <button ion-button clear item-right (click)="joinTeam(group.id)">Join</button>\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard-group-add/dashboard-group-add.html"*/
+    }),
+    __metadata$25("design:paramtypes", [Platform,
+        ViewController,
+        UserData,
+        NavParams])
+], DashboardGroupAddPage);
 
 var __decorate$24 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -102725,10 +102791,11 @@ var __metadata$22 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var DashboardPage = (function () {
-    function DashboardPage(nav, userData, navParams) {
+    function DashboardPage(nav, userData, navParams, modalCtrl) {
         this.nav = nav;
         this.userData = userData;
         this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
         this.teamView = navParams.get('param1');
         this.initDashboard();
     }
@@ -102746,22 +102813,33 @@ var DashboardPage = (function () {
                 console.log("nav.push.GroupDetailPage failed");
         });
     };
+    DashboardPage.prototype.openModal = function (characterNum) {
+        var _this = this;
+        var modal = this.modalCtrl.create(DashboardGroupAddPage, characterNum);
+        modal.onDidDismiss(function () {
+            _this.initDashboard();
+        });
+        modal.present();
+    };
     return DashboardPage;
 }());
 DashboardPage = __decorate$24([
     Component({
         selector: 'page-dashboard',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n\n    <ion-card *ngFor="let team of teamView">\n\n        <ion-card-header>\n            <button ion-item (click)="goToGroupDetail(team)">\n                {{team.teamName}}\n            </button>\n        </ion-card-header>\n\n        <ion-list>\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of team.fullScoresTableList">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n        </ion-list>\n\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <button ion-item (click)="openModal({charNum: 0})">\n                <ion-icon ios="ios-add-circle" md="md-add-circle" is-active="false" item-left></ion-icon>\n                Join Group\n            </button>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard/dashboard.html"*/
     }),
-    __metadata$22("design:paramtypes", [NavController, UserData, NavParams])
+    __metadata$22("design:paramtypes", [NavController,
+        UserData,
+        NavParams,
+        ModalController])
 ], DashboardPage);
 
-var __decorate$27 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+var __decorate$28 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata$25 = (undefined && undefined.__metadata) || function (k, v) {
+var __metadata$26 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ProfilePage = (function () {
@@ -102780,11 +102858,11 @@ var ProfilePage = (function () {
     };
     return ProfilePage;
 }());
-ProfilePage = __decorate$27([
+ProfilePage = __decorate$28([
     Component({
         selector: 'page-profile',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/'<ion-navbar *navbar>\n    <button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My Profile</ion-title>\n</ion-navbar>\n\n<ion-content padding>\n\n    <ion-item>\n        <ion-thumbnail item-left>\n            <!--<img class="profile-image" src="img/michael-phelps.png">-->\n            <img class="profile-image" [src]=profileAvatar>\n        </ion-thumbnail>\n        <h2>{{paceUserData.name}}</h2>\n        <h3>1564 p</h3>\n        <p>Athlete</p>\n    </ion-item>\n\n    <ion-segment padding [(ngModel)]="tab">\n        <ion-segment-button value="goals">\n            Goals\n        </ion-segment-button>\n        <ion-segment-button value="progress">\n            Progress\n        </ion-segment-button>\n        <ion-segment-button value="achievements">\n            Achievements\n        </ion-segment-button>\n    </ion-segment>\n\n    <!--<div [ngSwitch]="tab">-->\n        <!--<ion-list *ngSwitchDefault>-->\n            <!--&lt;!&ndash;<ion-list *ngSwitchWhen="\'goals\'">&ndash;&gt;-->\n            <!--<ion-list-header>-->\n                <!--Gymnastics-->\n            <!--</ion-list-header>-->\n            <!--<a ion-item (click)="openModal({charNum: 0})">-->\n                <!--Salto (360°) backward-->\n            <!--</a>-->\n            <!--<a ion-item (click)="openModal({charNum: 1})">-->\n                <!--Round off-->\n            <!--</a>-->\n            <!--<a ion-item (click)="openModal({charNum: 2})">-->\n                <!--Flic flac-->\n            <!--</a>-->\n        <!--</ion-list>-->\n\n        <!--<ion-list *ngSwitchWhen="\'progress\'">-->\n            <!--<ion-item>-->\n                <!--<h2>Siia</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>tuleb</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>isiklik</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>progress.</h2>-->\n            <!--</ion-item>-->\n        <!--</ion-list>-->\n\n        <!--<ion-list *ngSwitchWhen="\'achievements\'">-->\n            <!--<ion-card>-->\n                <!--<div>-->\n                    <!--&lt;!&ndash;<iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>&ndash;&gt;-->\n                    <!--<ion-card>-->\n                        <!--<img [src]="image">-->\n                    <!--</ion-card>-->\n                <!--</div>-->\n\n                <!--<ion-card-content>-->\n                    <!--<h2 class="card-title">-->\n                        <!--Round off-->\n                    <!--</h2>-->\n                    <!--<p>-->\n                        <!--gymnastics-->\n                    <!--</p>-->\n                <!--</ion-card-content>-->\n\n                <!--<ion-row no-padding>-->\n                    <!--<ion-col>-->\n                        <!--<button clear small danger (click)="openProfileAchievementsModal({charNum: 0})">-->\n                            <!--<ion-icon name=\'create\'></ion-icon>-->\n                            <!--Edit-->\n                        <!--</button>-->\n                    <!--</ion-col>-->\n                <!--</ion-row>-->\n            <!--</ion-card>-->\n        <!--</ion-list>-->\n    <!--</div>-->\n\n</ion-content>\n\n<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini">\n    <ion-icon ios="ios-flag" md="md-flag" is-active="false"></ion-icon>\n</button>\n\n<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini"\n        (click)="snapImage()">\n    <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>\n</button>\n\n<button fab primary fab-bottom fab-right style="z-index: 999">\n    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>\n</button>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/
     }),
-    __metadata$25("design:paramtypes", [NgZone, NavController, UserData])
+    __metadata$26("design:paramtypes", [NgZone, NavController, UserData])
 ], ProfilePage);
 
 var __decorate$22 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -102812,13 +102890,13 @@ TabsPage = __decorate$22([
     __metadata$21("design:paramtypes", [NavParams])
 ], TabsPage);
 
-var __decorate$29 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+var __decorate$30 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata$27 = (undefined && undefined.__metadata) || function (k, v) {
+var __metadata$28 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var FbProvider = (function () {
@@ -102951,21 +103029,21 @@ var FbProvider = (function () {
     };
     return FbProvider;
 }());
-FbProvider = __decorate$29([
+FbProvider = __decorate$30([
     Injectable(),
-    __metadata$27("design:paramtypes", [Events,
+    __metadata$28("design:paramtypes", [Events,
         Platform,
         UserData,
         Storage])
 ], FbProvider);
 
-var __decorate$28 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+var __decorate$29 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata$26 = (undefined && undefined.__metadata) || function (k, v) {
+var __metadata$27 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var LoginPage = (function () {
@@ -102983,11 +103061,11 @@ var LoginPage = (function () {
     };
     return LoginPage;
 }());
-LoginPage = __decorate$28([
+LoginPage = __decorate$29([
     Component({
         selector: 'page-login',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/login/login.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Login</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-row responsive-sm>\n        <ion-col>\n            <button ion-button (click)="fbLogin()" block class="facebook-btn">Log\n                In with\n                Facebook\n            </button>\n        </ion-col>\n    </ion-row>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/login/login.html"*/
     }),
-    __metadata$26("design:paramtypes", [NavController,
+    __metadata$27("design:paramtypes", [NavController,
         FbProvider])
 ], LoginPage);
 
@@ -103161,63 +103239,6 @@ PaceApp = __decorate$20([
         Storage,
         SplashScreen])
 ], PaceApp);
-
-var __decorate$30 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata$28 = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var DashboardGroupAddPage = (function () {
-    function DashboardGroupAddPage(viewCtrl, userData) {
-        this.viewCtrl = viewCtrl;
-        this.userData = userData;
-        this.searchQuery = '';
-        this.initializeItems();
-    }
-    DashboardGroupAddPage.prototype.initializeItems = function () {
-        var _this = this;
-        this.userData.getGroups().then(function (teams) {
-            _this.teams = teams;
-        });
-    };
-    DashboardGroupAddPage.prototype.getItems = function (searchbar) {
-        // Reset items back to all of the items
-        this.initializeItems();
-        // set q to the value of the searchbar
-        var q = searchbar.value;
-        // if the value is an empty string don't filter the items
-        if (q.trim() == '') {
-            return;
-        }
-        this.teams = this.teams.filter(function (v) {
-            return v.toLowerCase().indexOf(q.toLowerCase()) > -1;
-        });
-    };
-    DashboardGroupAddPage.prototype.joinTeam = function (teamId) {
-        var _this = this;
-        this.userData.joinTeam(teamId).then(function (success) {
-            console.log(JSON.stringify(success));
-            console.log("Joined team!");
-            _this.viewCtrl.dismiss();
-        }, function () {
-            console.log("Joining team failed!");
-        });
-    };
-    DashboardGroupAddPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss().then();
-    };
-    return DashboardGroupAddPage;
-}());
-DashboardGroupAddPage = __decorate$30([
-    Component({
-        selector: 'page-dashboard-group-add',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard-group-add/dashboard-group-add.html"*/'<ion-toolbar>\n    <ion-title>\n        Join Group\n    </ion-title>\n    <ion-buttons start>\n        <button (click)="dismiss()">\n            <span primary showWhen="ios">Cancel</span>\n            <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n        </button>\n    </ion-buttons>\n</ion-toolbar>\n\n<ion-content>\n    <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>\n    <ion-list>\n        <ion-item *ngFor="let team of teams">\n            {{ team.teamName }}\n            <button clear item-right (click)="joinTeam(team.id)">Join</button>\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/dashboard-group-add/dashboard-group-add.html"*/
-    }),
-    __metadata$28("design:paramtypes", [ViewController, UserData])
-], DashboardGroupAddPage);
 
 var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

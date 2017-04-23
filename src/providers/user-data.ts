@@ -10,12 +10,6 @@ export class UserData {
 
     BASE_URL = 'localhost:8181';
 
-    // TTU
-    // BASE_URL = '10.224.4.183';
-
-    // Viinamae
-    // BASE_URL = '192.168.0.101';
-
     constructor(private events: Events,
                 private http: Http,
                 private storage: Storage) {
@@ -33,10 +27,6 @@ export class UserData {
 
     shortTeamView: any;
     teamData: any;
-
-    teams: any;
-
-    groupData: any;
 
     getPaceUser(userID: any, accessToken: any) {
         console.log("UserID to make request with:", userID);
@@ -82,14 +72,43 @@ export class UserData {
                     day: date.day,
                     month: date.month,
                     year: date.year,
-                    member : member.userName
+                    member: member.userName
                 };
 
                 this.makePostHttpReq(url, markAttendanceData).then(result => {
                     let currentMonthAttendance = this.extractCurrentMonthAttendance(this.formatToJSON(result));
                     resolve(currentMonthAttendance)
                 })
+            });
+        });
+    }
 
+    getGroups() {
+        return new Promise(resolve => {
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructGetGroupsUrl(paceUser);
+
+                this.makeGetHttpReq(url).then(result => {
+                    let groups = this.extractGroups(this.formatToJSON(result));
+                    resolve(groups)
+                })
+            });
+        });
+    }
+
+    joinGroup(teamId: any) {
+        return new Promise(resolve => {
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructJoinGroupUrl(paceUser);
+
+                let groupData = JSON.stringify({
+                    teamId: teamId
+                });
+
+                this.makePostHttpReq(url, groupData).then(result => {
+                    let resultJSON = this.formatToJSON(result);
+                    resolve(resultJSON)
+                })
             });
         });
     }
@@ -121,6 +140,10 @@ export class UserData {
         return result.currentMonthAttendance;
     }
 
+    private extractGroups(result: any) {
+        return result;
+    }
+
     private constructGetPaceUserUrl(userID: any, accessToken: any) {
         let url = 'http://' + this.BASE_URL + '/api/user?facebookId=' + userID + '&token=' + accessToken;
         console.log("Making GET request to: " + url);
@@ -134,7 +157,6 @@ export class UserData {
         return url;
     }
 
-
     private constructGetTeamDataUrl(paceUser: any, teamId: any) {
         let url = 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
             + '&token=' + paceUser.accessToken + '&teamId=' + teamId;
@@ -145,6 +167,23 @@ export class UserData {
     private constructMarkAttendanceUrl(paceUser: any, teamId: any, attendance: any) {
         let url = 'http://' + this.BASE_URL + '/api/team?facebookId=' + paceUser.facebookId
             + '&token=' + paceUser.accessToken + '&teamId=' + teamId + '&attendance=' + attendance;
+        console.log("Making POST request to: " + url);
+        return url;
+    }
+
+    private constructGetGroupsUrl(paceUser: any) {
+        let url = 'http://' + this.BASE_URL + '/api/dashboard/join_group'
+            + '?facebookId=' + paceUser.facebookId
+            + '&token=' + paceUser.accessToken
+            + '&groups=all';
+        console.log("Making GET request to: ", url);
+        return url;
+    }
+
+    private constructJoinGroupUrl(paceUser: any) {
+        let url = 'http://' + this.BASE_URL + '/api/dashboard/join_group?facebookId=' +
+            paceUser.facebookId + '&token=' +
+            paceUser.accessToken;
         console.log("Making POST request to: " + url);
         return url;
     }
@@ -228,43 +267,6 @@ export class UserData {
                 console.log("Error!");
                 reject(error);
             });
-        });
-    }
-
-    getGroups() {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group'
-                + '?facebookId=' + this.userId
-                + '&token=' + this.userToken
-                + '&groups=all';
-            console.log("Making request to: " + this.url);
-            this.http.get(this.url).subscribe(teams => {
-                this.teams = teams.json();
-                resolve(this.teams);
-            }, error => {
-                console.log("Error occurred in getGroups()");
-                reject(error);
-            });
-        });
-    }
-
-    joinTeam(teamId: any) {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/dashboard/join_group?facebookId=' + this.userId + '&token=' +
-                this.userToken;
-            console.log("Making request to: " + this.url);
-
-            this.groupData = JSON.stringify({
-                teamId: teamId
-            });
-
-            this.http.post(this.url, this.groupData).subscribe(success => {
-                console.log("Joined team...");
-                resolve(success);
-            }, () => {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                reject();
-            }, () => console.log('Joining team complete!'));
         });
     }
 

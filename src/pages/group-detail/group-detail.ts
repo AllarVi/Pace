@@ -15,7 +15,7 @@ export class GroupDetailPage {
 
     teamName: any;
 
-    currentDate: any;
+    curDate: any;
 
     currentMonthAttendance: any;
 
@@ -32,7 +32,8 @@ export class GroupDetailPage {
 
     constructor(private navParams: NavParams, private userData: UserData) {
 
-        this.currentDate = new Date();
+        let now = new Date();
+        this.curDate = now.toISOString().slice(0, 10);
 
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
@@ -62,9 +63,9 @@ export class GroupDetailPage {
 
     markPresent(member: any) {
         let date = {
-            day: this.currentDate.getUTCDay(),
-            month: this.currentDate.getUTCMonth(),
-            year: this.currentDate.getUTCFullYear()
+            day: this.curDate.slice(0, 2),
+            month: this.curDate.slice(3, 5),
+            year: this.curDate.slice(6)
         };
 
         this.userData.markAttendance(member, this.team.id, "present", date).then((currentMonthAttendance: any) => {
