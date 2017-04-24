@@ -63,7 +63,8 @@
 
         <ion-list *ngSwitchCase="'attendance'">
             <ion-list-header>
-                <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"></ion-datetime>
+                <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"
+                              (ionChange)="onCurDateChange($event)"></ion-datetime>
             </ion-list-header>
 
             <ion-item *ngFor="let member of teamMembers">
@@ -82,13 +83,13 @@
                 <ion-card-header>
                     <span>Attending on:</span>
                     <ion-datetime class="inline" displayFormat="DD MMM YYYY"
-                                  [(ngModel)]="curDate"></ion-datetime>
+                                  [(ngModel)]="curDate" (ionChange)="onCurDateChange($event)"></ion-datetime>
                 </ion-card-header>
 
                 <ion-card-content>
-                    <ion-item *ngFor="let member of attendees">
+                    <div *ngFor="let member of attendees">
                         {{member}}
-                    </ion-item>
+                    </div>
                 </ion-card-content>
             </ion-card>
 

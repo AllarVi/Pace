@@ -32,8 +32,7 @@ export class GroupDetailPage {
 
     constructor(private navParams: NavParams, private userData: UserData) {
 
-        let now = new Date();
-        this.curDate = now.toISOString().slice(0, 10);
+        this.curDate = new Date().toISOString().slice(0, 10);
 
         this.team = this.navParams.get('team');
         this.teamName = this.team.teamName;
@@ -44,32 +43,31 @@ export class GroupDetailPage {
 
             this.currentMonthAttendance = teamData['currentMonthAttendance'];
 
-            this.attenChartLabels = this.currentMonthAttendance.map((element: any) => {
-                return element.date;
-            });
+            this.extractAttendees(this.currentMonthAttendance, this.parseDate(this.curDate));
 
-            this.maleAttendees = this.currentMonthAttendance.map((element: any) => {
-                return element.maleAttendees;
-            });
-
-            this.femaleAttendees = this.currentMonthAttendance.map((element: any) => {
-                return element.femaleAttendees;
-            });
+            this.extractAttendanceData();
 
             this.attenChartData = [this.maleAttendees, this.femaleAttendees];
 
         });
     }
 
-    markPresent(member: any) {
+    onCurDateChange(newValue: any) {
+        let month = this.parseMonth(newValue.month.value);
+
         let date = {
-            day: this.curDate.slice(0, 2),
-            month: this.curDate.slice(3, 5),
-            year: this.curDate.slice(6)
+            day: newValue.day.text,
+            month: month,
+            year: newValue.year.text
         };
+        this.extractAttendees(this.currentMonthAttendance, date);
+    }
+
+    markPresent(member: any) {
+        let date = this.parseDate(this.curDate);
 
         this.userData.markAttendance(member, this.team.id, "present", date).then((currentMonthAttendance: any) => {
-            console.log("Marked as present!");
+            console.log("Marked as present on ", date);
             this.currentMonthAttendance = currentMonthAttendance;
             this.extractAttendees(currentMonthAttendance, date);
 
@@ -84,10 +82,49 @@ export class GroupDetailPage {
         this.teamMembers.splice(index, 1);
     }
 
+    private parseMonth(newValue) {
+        if (newValue < 10)
+            return "0" + newValue.toString();
+        else
+            return newValue.toString();
+    }
+
+    private extractAttendanceData() {
+        this.attenChartLabels = this.currentMonthAttendance.map((element: any) => {
+            return element._date_;
+        });
+
+        this.maleAttendees = this.currentMonthAttendance.map((element: any) => {
+            return element.maleAttendees;
+        });
+
+        this.femaleAttendees = this.currentMonthAttendance.map((element: any) => {
+            return element.femaleAttendees;
+        });
+    }
+
+    private parseDate(date: any) {
+        return { // Parse from YYYY-MM-DD
+            day: date.slice(8),
+            month: date.slice(5, 7),
+            year: date.slice(0, 4)
+        };
+    }
+
     private extractAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
+        let dayOfMonthAttendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
+        if (dayOfMonthAttendees) // Attendees exist
+            this.attendees = dayOfMonthAttendees;
+        else // Attendees don't exist
+            this.attendees = [];
+    }
+
+    private getDayOfMonthAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
         for (let dayOfMonth of currentMonthAttendance) {
-            if (dayOfMonth._date_.day == date.day) {
-                this.attendees = dayOfMonth.attendees;
+            if (dayOfMonth._date_.day === date.day &&
+                dayOfMonth._date_.month === date.month &&
+                dayOfMonth._date_.year === date.year) {
+                return dayOfMonth.attendees;
             }
         }
     }
