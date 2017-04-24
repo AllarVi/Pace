@@ -1,6 +1,6 @@
 import {NavController} from "ionic-angular";
 import {UserData} from "../../providers/user-data";
-import {Component, NgZone} from "@angular/core";
+import {Component} from "@angular/core";
 
 
 @Component({
@@ -9,20 +9,22 @@ import {Component, NgZone} from "@angular/core";
 })
 export class ProfilePage {
 
-    paceUserData: any;
-    profileAvatar: any;
+    paceUser: any = {};
+    profileAvatar: any = {
+        data: {
+            url: ''
+        }
+    };
 
-    image: any;
+    constructor(private nav: NavController,
+                private userData: UserData) {
 
-    constructor(private ngZone: NgZone, private nav: NavController, private userData: UserData) {
-        this.paceUserData = this.userData.getPaceUserData();
+        this.userData.getPaceUserFromStorage().then(paceUser => {
+            this.paceUser = paceUser;
+        });
 
-        // Fetching profile avatar from Facebook
         this.userData.getPaceUserPicture().then((profileAvatar) => {
             this.profileAvatar = profileAvatar;
         });
-    }
-
-    snapImage() {
     }
 }

@@ -113,6 +113,19 @@ export class UserData {
         });
     }
 
+    getPaceUserPicture() {
+        return new Promise(resolve => {
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                let url = this.constructGetPaceUserPictureUrl(paceUser);
+
+                this.makeGetHttpReq(url).then((result: any) => {
+                    let paceUserPicture = JSON.parse(result._body);
+                    resolve(paceUserPicture)
+                })
+            });
+        });
+    }
+
     private extractUserShortTeamView(teamView: any) {
         this.shortTeamView = teamView;
 
@@ -188,6 +201,12 @@ export class UserData {
         return url;
     }
 
+    private constructGetPaceUserPictureUrl(paceUser: any) {
+        let url = paceUser.picture + '&redirect=false';
+        console.log("Making GET request to: ", url);
+        return url;
+    }
+
     private makeGetHttpReq(url: any) {
         return new Promise(resolve => {
             this.http.get(url).subscribe(result => {
@@ -226,8 +245,12 @@ export class UserData {
         console.log(JSON.stringify(error.json()));
     }
 
-    getPaceUserData() {
-        return this.paceUser;
+    getPaceUserFromStorage() {
+        return new Promise(resolve => {
+            this.storage.get(this.PACE_USER).then(paceUser => {
+                resolve(paceUser);
+            })
+        })
     }
 
     saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
@@ -253,20 +276,6 @@ export class UserData {
 
             let paceUser = this.extractPaceUser(this.mockGetPaceUser());
             resolve(paceUser);
-        });
-    }
-
-    getPaceUserPicture() {
-        return new Promise((resolve, reject) => {
-            this.url = this.paceUser.picture + '&redirect=false';
-            console.log("Making request to", this.url);
-            this.http.get(this.url).subscribe(success => {
-                console.log("Success!");
-                resolve(success);
-            }, error => {
-                console.log("Error!");
-                reject(error);
-            });
         });
     }
 

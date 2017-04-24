@@ -102329,7 +102329,7 @@ var AboutPage = (function () {
 }());
 AboutPage = __decorate$23([
     Component({
-        selector: 'page-about',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/'<ion-navbar *navbar>\n    <button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>About</ion-title>\n</ion-navbar>\n\n<ion-content>\n    <div class="about-header">\n        <img src="img/ionic-logo-white.svg">\n    </div>\n    <div padding class="about-info">\n        <h4>Pace</h4>\n\n        <div>\n            <ion-icon name="calendar"></ion-icon>\n            28/03/1994\n        </div>\n\n        <p>\n            Siia tuleb mingi huvitav jutt appi enda kohta\n        </p>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/
+        selector: 'page-about',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>About</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="about-header">\n        <img src="img/ionic-logo-white.svg">\n    </div>\n    <div padding class="about-info">\n        <h4>Pace</h4>\n        <p>\n            Siia tuleb mingi huvitav jutt appi enda kohta\n        </p>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/
     })
 ], AboutPage);
 
@@ -102432,6 +102432,18 @@ var UserData = (function () {
             });
         });
     };
+    UserData.prototype.getPaceUserPicture = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                var url = _this.constructGetPaceUserPictureUrl(paceUser);
+                _this.makeGetHttpReq(url).then(function (result) {
+                    var paceUserPicture = JSON.parse(result._body);
+                    resolve(paceUserPicture);
+                });
+            });
+        });
+    };
     UserData.prototype.extractUserShortTeamView = function (teamView) {
         this.shortTeamView = teamView;
         return teamView;
@@ -102493,6 +102505,11 @@ var UserData = (function () {
         console.log("Making POST request to: " + url);
         return url;
     };
+    UserData.prototype.constructGetPaceUserPictureUrl = function (paceUser) {
+        var url = paceUser.picture + '&redirect=false';
+        console.log("Making GET request to: ", url);
+        return url;
+    };
     UserData.prototype.makeGetHttpReq = function (url) {
         var _this = this;
         return new Promise(function (resolve) {
@@ -102527,8 +102544,13 @@ var UserData = (function () {
         console.log("Error occurred while POST... probably need to enable correct cors mapping");
         console.log(JSON.stringify(error.json()));
     };
-    UserData.prototype.getPaceUserData = function () {
-        return this.paceUser;
+    UserData.prototype.getPaceUserFromStorage = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.storage.get(_this.PACE_USER).then(function (paceUser) {
+                resolve(paceUser);
+            });
+        });
     };
     UserData.prototype.saveNewPaceUser = function (userProfile, status, accessToken) {
         var _this = this;
@@ -102551,20 +102573,6 @@ var UserData = (function () {
             // }, () => console.log('User data fetching complete!'));
             var paceUser = _this.extractPaceUser(_this.mockGetPaceUser());
             resolve(paceUser);
-        });
-    };
-    UserData.prototype.getPaceUserPicture = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = _this.paceUser.picture + '&redirect=false';
-            console.log("Making request to", _this.url);
-            _this.http.get(_this.url).subscribe(function (success) {
-                console.log("Success!");
-                resolve(success);
-            }, function (error) {
-                console.log("Error!");
-                reject(error);
-            });
         });
     };
     UserData.prototype.getAllAchievements = function () {
@@ -102727,7 +102735,6 @@ var GroupDetailPage = (function () {
         };
     };
     GroupDetailPage.prototype.extractAttendees = function (currentMonthAttendance, date) {
-        console.log("date data", date);
         var dayOfMonthAttendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
         if (dayOfMonthAttendees)
             this.attendees = dayOfMonthAttendees;
@@ -102874,26 +102881,31 @@ var __metadata$26 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ProfilePage = (function () {
-    function ProfilePage(ngZone, nav, userData) {
+    function ProfilePage(nav, userData) {
         var _this = this;
-        this.ngZone = ngZone;
         this.nav = nav;
         this.userData = userData;
-        this.paceUserData = this.userData.getPaceUserData();
-        // Fetching profile avatar from Facebook
+        this.paceUser = {};
+        this.profileAvatar = {
+            data: {
+                url: ''
+            }
+        };
+        this.userData.getPaceUserFromStorage().then(function (paceUser) {
+            _this.paceUser = paceUser;
+        });
         this.userData.getPaceUserPicture().then(function (profileAvatar) {
             _this.profileAvatar = profileAvatar;
         });
     }
-    ProfilePage.prototype.snapImage = function () {
-    };
     return ProfilePage;
 }());
 ProfilePage = __decorate$28([
     Component({
-        selector: 'page-profile',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/'<ion-navbar *navbar>\n    <button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My Profile</ion-title>\n</ion-navbar>\n\n<ion-content padding>\n\n    <ion-item>\n        <ion-thumbnail item-left>\n            <!--<img class="profile-image" src="img/michael-phelps.png">-->\n            <img class="profile-image" [src]=profileAvatar>\n        </ion-thumbnail>\n        <h2>{{paceUserData.name}}</h2>\n        <h3>1564 p</h3>\n        <p>Athlete</p>\n    </ion-item>\n\n    <ion-segment padding [(ngModel)]="tab">\n        <ion-segment-button value="goals">\n            Goals\n        </ion-segment-button>\n        <ion-segment-button value="progress">\n            Progress\n        </ion-segment-button>\n        <ion-segment-button value="achievements">\n            Achievements\n        </ion-segment-button>\n    </ion-segment>\n\n    <!--<div [ngSwitch]="tab">-->\n        <!--<ion-list *ngSwitchDefault>-->\n            <!--&lt;!&ndash;<ion-list *ngSwitchWhen="\'goals\'">&ndash;&gt;-->\n            <!--<ion-list-header>-->\n                <!--Gymnastics-->\n            <!--</ion-list-header>-->\n            <!--<a ion-item (click)="openModal({charNum: 0})">-->\n                <!--Salto (360°) backward-->\n            <!--</a>-->\n            <!--<a ion-item (click)="openModal({charNum: 1})">-->\n                <!--Round off-->\n            <!--</a>-->\n            <!--<a ion-item (click)="openModal({charNum: 2})">-->\n                <!--Flic flac-->\n            <!--</a>-->\n        <!--</ion-list>-->\n\n        <!--<ion-list *ngSwitchWhen="\'progress\'">-->\n            <!--<ion-item>-->\n                <!--<h2>Siia</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>tuleb</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>isiklik</h2>-->\n            <!--</ion-item>-->\n            <!--<ion-item>-->\n                <!--<h2>progress.</h2>-->\n            <!--</ion-item>-->\n        <!--</ion-list>-->\n\n        <!--<ion-list *ngSwitchWhen="\'achievements\'">-->\n            <!--<ion-card>-->\n                <!--<div>-->\n                    <!--&lt;!&ndash;<iframe [src]="image" type="video/mp4" frameborder="0" width="560" height="315"></iframe>&ndash;&gt;-->\n                    <!--<ion-card>-->\n                        <!--<img [src]="image">-->\n                    <!--</ion-card>-->\n                <!--</div>-->\n\n                <!--<ion-card-content>-->\n                    <!--<h2 class="card-title">-->\n                        <!--Round off-->\n                    <!--</h2>-->\n                    <!--<p>-->\n                        <!--gymnastics-->\n                    <!--</p>-->\n                <!--</ion-card-content>-->\n\n                <!--<ion-row no-padding>-->\n                    <!--<ion-col>-->\n                        <!--<button clear small danger (click)="openProfileAchievementsModal({charNum: 0})">-->\n                            <!--<ion-icon name=\'create\'></ion-icon>-->\n                            <!--Edit-->\n                        <!--</button>-->\n                    <!--</ion-col>-->\n                <!--</ion-row>-->\n            <!--</ion-card>-->\n        <!--</ion-list>-->\n    <!--</div>-->\n\n</ion-content>\n\n<button primary fab-bottom-mini-goal fab-right-mini style="z-index: 999" class="button-fab-mini">\n    <ion-icon ios="ios-flag" md="md-flag" is-active="false"></ion-icon>\n</button>\n\n<button primary fab-bottom-mini-achievement fab-right-mini style="z-index: 999" class="button-fab-mini"\n        (click)="snapImage()">\n    <ion-icon ios="ios-trophy" md="md-trophy" is-active="false"></ion-icon>\n</button>\n\n<button fab primary fab-bottom fab-right style="z-index: 999">\n    <ion-icon ios="ios-add" md="md-add" is-active="false"></ion-icon>\n</button>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/
+        selector: 'page-profile',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>My Profile</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <ion-item>\n        <ion-thumbnail item-left>\n            <img class="profile-image" src={{profileAvatar.data.url}}/>\n        </ion-thumbnail>\n        <h2>{{paceUser.name}}</h2>\n        <h3>Total points</h3>\n        <p>Athlete/Coach/Extra</p>\n    </ion-item>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/
     }),
-    __metadata$26("design:paramtypes", [NgZone, NavController, UserData])
+    __metadata$26("design:paramtypes", [NavController,
+        UserData])
 ], ProfilePage);
 
 var __decorate$22 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
