@@ -1,5 +1,5 @@
 # Pace
-by Allar Viinamäe
+Hybrid mobile app for team management
 
 ## Setup
 Going to write when in need to set up on another machine...
