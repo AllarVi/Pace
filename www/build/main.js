@@ -102622,7 +102622,7 @@ var UserData = (function () {
     UserData.prototype.FbLogout = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.storage.set(_this.HAS_LOGGED_IN, false);
+            _this.storage.remove(_this.HAS_LOGGED_IN);
             console.log("UserData: logout() reached...");
             facebookConnectPlugin.logout(function () {
                 console.log("Logging out...");
@@ -103219,18 +103219,17 @@ var PaceApp = (function () {
         }
         if (page.logsOut === true) {
             // Give the menu time to close before changing to logged out
-            this.initLogout();
+            this.userData.FbLogout();
         }
-    };
-    PaceApp.prototype.initLogout = function () {
-        // TODO:
     };
     PaceApp.prototype.listenToLoginEvents = function () {
         var _this = this;
         this.events.subscribe('user:login', function () {
+            console.log("ENABLE MENU");
             _this.enableMenu(true);
         });
         this.events.subscribe('user:logout', function () {
+            console.log("DISABLE MENU");
             _this.enableMenu(false);
         });
     };

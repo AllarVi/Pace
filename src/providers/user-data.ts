@@ -280,44 +280,6 @@ export class UserData {
         });
     }
 
-    getAllAchievements() {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/profile/goal'
-                + '?facebookId=' + this.userId
-                + '&token=' + this.userToken;
-            console.log("Making request to: " + this.url);
-            this.http.get(this.url).subscribe(goals => {
-                resolve(goals.json());
-            }, error => {
-                console.log("Error occurred in getAllAchievements()");
-                reject(error);
-            });
-        });
-    }
-
-    uploadAchievement(fileName: any, image: any) {
-        return new Promise((resolve, reject) => {
-            this.url = 'http://' + this.BASE_URL + ':8080/api/fileUpload' +
-                '?name=' + fileName +
-                '&file=' + image;
-
-
-            console.log("Making request to: " + this.url);
-
-            let params = JSON.stringify({
-                headers: {'Content-Type': undefined}
-            });
-
-            this.http.post(this.url, params).subscribe(success => {
-                console.log("File upload request complete...");
-                resolve(success);
-            }, () => {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                reject();
-            }, () => console.log('File upload complete!'));
-        });
-    }
-
     removeFavorite(sessionName: any) {
         let index = this._favorites.indexOf(sessionName);
         if (index > -1) {
@@ -331,7 +293,7 @@ export class UserData {
 
     FbLogout() {
         return new Promise((resolve, reject) => {
-            this.storage.set(this.HAS_LOGGED_IN, false);
+            this.storage.remove(this.HAS_LOGGED_IN);
             console.log("UserData: logout() reached...");
 
             facebookConnectPlugin.logout(() => {

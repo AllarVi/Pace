@@ -122,20 +122,18 @@ export class PaceApp {
 
         if (page.logsOut === true) {
             // Give the menu time to close before changing to logged out
-            this.initLogout();
+            this.userData.FbLogout();
         }
-    }
-
-    initLogout() {
-        // TODO:
     }
 
     listenToLoginEvents() {
         this.events.subscribe('user:login', () => {
+            console.log("ENABLE MENU");
             this.enableMenu(true);
         });
 
         this.events.subscribe('user:logout', () => {
+            console.log("DISABLE MENU");
             this.enableMenu(false);
         });
     }

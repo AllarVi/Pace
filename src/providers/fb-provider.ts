@@ -12,6 +12,8 @@ export class FbProvider {
 
     HAS_LOGGED_IN = 'hasLoggedIn';
 
+    uri: any;
+
     constructor(private events: Events,
                 private platform: Platform,
                 private userData: UserData,
@@ -122,7 +124,6 @@ export class FbProvider {
         });
     }
 
-    uri: any;
     // This method is to get the user profile info from the facebook api
     getCurrentUserProfile(authResponse: any) {
         console.log("Fb-provider: getCurrentUserProfile() reached...");
