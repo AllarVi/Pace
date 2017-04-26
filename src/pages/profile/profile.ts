@@ -19,12 +19,12 @@ export class ProfilePage {
     constructor(private nav: NavController,
                 private userData: UserData) {
 
-        this.userData.getPaceUserFromStorage().then(paceUser => {
+        this.userData.getPaceUserFromStorage().then((paceUser: any) => {
             this.paceUser = paceUser;
-        });
 
-        this.userData.getPaceUserPicture().then((profileAvatar) => {
-            this.profileAvatar = profileAvatar;
+            this.userData.getPaceUserPicture(paceUser.facebookId).then((profileAvatar) => {
+                this.profileAvatar = profileAvatar;
+            });
         });
     }
 }

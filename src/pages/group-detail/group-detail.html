@@ -35,7 +35,7 @@
                         <p>Name</p>
                     </ion-col>
                     <ion-col width-20>
-                        <p>Tier</p>
+                        <p>Badge</p>
                     </ion-col>
                     <ion-col width-20>
                         <p>Points</p>
@@ -87,9 +87,15 @@
                 </ion-card-header>
 
                 <ion-card-content>
-                    <div *ngFor="let member of attendees">
-                        {{member.userName}}
-                    </div>
+                    <ion-list *ngFor="let member of attendees">
+                        <ion-item>
+                            <ion-avatar item-left>
+                                <img src="img/michael-phelps.png">
+                            </ion-avatar>
+                            <h2>{{member.userName}}</h2>
+                            <p></p>
+                        </ion-item>
+                    </ion-list>
                 </ion-card-content>
             </ion-card>
 

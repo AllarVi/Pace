@@ -114,16 +114,14 @@ export class UserData {
         });
     }
 
-    getPaceUserPicture() {
+    getPaceUserPicture(facebookId: any) {
         return new Promise(resolve => {
-            this.storage.get(this.PACE_USER).then(paceUser => {
-                let url = this.constructGetPaceUserPictureUrl(paceUser);
+            let url = this.constructGetPaceUserPictureUrl(facebookId);
 
-                this.makeGetHttpReq(url).then((result: any) => {
-                    let paceUserPicture = JSON.parse(result._body);
-                    resolve(paceUserPicture)
-                })
-            });
+            this.makeGetHttpReq(url).then((result: any) => {
+                let paceUserPicture = JSON.parse(result._body);
+                resolve(paceUserPicture)
+            })
         });
     }
 
@@ -202,8 +200,8 @@ export class UserData {
         return url;
     }
 
-    private constructGetPaceUserPictureUrl(paceUser: any) {
-        let url = paceUser.picture + '&redirect=false';
+    private constructGetPaceUserPictureUrl(facebookId: any) {
+        let url = "http://graph.facebook.com/" + facebookId + "/picture?type=large" + '&redirect=false';
         console.log("Making GET request to: ", url);
         return url;
     }
@@ -248,7 +246,7 @@ export class UserData {
 
     getPaceUserFromStorage() {
         return new Promise(resolve => {
-            this.storage.get(this.PACE_USER).then(paceUser => {
+            this.storage.get(this.PACE_USER).then((paceUser: any) => {
                 resolve(paceUser);
             })
         })
