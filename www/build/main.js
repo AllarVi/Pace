@@ -102576,40 +102576,6 @@ var UserData = (function () {
             resolve(paceUser);
         });
     };
-    UserData.prototype.getAllAchievements = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/profile/goal'
-                + '?facebookId=' + _this.userId
-                + '&token=' + _this.userToken;
-            console.log("Making request to: " + _this.url);
-            _this.http.get(_this.url).subscribe(function (goals) {
-                resolve(goals.json());
-            }, function (error) {
-                console.log("Error occurred in getAllAchievements()");
-                reject(error);
-            });
-        });
-    };
-    UserData.prototype.uploadAchievement = function (fileName, image) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.url = 'http://' + _this.BASE_URL + ':8080/api/fileUpload' +
-                '?name=' + fileName +
-                '&file=' + image;
-            console.log("Making request to: " + _this.url);
-            var params = JSON.stringify({
-                headers: { 'Content-Type': undefined }
-            });
-            _this.http.post(_this.url, params).subscribe(function (success) {
-                console.log("File upload request complete...");
-                resolve(success);
-            }, function () {
-                console.log("Error... is backend running? probably need to enable cors mapping?");
-                reject();
-            }, function () { return console.log('File upload complete!'); });
-        });
-    };
     UserData.prototype.removeFavorite = function (sessionName) {
         var index = this._favorites.indexOf(sessionName);
         if (index > -1) {

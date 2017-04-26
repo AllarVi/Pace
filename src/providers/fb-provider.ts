@@ -46,17 +46,17 @@ export class FbProvider {
         return this.result;
     }
 
-    private handleUnknown(success: any, resolve) {
+    private handleUnknown(success: any, resolve: any) {
         console.log('Login Status: ', success.status);
         resolve(success);
     }
 
-    private handleNotAuthorized(success: any, resolve) {
+    private handleNotAuthorized(success: any, resolve: any) {
         console.log('Login Status: ', success.status);
         resolve(success);
     }
 
-    private handleConnected(success: any, resolve) {
+    private handleConnected(success: any, resolve: any) {
         console.log('Login Status: ', success.status, success.authResponse.accessToken);
         // Check if we have our user saved in the backend
         this.userData.getPaceUser(success.authResponse.userID, success.authResponse.accessToken).then(() => {

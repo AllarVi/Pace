@@ -317,7 +317,7 @@ export class UserData {
         });
     };
 
-    private formatToJSON(result) {
+    private formatToJSON(result: any) {
         return result.json();
     }
 

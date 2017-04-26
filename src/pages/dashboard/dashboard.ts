@@ -36,7 +36,7 @@ export class DashboardPage {
         });
     }
 
-    openModal(characterNum) {
+    openModal(characterNum: any) {
         let modal = this.modalCtrl.create(DashboardGroupAddPage, characterNum);
         modal.onDidDismiss(() => {
             this.initDashboard();

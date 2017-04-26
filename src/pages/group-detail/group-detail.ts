@@ -81,7 +81,7 @@ export class GroupDetailPage {
     }
 
     private removeAttendingFromMembers(attendees: any) {
-        attendees.forEach(attendee => {
+        attendees.forEach((attendee: any) => {
             this.teamMembers.forEach(member => {
                 if (attendee.facebookId == member.facebookId) {
                     this.removeMemberFromList(member);
@@ -95,7 +95,7 @@ export class GroupDetailPage {
         this.teamMembers.splice(index, 1);
     }
 
-    private parseMonth(newValue) {
+    private parseMonth(newValue: any) {
         if (newValue < 10)
             return "0" + newValue.toString();
         else

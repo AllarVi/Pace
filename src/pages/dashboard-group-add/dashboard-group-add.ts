@@ -35,7 +35,7 @@ export class DashboardGroupAddPage {
 
         // if the value is an empty string don't filter the items
         if (val && val.trim() != '') {
-            this.groups = this.groups.filter((item) => {
+            this.groups = this.groups.filter((item: any) => {
                 return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }
