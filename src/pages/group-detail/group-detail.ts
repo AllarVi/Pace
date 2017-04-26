@@ -10,10 +10,8 @@ export class GroupDetailPage {
 
     team: any;
 
-    teamMembers: Array<Object>;
-    teamScores: Array<Object>;
-
-    teamName: any;
+    teamMembers: Array<any>;
+    teamScores: Array<any>;
 
     curDate: any;
 
@@ -28,22 +26,21 @@ export class GroupDetailPage {
     groupTab: string = "scores";
 
     // Today's attendees
-    attendees: any;
+    attendees: Array<any>;
 
     constructor(private navParams: NavParams, private userData: UserData) {
 
-        this.curDate = new Date().toISOString().slice(0, 10);
+        this.curDate = new Date().toISOString().slice(0, 10); // get YYYY-MM-DD part of date
 
-        this.team = this.navParams.get('team');
-        this.teamName = this.team.teamName;
+        this.team = this.navParams.get('team'); // team data
 
         this.userData.getTeamData(this.team.id).then((teamData: any) => {
-            this.teamMembers = teamData['fullScoresTableList'];
-            this.teamScores = Object.assign([], this.teamMembers);
+            this.teamScores = teamData['fullScoresTableList'];
+            this.teamMembers = Object.assign([], this.teamScores);
 
             this.currentMonthAttendance = teamData['currentMonthAttendance'];
-
-            this.extractAttendees(this.currentMonthAttendance, this.parseDate(this.curDate));
+            this.attendees = this.extractAttendees(this.currentMonthAttendance, this.parseDate(this.curDate));
+            this.removeAttendingFromMembers(this.attendees);
 
             this.extractAttendanceData();
 
@@ -60,7 +57,10 @@ export class GroupDetailPage {
             month: month,
             year: newValue.year.text
         };
-        this.extractAttendees(this.currentMonthAttendance, date);
+
+        this.teamMembers = Object.assign([], this.teamScores); // Reset members
+        this.attendees = this.extractAttendees(this.currentMonthAttendance, date); // Get attendees
+        this.removeAttendingFromMembers(this.attendees); // Members - attendees
     }
 
     markPresent(member: any) {
@@ -69,15 +69,28 @@ export class GroupDetailPage {
         this.userData.markAttendance(member, this.team.id, "present", date).then((currentMonthAttendance: any) => {
             console.log("Marked as present on ", date);
             this.currentMonthAttendance = currentMonthAttendance;
-            this.extractAttendees(currentMonthAttendance, date);
+            this.attendees = this.extractAttendees(currentMonthAttendance, date);
 
         });
 
-        let index = this.teamMembers.indexOf(member);
-        this.teamMembers.splice(index, 1);
+        this.removeMemberFromList(member);
     }
 
     markAbsent(member: any) {
+        this.removeMemberFromList(member);
+    }
+
+    private removeAttendingFromMembers(attendees: any) {
+        attendees.forEach(attendee => {
+            this.teamMembers.forEach(member => {
+                if (attendee.facebookId == member.facebookId) {
+                    this.removeMemberFromList(member);
+                }
+            });
+        });
+    }
+
+    private removeMemberFromList(member: any) {
         let index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
     }
@@ -112,11 +125,11 @@ export class GroupDetailPage {
     }
 
     private extractAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
-        let dayOfMonthAttendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
-        if (dayOfMonthAttendees) // Attendees exist
-            this.attendees = dayOfMonthAttendees;
+        let attendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
+        if (attendees) // Attendees exist
+            return attendees;
         else // Attendees don't exist
-            this.attendees = [];
+            return [];
     }
 
     private getDayOfMonthAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {

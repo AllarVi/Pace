@@ -72,7 +72,8 @@ export class UserData {
                     day: date.day,
                     month: date.month,
                     year: date.year,
-                    member: member.userName
+                    member: member.userName,
+                    facebookId: member.facebookId
                 };
 
                 this.makePostHttpReq(url, markAttendanceData).then(result => {

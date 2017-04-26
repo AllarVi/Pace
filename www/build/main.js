@@ -102396,7 +102396,8 @@ var UserData = (function () {
                     day: date.day,
                     month: date.month,
                     year: date.year,
-                    member: member.userName
+                    member: member.userName,
+                    facebookId: member.facebookId
                 };
                 _this.makePostHttpReq(url, markAttendanceData).then(function (result) {
                     var currentMonthAttendance = _this.extractCurrentMonthAttendance(_this.formatToJSON(result));
@@ -102674,14 +102675,14 @@ var GroupDetailPage = (function () {
         this.userData = userData;
         // Default tab to open
         this.groupTab = "scores";
-        this.curDate = new Date().toISOString().slice(0, 10);
-        this.team = this.navParams.get('team');
-        this.teamName = this.team.teamName;
+        this.curDate = new Date().toISOString().slice(0, 10); // get YYYY-MM-DD part of date
+        this.team = this.navParams.get('team'); // team data
         this.userData.getTeamData(this.team.id).then(function (teamData) {
-            _this.teamMembers = teamData['fullScoresTableList'];
-            _this.teamScores = Object.assign([], _this.teamMembers);
+            _this.teamScores = teamData['fullScoresTableList'];
+            _this.teamMembers = Object.assign([], _this.teamScores);
             _this.currentMonthAttendance = teamData['currentMonthAttendance'];
-            _this.extractAttendees(_this.currentMonthAttendance, _this.parseDate(_this.curDate));
+            _this.attendees = _this.extractAttendees(_this.currentMonthAttendance, _this.parseDate(_this.curDate));
+            _this.removeAttendingFromMembers(_this.attendees);
             _this.extractAttendanceData();
             _this.attenChartData = [_this.maleAttendees, _this.femaleAttendees];
         });
@@ -102693,7 +102694,9 @@ var GroupDetailPage = (function () {
             month: month,
             year: newValue.year.text
         };
-        this.extractAttendees(this.currentMonthAttendance, date);
+        this.teamMembers = Object.assign([], this.teamScores); // Reset members
+        this.attendees = this.extractAttendees(this.currentMonthAttendance, date); // Get attendees
+        this.removeAttendingFromMembers(this.attendees); // Members - attendees
     };
     GroupDetailPage.prototype.markPresent = function (member) {
         var _this = this;
@@ -102701,12 +102704,24 @@ var GroupDetailPage = (function () {
         this.userData.markAttendance(member, this.team.id, "present", date).then(function (currentMonthAttendance) {
             console.log("Marked as present on ", date);
             _this.currentMonthAttendance = currentMonthAttendance;
-            _this.extractAttendees(currentMonthAttendance, date);
+            _this.attendees = _this.extractAttendees(currentMonthAttendance, date);
         });
-        var index = this.teamMembers.indexOf(member);
-        this.teamMembers.splice(index, 1);
+        this.removeMemberFromList(member);
     };
     GroupDetailPage.prototype.markAbsent = function (member) {
+        this.removeMemberFromList(member);
+    };
+    GroupDetailPage.prototype.removeAttendingFromMembers = function (attendees) {
+        var _this = this;
+        attendees.forEach(function (attendee) {
+            _this.teamMembers.forEach(function (member) {
+                if (attendee.facebookId == member.facebookId) {
+                    _this.removeMemberFromList(member);
+                }
+            });
+        });
+    };
+    GroupDetailPage.prototype.removeMemberFromList = function (member) {
         var index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
     };
@@ -102735,11 +102750,11 @@ var GroupDetailPage = (function () {
         };
     };
     GroupDetailPage.prototype.extractAttendees = function (currentMonthAttendance, date) {
-        var dayOfMonthAttendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
-        if (dayOfMonthAttendees)
-            this.attendees = dayOfMonthAttendees;
+        var attendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
+        if (attendees)
+            return attendees;
         else
-            this.attendees = [];
+            return [];
     };
     GroupDetailPage.prototype.getDayOfMonthAttendees = function (currentMonthAttendance, date) {
         for (var _i = 0, currentMonthAttendance_1 = currentMonthAttendance; _i < currentMonthAttendance_1.length; _i++) {
@@ -102755,7 +102770,7 @@ var GroupDetailPage = (function () {
 }());
 GroupDetailPage = __decorate$25([
     Component({
-        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="attendance">\n                Attendance\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'attendance\'">\n            <ion-list-header>\n                <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"\n                              (ionChange)="onCurDateChange($event)"></ion-datetime>\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button ion-button outline item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button ion-button outline item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    <span>Attending on:</span>\n                    <ion-datetime class="inline" displayFormat="DD MMM YYYY"\n                                  [(ngModel)]="curDate" (ionChange)="onCurDateChange($event)"></ion-datetime>\n                </ion-card-header>\n\n                <ion-card-content>\n                    <div *ngFor="let member of attendees">\n                        {{member}}\n                    </div>\n                </ion-card-content>\n            </ion-card>\n\n            <ion-card>\n                <ion-card-header>\n                    Attendance Graph\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
+        selector: 'page-group-detail',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>{{team.teamName}}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <img src="img/team_cover.png"/>\n\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="groupTab">\n            <ion-segment-button value="scores">\n                Scores\n            </ion-segment-button>\n            <ion-segment-button value="attendance">\n                Attendance\n            </ion-segment-button>\n            <ion-segment-button value="velocity">\n                Velocity\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n    <div [ngSwitch]="groupTab">\n        <ion-list *ngSwitchCase="\'scores\'">\n            <ion-item class="leaderboard-header">\n                <ion-row>\n                    <ion-col width-10>\n                        <p>Rk</p>\n                    </ion-col>\n                    <ion-col width-40>\n                        <p>Name</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Tier</p>\n                    </ion-col>\n                    <ion-col width-20>\n                        <p>Points</p>\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n\n            <ion-item *ngFor="let member of teamScores">\n                <ion-row>\n                    <ion-col width-10>\n                        {{member.rank}}\n                    </ion-col>\n                    <ion-col width-50>\n                        {{member.userName}}\n                    </ion-col>\n                    <ion-col width-20>\n                        <ion-icon name="trophy"></ion-icon>\n                    </ion-col>\n                    <ion-col width-20>\n                        {{member.points}}\n                    </ion-col>\n                </ion-row>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'attendance\'">\n            <ion-list-header>\n                <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="curDate"\n                              (ionChange)="onCurDateChange($event)"></ion-datetime>\n            </ion-list-header>\n\n            <ion-item *ngFor="let member of teamMembers">\n                {{member.userName}}\n                <button ion-button outline item-right (click)="markPresent(member)">\n                    Present\n                </button>\n                <button ion-button outline item-right (click)="markAbsent(member)">\n                    Absent\n                </button>\n            </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'velocity\'">\n            <ion-card>\n                <ion-card-header>\n                    <span>Attending on:</span>\n                    <ion-datetime class="inline" displayFormat="DD MMM YYYY"\n                                  [(ngModel)]="curDate" (ionChange)="onCurDateChange($event)"></ion-datetime>\n                </ion-card-header>\n\n                <ion-card-content>\n                    <div *ngFor="let member of attendees">\n                        {{member.userName}}\n                    </div>\n                </ion-card-content>\n            </ion-card>\n\n            <ion-card>\n                <ion-card-header>\n                    Attendance Graph\n                </ion-card-header>\n\n                <ion-card-content>\n                    <!--<div class="chart-container">-->\n                    <!--<base-chart class="chart"-->\n                    <!--[data]="attenChartData"-->\n                    <!--[labels]="attenChartLabels"-->\n                    <!--[options]="lineChartOptions"-->\n                    <!--[series]="attendanceChartSeries"-->\n                    <!--[colours]="lineChartColours"-->\n                    <!--[legend]="lineChartLegend"-->\n                    <!--[chartType]="lineChartType"-->\n                    <!--(chartHover)="attendanceChartHovered($event)"-->\n                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->\n                    <!--</div>-->\n                </ion-card-content>\n            </ion-card>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/group-detail/group-detail.html"*/,
     }),
     __metadata$23("design:paramtypes", [NavParams, UserData])
 ], GroupDetailPage);
