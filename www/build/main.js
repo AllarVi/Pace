@@ -101446,7 +101446,7 @@ var AboutPage = (function () {
 }());
 AboutPage = __decorate$4([
     Component({
-        selector: 'page-about',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>About</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="about-header">\n        <img src="img/ionic-logo-white.svg">\n    </div>\n    <div padding class="about-info">\n        <h4>Pace</h4>\n        <p>\n            Siia tuleb mingi huvitav jutt appi enda kohta\n        </p>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/
+        selector: 'page-about',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>About</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="about-header">\n        <img src="img/ionic-logo-white.svg">\n    </div>\n    <div padding class="about-info">\n        <h4>Pace</h4>\n        <p>\n            Need ideas for filling up this tab.\n        </p>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/about/about.html"*/
     })
 ], AboutPage);
 
@@ -101772,11 +101772,12 @@ var GroupDetailPage = (function () {
         });
     }
     GroupDetailPage.prototype.onCurDateChange = function (newValue) {
-        var month = this.parseMonth(newValue.month.value);
+        console.log("newValue", newValue);
+        var month = this.formatMonth(newValue.month);
         var date = {
-            day: newValue.day.text,
+            day: newValue.day.toString(),
             month: month,
-            year: newValue.year.text
+            year: newValue.year.toString()
         };
         this.teamMembers = Object.assign([], this.teamScores); // Reset members
         this.attendees = this.extractAttendees(this.currentMonthAttendance, date); // Get attendees
@@ -101809,11 +101810,11 @@ var GroupDetailPage = (function () {
         var index = this.teamMembers.indexOf(member);
         this.teamMembers.splice(index, 1);
     };
-    GroupDetailPage.prototype.parseMonth = function (newValue) {
-        if (newValue < 10)
-            return "0" + newValue.toString();
+    GroupDetailPage.prototype.formatMonth = function (month) {
+        if (month < 10)
+            return "0" + month.toString();
         else
-            return newValue.toString();
+            return month.toString();
     };
     GroupDetailPage.prototype.extractAttendanceData = function () {
         this.attenChartLabels = this.currentMonthAttendance.map(function (element) {
@@ -101843,7 +101844,7 @@ var GroupDetailPage = (function () {
     GroupDetailPage.prototype.getDayOfMonthAttendees = function (currentMonthAttendance, date) {
         for (var _i = 0, currentMonthAttendance_1 = currentMonthAttendance; _i < currentMonthAttendance_1.length; _i++) {
             var dayOfMonth = currentMonthAttendance_1[_i];
-            if (dayOfMonth._date_.day === date.day &&
+            if ((dayOfMonth._date_.day === date.day || (dayOfMonth._date_.day === "0" + date.day)) &&
                 dayOfMonth._date_.month === date.month &&
                 dayOfMonth._date_.year === date.year) {
                 return dayOfMonth.attendees;
@@ -101980,9 +101981,8 @@ var __metadata$7 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ProfilePage = (function () {
-    function ProfilePage(nav, userData) {
+    function ProfilePage(userData) {
         var _this = this;
-        this.nav = nav;
         this.userData = userData;
         this.paceUser = {};
         this.profileAvatar = {
@@ -102003,8 +102003,7 @@ ProfilePage = __decorate$9([
     Component({
         selector: 'page-profile',template:/*ion-inline-start:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/'<ion-header>\n    <ion-navbar no-border-button>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n\n        <ion-title>My Profile</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <ion-item>\n        <ion-thumbnail item-left>\n            <img class="profile-image" src={{profileAvatar.data.url}}/>\n        </ion-thumbnail>\n        <h2>{{paceUser.name}}</h2>\n        <h3>Total points</h3>\n        <p>Athlete/Coach/Extra</p>\n    </ion-item>\n\n</ion-content>'/*ion-inline-end:"/Users/allarviinamae/Workspace/pacewayer/src/pages/profile/profile.html"*/
     }),
-    __metadata$7("design:paramtypes", [NavController,
-        UserData])
+    __metadata$7("design:paramtypes", [UserData])
 ], ProfilePage);
 
 var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -102270,13 +102269,13 @@ var PaceApp = (function () {
             }
             _this.platformReady();
         });
+        // Just check facebook login status and do nothing
         this.fbProvider.getFbLoginStatus().then(function (FbLoginStatus) {
             if (FbLoginStatus.status === 'connected') {
-                // this.initLeftMenuAccount();
-                // this.initDashboardPage();
+                // Initialize left menu and navigate to dashboard
             }
             else {
-                // this.initLoginPage();
+                // Navigate to login page
             }
         });
         this.enableMenu(true);
@@ -102310,11 +102309,9 @@ var PaceApp = (function () {
     PaceApp.prototype.listenToLoginEvents = function () {
         var _this = this;
         this.events.subscribe('user:login', function () {
-            console.log("ENABLE MENU");
             _this.enableMenu(true);
         });
         this.events.subscribe('user:logout', function () {
-            console.log("DISABLE MENU");
             _this.enableMenu(false);
         });
     };
@@ -102342,27 +102339,6 @@ var PaceApp = (function () {
             return 'primary';
         }
         return;
-    };
-    PaceApp.prototype.initLoginPage = function () {
-        console.log("Navigating to Login Page...");
-        this.nav.setRoot('LoginPage').catch(function (err) {
-            console.log("Didn't set nav root: " + err);
-        });
-    };
-    PaceApp.prototype.initDashboardPage = function () {
-        var _this = this;
-        this.userData.getUserShortTeamView().then(function (shortTeamView) {
-            console.log("Navigating to Dashboard Page...");
-            _this.nav.setRoot(DashboardPage, {
-                param1: shortTeamView
-            });
-        });
-    };
-    PaceApp.prototype.initLeftMenuAccount = function () {
-        var _this = this;
-        this.userData.hasLoggedIn().then(function (hasLoggedIn) {
-            _this.enableMenu(hasLoggedIn === true);
-        });
     };
     return PaceApp;
 }());

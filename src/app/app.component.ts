@@ -84,12 +84,12 @@ export class PaceApp {
                 this.platformReady()
             });
 
+        // Just check facebook login status and do nothing
         this.fbProvider.getFbLoginStatus().then((FbLoginStatus: any) => {
             if (FbLoginStatus.status === 'connected') {
-                // this.initLeftMenuAccount();
-                // this.initDashboardPage();
+                // Initialize left menu and navigate to dashboard
             } else {
-                // this.initLoginPage();
+                // Navigate to login page
             }
         });
         this.enableMenu(true);
@@ -128,12 +128,10 @@ export class PaceApp {
 
     listenToLoginEvents() {
         this.events.subscribe('user:login', () => {
-            console.log("ENABLE MENU");
             this.enableMenu(true);
         });
 
         this.events.subscribe('user:logout', () => {
-            console.log("DISABLE MENU");
             this.enableMenu(false);
         });
     }
@@ -165,28 +163,6 @@ export class PaceApp {
             return 'primary';
         }
         return;
-    }
-
-    private initLoginPage() {
-        console.log("Navigating to Login Page...");
-        this.nav.setRoot('LoginPage').catch((err: any) => {
-            console.log(`Didn't set nav root: ${err}`);
-        });
-    }
-
-    private initDashboardPage() {
-        this.userData.getUserShortTeamView().then((shortTeamView) => {
-            console.log("Navigating to Dashboard Page...");
-            this.nav.setRoot(DashboardPage, {
-                param1: shortTeamView
-            });
-        });
-    }
-
-    private initLeftMenuAccount() {
-        this.userData.hasLoggedIn().then((hasLoggedIn) => {
-            this.enableMenu(hasLoggedIn === true);
-        });
     }
 
 }

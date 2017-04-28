@@ -50,12 +50,13 @@ export class GroupDetailPage {
     }
 
     onCurDateChange(newValue: any) {
-        let month = this.parseMonth(newValue.month.value);
+        console.log("newValue", newValue);
+        let month = this.formatMonth(newValue.month);
 
         let date = {
-            day: newValue.day.text,
+            day: newValue.day.toString(),
             month: month,
-            year: newValue.year.text
+            year: newValue.year.toString()
         };
 
         this.teamMembers = Object.assign([], this.teamScores); // Reset members
@@ -95,11 +96,11 @@ export class GroupDetailPage {
         this.teamMembers.splice(index, 1);
     }
 
-    private parseMonth(newValue: any) {
-        if (newValue < 10)
-            return "0" + newValue.toString();
+    private formatMonth(month: any) {
+        if (month < 10)
+            return "0" + month.toString();
         else
-            return newValue.toString();
+            return month.toString();
     }
 
     private extractAttendanceData() {
@@ -124,7 +125,7 @@ export class GroupDetailPage {
         };
     }
 
-    private extractAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
+    private extractAttendees(currentMonthAttendance: any, date: { day: any; month: any; year: any }) {
         let attendees = this.getDayOfMonthAttendees(currentMonthAttendance, date);
         if (attendees) // Attendees exist
             return attendees;
@@ -132,9 +133,9 @@ export class GroupDetailPage {
             return [];
     }
 
-    private getDayOfMonthAttendees(currentMonthAttendance: any, date: { day: number; month: number; year: number }) {
+    private getDayOfMonthAttendees(currentMonthAttendance: any, date: { day: any; month: any; year: any }) {
         for (let dayOfMonth of currentMonthAttendance) {
-            if (dayOfMonth._date_.day === date.day &&
+            if ((dayOfMonth._date_.day === date.day || (dayOfMonth._date_.day === "0" + date.day)) &&
                 dayOfMonth._date_.month === date.month &&
                 dayOfMonth._date_.year === date.year) {
                 return dayOfMonth.attendees;

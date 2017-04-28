@@ -1,4 +1,3 @@
-import {NavController} from "ionic-angular";
 import {UserData} from "../../providers/user-data";
 import {Component} from "@angular/core";
 
@@ -16,8 +15,7 @@ export class ProfilePage {
         }
     };
 
-    constructor(private nav: NavController,
-                private userData: UserData) {
+    constructor(private userData: UserData) {
 
         this.userData.getPaceUserFromStorage().then((paceUser: any) => {
             this.paceUser = paceUser;
