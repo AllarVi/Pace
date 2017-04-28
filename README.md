@@ -1,8 +1,14 @@
 # Pace
 Hybrid mobile app for team management
 
-## Setup
-Going to write when in need to set up on another machine...
+## Getting Started
+* Clone this repository: `git clone https://github.com/aglo35/Pace.git`.
+* Run `npm install` from the project root.
+* Install the ionic CLI (`npm install -g ionic`)
+* Add mobile platform `ionic platform add ios`
+* Run `ionic emulate ios` in a terminal from the project root.
+
+NB! Going to finish the documentation when in need to set up on another machine...
 
 ## File structure
 
@@ -11,6 +17,3 @@ Going to write when in need to set up on another machine...
 * platforms/  # platforms you installed
 * plugins/    # plugins you installed
 * www/        # will contain the build of your web app, before Cordova is added
-
-### Gulp tasks and dependencies
-* package.json  # dependencies like Gulp plugins installed to node_modules/
