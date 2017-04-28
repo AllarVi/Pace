@@ -110,7 +110,7 @@ export class FbProvider {
             if (success.status === 'connected') {
                 this.getCurrentUserProfile(success.authResponse.accessToken).then(
                     (profileData) => {
-                        console.log("fbLoginSuccess: getCurrentUserProfile:", JSON.stringify(profileData));
+                        console.log("fbLoginSuccess: getCurrentUserProfile:", profileData);
 
                         this.userData.saveNewPaceUser(profileData, success.status, success.authResponse.accessToken).then((paceUser) => {
                             resolve(paceUser)
@@ -132,12 +132,13 @@ export class FbProvider {
         return new Promise((resolve, reject) => {
             facebookConnectPlugin.api(this.uri, null,
                 (profileData: any) => {
-                    console.log(JSON.stringify(profileData));
-                    console.log("Resolving...");
+                    console.log("Resolving...", profileData);
                     resolve(profileData);
                 }, (err: any) => {
                     reject(err);
-                }).then();
+                }).then((error: any) => {
+                console.log("Facebook API Promise rejection", error);
+            });
         });
     }
 }

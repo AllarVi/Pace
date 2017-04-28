@@ -10,6 +10,9 @@ export class UserData {
 
     BASE_URL = 'localhost:8181';
 
+    // When on USB and hotspot connection
+    // BASE_URL = '172.20.10.5:8181';
+
     constructor(private events: Events,
                 private http: Http,
                 private storage: Storage) {
@@ -254,6 +257,7 @@ export class UserData {
 
     saveNewPaceUser(userProfile: any, status: any, accessToken: any) {
         return new Promise((resolve, reject) => {
+            console.log("Saving new Pace user");
             // this.url = 'http://' + this.BASE_URL + ':8080/api/user';
 
             this.paceUser = JSON.stringify({
