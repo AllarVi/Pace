@@ -39000,6 +39000,14 @@ ion-datetime.inline {
   display: inline-block;
 }
 
+group-detail-page .ios page-home .scroll-content, group-detail-page .md page-home .scroll-content {
+  background-color: #f4f4f4;
+}
+
+group-detail-page .ios page-home ion-card-header, group-detail-page .md page-home ion-card-header {
+  font-weight: bold;
+}
+
 page-login .facebook-btn {
   background-color: #3b5998;
 }

@@ -19,7 +19,8 @@ import {ProfilePage} from "../pages/profile/profile";
 import {IonicStorageModule} from "@ionic/storage";
 import {DashboardGroupAddPage} from "../pages/dashboard-group-add/dashboard-group-add";
 import {FbProvider} from "../providers/fb-provider";
-
+import {ChartsModule} from "../../node_modules/ng2-charts-base/src/ng2-charts";
+import '../../node_modules/chart.js/dist/Chart.bundle.min.js';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import {FbProvider} from "../providers/fb-provider";
     imports: [
         BrowserModule,
         HttpModule,
+        ChartsModule,
         IonicModule.forRoot(PaceApp, {}, {
             links: [
                 {component: TabsPage, name: 'Tabs', segment: 'tabs'},

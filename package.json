@@ -25,24 +25,26 @@
     "@angular/platform-browser-dynamic": "4.0.2",
     "@angular/platform-server": "4.0.2",
     "@angular/router": "4.0.2",
-    "@ionic-native/core": "3.4.2",
-    "@ionic-native/in-app-browser": "3.4.2",
-    "@ionic-native/splash-screen": "3.4.2",
-    "@ionic-native/status-bar": "3.4.2",
+    "@ionic-native/core": "3.6.1",
+    "@ionic-native/in-app-browser": "3.6.1",
+    "@ionic-native/splash-screen": "3.6.1",
+    "@ionic-native/status-bar": "3.6.1",
     "@ionic/storage": "2.0.1",
+    "chart.js": "^2.5.0",
     "es6-shim": "0.35.3",
     "ionic-angular": "nightly",
     "ionicons": "3.0.0",
+    "ng2-charts-base": "git+https://github.com/ExplodingCabbage/ng2-charts.git#1a73556615f145203b6efc723ee62cdbb80580a0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.1.1",
     "sw-toolbox": "3.4.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.9"
   },
   "devDependencies": {
     "@angular/language-service": "^4.0.2",
     "@ionic/cli-plugin-cordova": "0.0.12-alpha.2c85eb7d",
     "@ionic/cli-plugin-ionic-angular": "0.0.6-alpha.2c85eb7d",
-    "@ionic/app-scripts": "^1.3.3",
+    "@ionic/app-scripts": "1.3.6",
     "typescript": "~2.2.1"
   },
   "config": {

@@ -15,3 +15,21 @@
 ion-datetime.inline {
   display: inline-block;
 }
+
+group-detail-page {
+  .ios, .md {
+
+    page-home {
+
+      .scroll-content {
+        background-color: map-get($colors, light);
+      }
+
+      ion-card-header {
+        font-weight: bold;
+      }
+
+    }
+
+  }
+}

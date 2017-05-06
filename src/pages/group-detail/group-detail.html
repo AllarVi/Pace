@@ -103,20 +103,16 @@
                 <ion-card-header>
                     Attendance Graph
                 </ion-card-header>
-
                 <ion-card-content>
-                    <!--<div class="chart-container">-->
-                    <!--<base-chart class="chart"-->
-                    <!--[data]="attenChartData"-->
-                    <!--[labels]="attenChartLabels"-->
-                    <!--[options]="lineChartOptions"-->
-                    <!--[series]="attendanceChartSeries"-->
-                    <!--[colours]="lineChartColours"-->
-                    <!--[legend]="lineChartLegend"-->
-                    <!--[chartType]="lineChartType"-->
-                    <!--(chartHover)="attendanceChartHovered($event)"-->
-                    <!--(chartClick)="attendanceChartClicked($event)"></base-chart>-->
-                    <!--</div>-->
+                    <canvas baseChart width="400" height="400"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
                 </ion-card-content>
             </ion-card>
         </ion-list>
