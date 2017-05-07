@@ -9,6 +9,7 @@ import {Chart} from "chart.js";
 })
 export class GroupDetailPage {
 
+    // Team data passed when navigated from Dashboard
     team: any;
 
     teamMembers: Array<any>;
@@ -18,15 +19,14 @@ export class GroupDetailPage {
 
     currentMonthAttendance: any;
 
-    attenChartLabels: any;
-    maleAttendees: any;
-    femaleAttendees: any;
-    attenChartData: any;
+    // Attendance chart data
+    attenChartLabels: Array<any>;
+    attenChartData: Array<any>;
 
     // Default tab to open
     groupTab: string = "scores";
 
-    // Today's attendees
+    // Attendees currently shown on Velocity tab
     attendees: Array<any>;
 
     constructor(private navParams: NavParams,
@@ -46,9 +46,6 @@ export class GroupDetailPage {
             this.removeAttendingFromMembers(this.attendees);
 
             this.extractAttendanceData();
-
-            this.attenChartData = [this.maleAttendees, this.femaleAttendees];
-
         });
     }
 
@@ -73,7 +70,7 @@ export class GroupDetailPage {
             console.log("Marked as present on ", date);
             this.currentMonthAttendance = currentMonthAttendance;
             this.attendees = this.extractAttendees(currentMonthAttendance, date);
-
+            this.extractAttendanceData();
         });
 
         this.removeMemberFromList(member);
@@ -107,16 +104,18 @@ export class GroupDetailPage {
 
     private extractAttendanceData() {
         this.attenChartLabels = this.currentMonthAttendance.map((element: any) => {
-            return element._date_;
+            return element._date_.day + "-" + element._date_.month + "-" + element._date_.year;
         });
 
-        this.maleAttendees = this.currentMonthAttendance.map((element: any) => {
-            return element.maleAttendees;
+        let data = this.currentMonthAttendance.map((element: any) => {
+            return element.attendees.length;
         });
 
-        this.femaleAttendees = this.currentMonthAttendance.map((element: any) => {
-            return element.femaleAttendees;
-        });
+        this.attenChartData = [
+            {
+                data: data,
+                label: 'Attendees'
+            }];
     }
 
     private parseDate(date: any) {
@@ -146,11 +145,6 @@ export class GroupDetailPage {
     }
 
     // lineChart
-    public lineChartData: Array<any> = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Male'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'Female'},
-    ];
-    public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     public lineChartOptions: any = {
         responsive: true
     };
@@ -162,14 +156,6 @@ export class GroupDetailPage {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-        },
-        { // dark grey
-            backgroundColor: 'rgba(77,83,96,0.2)',
-            borderColor: 'rgba(77,83,96,1)',
-            pointBackgroundColor: 'rgba(77,83,96,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(77,83,96,1)'
         }
     ];
     public lineChartLegend: boolean = true;
